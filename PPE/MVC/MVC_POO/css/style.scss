@@ -1,0 +1,27 @@
+$bgcolor-fond: rgba(38, 2, 135, 0.56);
+body {
+    header {
+        z-index: 100;
+        .navbar-collapse {
+            flex-grow: unset;
+        }
+    }
+    .sectionOne {
+        width: 100%;
+        height: 100vh;
+        background: url(../images/fond.png);
+        background-size: cover;
+        overflow: hidden;
+        .overlay {
+            left: 0;
+            height: 100%;
+            background: $bgcolor-fond;
+            .mt-custom {
+                margin-top: 15rem;
+                h1 {
+                    font-size: 96px;
+                }
+            }
+        }
+    }
+}

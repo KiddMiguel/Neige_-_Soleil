@@ -1,0 +1,32 @@
+body header {
+  z-index: 100;
+}
+
+body header .navbar-collapse {
+  -webkit-box-flex: unset;
+      -ms-flex-positive: unset;
+          flex-grow: unset;
+}
+
+body .sectionOne {
+  width: 100%;
+  height: 100vh;
+  background: url(../images/fond.png);
+  background-size: cover;
+  overflow: hidden;
+}
+
+body .sectionOne .overlay {
+  left: 0;
+  height: 100%;
+  background: rgba(38, 2, 135, 0.56);
+}
+
+body .sectionOne .overlay .mt-custom {
+  margin-top: 15rem;
+}
+
+body .sectionOne .overlay .mt-custom h1 {
+  font-size: 96px;
+}
+/*# sourceMappingURL=style.css.map */
