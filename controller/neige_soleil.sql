@@ -1,26 +1,35 @@
-drop database if exists neige_&_soleil;
-create database neige_&_soleil;
-use neige_&_soleil;
+drop database if exists neige_soleil;
+create database neige_soleil;
+use neige_soleil;
 
 create table user (
     id_user int(5) NOT NULL auto_increment, 
-    primary key (id_user)
+   CONSTRAINT PRODUIT_PK PRIMARY KEY (id_user)
 );
 
 create table locataire (
-    civilite as enum ('Mr', 'Mme') not null,
-    nom_locataire varchar(50) not null,
-    prenom_locataire varchar(50) not null, 
-    email_locataire varchar(100) not null,
+    id_user int(5) NOT NULL auto_increment, 
+    civilite_locataire enum ("Mr", "Mme"),
+    nom_locataire varchar(50),
+    prenom_locataire varchar(50), 
+    email_locataire varchar(100),
     mdp_locataire varchar(100),
     tel_locataire varchar(50),
     adresse_locataire varchar(50),
     cp_locataire varchar(50),
-    nb_reservations int(5)
-)INHERITS(user);
+    nb_reservations int(5),
+    id_appart int(5),
+    id_reservation int(5),
+    FOREIGN key (id_reservation) REFERENCES reservation(id_reservation),
+    FOREIGN key (id_appart) REFERENCES appartement(id_appart),
+    CONSTRAINT locataire_id PRIMARY KEY (id_user),
+    FOREIGN KEY (id_user) REFERENCES user ON DELETE CASCADE
+    
+);
 
 create table proprietaire (
-    civilite as enum ('Mr', 'Mme') not null,
+    id_user int(5) NOT NULL auto_increment, 
+    civilite_proprio enum ("Mr", "Mme"),
     nom_proprio varchar(50) not null,
     prenom_proprio varchar(50) not null,
     email_proprio varchar(50) not null,
@@ -28,9 +37,13 @@ create table proprietaire (
     tel_proprio varchar(50),
     adresse_proprio varchar(50),
     cp_proprio varchar(50),
-    id_contra int (5),
-    foreign key (id_contra) references contrat(id_contrat)
-)INHERITS(user);
+    id_contrat int (5),
+    id_appart int(5),
+    foreign key (id_contrat) references contrat(id_contrat),
+    FOREIGN key (id_appart) REFERENCES appartement(id_appart),
+    CONSTRAINT proprio_id PRIMARY KEY (id_user),
+    FOREIGN KEY (id_user) REFERENCES user ON DELETE CASCADE
+);
 
 create table contrat (
     id_contrat int(5) not null auto_increment,
@@ -39,6 +52,97 @@ create table contrat (
     date_fin_contrat date,
     date_sign_contrat date,
     id_user int(5), 
+    id_appart int(5),
     primary key (id_contrat),
+    FOREIGN key (id_appart) REFERENCES appartement(id_appart),
     foreign key (id_user) references proprietaire(id_user)
 ); 
+
+CREATE Table materiel_proprio (
+    id_materiel_proprio int(5) not null AUTO_INCREMENT,
+    intitule_materiel_proprio VARCHAR (50), 
+    nb_materiel_proprio INT(5),
+    prix_materiel_proprio VARCHAR(50),
+    type_materiel_proprio VARCHAR (50),
+    staut_materiel_proprio VARCHAR (50),
+    id_user int(5),
+    id_appart int(5),
+    primary key (id_materiel_proprio), 
+    FOREIGN key (id_appart) REFERENCES appartement(id_appart),
+    FOREIGN key (id_user) REFERENCES proprietaire(id_user)
+); 
+
+CREATE table reservation (
+    id_reservation int (5) not null AUTO_INCREMENT,
+    statut_reservation int(5),
+    date_reservation date,
+    date_debut_reservation date,
+    prix_reservation VARCHAR (50),
+    nb_personnes int(5),
+    id_user int(5), 
+    id_materiel_proprio int(5),
+    id_appart int(5),
+    primary key (id_reservation),
+    FOREIGN key (id_user) REFERENCES locataire(id_user), 
+    FOREIGN key (id_materiel_proprio) REFERENCES materiel_proprio (id_materiel_proprio),
+    FOREIGN key (id_appart) REFERENCES appartement(id_appart)
+);
+
+CREATE table appartement (
+    id_appart int(5) not null AUTO_INCREMENT,
+    intitule_appart VARCHAR(100),
+    adresse_appart VARCHAR (50),
+    cp_appart VARCHAR (50),
+    type_appart VARCHAR (50),
+    statut VARCHAR(50),
+    surface_appart VARCHAR (50),
+    atout_appart VARCHAR (50),
+    image_appart VARCHAR (50),
+    id_reservation INT(5),
+    id_contrat int(5),
+    id_user INT(5),
+    id_materiel_proprio int(5),
+    PRIMARY key (id_appart),
+    FOREIGN key (id_reservation) REFERENCES reservation(id_reservation),
+    FOREIGN key (id_contrat) REFERENCES contrat(id_contrat),
+    FOREIGN key (id_user) REFERENCES user(idt_user),
+    FOREIGN key (id_materiel_proprio) REFERENCES materiel_proprio(id_materiel_proprio)
+);
+
+CREATE TABLE equipement_appart (
+    id_equip_appart int(5) not null AUTO_INCREMENT,
+    intitule_equip_appart VARCHAR(50),
+    nb_equi_appart INT(5),
+    prix_equip_appart int(50),
+    type_equip_appart VARCHAR(50),
+    statut_equip_appart VARCHAR(50),
+    id_appart int(5),
+    primary key(id_equip_appart),
+    FOREIGN key (id_appart) REFERENCES appartement(id_appart)
+    );
+CREATE Table agence(
+    id_agence INT(10) NOT NULL AUTO_INCREMENT,
+    intitule_agence VARCHAR(50),
+    adresse_agence varchar(50),
+    cp_agence VARCHAR(50),
+    email_agence VARCHAR(50),
+    tel_agence VARCHAR(50),
+    id_contrat INT(5),
+    id_appart int(5),
+    PRIMARY key (id_agence),
+    FOREIGN key (id_contrat) REFERENCES contrat(id_agence),
+    FOREIGN key (id_appart) REFERENCES appartement(id_appart)
+);
+
+CREATE TABLE employe (
+    id_employe INT(5) NOT NULL AUTO_INCREMENT,
+    civilite_employe enum ("Mr", "Mme"),
+    nom_employe VARCHAR(50),
+    prenom_employe VARCHAR(50),
+    poste_employe VARCHAR(50),
+    email_employe VARCHAR(50),
+    id_agence int(5),
+    tel VARCHAR(50),
+    PRIMARY key (id_employe),
+    FOREIGN key (id_agence) REFERENCES agence (id_agence)
+);
