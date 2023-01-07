@@ -3,8 +3,8 @@ create database neige_soleil;
 use neige_soleil;
 
 create table user (
-    id_user int(5) NOT NULL auto_increment, 
-   CONSTRAINT PRODUIT_PK PRIMARY KEY (id_user)
+    id_user int(5) NOT NULL auto_increment,
+    PRIMARY KEY (id_user)
 );
 
 create table locataire (
@@ -20,10 +20,9 @@ create table locataire (
     nb_reservations int(5),
     id_appart int(5),
     id_reservation int(5),
-    FOREIGN key (id_reservation) REFERENCES reservation(id_reservation),
+    FOREIGN key (id_user) REFERENCES user(id_user) on delete cascade,
     FOREIGN key (id_appart) REFERENCES appartement(id_appart),
-    CONSTRAINT locataire_id PRIMARY KEY (id_user),
-    FOREIGN KEY (id_user) REFERENCES user ON DELETE CASCADE
+    FOREIGN KEY (id_reservation) REFERENCES reservation(reservation)
     
 );
 
@@ -39,10 +38,9 @@ create table proprietaire (
     cp_proprio varchar(50),
     id_contrat int (5),
     id_appart int(5),
+     FOREIGN key (id_user) REFERENCES user(id_user) on delete cascade,
     foreign key (id_contrat) references contrat(id_contrat),
-    FOREIGN key (id_appart) REFERENCES appartement(id_appart),
-    CONSTRAINT proprio_id PRIMARY KEY (id_user),
-    FOREIGN KEY (id_user) REFERENCES user ON DELETE CASCADE
+    FOREIGN key (id_appart) REFERENCES appartement(id_appart)
 );
 
 create table contrat (
@@ -120,29 +118,5 @@ CREATE TABLE equipement_appart (
     primary key(id_equip_appart),
     FOREIGN key (id_appart) REFERENCES appartement(id_appart)
     );
-CREATE Table agence(
-    id_agence INT(10) NOT NULL AUTO_INCREMENT,
-    intitule_agence VARCHAR(50),
-    adresse_agence varchar(50),
-    cp_agence VARCHAR(50),
-    email_agence VARCHAR(50),
-    tel_agence VARCHAR(50),
-    id_contrat INT(5),
-    id_appart int(5),
-    PRIMARY key (id_agence),
-    FOREIGN key (id_contrat) REFERENCES contrat(id_agence),
-    FOREIGN key (id_appart) REFERENCES appartement(id_appart)
-);
 
-CREATE TABLE employe (
-    id_employe INT(5) NOT NULL AUTO_INCREMENT,
-    civilite_employe enum ("Mr", "Mme"),
-    nom_employe VARCHAR(50),
-    prenom_employe VARCHAR(50),
-    poste_employe VARCHAR(50),
-    email_employe VARCHAR(50),
-    id_agence int(5),
-    tel VARCHAR(50),
-    PRIMARY key (id_employe),
-    FOREIGN key (id_agence) REFERENCES agence (id_agence)
-);
+
