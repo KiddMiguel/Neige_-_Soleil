@@ -1,0 +1,70 @@
+body header {
+  font-size: 1.15rem;
+  z-index: 100;
+}
+body header .navbar-collapse {
+  flex-grow: unset;
+}
+body header .navbar-collapse .nav-item {
+  margin-right: 2rem;
+}
+body header .navbar-collapse .nav-item a {
+  color: white;
+}
+body header .navbar-collapse .nav-item :hover {
+  color: #FFC839;
+}
+body header .navbar-collapse .dropdown .dropdown-menu a {
+  color: black;
+}
+body header .navbar-collapse .dropdown .dropdown-menu a:hover {
+  background-color: #FFC839;
+}
+body .sectionOne {
+  width: 100%;
+  height: 100vh;
+  background: url(../images/fond.png);
+  background-size: cover;
+  overflow: hidden;
+}
+body .sectionOne .overlay {
+  left: 0;
+  height: 100%;
+  background: rgba(38, 2, 135, 0.56);
+}
+body .sectionOne .overlay .mt-custom {
+  margin-top: 15rem;
+}
+body .sectionOne .overlay .mt-custom h1 {
+  font-size: 96px;
+}
+body .sectionOne .overlay .mt-custom .bg-custom {
+  background-color: #FFC839;
+}
+body .sectionOne .overlay .mt-custom input {
+  background-color: #FFF0CB;
+}
+body .sectionTwo div .card {
+  padding: 0;
+}
+body .sectionTwo div .card-body {
+  background: white;
+}
+body .sectionTwo div .card-body:hover {
+  background: #FFC839;
+}
+body .sectionTwo div .card-body:hover .btn-log {
+  background: white;
+}
+body .sectionTwo div .card-body .btn-log {
+  background-color: #FFC839;
+}
+body .sectionThree div .logo_how_make {
+  font-size: 3rem;
+}
+body .sectionFour div .carousel-item {
+  height: 50vh;
+}
+body .sectionFour div .carousel-item .card {
+  border: none;
+}/*# sourceMappingURL=style.css.map */

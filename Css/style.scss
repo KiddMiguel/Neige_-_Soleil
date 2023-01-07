@@ -1,0 +1,91 @@
+$bgcolor-fond: rgba(38, 2, 135, 0.56);
+$color-button: #FFC839;
+$color-InsideInput: #FFF0CB;
+body {
+    header {
+        font-size: 1.15rem;
+        z-index: 100;
+        .navbar-collapse {
+            flex-grow: unset;
+            .nav-item {
+                margin-right: 2rem;
+                a {
+                    color: white;
+                }
+                 :hover {
+                    color: #FFC839;
+                }
+            }
+            .dropdown {
+                .dropdown-menu {
+                    a {
+                        color: black;
+                        &:hover {
+                            background-color: #FFC839;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    .sectionOne {
+        width: 100%;
+        height: 100vh;
+        background: url(../images/fond.png);
+        background-size: cover;
+        overflow: hidden;
+        .overlay {
+            left: 0;
+            height: 100%;
+            background: $bgcolor-fond;
+            .mt-custom {
+                margin-top: 15rem;
+                h1 {
+                    font-size: 96px;
+                }
+                .bg-custom {
+                    background-color: $color-button;
+                }
+                input {
+                    background-color: $color-InsideInput;
+                }
+            }
+        }
+    }
+    .sectionTwo {
+        div {
+            .card {
+                padding: 0;
+            }
+            .card-body {
+                background: white;
+                &:hover {
+                    background: $color-button;
+                    .btn-log {
+                        background: white;
+                    }
+                }
+                .btn-log {
+                    background-color: $color-button;
+                }
+            }
+        }
+    }
+    .sectionThree {
+        div {
+            .logo_how_make {
+                font-size: 3rem;
+            }
+        }
+    }
+    .sectionFour {
+        div {
+            .carousel-item {
+                height: 50vh;
+                .card {
+                    border: none;
+                }
+            }
+        }
+    }
+}
