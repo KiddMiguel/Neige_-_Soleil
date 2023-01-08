@@ -93,12 +93,9 @@ CREATE table appartement (
     intitule_appart VARCHAR(100),
     adresse_appart VARCHAR (50),
     cp_appart VARCHAR (50),
-<<<<<<< Updated upstream
-=======
     adresse_appart varchar (255),
     description_appart VARCHAR(255),
     photo_appart varchar(255),
->>>>>>> Stashed changes
     type_appart VARCHAR (50),
     statut VARCHAR(50),
     surface_appart VARCHAR (50),
