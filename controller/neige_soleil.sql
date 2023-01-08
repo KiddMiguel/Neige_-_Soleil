@@ -3,12 +3,13 @@ create database neige_soleil;
 use neige_soleil;
 
 create table user (
-    id_user int(5) NOT NULL auto_increment, 
-   CONSTRAINT PRODUIT_PK PRIMARY KEY (id_user)
+    id_user int(5) NOT NULL auto_increment,
+    PRIMARY KEY (id_user)
 );
 
 create table locataire (
-    id_user int(5) NOT NULL auto_increment, 
+    id_locataire int(5) NOT NULL auto_increment,
+    id_user int(5), 
     civilite_locataire enum ("Mr", "Mme"),
     nom_locataire varchar(50),
     prenom_locataire varchar(50), 
@@ -20,15 +21,16 @@ create table locataire (
     nb_reservations int(5),
     id_appart int(5),
     id_reservation int(5),
-    FOREIGN key (id_reservation) REFERENCES reservation(id_reservation),
+    FOREIGN key (id_user) REFERENCES user(id_user) on delete cascade,
     FOREIGN key (id_appart) REFERENCES appartement(id_appart),
-    CONSTRAINT locataire_id PRIMARY KEY (id_user),
-    FOREIGN KEY (id_user) REFERENCES user ON DELETE CASCADE
+    FOREIGN KEY (id_reservation) REFERENCES reservation(reservation),
+    PRIMARY KEY (id_locataire)
     
 );
 
 create table proprietaire (
-    id_user int(5) NOT NULL auto_increment, 
+    id_proprio INT(5) not null AUTO_INCREMENT,
+    id_user int(5), 
     civilite_proprio enum ("Mr", "Mme"),
     nom_proprio varchar(50) not null,
     prenom_proprio varchar(50) not null,
@@ -39,10 +41,10 @@ create table proprietaire (
     cp_proprio varchar(50),
     id_contrat int (5),
     id_appart int(5),
+     FOREIGN key (id_user) REFERENCES user(id_user) on delete cascade,
     foreign key (id_contrat) references contrat(id_contrat),
     FOREIGN key (id_appart) REFERENCES appartement(id_appart),
-    CONSTRAINT proprio_id PRIMARY KEY (id_user),
-    FOREIGN KEY (id_user) REFERENCES user ON DELETE CASCADE
+    PRIMARY KEY (id_proprio)
 );
 
 create table contrat (
@@ -53,9 +55,9 @@ create table contrat (
     date_sign_contrat date,
     id_user int(5), 
     id_appart int(5),
-    primary key (id_contrat),
     FOREIGN key (id_appart) REFERENCES appartement(id_appart),
-    foreign key (id_user) references proprietaire(id_user)
+    foreign key (id_user) references proprietaire(id_user),
+    primary key (id_contrat)
 ); 
 
 CREATE Table materiel_proprio (
@@ -67,14 +69,14 @@ CREATE Table materiel_proprio (
     staut_materiel_proprio VARCHAR (50),
     id_user int(5),
     id_appart int(5),
-    primary key (id_materiel_proprio), 
     FOREIGN key (id_appart) REFERENCES appartement(id_appart),
-    FOREIGN key (id_user) REFERENCES proprietaire(id_user)
+    FOREIGN key (id_user) REFERENCES proprietaire(id_user),
+    primary key (id_materiel_proprio)
 ); 
 
 CREATE table reservation (
     id_reservation int (5) not null AUTO_INCREMENT,
-    statut_reservation int(5),
+    statut_reservation VARCHAR(50),
     date_reservation date,
     date_debut_reservation date,
     prix_reservation VARCHAR (50),
@@ -82,34 +84,40 @@ CREATE table reservation (
     id_user int(5), 
     id_materiel_proprio int(5),
     id_appart int(5),
-    primary key (id_reservation),
-    FOREIGN key (id_user) REFERENCES locataire(id_user), 
+    FOREIGN key (id_user) REFERENCES user(id_user), 
     FOREIGN key (id_materiel_proprio) REFERENCES materiel_proprio (id_materiel_proprio),
-    FOREIGN key (id_appart) REFERENCES appartement(id_appart)
+    FOREIGN key (id_appart) REFERENCES appartement(id_appart),
+    primary key (id_reservation)
 );
 
 CREATE table appartement (
     id_appart int(5) not null AUTO_INCREMENT,
+    statut_appart VARCHAR (50),
+    prix_appart VARCHAR (100),
     intitule_appart VARCHAR(100),
-    adresse_appart VARCHAR (50),
+    ville_appart VARCHAR (50),
     cp_appart VARCHAR (50),
     adresse_appart varchar (255),
     description_appart VARCHAR(255),
-    photo_appart varchar(255),
     type_appart VARCHAR (50),
-    statut VARCHAR(50),
-    surface_appart VARCHAR (50),
+    superficie_appart VARCHAR (50),
+    nb_chambres int (5),
+    nb_lits int(5),
+    nb_salles_bain int(5),
+    capacite_appart int(5),
     atout_appart VARCHAR (50),
     image_appart VARCHAR (50),
     id_reservation INT(5),
     id_contrat int(5),
     id_user INT(5),
+    id_proprio int(5),
     id_materiel_proprio int(5),
-    PRIMARY key (id_appart),
     FOREIGN key (id_reservation) REFERENCES reservation(id_reservation),
     FOREIGN key (id_contrat) REFERENCES contrat(id_contrat),
-    FOREIGN key (id_user) REFERENCES user(idt_user),
-    FOREIGN key (id_materiel_proprio) REFERENCES materiel_proprio(id_materiel_proprio)
+    FOREIGN key (id_user) REFERENCES user(id_user),
+    FOREIGN key (id_proprio) REFERENCES proprietaire(id_proprio),
+    FOREIGN key (id_materiel_proprio) REFERENCES materiel_proprio(id_materiel_proprio),
+    PRIMARY key (id_appart)
 );
 
 CREATE TABLE equipement_appart (
@@ -120,36 +128,10 @@ CREATE TABLE equipement_appart (
     type_equip_appart VARCHAR(50),
     statut_equip_appart VARCHAR(50),
     id_appart int(5),
-    primary key(id_equip_appart),
-    FOREIGN key (id_appart) REFERENCES appartement(id_appart)
+    FOREIGN key (id_appart) REFERENCES appartement(id_appart),
+    primary key(id_equip_appart)
     );
-CREATE Table agence(
-    id_agence INT(10) NOT NULL AUTO_INCREMENT,
-    intitule_agence VARCHAR(50),
-    adresse_agence varchar(50),
-    cp_agence VARCHAR(50),
-    email_agence VARCHAR(50),
-    tel_agence VARCHAR(50),
-    id_contrat INT(5),
-    id_appart int(5),
-    PRIMARY key (id_agence),
-    FOREIGN key (id_contrat) REFERENCES contrat(id_agence),
-    FOREIGN key (id_appart) REFERENCES appartement(id_appart)
-);
 
-CREATE TABLE employe (
-    id_employe INT(5) NOT NULL AUTO_INCREMENT,
-    civilite_employe enum ("Mr", "Mme"),
-    nom_employe VARCHAR(50),
-    prenom_employe VARCHAR(50),
-    poste_employe VARCHAR(50),
-    email_employe VARCHAR(50),
-    id_agence int(5),
-    tel VARCHAR(50),
-    PRIMARY key (id_employe),
-    FOREIGN key (id_agence) REFERENCES agence (id_agence)
-);
-=======
 
 /*On va  créer un trigger qui insert automatiquement l'id dans la table user lors de ll'insertion dans une table enfant.*/
 drop trigger if exists insert_user_locataire;
@@ -190,9 +172,7 @@ delimiter ;
 
 
 /*Insertion*/
-/*
 INSERT INTO user (id_user) VALUES (1), (2), (3);
-*/
 
 INSERT INTO locataire (id_locataire, id_user, civilite_locataire, nom_locataire, prenom_locataire, email_locataire, mdp_locataire, tel_locataire, adresse_locataire, cp_locataire, nb_reservations, id_appart, id_reservation) 
 VALUES 
@@ -226,8 +206,9 @@ VALUES
 (2, "Non réservé", '2022-01-01', '2022-01-15', '700€', 4, 2, 2),
 (3, "En cours", '2022-01-01', '2022-01-15', '600€', 3, 3, 3);
 
-INSERT INTO appartement (id_appart, statut_appart, prix_appart, intitule_appart, ville_appart, cp_appart, adresse_appart, description_appart, photo_appart, type_appart, superficie_appart, nb_chambres, nb_lits, nb_salles_bain, capacite_appart, id_proprio)
+INSERT INTO appartement (id_appart, statut_appart, prix_appart, ville_appart, cp_appart, adresse_appart, description_appart, photo_appart, type_appart, superficie_appart, nb_chambres, nb_lits, nb_salles_bain, capacite_appart, id_proprio)
 VALUES
-(1, "disponible", "800€/semaine","Villa lourde", "Paris", "75000", "7 rue de la Plage", "Appartement en bord de mer avec vue imprenable sur l'océan", "photo1.jpg", "T2", 50, 1, 2, 1, 4, 1),
-(2, "disponible", "1000€/semaine","Maison tortue", "Lyon", "69000", "8 rue de la Montagne", "Chalet au pied des pistes de ski avec sauna et Jacuzzi", "photo2.jpg", "T3", 70, 2, 4, 2, 6, 2),
-(3, "disponible", "900€/semaine", "Appartement haute coline","Marseille", "13000", "9 rue de la Forêt", "Villa avec piscine privée et terrasse ensoleillée", "photo3.jpg", "T4", 100, 3, 6, 2, 8, 3);
+(1, "disponible", "800€/semaine", "Paris", "75000", "7 rue de la Plage", "Appartement en bord de mer avec vue imprenable sur l'océan", "photo1.jpg", "T2", 50, 1, 2, 1, 4, 1),
+(2, "disponible", "1000€/semaine", "Lyon", "69000", "8 rue de la Montagne", "Chalet au pied des pistes de ski avec sauna et Jacuzzi", "photo2.jpg", "T3", 70, 2, 4, 2, 6, 2),
+(3, "disponible", "900€/semaine", "Marseille", "13000", "9 rue de la Forêt", "Villa avec piscine privée et terrasse ensoleillée", "photo3.jpg", "T4", 100, 3, 6, 2, 8, 3);
+
