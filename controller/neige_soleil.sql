@@ -8,7 +8,8 @@ create table user (
 );
 
 create table locataire (
-    id_user int(5) NOT NULL auto_increment, 
+    id_locataire int(5) NOT NULL auto_increment,
+    id_parent int(5), 
     civilite_locataire enum ("Mr", "Mme"),
     nom_locataire varchar(50),
     prenom_locataire varchar(50), 
@@ -18,16 +19,18 @@ create table locataire (
     adresse_locataire varchar(50),
     cp_locataire varchar(50),
     nb_reservations int(5),
+    PRIMARY KEY (id_locataire),
     id_appart int(5),
     id_reservation int(5),
-    FOREIGN key (id_user) REFERENCES user(id_user) on delete cascade,
+    FOREIGN key (id_parent) REFERENCES user(id_user) on delete cascade,
     FOREIGN key (id_appart) REFERENCES appartement(id_appart),
     FOREIGN KEY (id_reservation) REFERENCES reservation(reservation)
     
 );
 
 create table proprietaire (
-    id_user int(5) NOT NULL auto_increment, 
+    id_proprio INT(5) not null AUTO_INCREMENT,
+    id_parent int(5), 
     civilite_proprio enum ("Mr", "Mme"),
     nom_proprio varchar(50) not null,
     prenom_proprio varchar(50) not null,
@@ -36,9 +39,10 @@ create table proprietaire (
     tel_proprio varchar(50),
     adresse_proprio varchar(50),
     cp_proprio varchar(50),
+    PRIMARY KEY (id_proprio),
     id_contrat int (5),
     id_appart int(5),
-     FOREIGN key (id_user) REFERENCES user(id_user) on delete cascade,
+     FOREIGN key (id_parent) REFERENCES user(id_user) on delete cascade,
     foreign key (id_contrat) references contrat(id_contrat),
     FOREIGN key (id_appart) REFERENCES appartement(id_appart)
 );
@@ -120,3 +124,14 @@ CREATE TABLE equipement_appart (
     );
 
 
+/*On va  créer un trigger qui insert automatiquement l'id dans la table user lors de ll'insertion dans une table enfant.*/
+drop trigger if exists insert_user_id;
+delimiter //
+CREATE trigger insert_user_id
+after insert on locataire
+for each ROW
+BEGIN
+    insert into user (id_user) values (new.id_parent);
+
+    end //
+delimiter ;
