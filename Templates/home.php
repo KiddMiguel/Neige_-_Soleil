@@ -94,76 +94,6 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-4 col-sm-6 col-xm-12 p-3">
-                    <div class="card">
-                        <img src="images/image.png" class="card-img-top" alt="...">
-                        <div class="card-body d-flex">
-                            <div class="pt-3 me-3">
-                                <a href="#"><i class="fa-solid fa-circle-chevron-right fs-3"></i> </a>
-                            </div>
-
-                            <div class="ps-3 text-start border-start">
-                                <a class="card-text  text-decoration-none fw-semibold" href=""><span class="text-secondary">PARIS(75017)</span><br> <span class="text-primary ">1 300.2</span>€ - <span>53.0</span> m²<br><span class="text-black">2pièces . Meublé . Rez-de-chaussée</span> </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-4 col-sm-6 col-xm-12 p-3">
-                    <div class="card">
-                        <img src="images/image.png" class="card-img-top" alt="...">
-                        <div class="card-body d-flex">
-                            <div class="pt-3 me-3">
-                                <a href="#"><i class="fa-solid fa-circle-chevron-right fs-3"></i> </a>
-                            </div>
-
-                            <div class="ps-3 text-start border-start">
-                                <a class="card-text  text-decoration-none fw-semibold" href=""><span class="text-secondary">PARIS(75017)</span><br> <span class="text-primary ">1 300.2</span>€ - <span>53.0</span> m²<br><span class="text-black">2pièces . Meublé . Rez-de-chaussée</span> </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-4 col-sm-6 col-xm-12 p-3">
-                    <div class="card">
-                        <img src="images/image.png" class="card-img-top" alt="...">
-                        <div class="card-body d-flex">
-                            <div class="pt-3 me-3">
-                                <a href="#"><i class="fa-solid fa-circle-chevron-right fs-3"></i> </a>
-                            </div>
-
-                            <div class="ps-3 text-start border-start">
-                                <a class="card-text  text-decoration-none fw-semibold" href=""><span class="text-secondary">PARIS(75017)</span><br> <span class="text-primary ">1 300.2</span>€ - <span>53.0</span> m²<br><span class="text-black">2pièces . Meublé . Rez-de-chaussée</span> </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-4 col-sm-6 col-xm-12 p-3">
-                    <div class="card">
-                        <img src="images/image.png" class="card-img-top" alt="...">
-                        <div class="card-body d-flex">
-                            <div class="pt-3 me-3">
-                                <a href="#"><i class="fa-solid fa-circle-chevron-right fs-3"></i> </a>
-                            </div>
-
-                            <div class="ps-3 text-start border-start">
-                                <a class="card-text  text-decoration-none fw-semibold" href=""><span class="text-secondary">PARIS(75017)</span><br> <span class="text-primary ">1 300.2</span>€ - <span>53.0</span> m²<br><span class="text-black">2pièces . Meublé . Rez-de-chaussée</span> </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-4 col-sm-6 col-xm-12 p-3">
-                    <div class="card">
-                        <img src="images/image.png" class="card-img-top" alt="...">
-                        <div class="card-body d-flex">
-                            <div class="pt-3 me-3">
-                                <a href="#"><i class="fa-solid fa-circle-chevron-right fs-3"></i> </a>
-                            </div>
-
-                            <div class="ps-3 text-start border-start">
-                                <a class="card-text  text-decoration-none fw-semibold" href=""><span class="text-secondary">PARIS(75017)</span><br> <span class="text-primary ">1 300.2</span>€ - <span>53.0</span> m²<br><span class="text-black">2pièces . Meublé . Rez-de-chaussée</span> </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     </section>
@@ -208,7 +138,7 @@
 
     <section class="sectionFour container-fluid">
 
-        <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
+        <div id="myCarousel" class="carousel slide comments" data-bs-ride="carousel">
             <div class="carousel-indicators">
                 <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
                 <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
@@ -246,8 +176,6 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            
-                                            
                                         </div>
                                     </div>
                                 </div>
@@ -265,9 +193,50 @@
                     <span class="visually-hidden">Next</span>
                 </button>
             </div>
+        </div>
 
+        <div class="help pt-5 mt-5 mb-5 container d-flex justify-content-center align-self-center ">
+            <div class="m-auto ">
+                <h4 class="fs-3">Avez-vous besoin d'aide ?</h4>
+                <p>Entrez votre numéro de téléphone portable pour obtenir de l'aide</p>
+                <div class="sendHelp bg-white">
+                    <select name="pets" id="pet-select" class="ms-2">
+                        <option value="dog">FR</option>
+                        <option value="cat">ANG</option>
+                    </select><input class="mt-2 mb-2 ps-2" type="text" name="" id=""><button class="bouton ms-2">Envoyer</button>
+                </div>
+
+            </div>
+
+        </div>
     </section>
+<footer class="container-fluid">
+    <div class="container text-light pb-5">
 
+    <ul class="d-flex justify-content-around pt-5">
+        <li class="nav-item">Lien utiles -></li>
+        <li >Lorem</li>
+        <li>Lorem</li>
+        <li>Lorem</li>
+        <li>Lorem</li>
+        <li>Lorem</li>
+        <li>Lorem</li>
+    </ul>
+    <hr>
+    <ul  class="d-flex justify-content-around pt-5">
+        <li>LOGO</li>
+        <li class="form-text">© 2022 Nom de l’entreprise</li>
+        <li class="form-text">6 Impasse des 2 cousins, Paris, France</li>
+        <li class="form-text">contact@nomdel’entreprise.com</li>
+        <div>
+            <H6>Inscription à la newsletter</H6>
+            <input type="text" name="" class="p-1 me-2" id=""><button type="button" class="p-1">Je m'inscrit</button>
+        </div>
+    </ul>
+    </div>
+
+
+</footer>
     <!-- JavaScript Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
 </body>

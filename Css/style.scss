@@ -1,6 +1,22 @@
-$bgcolor-fond: rgba(38, 2, 135, 0.56);
-$color-button: #FFC839;
-$color-InsideInput: #FFF0CB;
+@font-face {
+    font-family: 'Poppins_Medium';
+    src: url(../Polices/Poppins-Medium.ttf);
+}
+
+@font-face {
+    font-family: 'Poppins_Light';
+    src: url(../Polices/Poppins-LightItalic.otf);
+}
+
+@font-face {
+    font-family: 'Poppins_Regular';
+    src: url(../Polices/Poppins-Regular.ttf);
+}
+
+$bgcolor_fond: rgba(38, 2, 135, 0.56);
+$color_button: #FFC839;
+$color_blue: rgb(9, 58, 122);
+$color_InsideInput: #FFF0CB;
 body {
     header {
         font-size: 1.15rem;
@@ -13,7 +29,7 @@ body {
                     color: white;
                 }
                  :hover {
-                    color: #FFC839;
+                    color: $color_button;
                 }
             }
             .dropdown {
@@ -21,7 +37,7 @@ body {
                     a {
                         color: black;
                         &:hover {
-                            background-color: #FFC839;
+                            background-color: $color_button;
                         }
                     }
                 }
@@ -37,17 +53,17 @@ body {
         .overlay {
             left: 0;
             height: 100%;
-            background: $bgcolor-fond;
+            background: $bgcolor_fond;
             .mt-custom {
                 margin-top: 15rem;
                 h1 {
                     font-size: 96px;
                 }
                 .bg-custom {
-                    background-color: $color-button;
+                    background-color: $color_button;
                 }
                 input {
-                    background-color: $color-InsideInput;
+                    background-color: $color_InsideInput;
                 }
             }
         }
@@ -60,31 +76,73 @@ body {
             .card-body {
                 background: white;
                 &:hover {
-                    background: $color-button;
+                    background: $color_button;
                     .btn-log {
                         background: white;
                     }
                 }
                 .btn-log {
-                    background-color: $color-button;
+                    background-color: $color_button;
                 }
             }
         }
     }
     .sectionThree {
         div {
+            p {
+                margin: 1rem 1rem 1rem 1rem;
+                text-align: justify;
+                font-family: Poppins_Light;
+            }
             .logo_how_make {
                 font-size: 3rem;
             }
         }
     }
     .sectionFour {
-        div {
+        font-family: Poppins_Regular;
+        .comments {
             .carousel-item {
                 height: 50vh;
                 .card {
                     border: none;
                 }
+            }
+        }
+        .help {
+            background-color: $color_InsideInput;
+            height: 30vh;
+            .sendHelp {
+                border: 1px solid black;
+                width: 80%;
+                input {
+                    width: 60%;
+                    border: none;
+                    & {
+                        border: none;
+                        outline: none;
+                    }
+                }
+                .bouton {
+                    width: 20%;
+                    border: none;
+                    background-color: $color_button;
+                }
+            }
+        }
+    }
+    footer {
+        background-color: $color_blue;
+        li {
+            list-style: none;
+        }
+        div {
+            button {
+                border: $color_button;
+                background-color: $color_button;
+            }
+            input {
+                border: none;
             }
         }
     }
