@@ -5,7 +5,7 @@ use neige_soleil;
 create table user (
     id_user int(5) NOT NULL auto_increment,
     PRIMARY KEY (id_user)
-);
+); 
 
 create table locataire (
     id_locataire int(5) NOT NULL auto_increment,
@@ -142,7 +142,7 @@ for each ROW
 BEGIN
     insert into user (id_user) values (new.id_user);
 
-    end //
+end //
 delimiter ;
 
 

@@ -1,3 +1,15 @@
+@font-face {
+  font-family: "Poppins_Medium";
+  src: url(../Polices/Poppins-Medium.ttf);
+}
+@font-face {
+  font-family: "Poppins_Light";
+  src: url(../Polices/Poppins-LightItalic.otf);
+}
+@font-face {
+  font-family: "Poppins_Regular";
+  src: url(../Polices/Poppins-Regular.ttf);
+}
 body header {
   font-size: 1.15rem;
   z-index: 100;
@@ -59,12 +71,54 @@ body .sectionTwo div .card-body:hover .btn-log {
 body .sectionTwo div .card-body .btn-log {
   background-color: #FFC839;
 }
+body .sectionThree div p {
+  margin: 1rem 1rem 1rem 1rem;
+  text-align: justify;
+  font-family: Poppins_Light;
+}
 body .sectionThree div .logo_how_make {
   font-size: 3rem;
 }
-body .sectionFour div .carousel-item {
+body .sectionFour {
+  font-family: Poppins_Regular;
+}
+body .sectionFour .comments .carousel-item {
   height: 50vh;
 }
-body .sectionFour div .carousel-item .card {
+body .sectionFour .comments .carousel-item .card {
+  border: none;
+}
+body .sectionFour .help {
+  background-color: #FFF0CB;
+  height: 30vh;
+}
+body .sectionFour .help .sendHelp {
+  border: 1px solid black;
+  width: 80%;
+}
+body .sectionFour .help .sendHelp input {
+  width: 60%;
+  border: none;
+}
+body .sectionFour .help .sendHelp input {
+  border: none;
+  outline: none;
+}
+body .sectionFour .help .sendHelp .bouton {
+  width: 20%;
+  border: none;
+  background-color: #FFC839;
+}
+body footer {
+  background-color: rgb(9, 58, 122);
+}
+body footer li {
+  list-style: none;
+}
+body footer div button {
+  border: #FFC839;
+  background-color: #FFC839;
+}
+body footer div input {
   border: none;
 }/*# sourceMappingURL=style.css.map */
