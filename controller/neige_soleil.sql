@@ -132,6 +132,17 @@ CREATE TABLE equipement_appart (
     primary key(id_equip_appart)
     );
 
+Create table images (
+    id_img int(10) not null AUTO_INCREMENT,
+    nom_img varchar(100) not null,
+    taille_img varchar(100) not null,
+    type_img varchar(100) not null,
+    desc_img varchar(100) not null,
+    img_blog blob not null,
+    id_appart int(10),
+    foreign key (id_appart) references images(id_appart),
+    primary key (id_img)
+);
 
 /*On va  créer un trigger qui insert automatiquement l'id dans la table user lors de ll'insertion dans une table enfant.*/
 drop trigger if exists insert_user_locataire;
@@ -206,9 +217,9 @@ VALUES
 (2, "Non réservé", '2022-01-01', '2022-01-15', '700€', 4, 2, 2),
 (3, "En cours", '2022-01-01', '2022-01-15', '600€', 3, 3, 3);
 
-INSERT INTO appartement (id_appart, statut_appart, prix_appart, ville_appart, cp_appart, adresse_appart, description_appart, photo_appart, type_appart, superficie_appart, nb_chambres, nb_lits, nb_salles_bain, capacite_appart, id_proprio)
+INSERT INTO appartement (id_appart, statut_appart, prix_appart, ville_appart, cp_appart, adresse_appart, description_appart, type_appart, superficie_appart, nb_chambres, nb_lits, nb_salles_bain, capacite_appart, id_proprio)
 VALUES
-(1, "disponible", "800€/semaine", "Paris", "75000", "7 rue de la Plage", "Appartement en bord de mer avec vue imprenable sur l'océan", "photo1.jpg", "T2", 50, 1, 2, 1, 4, 1),
-(2, "disponible", "1000€/semaine", "Lyon", "69000", "8 rue de la Montagne", "Chalet au pied des pistes de ski avec sauna et Jacuzzi", "photo2.jpg", "T3", 70, 2, 4, 2, 6, 2),
-(3, "disponible", "900€/semaine", "Marseille", "13000", "9 rue de la Forêt", "Villa avec piscine privée et terrasse ensoleillée", "photo3.jpg", "T4", 100, 3, 6, 2, 8, 3);
+(1, "disponible", "800€/semaine", "Paris", "75000", "7 rue de la Plage", "Appartement en bord de mer avec vue imprenable sur l'océan", "T2", 50, 1, 2, 1, 4, 1),
+(2, "disponible", "1000€/semaine", "Lyon", "69000", "8 rue de la Montagne", "Chalet au pied des pistes de ski avec sauna et Jacuzzi", "T3", 70, 2, 4, 2, 6, 2),
+(3, "disponible", "900€/semaine", "Marseille", "13000", "9 rue de la Forêt", "Villa avec piscine privée et terrasse ensoleillée", "T4", 100, 3, 6, 2, 8, 3);
 
