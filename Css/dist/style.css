@@ -12,6 +12,8 @@
 }
 body header {
   font-size: 1.15rem;
+  background-color: #093A7A;
+  position: fixed;
   z-index: 100;
 }
 body header .navbar-collapse {
@@ -25,6 +27,9 @@ body header .navbar-collapse .nav-item a {
 }
 body header .navbar-collapse .nav-item :hover {
   color: #FFC839;
+}
+body header .navbar-collapse .nav-item .active {
+  color: #FFC839 !important;
 }
 body header .navbar-collapse .dropdown .dropdown-menu a {
   color: black;
@@ -42,7 +47,7 @@ body .sectionOne {
 body .sectionOne .overlay {
   left: 0;
   height: 100%;
-  background: rgba(38, 2, 135, 0.56);
+  background: rgba(2, 60, 135, 0.363);
 }
 body .sectionOne .overlay .mt-custom {
   margin-top: 15rem;
@@ -110,7 +115,7 @@ body .sectionFour .help .sendHelp .bouton {
   background-color: #FFC839;
 }
 body footer {
-  background-color: #093a7a;
+  background-color: #093A7A;
 }
 body footer li {
   list-style: none;

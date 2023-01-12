@@ -19,17 +19,18 @@ $unController = new Controller($server, $bdd, $user, $mdp);
 </head>
 
 <body>
-    <header class="container-fluid position-absolute">
-        <nav class="navbar navbar-expand-lg">
+    <header class="container-fluid">
+        <nav class="navbar navbar-expand-lg p-0">
             <div class="container-fluid">
-                <a class="navbar-brand text-light" href="#">LOGO</a>
+                <a class="navbar-brand text-light" href="#"><img src="Images/logo.png" width="50%" alt=""></a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav">
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="index.php?page=home">Accueil</a>
+                       
+                       
                         </li>
                         <li class="nav-item">
                             <a class="nav-link " href="index.php?page=location">Location</a>
@@ -51,9 +52,7 @@ $unController = new Controller($server, $bdd, $user, $mdp);
                     <li class="nav-item">
                         <a class="nav-link" href="#">A propos</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link " href="#">Contactez Nous</a>
-                    </li>
+                    <button class="btn btn-warning" type="submit">Contactez nous</button>
                     </ul>
                 </div>
             </div>

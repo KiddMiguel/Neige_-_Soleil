@@ -13,13 +13,15 @@
     src: url(../Polices/Poppins-Regular.ttf);
 }
 
-$bgcolor_fond: rgba(38, 2, 135, 0.56);
+$bgcolor_fond: rgba(2, 60, 135, 0.363);
 $color_button: #FFC839;
-$color_blue: rgb(9, 58, 122);
+$color_blue: #093A7A;
 $color_InsideInput: #FFF0CB;
 body {
     header {
         font-size: 1.15rem;
+        background-color: $color_blue;
+        position: fixed;
         z-index: 100;
         .navbar-collapse {
             flex-grow: unset;
@@ -30,6 +32,9 @@ body {
                 }
                  :hover {
                     color: $color_button;
+                }
+                .active {
+                    color: $color_button !important;
                 }
             }
             .dropdown {
