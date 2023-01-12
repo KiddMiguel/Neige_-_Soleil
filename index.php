@@ -30,7 +30,7 @@ $unController = new Controller($server, $bdd, $user, $mdp);
                     <ul class="navbar-nav">
                         <li class="nav-item">
                        
-                       
+                            <a class="nav-link" aria-current="page" href="index.php?page=home">Accueil</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link " href="index.php?page=location">Location</a>
