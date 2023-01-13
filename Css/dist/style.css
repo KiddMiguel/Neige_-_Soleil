@@ -1,5 +1,19 @@
+@font-face {
+  font-family: "Poppins_Medium";
+  src: url(../Polices/Poppins-Medium.ttf);
+}
+@font-face {
+  font-family: "Poppins_Light";
+  src: url(../Polices/Poppins-LightItalic.otf);
+}
+@font-face {
+  font-family: "Poppins_Regular";
+  src: url(../Polices/Poppins-Regular.ttf);
+}
 body header {
   font-size: 1.15rem;
+  background-color: #093A7A;
+  position: fixed;
   z-index: 100;
 }
 body header .navbar-collapse {
@@ -30,7 +44,7 @@ body .sectionOne {
 body .sectionOne .overlay {
   left: 0;
   height: 100%;
-  background: rgba(38, 2, 135, 0.56);
+  background: rgba(2, 60, 135, 0.363);
 }
 body .sectionOne .overlay .mt-custom {
   margin-top: 15rem;
@@ -59,12 +73,65 @@ body .sectionTwo div .card-body:hover .btn-log {
 body .sectionTwo div .card-body .btn-log {
   background-color: #FFC839;
 }
+body .sectionThree div p {
+  margin: 1rem 1rem 1rem 1rem;
+  text-align: justify;
+  font-family: Poppins_Light;
+}
 body .sectionThree div .logo_how_make {
   font-size: 3rem;
 }
-body .sectionFour div .carousel-item {
+body .sectionFour {
+  font-family: Poppins_Regular;
+}
+body .sectionFour .comments .carousel-item {
   height: 50vh;
 }
-body .sectionFour div .carousel-item .card {
+body .sectionFour .comments .carousel-item .card {
+  border: none;
+}
+body .sectionFour .help {
+  background-color: #FFF0CB;
+  height: 30vh;
+}
+body .sectionFour .help .sendHelp {
+  border: 1px solid black;
+  width: 80%;
+}
+body .sectionFour .help .sendHelp input {
+  width: 60%;
+  border: none;
+}
+body .sectionFour .help .sendHelp input {
+  border: none;
+  outline: none;
+}
+body .sectionFour .help .sendHelp .bouton {
+  width: 20%;
+  border: none;
+  background-color: #FFC839;
+}
+body .sectionLocation div .pagination .actives {
+  background-color: #FFC839 !important;
+  color: white;
+}
+body .sectionConnexion .gradient-custom-2 {
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: -webkit-linear-gradient(to right, #FFC839, #E1A624, #093A7A, #093A7A);
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background: linear-gradient(to right, #E1A624, #a88838, #093A7A, #093A7A);
+}
+body footer {
+  background-color: #093A7A;
+}
+body footer li {
+  list-style: none;
+}
+body footer div button {
+  border: #FFC839;
+  background-color: #FFC839;
+}
+body footer div input {
+  background-color: #FFF0CB;
   border: none;
 }

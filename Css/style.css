@@ -12,6 +12,8 @@
 }
 body header {
   font-size: 1.15rem;
+  background-color: #093A7A;
+  position: fixed;
   z-index: 100;
 }
 body header .navbar-collapse {
@@ -42,7 +44,7 @@ body .sectionOne {
 body .sectionOne .overlay {
   left: 0;
   height: 100%;
-  background: rgba(38, 2, 135, 0.56);
+  background: rgba(2, 60, 135, 0.363);
 }
 body .sectionOne .overlay .mt-custom {
   margin-top: 15rem;
@@ -109,8 +111,17 @@ body .sectionFour .help .sendHelp .bouton {
   border: none;
   background-color: #FFC839;
 }
+body .sectionLocation div .pagination .actives {
+  background-color: #FFC839 !important;
+  color: white;
+}
+body .sectionConnexion .gradient-custom-2 {
+  /* Chrome 10-25, Safari 5.1-6 */
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background: linear-gradient(to right, #E1A624, #a88838, #093A7A, #093A7A);
+}
 body footer {
-  background-color: rgb(9, 58, 122);
+  background-color: #093A7A;
 }
 body footer li {
   list-style: none;
@@ -120,5 +131,6 @@ body footer div button {
   background-color: #FFC839;
 }
 body footer div input {
+  background-color: #FFF0CB;
   border: none;
 }/*# sourceMappingURL=style.css.map */

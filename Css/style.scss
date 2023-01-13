@@ -13,13 +13,15 @@
     src: url(../Polices/Poppins-Regular.ttf);
 }
 
-$bgcolor_fond: rgba(38, 2, 135, 0.56);
+$bgcolor_fond: rgba(2, 60, 135, 0.363);
 $color_button: #FFC839;
-$color_blue: rgb(9, 58, 122);
+$color_blue: #093A7A;
 $color_InsideInput: #FFF0CB;
 body {
     header {
         font-size: 1.15rem;
+        background-color: $color_blue;
+        position: fixed;
         z-index: 100;
         .navbar-collapse {
             flex-grow: unset;
@@ -131,6 +133,26 @@ body {
             }
         }
     }
+    .sectionLocation {
+        div {
+            .pagination {
+                .actives {
+                    background-color: $color_button !important;
+                    color: white;
+                }
+            }
+        }
+    }
+    .sectionConnexion {
+        .gradient-custom-2 {
+            /* Chrome 10-25, Safari 5.1-6 */
+            background: -webkit-linear-gradient(to right, #FFC839, #E1A624, #093A7A, #093A7A);
+            /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+            background: linear-gradient(to right, #E1A624, #a88838, #093A7A, #093A7A);
+          
+        }
+       
+    }
     footer {
         background-color: $color_blue;
         li {
@@ -142,6 +164,7 @@ body {
                 background-color: $color_button;
             }
             input {
+                background-color: $color_InsideInput;
                 border: none;
             }
         }
