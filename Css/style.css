@@ -28,9 +28,6 @@ body header .navbar-collapse .nav-item a {
 body header .navbar-collapse .nav-item :hover {
   color: #FFC839;
 }
-body header .navbar-collapse .nav-item .active {
-  color: #FFC839 !important;
-}
 body header .navbar-collapse .dropdown .dropdown-menu a {
   color: black;
 }
@@ -113,6 +110,15 @@ body .sectionFour .help .sendHelp .bouton {
   width: 20%;
   border: none;
   background-color: #FFC839;
+}
+body .sectionLocation div .pagination .actives {
+  background-color: #FFC839 !important;
+  color: white;
+}
+body .sectionConnexion .gradient-custom-2 {
+  /* Chrome 10-25, Safari 5.1-6 */
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background: linear-gradient(to right, #E1A624, #a88838, #093A7A, #093A7A);
 }
 body footer {
   background-color: #093A7A;

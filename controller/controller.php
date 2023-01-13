@@ -8,4 +8,10 @@ class Controller
     {
         $this->unModele = new Modele($server, $bdd, $user, $mdp);
     }
+    
+    public function verifconnexion($email, $mdp){
+        return $this->unModele->verifconnexion($email, $mdp);
+        
+    }
+
 }

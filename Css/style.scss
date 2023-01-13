@@ -33,9 +33,6 @@ body {
                  :hover {
                     color: $color_button;
                 }
-                .active {
-                    color: $color_button !important;
-                }
             }
             .dropdown {
                 .dropdown-menu {
@@ -135,6 +132,26 @@ body {
                 }
             }
         }
+    }
+    .sectionLocation {
+        div {
+            .pagination {
+                .actives {
+                    background-color: $color_button !important;
+                    color: white;
+                }
+            }
+        }
+    }
+    .sectionConnexion {
+        .gradient-custom-2 {
+            /* Chrome 10-25, Safari 5.1-6 */
+            background: -webkit-linear-gradient(to right, #FFC839, #E1A624, #093A7A, #093A7A);
+            /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+            background: linear-gradient(to right, #E1A624, #a88838, #093A7A, #093A7A);
+          
+        }
+       
     }
     footer {
         background-color: $color_blue;
