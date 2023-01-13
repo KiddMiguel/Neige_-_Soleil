@@ -16,38 +16,45 @@
                     </li>
                     <?php if (!isset($_SESSION["email_locataire"])) {
                         echo '
-                            <li class="nav-item">
-                            <a class="nav-link " href="index.php?page=connexion"><i class="fa-solid fa-id-card "></i> Connexion</a>
-                            </li>
-                            <li class="nav-item dropdown">
-                            <a class="nav-link text-light dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                <i class="fa-solid fa-user-plus text-light"></i> Inscription
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li class="hover-dropdown"><a class="dropdown-item" href="#"><i class="fa-solid fa-user text-black"></i> Locataire</a></li>
-                                <hr class="dropdown-divider m-0">
-                            </li>
-                            <li class="hover-dropdown"><a class="dropdown-item" href="#"><i class="fa-solid fa-user-tie text-black"></i> Propriétaire</a></li>
-                            </ul>
-                            </li>
+                        <li class="nav-item">
+                        <a class="nav-link " href="index.php?page=connexion"><i class="fa-solid fa-id-card "></i> Connexion</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link text-light dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fa-solid fa-user-plus text-light"></i> Inscription
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li class="hover-dropdown"><a class="dropdown-item" href="#"><i class="fa-solid fa-user text-black"></i> Locataire</a></li>
+                            <hr class="dropdown-divider m-0">
+                    </li>
+                    <li class="hover-dropdown"><a class="dropdown-item" href="#"><i class="fa-solid fa-user-tie text-black"></i> Propriétaire</a></li>
+                     </ul>
+                     </li>
+                     <li class="nav-item">
+                         <a class="nav-link" href="#"><i class="fa-regular fa-newspaper tN"></i> A propos</a>
+                     </li>
+                     <button class="btn btn-warning" type="submit"><a href="index.php?page=contact" class="text-decoration-none text-black">Contactez Nous</a> </button>
                             ';
-                    }else{
+                    } else {
                         echo '
-                        <div class="dropdown">
-     
-                        <ul class="dropdown-menu text-small shadow">
-                            <li><a class="dropdown-item" href="#">Profil</a></li>
-                          <li><a class="dropdown-item" href="#">Mes réservations</a></li>
-                          <li><a class="dropdown-item" href="#">Gérer Compte</a></li>
-                          <li><hr class="dropdown-divider"></li>
-                          <li><a class="dropdown-item" href="index.php?page=deconnexion">Déconnexion</a></li>
-                        </ul>
-                      </div>
-                        <button class="btn btn-outline-warning ms-4 ropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa-solid fa-user rounded"></i> '.$_SESSION["civilite_locataire"].' '.$_SESSION["nom_locataire"].'</li></button>
-                       
+                        <li class="nav-item">
+                        <a class="nav-link" href="#"><i class="fa-regular fa-newspaper tN"></i> A propos</a>
+                    </li>
+                    <button class="btn btn-warning" type="button"><a href="index.php?page=contact" class="text-decoration-none text-black">Contactez Nous</a> </button>
+                    <div class="dropdown">
+ 
+                    <ul class="dropdown-menu text-small shadow">
+                        <li><a class="dropdown-item" href="#">Profil</a></li>
+                      <li><a class="dropdown-item" href="#">Mes réservations</a></li>
+                      <li><a class="dropdown-item" href="#">Gérer Compte</a></li>
+                      <li><hr class="dropdown-divider"></li>
+                      <li><a class="dropdown-item" href="index.php?page=deconnexion">Déconnexion</a></li>
+                    </ul>
+                  </div>
+                    <button class="btn btn-outline-warning ms-4 ropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa-solid fa-user rounded"></i> '.$_SESSION["civilite_locataire"].' '.$_SESSION["nom_locataire"].'</li></button>
+                   
 
-                        </ul>
-                    </div>';
+                    </ul>';
                     }
                     ?>
                     <li class="nav-item">
