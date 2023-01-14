@@ -121,6 +121,13 @@ body .sectionConnexion .gradient-custom-2 {
   /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
   background: linear-gradient(to right, #E1A624, #a88838, #093A7A, #093A7A);
 }
+body .SectionProfil {
+  background-color: #FFF0CB !important;
+  height: 80vh;
+}
+body .SectionProfil .divProfil a {
+  background-color: #FFC839;
+}
 body footer {
   background-color: #093A7A;
 }

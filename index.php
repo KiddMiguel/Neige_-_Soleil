@@ -20,15 +20,40 @@ $unController = new Controller($server, $bdd, $user, $mdp);
 </head>
 
 <body>
-   <?php
-require_once ("include/header.php");
-        //Chaque section à l'interieur de notre balise php appel la page mentionner -->
+    <?php
+    require_once("include/header.php");
+    //Chaque section à l'interieur de notre balise php appel la page mentionner -->
 
+/********CONNEXION LOCATAIRE***** */
+    if (isset($_POST["se_connecter"])) {
+        $email = $_POST["email_locataire"];
+        $mdp = $_POST["mdp_locataire"];
+        $unUser = $unController->verifconnexionLocataire($email, $mdp);
+        if ($unUser == null) {
+            echo "Mot de passe incorrect";
+        } else {
+            $_SESSION["civilite_locataire"] = $unUser["civilite_locataire"];
+            $_SESSION["email_locataire"] = $unUser["email_locataire"];
+            $_SESSION["mdp_locataire"] = $unUser["mdp_locataire"];
+            $_SESSION["nom_locataire"] = $unUser["nom_locataire"];
+            $_SESSION["prenom_locataire"] = $unUser["prenom_locataire"];
+            $_SESSION["tel_locataire"] = $unUser["tel_locataire"];
+            $_SESSION["adresse_locataire"] = $unUser["adresse_locataire"];
+            $_SESSION["cp_locataire"] = $unUser["cp_locataire"];
+            $_SESSION["nb_reservations"] = $unUser["nb_reservations"];
+            header("location: index.php?page=home");
+        }
+    }
 
-        if (isset($_POST["se_connecter"])) {
+    /*******INSERT NEW LOCATAIRE********** */
+
+    if (isset($_POST["valider"])) {
+        $unController->insertLocataire($_POST);
+        echo"Inscription okay";
+        if (isset($_POST["valider"])) {
             $email = $_POST["email_locataire"];
             $mdp = $_POST["mdp_locataire"];
-            $unUser = $unController->verifconnexion($email, $mdp);
+            $unUser = $unController->verifconnexionLocataire($email, $mdp);
             if ($unUser == null) {
                 echo "Mot de passe incorrect";
             } else {
@@ -37,42 +62,58 @@ require_once ("include/header.php");
                 $_SESSION["nom_locataire"] = $unUser["nom_locataire"];
                 $_SESSION["prenom_locataire"] = $unUser["prenom_locataire"];
                 $_SESSION["civilite_locataire"] = $unUser["civilite_locataire"];
+                $_SESSION["tel_locataire"] = $unUser["tel_locataire"];
+                $_SESSION["adresse_locataire"] = $unUser["adresse_locataire"];
+                $_SESSION["cp_locataire"] = $unUser["cp_locataire"];
+                $_SESSION["nb_reservations"] = $unUser["nb_reservations"];
                 header("location: index.php?page=home");
             }
         }
+    }
 
+    if (isset($_GET["page"])) {
+        $page = $_GET["page"];
+    } else {
+        $page = "home";
+    }
 
-        if (isset($_GET["page"])) {
-            $page = $_GET["page"];
-        } else {
-            $page = "home";
-        }
-
-        switch ($page) {
-            case "home":
-                require_once("Templates/home.php");
-                break;
-            case "location":
-                require_once("Templates/location.php");
-                break;
-                break;
-            case "appartement":
-                require_once("Templates/appartement.php");
-                break;
-            case "connexion":
-                require_once("Templates/connexion.php");
-                break;
-            case "deconnexion":
-                    session_destroy();
-                    unset($_SESSION["email_locataire"]);
-                    header("location: index.php?page=home");
-                    break;
-            case "contact":
-                require_once("Templates/contact.php");
-                break;
-            default:
-                require_once("erreur.php");
-        }
+    switch ($page) {
+        case "home":
+            require_once("Templates/home.php");
+            break;
+        case "location":
+            require_once("Templates/location.php");
+            break;
+            break;
+        case "appartement":
+            require_once("Templates/appartement.php");
+            break;
+        case "connexion_proprietaire":
+            require_once("Templates/connexion_proprietaire.php");
+            break;
+        case "connexion_locataire":
+            require_once("Templates/connexion_locataire.php");
+            break;
+        case "profil":
+            require_once("Templates/profil.php");
+            break;
+        case "reservation":
+            require_once("Templates/reservation.php");
+            break;
+        case "gerer_compte":
+            require_once("Templates/gerer_compte.php");
+            break;
+        case "deconnexion":
+            session_destroy();
+            unset($_SESSION["email_locataire"]);
+            header("location: index.php?page=home");
+            break;
+        case "contact":
+            require_once("Templates/contact.php");
+            break;
+        default:
+            require_once("erreur.php");
+    }
 
     ?>
     <footer class="container-fluid">

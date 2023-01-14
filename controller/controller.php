@@ -9,9 +9,20 @@ class Controller
         $this->unModele = new Modele($server, $bdd, $user, $mdp);
     }
     
-    public function verifconnexion($email, $mdp){
-        return $this->unModele->verifconnexion($email, $mdp);
+    public function verifconnexionLocataire($email, $mdp){
+        return $this->unModele->verifconnexionLocataire($email, $mdp);
         
+    }
+
+    public function insertLocataire($tab){
+        $this->unModele->insertLocataire($tab);
+    }
+
+    public function recupImage()
+    {
+        $images = $this->unModele->recupImage();
+
+        return $images;
     }
 
 }
