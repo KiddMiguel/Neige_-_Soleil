@@ -15,6 +15,7 @@ $unController = new Controller($server, $bdd, $user, $mdp);
     <link rel="stylesheet" href="Css/style.css" class="css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
     <!--Integration du css boostrap -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
     <title>Home</title>
 </head>
@@ -23,14 +24,14 @@ $unController = new Controller($server, $bdd, $user, $mdp);
     <?php
     require_once("include/header.php");
     //Chaque section à l'interieur de notre balise php appel la page mentionner -->
-
+/************************************************-----------------------PARTIE LOCATAIRE---------------------------------------********************** */
 /********CONNEXION LOCATAIRE***** */
     if (isset($_POST["se_connecter"])) {
         $email = $_POST["email_locataire"];
         $mdp = $_POST["mdp_locataire"];
         $unUser = $unController->verifconnexionLocataire($email, $mdp);
-        if ($unUser == null) {
-            echo "Mot de passe incorrect";
+        if ($unUser == null) { 
+                
         } else {
             $_SESSION["civilite_locataire"] = $unUser["civilite_locataire"];
             $_SESSION["email_locataire"] = $unUser["email_locataire"];
@@ -55,7 +56,7 @@ $unController = new Controller($server, $bdd, $user, $mdp);
             $mdp = $_POST["mdp_locataire"];
             $unUser = $unController->verifconnexionLocataire($email, $mdp);
             if ($unUser == null) {
-                echo "Mot de passe incorrect";
+            
             } else {
                 $_SESSION["email_locataire"] = $unUser["email_locataire"];
                 $_SESSION["mdp_locataire"] = $unUser["mdp_locataire"];
@@ -70,6 +71,63 @@ $unController = new Controller($server, $bdd, $user, $mdp);
             }
         }
     }
+
+    /******UPDATE LOCATAIRE******/
+
+    if (isset($_POST["update_locataire"])){
+        $unController->updateLocataire($_POST);
+    }
+
+
+
+    
+
+    /************************************************-----------------------PARTIE PROPRIETAIRE---------------------------------------********************** */
+/********CONNEXION PROPRIETAIRE***** */
+if (isset($_POST["se_connecter_proprio"])) {
+    $email = $_POST["email_proprio"];
+    $mdp = $_POST["mdp_proprio"];
+    $unUser = $unController->verifconnexionProprietaire($email, $mdp);
+    if ($unUser == null) { 
+            echo'Error: Error';
+    } else {
+        $_SESSION["civilite_proprio"] = $unUser["civilite_proprio"];
+        $_SESSION["email_proprio"] = $unUser["email_proprio"];
+        $_SESSION["mdp_proprio"] = $unUser["mdp_proprio"];
+        $_SESSION["nom_proprio"] = $unUser["nom_proprio"];
+        $_SESSION["prenom_proprio"] = $unUser["prenom_proprio"];
+        $_SESSION["tel_proprio"] = $unUser["tel_proprio"];
+        $_SESSION["adresse_proprio"] = $unUser["adresse_proprio"];
+        $_SESSION["cp_proprio"] = $unUser["cp_proprio"];
+        header("location: index.php?page=home");
+    }
+}
+
+/*******INSERT NEW PROPRIETAIRE********** */
+
+if (isset($_POST["valider"])) {
+    $unController->insertLocataire($_POST);
+    echo"Inscription okay";
+    if (isset($_POST["valider"])) {
+        $email = $_POST["email_locataire"];
+        $mdp = $_POST["mdp_locataire"];
+        $unUser = $unController->verifconnexionLocataire($email, $mdp);
+        if ($unUser == null) {
+        
+        } else {
+            $_SESSION["email_locataire"] = $unUser["email_locataire"];
+            $_SESSION["mdp_locataire"] = $unUser["mdp_locataire"];
+            $_SESSION["nom_locataire"] = $unUser["nom_locataire"];
+            $_SESSION["prenom_locataire"] = $unUser["prenom_locataire"];
+            $_SESSION["civilite_locataire"] = $unUser["civilite_locataire"];
+            $_SESSION["tel_locataire"] = $unUser["tel_locataire"];
+            $_SESSION["adresse_locataire"] = $unUser["adresse_locataire"];
+            $_SESSION["cp_locataire"] = $unUser["cp_locataire"];
+            $_SESSION["nb_reservations"] = $unUser["nb_reservations"];
+            header("location: index.php?page=home");
+        }
+    }
+}
 
     if (isset($_GET["page"])) {
         $page = $_GET["page"];
@@ -94,14 +152,17 @@ $unController = new Controller($server, $bdd, $user, $mdp);
         case "connexion_locataire":
             require_once("Templates/connexion_locataire.php");
             break;
+        case "inscription_proprio":
+            require_once("Templates/inscription_proprio.php");
+            break;
         case "profil":
             require_once("Templates/profil.php");
             break;
         case "reservation":
             require_once("Templates/reservation.php");
             break;
-        case "gerer_compte":
-            require_once("Templates/gerer_compte.php");
+        case "apropos":
+            require_once("Templates/apropos.php");
             break;
         case "deconnexion":
             session_destroy();
@@ -115,34 +176,10 @@ $unController = new Controller($server, $bdd, $user, $mdp);
             require_once("erreur.php");
     }
 
+/******Calling footer****/
+    require_once("include/footer.php");
     ?>
-    <footer class="container-fluid">
-        <div class="container text-light pb-5">
-
-            <ul class="container-fluid d-flex justify-content-around pt-5">
-                <li class="nav-item">Lien utiles -></li>
-                <li>Lorem</li>
-                <li>Lorem</li>
-                <li>Lorem</li>
-                <li>Lorem</li>
-                <li>Lorem</li>
-                <li>Lorem</li>
-            </ul>
-            <hr>
-            <ul class="d-flex justify-content-around pt-5">
-                <li><img src="Images/logo.png" width="50%" alt=""></li>
-                <li class="form-text">© 2022 Nom de l’entreprise</li>
-                <li class="form-text">6 Impasse des 2 cousins, Paris, France</li>
-                <li class="form-text">contact@nomdel’entreprise.com</li>
-                <div>
-                    <H6>Inscription à la newsletter</H6>
-                    <input type="text" name="" class="p-1 me-2 rounded-2" id="" placeholder="Votre e-mail"><button type="button" class="p-1 rounded-2">Je m'inscrit</button>
-                </div>
-            </ul>
-        </div>
-
-
-    </footer>
+      
     <!-- JavaScript Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
 </body>

@@ -28,15 +28,19 @@ create table locataire (
 );
 
 create table proprietaire (
-    id_user int(5) not null AUTO_INCREMENT, 
+    id_user int(5) AUTO_INCREMENT, 
     civilite_proprio enum ("Mr", "Mme"),
-    nom_proprio varchar(50) not null,
-    prenom_proprio varchar(50) not null,
-    email_proprio varchar(50) not null,
+    nom_proprio varchar(50) ,
+    prenom_proprio varchar(50),
+    statut_proprio varchar(50),
+    email_proprio varchar(50),
     mdp_proprio varchar(50),
     tel_proprio varchar(50),
     adresse_proprio varchar(50),
     cp_proprio varchar(50),
+    ville_proprio varchar(50),
+    pays_proprio varchar(50),
+    code_adherent varchar(50),
     id_contrat int (5),
     id_appart int(5),
      FOREIGN key (id_user) REFERENCES user(id_user) on delete cascade,
@@ -196,9 +200,9 @@ VALUES
 
 INSERT INTO proprietaire 
 VALUES
-( 4, 'Mme', 'Lefebvre', 'Anne', 'anne.lefebvre@gmail.com', 'motdepasse', '0612345678', '4 rue des Fleurs', '75000', 1, 1),
-( 5, 'Mme', 'Garcia', 'Emilie', 'emilie.garcia@gmail.com', 'motdepasse', '0698765432', '5 rue des Arbres', '75000', 2, 2),
-( 6, 'Mr', 'Dupuis', 'Thomas', 'thomas.dupuis@gmail.com', 'motdepasse', '0698765432', '6 rue des Oiseaux', '75000', 3, 3);
+( 4, 'Mme', 'Lefebvre', 'Anne','Louer particulier', 'anne.lefebvre@gmail.com', 'motdepasse', '0612345678', '4 rue des Fleurs', '75000','Paris','France','KI78545', 1, 1),
+( 5, 'Mme', 'Garcia', 'Emilie', 'Société', 'emilie.garcia@gmail.com', 'motdepasse', '0698765432', '5 rue des Arbres', '75000','Nanterre','Espagne','KI78565', 2, 2),
+( 6, 'Mr', 'Dupuis', 'Thomas','Louer particulier', 'thomas.dupuis@gmail.com', 'motdepasse', '0698765432', '6 rue des Oiseaux', '75000','Nanterre','France','KH8565', 3, 3);
 
 INSERT INTO contrat
 VALUES

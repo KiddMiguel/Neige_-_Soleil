@@ -11,7 +11,7 @@
                                     <div class="row">
                                         <div class="col-md-7 mb-2">
                                             <div class="form-outline">
-                                                <input type="email" id="form3Example1m" class="form-control form-control-lg" name="email_locataire" />
+                                                <input type="text" id="form3Example1m" class="form-control form-control-lg" name="email_locataire" />
                                                 <label class="form-label" for="form3Example1m">Email</label>
                                             </div>
                                         </div>
@@ -26,8 +26,11 @@
                                     </div>
                                     <div class="d-flex justify-content-start pt-3">
                                         <button type="submit" class="btn btn-warning btn-lg ms-2" name="se_connecter">Connexion</button>
+                                        <a class="text-muted ms-5" href="#!"> Mot de passe oublié?</a>
+
                                     </div>
-                                    <img src="Images/logo.png" alt="" class="mt-5">
+                                  
+                                    <img src="Images/Logo-noir.png" alt="" class="mt-5" width="40%">
                                 </div>
                             </form>
                         </div>
