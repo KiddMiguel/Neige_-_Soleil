@@ -11,7 +11,7 @@
                 
                         <h3 class="mb-4 pb-2 pb-md-0 mb-md-5 px-md-2">Registration Info</h3>
 
-                        <form class="px-md-2">
+                        <form class="px-md-2" method="post">
                             <div class="row">
                                 <div class="d-md-flex justify-content-start align-items-center mb-4 py-2">
                                     <select class="select border" name="statut_proprio">
@@ -35,12 +35,12 @@
 
                                 <div class="col-md-6 mb-4">
                                     <div class="form-outline">
-                                        <input type="text" class="form-control form-control" name="nom_locataire" placeholder="Nom"/>
+                                        <input type="text" class="form-control form-control" name="nom_proprio" placeholder="Nom"/>
                                     </div>
                                 </div>
                                 <div class="col-md-6 mb-4">
                                     <div class="form-outline">
-                                        <input type="text" id="form3Example1n" class="form-control form-control" name="prenom_locataire" placeholder="Prenom"/>
+                                        <input type="text" id="form3Example1n" class="form-control form-control" name="prenom_proprio" placeholder="Prenom"/>
                                     </div>
                                 </div>
                                 <div class="col-md-12 mb-4">
@@ -79,12 +79,18 @@
                                 </div>
                                 <div class="col-md-6 mb-2">
                                     <div class="form-outline">
-                                        <input type="email" class="form-control form-control" name="nom_locataire" placeholder="Email" />
+                                        <input type="email" class="form-control form-control" name="email_proprio" placeholder="Email" />
                                     </div>
                                 </div>
                                 <div class="col-md-6 mb-2">
                                     <div class="form-outline">
-                                        <input type="text" id="form3Example1n" class="form-control form-control" name="prenom_locataire" placeholder="Numéro de téléphone" />
+                                        <input type="text" id="form3Example1n" class="form-control form-control" name="tel_proprio" placeholder="Numéro de téléphone" />
+                                        <label class="form-label" for="form3Example1n"></label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mb-2">
+                                    <div class="form-outline">
+                                        <input type="text" id="form3Example1n" class="form-control form-control" name="code_adherent" placeholder="Code adhérent de votre parrain" />
                                         <label class="form-label" for="form3Example1n"></label>
                                     </div>
                                 </div>
@@ -92,10 +98,10 @@
 
                             <div class="col-md-12 mb-2">
                                 <div class="form-outline mb-4">
-                                    <input type="text" id="form3Example1n" class="form-control form-control" name="prenom_locataire" placeholder="Mot de passe" />
+                                    <input type="text" id="form3Example1n" class="form-control form-control" name="" placeholder="Mot de passe" />
                                 </div>
                                 <div class="form-outline">
-                                    <input type="text" id="form3Example1n" class="form-control form-control" name="prenom_locataire" placeholder="Confirmer votre mot de passe" />
+                                    <input type="text" id="form3Example1n" class="form-control form-control" name="mdp_proprio" placeholder="Confirmer votre mot de passe" />
                               
                                 </div>
                             </div>

@@ -1,4 +1,4 @@
-<section class="SectionProfil pt-5">
+<section class="SectionProfil pt-5" style="height: 100vh;">
     <div class="container rounded mt-5 mb-5 border divProfil bg-white">
         <div class="row">
             <div class="col-md-3 border-right">
@@ -20,14 +20,23 @@
                     </div>
                     <form action="" method="post">
                         <div class="row mt-2">
-                            <div class="col-md-6"><label class="labels">Nom</label><input type="text" class="form-control" name="nom_locataire" placeholder="Votre nom" value="<?= ((isset($_SESSION["email_proprio"]))) ? $_SESSION['nom_proprio'] : $_SESSION['nom_locataire'] ?>"></div>
-                            <div class="col-md-6"><label class="labels">Prenom</label><input type="text" class="form-control" name="" placeholder="Votre prenom" value="<?= ((isset($_SESSION["email_proprio"]))) ? $_SESSION['prenom_proprio'] : $_SESSION['prenom_locataire'] ?>"></div>
+                            <div class="col-md-6 pt-3"><input type="text" class="form-control" name="nom_locataire" placeholder="Votre nom" value="<?= ((isset($_SESSION["email_proprio"]))) ? $_SESSION['nom_proprio'] : $_SESSION['nom_locataire'] ?>"></div>
+                            <div class="col-md-6 pt-3"><input type="text" class="form-control" name="" placeholder="Votre prenom" value="<?= ((isset($_SESSION["email_proprio"]))) ? $_SESSION['prenom_proprio'] : $_SESSION['prenom_locataire'] ?>"></div>
+                            <div class="col-md-6 pt-3"><input type="text" class="form-control" name="nom_locataire" placeholder="Votre nom" value="<?= ((isset($_SESSION["email_proprio"]))) ? $_SESSION['nom_proprio'] : $_SESSION['nom_locataire'] ?>"></div>
                         </div>
                         <div class="row mt-3">
-                            <div class="col-md-12 pt-2"><label class="labels">Numéro de téléphone</label><input type="text" class="form-control" placeholder="Votre numéro de téléphone" value="<?= ((isset($_SESSION["email_proprio"]))) ? $_SESSION['tel_proprio'] : $_SESSION['tel_locataire'] ?>"></div>
-                            <div class="col-md-12 pt-2"><label class="labels">Adresse</label><input type="text" class="form-control" placeholder="Votre adresse" value="<?= ((isset($_SESSION["email_proprio"]))) ? $_SESSION['adresse_proprio'] : $_SESSION['adresse_locataire'] ?>"></div>
-                            <div class="col-md-12 pt-2"><label class="labels">Code Postal</label><input type="text" class="form-control" placeholder="Votre code postal" value="<?= ((isset($_SESSION["email_proprio"]))) ? $_SESSION['cp_proprio'] : $_SESSION['cp_locataire'] ?>"></div>
-                        </div>
+                            <div class="col-md-12 pt-3"><input type="text" class="form-control" placeholder="Votre numéro de téléphone" value="<?= ((isset($_SESSION["email_proprio"]))) ? $_SESSION['tel_proprio'] : $_SESSION['tel_locataire'] ?>"></div>
+                            <div class="col-md-12 pt-3"><input type="text" class="form-control" placeholder="Votre adresse" value="<?= ((isset($_SESSION["email_proprio"]))) ? $_SESSION['adresse_proprio'] : $_SESSION['adresse_locataire'] ?>"></div>
+                            <div class="col-md-6 pt-3"><input type="text" class="form-control" placeholder="Votre code postal" value="<?= ((isset($_SESSION["email_proprio"]))) ? $_SESSION['cp_proprio'] : $_SESSION['cp_locataire'] ?>"></div>
+                 
+                            <?php
+                                if(isset($_SESSION["email_proprio"])){
+                                    echo  '<div class="col-md-6 pt-3"><input type="text" class="form-control" placeholder="Ville" value="'.$_SESSION["ville_proprio"].'"></div> ';
+                                    echo  '<div class="col-md-6 pt-3"><input type="text" class="form-control" placeholder="Votre pays" value="'.$_SESSION["pays_proprio"].'"></div> ';
+                                    echo  '<div class="col-md-6 pt-3"><input type="text" class="form-control" placeholder="Votre Adhérent" value="'.$_SESSION["code_adherent"].'"></div> ';
+                                }
+                            ?>
+                       </div>
                         <div class="mt-5 text-center"><button class="btn btn-warning profile-button" type="button" name="update_locataire" data-bs-target="#exampleModalToggle" data-bs-toggle="modal">Sauvegarder</button></div>
 
 
