@@ -231,7 +231,16 @@ VALUES
 (3, "disponible", "900","Nom de l'appart", "Marseille", "13000", "9 rue de la Forêt", "Villa avec piscine privée et terrasse ensoleillée", "T4", 100, 3, 6, 2, 8, "Terrasse","RER","BUS", "image",2,1,2,6,1);
 
 INSERT INTO images 
-VALUES (1,'image', 'description_image1', 1),
-       (2,'image', 'description_image2', 1),
-       (3,'nom_image24','description_image4', 2),
-       (4,'nom_image3', 'description_image3', 1);
+VALUES (1,'A-1', 'description_image1', 1),
+       (2,'A-2', 'description_image2', 1),
+       (3,'A-3','description_image4', 1),
+       (4,'A-4','description_image4', 1),
+       (5,'B-1', 'description_image3', 1),
+       (6,'B-2', 'description_image3', 2),
+       (7,'B-3', 'description_image3', 2),
+       (8,'B-4', 'description_image3', 2),
+       (9,'B-5', 'description_image3',2),
+       (10,'A-5', 'description_image3', 2)
+       
+       
+       ;
