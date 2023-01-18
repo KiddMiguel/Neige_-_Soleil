@@ -1,0 +1,2 @@
+<?php
+$reservations = $unController->recupAllReservation();

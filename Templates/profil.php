@@ -20,19 +20,47 @@
                     </div>
                     <form action="" method="post">
                         <div class="row mt-2">
+                            <div class="col-md-12 pt-3"> <select class="select border p-1" name="civilite_proprio">
+                                        <option value="Mme">Mme</option>
+                                        <option value="Mr">Mr</option>
+                                        <option value="Autre">Autre</option>
+                                    </select></div>
+                            <?php
+                                if(isset($_SESSION["email_proprio"])){
+                                    echo '<div class="col-md-12 pt-3"><select class="select border p-1" >
+                                    <option value="statut_proprio">'.$_SESSION["statut_proprio"].'</option>
+                                    <option value="Loueur particulier">Loueur particulier</option>
+                                    <option value="Agence immobilière">Agence immobilière</option>
+                                    <option value="Société">Société</option>
+                                    <option value="Association / Regroupement de propriétaires">Association / Regroupement de propriétaires</option>
+                                    <option value="Office de tourisme">Office de tourisme</option>
+                                    <option value="Entreprise individuelle / LMP">Entreprise individuelle / LMP</option>
+                                    <option value="Autres">Autres</option>
+                                </select></div>';
+                                }
+                            ?>
                             <div class="col-md-6 pt-3"><input type="text" class="form-control" name="nom_locataire" placeholder="Votre nom" value="<?= ((isset($_SESSION["email_proprio"]))) ? $_SESSION['nom_proprio'] : $_SESSION['nom_locataire'] ?>"></div>
                             <div class="col-md-6 pt-3"><input type="text" class="form-control" name="" placeholder="Votre prenom" value="<?= ((isset($_SESSION["email_proprio"]))) ? $_SESSION['prenom_proprio'] : $_SESSION['prenom_locataire'] ?>"></div>
-                            <div class="col-md-6 pt-3"><input type="text" class="form-control" name="nom_locataire" placeholder="Votre nom" value="<?= ((isset($_SESSION["email_proprio"]))) ? $_SESSION['nom_proprio'] : $_SESSION['nom_locataire'] ?>"></div>
                         </div>
                         <div class="row mt-3">
                             <div class="col-md-12 pt-3"><input type="text" class="form-control" placeholder="Votre numéro de téléphone" value="<?= ((isset($_SESSION["email_proprio"]))) ? $_SESSION['tel_proprio'] : $_SESSION['tel_locataire'] ?>"></div>
                             <div class="col-md-12 pt-3"><input type="text" class="form-control" placeholder="Votre adresse" value="<?= ((isset($_SESSION["email_proprio"]))) ? $_SESSION['adresse_proprio'] : $_SESSION['adresse_locataire'] ?>"></div>
+                       
                             <div class="col-md-6 pt-3"><input type="text" class="form-control" placeholder="Votre code postal" value="<?= ((isset($_SESSION["email_proprio"]))) ? $_SESSION['cp_proprio'] : $_SESSION['cp_locataire'] ?>"></div>
-                 
                             <?php
                                 if(isset($_SESSION["email_proprio"])){
+                                    echo  '<div class="col-md-6 pt-3 "> <select class="select border pe-5 pt-1 pb-2">
+                                    <option value="Afghanistan">'.$_SESSION["pays_proprio"].'</option>
+                                    <option value="Afghanistan">Afghanistan</option>
+                                    <option value="Algeria">Algeria</option>
+                                    <option value="Cameroon">Cameroon</option>
+                                    <option value="Canada">Canada</option>
+                                    <option value="Belgium">Belgium</option>
+                                    <option value="Congo">Congo</option>
+                                    <option value="Congo, RDC">Congo, RDC</option>
+                                    <option value="France">France</option>
+                                </select></div> ';
                                     echo  '<div class="col-md-6 pt-3"><input type="text" class="form-control" placeholder="Ville" value="'.$_SESSION["ville_proprio"].'"></div> ';
-                                    echo  '<div class="col-md-6 pt-3"><input type="text" class="form-control" placeholder="Votre pays" value="'.$_SESSION["pays_proprio"].'"></div> ';
                                     echo  '<div class="col-md-6 pt-3"><input type="text" class="form-control" placeholder="Votre Adhérent" value="'.$_SESSION["code_adherent"].'"></div> ';
                                 }
                             ?>

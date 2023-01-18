@@ -119,6 +119,47 @@ class Modele{
             $update->execute($donnees);
         }
     }
+
+
+    /*********************************************APPARTEMENT ************************************** */
+    public function recupAllAppartement(){
+        if($this->unPDO != null){
+            $request = "select * from appartement";
+            $select = $this->unPDO->prepare($request);
+            $select->execute();
+            $appartements = $select->fetchAll();
+            return $appartements;
+        }else{
+            return null;
+        }
+    }
+    
+    public function selectWhereApprtement($id_appart)
+    {
+        if ($this->unPDO != null) {
+            $request = "select * from appartement where id_appart = :id_appart"; 
+            $donnees = array(":id_appart" => $id_appart );
+
+            $select = $this->unPDO->prepare($request);
+            $select->execute($donnees);
+            $appartement = $select->fetch();
+            return $appartement;
+        }
+    }
+
+    /***************************RECUP RESERVATION*********************************** */
+    public function recupAllReservation(){
+        if($this->unPDO != null){
+            $request = "select * from reservation";
+            $select = $this->unPDO->prepare($request);
+            $select->execute();
+            $reservations = $select->fetchAll();
+            return $reservations;
+        }else{
+            return null;
+        }
+    }
+
     public function recupImage(){
         if ($this->unPDO != null) {
         $request = "select * from image";

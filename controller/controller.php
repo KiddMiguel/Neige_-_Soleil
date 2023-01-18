@@ -40,10 +40,26 @@ class Controller
     public function recupImage()
     {
         $images = $this->unModele->recupImage();
-
         return $images;
     }
 
+
+    /**************************************APPARTEMENT ******************************** */
+    public function recupAllAppartement(){
+        $appartements = $this->unModele->recupAllAppartement();
+        return $appartements;
+    }
+    public function selectWhereApprtement($id_appart){
+        return $this->unModele->selectWhereApprtement($id_appart);
+         
+    }
+
+
+    /*********************************RESERVATION************************ */
+    public function recupAllReservation(){
+        $reservations = $this->unModele->recupAllReservation();
+        return $reservations;
+    }
 
 
 }

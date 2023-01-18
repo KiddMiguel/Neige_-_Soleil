@@ -79,8 +79,8 @@ CREATE Table materiel_proprio (
 CREATE table reservation (
     id_reservation int (5) not null AUTO_INCREMENT,
     statut_reservation VARCHAR(50),
-    date_reservation date,
     date_debut_reservation date,
+    date_fin_reservation date,
     prix_reservation VARCHAR (50),
     nb_personnes int(5),
     id_user int(5), 
@@ -107,7 +107,9 @@ CREATE table appartement (
     nb_lits int(5),
     nb_salles_bain int(5),
     capacite_appart int(5),
-    atout_appart VARCHAR (50),
+    atout_appart1 VARCHAR (50),
+    atout_appart2 VARCHAR (50),
+    atout_appart3 VARCHAR (50),
     image_appart VARCHAR (50),
     id_reservation INT(5),
     id_contrat int(5),
@@ -218,15 +220,15 @@ VALUES
 
 INSERT INTO reservation 
 VALUES
-(1, "Réservé", '2022-01-01', '2022-01-15', '500€', 2, 1, 1,1),
-(2, "Non réservé", '2022-01-01', '2022-01-15', '700€', 4, 2, 2,1),
-(3, "En cours", '2022-01-01', '2022-01-15', '600€', 3, 3, 3, 1);
+(1, "Réservé",  '2022-01-15','2022-02-01', '500€', 2, 1, 1,1),
+(2, "Non réservé", '2022-06-11','2022-12-25',  '700€', 4, 2, 2,1),
+(3, "En cours",  '2022-03-26','2022-03-05', '600€', 3, 3, 3, 1);
 
 INSERT INTO appartement 
 VALUES
-(1, "disponible", "800€/semaine","Nom de l'appart", "Paris", "75000", "7 rue de la Plage", "Appartement en bord de mer avec vue imprenable sur l'océan", "T2", 50, 1, 2, 1, 4, "Machine à laver", "image",1,1,2,4,1),
-(2, "disponible", "1000€/semaine", "Nom de l'appart","Lyon", "69000", "8 rue de la Montagne", "Chalet au pied des pistes de ski avec sauna et Jacuzzi", "T3", 70, 2, 4, 2, 6, "Parking","image",1,1,2,5,1),
-(3, "disponible", "900€/semaine","Nom de l'appart", "Marseille", "13000", "9 rue de la Forêt", "Villa avec piscine privée et terrasse ensoleillée", "T4", 100, 3, 6, 2, 8, "Terrasse", "image",2,1,2,6,1);
+(1, "disponible", "800","Nom de l'appart", "Paris", "75000", "7 rue de la Plage", "Appartement en bord de mer avec vue imprenable sur l'océan", "T2", 50, 1, 2, 1, 4, "Machine à laver","Garage","Parking", "image",1,1,2,4,1),
+(2, "disponible", "1000", "Nom de l'appart","Lyon", "69000", "8 rue de la Montagne", "Chalet au pied des pistes de ski avec sauna et Jacuzzi", "T3", 70, 2, 4, 2, 6, "Parking","Balcon","Piscine","image",1,1,2,5,1),
+(3, "disponible", "900","Nom de l'appart", "Marseille", "13000", "9 rue de la Forêt", "Villa avec piscine privée et terrasse ensoleillée", "T4", 100, 3, 6, 2, 8, "Terrasse","RER","BUS", "image",2,1,2,6,1);
 
 INSERT INTO images 
 VALUES (1,'image', 'description_image1', 1),

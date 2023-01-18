@@ -23,6 +23,8 @@ $unController = new Controller($server, $bdd, $user, $mdp);
 <body>
     <?php
     require_once("include/header.php");
+    require_once("setting/setting_appartement.php");
+    require_once("setting/setting_reservation.php");
     //Chaque section à l'interieur de notre balise php appel la page mentionner -->
 /************************************************-----------------------PARTIE LOCATAIRE---------------------------------------********************** */
 /********CONNEXION LOCATAIRE***** */
@@ -77,8 +79,6 @@ $unController = new Controller($server, $bdd, $user, $mdp);
     if (isset($_POST["update_locataire"])){
         $unController->updateLocataire($_POST);
     }
-
-
 
     
 
@@ -182,12 +182,14 @@ if (isset($_POST["valider_proprio"])) {
         default:
             require_once("erreur.php");
     }
+ 
 
 /******Calling footer****/
     require_once("include/footer.php");
     ?>
       
     <!-- JavaScript Bundle with Popper -->
+    <script src="JavaScript/main.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
 </body>
 
