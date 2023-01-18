@@ -1,4 +1,4 @@
-<section class="h-100 gradient-form sectionConnexion" style="background-color: #eee;">
+<section class=" gradient-form sectionConnexion" style="background-color: #eee; height: 90vh;">
     <div class="container py-5 h-100">
         <div class="row d-flex justify-content-center align-items-center h-100">
             <div class="col-xl-10">
@@ -8,33 +8,34 @@
                             <div class="card-body p-md-5 mx-md-4 ">
 
                                 <div class="text-center ">
-                                    <img src="Images/logo.png" style="width: 185px;" alt="logo">
+                                    <img src="Images/Logo-noir.png" style="width: 185px;" alt="logo">
                                     <h4 class="mt-1 mb-5 pb-1">Nous sommes Neige & Soliel</h4>
                                 </div>
 
                                 <form method="post">
-                                    <p>Connectez vous à votre compte</p>
+                                    <p>Connectez vous à votre compte <span class="fw-semibold">Propriétaire</span></p>
 
                                     <div class="form-outline form-floating mb-4">
-                                        <input type="email" id="floatingInput" class="form-control" name="email_locataire" required placeholder="Email ou numéro de téléphone" />
+                                        <input type="email" id="floatingInput" name="email_proprio" class="form-control"  required placeholder="Email ou numéro de téléphone" />
                                         <label class="form-label" for="floatingInput">Email</label>
                                     </div>
 
                   
 
                                     <div class="form-outline form-floating mb-4">
-                                        <input type="password" id="floatingInput" name="mdp_locataire" class="form-control" placeholder="Mot de passe" required/>
+                                        <input type="password" id="floatingInput" name="mdp_proprio" class="form-control" placeholder="Mot de passe" required/>
                                         <label class="form-label" for="floatingInput" >Mot de passe</label>
                                     </div>
 
                                     <div class="pt-1 mb-5 pb-1">
-                                        <button class="btn btn-warning btn-block fa-lg mb-3" type="submit" name="se_connecter">Se connecter</button>
+                                        <button class="btn btn-warning btn-block fa-lg mb-3" name="se_connecter_proprio" type="submit" >Se connecter</button>
                                         <a class="text-muted ms-5" href="#!"> Mot de passe oublié?</a>
+                          
                                     </div>
 
                                     <div class="d-flex align-items-center justify-content-center pb-4">
                                         <p class="mb-0 me-2">Votre première fois?</p>
-                                        <button type="button" class="btn btn-outline-warning">Créer un nouveau compte</button>
+                                        <button type="button" class="btn btn-outline-warning"><a href="index.php?page=inscription_proprio" class="text-decoration-none text-black">Créer un nouveau compte</a></button>
                                     </div>
 
                                 </form>

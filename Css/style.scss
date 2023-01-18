@@ -149,9 +149,16 @@ body {
             background: -webkit-linear-gradient(to right, #FFC839, #E1A624, #093A7A, #093A7A);
             /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
             background: linear-gradient(to right, #E1A624, #a88838, #093A7A, #093A7A);
-          
         }
-       
+    }
+    .SectionProfil {
+        background-color: $color_InsideInput !important;
+        height: 80vh;
+        .divProfil {
+            a {
+                background-color: $color_button;
+            }
+        }
     }
     footer {
         background-color: $color_blue;

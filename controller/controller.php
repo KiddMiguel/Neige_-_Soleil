@@ -8,10 +8,58 @@ class Controller
     {
         $this->unModele = new Modele($server, $bdd, $user, $mdp);
     }
-    
-    public function verifconnexion($email, $mdp){
-        return $this->unModele->verifconnexion($email, $mdp);
+    /****************CONTROLLER LOCATAIRE********** */
+    public function verifconnexionLocataire($email, $mdp){
+        return $this->unModele->verifconnexionLocataire($email, $mdp);
         
     }
+
+    public function insertLocataire($tab){
+        $this->unModele->insertLocataire($tab);
+    }
+
+    public function updateLocataire($tab){
+        $this->unModele->updateLocataire($tab);
+    }
+
+
+    /*********************CONTROLLER PROPRIETAIRE************* */
+    public function verifconnexionProprietaire($email, $mdp){
+        return $this->unModele->verifconnexionProprietaire($email, $mdp);
+        
+    }
+
+    public function insertProprietaire($tab){
+        $this->unModele->insertProprietaire($tab);
+    }
+
+    public function updateProprietaire($tab){
+        $this->unModele->updateProprietaire($tab);
+    }
+
+    public function recupImage()
+    {
+        $images = $this->unModele->recupImage();
+        return $images;
+    }
+
+
+    /**************************************APPARTEMENT ******************************** */
+    public function recupAllAppartement(){
+        $appartements = $this->unModele->recupAllAppartement();
+        return $appartements;
+    }
+    public function selectWhereApprtement($id_appart){
+        return $this->unModele->selectWhereApprtement($id_appart);
+         
+    }
+
+
+    /*********************************RESERVATION************************ */
+    public function recupAllReservation(){
+        $reservations = $this->unModele->recupAllReservation();
+        return $reservations;
+    }
+
 
 }
