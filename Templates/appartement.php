@@ -123,8 +123,8 @@
         echo '<hr class="y-5">
         <div>
           <ul class="list-group">
-          <li class="list-group-item bg-warning fw-semibold">' . $appartement['prix_appart'] . ' €/mois</li>
-          <li class="list-group-item">' . $appartement['capacite_appart'] . ' Pièce(s)</li>
+            <li class="list-group-item bg-warning fw-semibold">' . $appartement['prix_appart'] . ' €/mois</li>
+            <li class="list-group-item">' . $appartement['capacite_appart'] . ' Pièce(s)</li>
             <li class="list-group-item">' . $appartement['nb_chambres'] . ' Chambre(s)</li>
             <li class="list-group-item">' . $appartement['nb_lits'] . ' Lit(s)</li>
             <li class="list-group-item">' . $appartement['nb_salles_bain'] . ' Salle de bain(s)</li>

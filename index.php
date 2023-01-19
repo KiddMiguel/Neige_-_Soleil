@@ -22,9 +22,10 @@ $unController = new Controller($server, $bdd, $user, $mdp);
 
 <body>
     <?php
-    require_once("include/header.php");
-    require_once("setting/setting_appartement.php");
-    require_once("setting/setting_reservation.php");
+        require_once("setting/setting_appartement.php");
+        require_once("setting/setting_reservation.php");
+        require_once("include/header.php");
+
     //Chaque section à l'interieur de notre balise php appel la page mentionner -->
 /************************************************-----------------------PARTIE LOCATAIRE---------------------------------------********************** */
 /********CONNEXION LOCATAIRE***** */

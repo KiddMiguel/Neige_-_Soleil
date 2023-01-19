@@ -148,6 +148,20 @@ class Modele{
     }
 
     /***************************RECUP RESERVATION*********************************** */
+
+    public function selectReservationLocataire($id_user)
+    {
+        if ($this->unPDO != null) {
+            $request = "select * from reservation where id_user = :id_user"; 
+            $donnees = array(":id_user" => $id_user );
+
+            $select = $this->unPDO->prepare($request);
+            $select->execute($donnees);
+            $appartement = $select->fetch();
+            return $appartement;
+        }
+    }
+
     public function recupAllReservation(){
         if($this->unPDO != null){
             $request = "select * from reservation";

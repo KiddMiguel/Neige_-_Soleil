@@ -20,10 +20,11 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                <?php 
+                                echo '
                                 <tr class="fw-normal">
                                     <th>
-                                        <img src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/avatar-5.webp" class="shadow-1-strong rounded-circle" alt="avatar 1" style="width: 55px; height: auto;">
-                                        <span class="ms-2">Alice Mayer</span>
+                                     <span class="ms-2">Alice Mayer</span>
                                     </th>
                                     <td class="align-middle">
                                     <input type="date" class="btn btn-outline-secondary" value="01/02/2022" disabled="disabled">
@@ -37,8 +38,8 @@
                                     <td class="align-middle">
                                         <button  class="btn btn-danger"><a href="#!" class="text-decoration-none text-light" data-mdb-toggle="tooltip" title="Done">Annuler</i></a></button>
                                     </td>
-                                </tr>
-                                
+                                </tr>'
+                                ?>
                                 
                             </tbody>
                         </table>
