@@ -9,36 +9,50 @@
                     </div>
                     <div class="card-body" data-mdb-perfect-scrollbar="true" style="position: relative; height: 400px">
 
-                        <table class="table mb-0">
+                        <table class="table mb-0 w-100">
                             <thead>
                                 <tr>
                                     <th scope="col">Intitule</th>
+                                    <th scope="col">Nb Personne</th>
                                     <th scope="col">Date Début</th>
                                     <th scope="col">Date Fin</th>
                                     <th scope="col">Statut</th>
+                                    <th scope="col">Prix</th>
                                     <th scope="col">Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <?php 
+                                    foreach ($reservations as $reservation){
+
+                                   
+                                                 
                                 echo '
                                 <tr class="fw-normal">
                                     <th>
-                                     <span class="ms-2">Alice Mayer</span>
+                                     <span class="ms-2">Nom de l\'appartement</span>
                                     </th>
                                     <td class="align-middle">
-                                    <input type="date" class="btn btn-outline-secondary" value="01/02/2022" disabled="disabled">
+                                    <span class="btn btn-outline-secondary" disabled="disabled">'.$reservation['nb_personnes'].'</span>
                                     </td>
                                     <td class="align-middle">
-                                       <input type="date" class="btn btn-outline-secondary" value="" disabled="disabled">
+                                    <input type="date" class="btn btn-outline-secondary w-75" value="'.$reservation['date_fin_reservation'].'" disabled="disabled">
                                     </td>
                                     <td class="align-middle">
-                                        <h6 class="mb-0"><span class="badge bg-warning">En cours de traitement</span></h6>
+                                       <input type="date" class="btn btn-outline-secondary w-75" value="'.$reservation['date_debut_reservation'].'" disabled="disabled">
+                                    </td>
+                                    <td class="align-middle">
+                                        <h6 class="mb-0"><span class="badge bg-warning">'.$reservation['statut_reservation'].'</span></h6>
+                                    </td>
+                                    <td class="align-middle">
+                                        <button  class=" border rounded">'.$reservation['prix_reservation'].' €/Mois</button>
                                     </td>
                                     <td class="align-middle">
                                         <button  class="btn btn-danger"><a href="#!" class="text-decoration-none text-light" data-mdb-toggle="tooltip" title="Done">Annuler</i></a></button>
                                     </td>
-                                </tr>'
+                                </tr>';
+                            }
+
                                 ?>
                                 
                             </tbody>

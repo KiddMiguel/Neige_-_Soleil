@@ -21,7 +21,7 @@ class Controller
     public function updateLocataire($tab){
         $this->unModele->updateLocataire($tab);
     }
-
+  
 
     /*********************CONTROLLER PROPRIETAIRE************* */
     public function verifconnexionProprietaire($email, $mdp){
@@ -61,6 +61,15 @@ class Controller
         $reservations = $this->unModele->selectReservationLocataire($id_user);
         return $reservations;
   
+    }
+    public function selectReservationAppartement($id_reservation){
+        $reservationsAppart = $this->unModele->selectReservationAppartement($id_reservation);
+        return $reservationsAppart;
+  
+    }
+
+    public function insertReseravation($tab){
+        $this->unModele->insertReseravation($tab);
     }
 
     public function recupAllReservation(){
