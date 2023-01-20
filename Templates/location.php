@@ -11,8 +11,7 @@
                             <button class="btn btn-outline-warning btn-lg" type="button"><i class="fa fa-search"></i></button>
                         </div>
                     </div>
-                </div>
-            </div>
+           
         </div>
         <div class="row g-2 ">
            <?php
