@@ -1,24 +1,30 @@
-<section class="sectionTwo" style="height: 100vh;">
-<div>
-  <div class="contact-form-wrapper d-flex justify-content-center">
-    <form action="#" class="contact-form">
-      <h5 class="title" style="align-items: center">Contactez nous !</h5>
-      <p class="description">N'hésitez pas à nous contacter pour tous problèmes, toute question, besoin d'assistance ou autres.
-      </p>
-      <div>
-        <input type="text" class="form-control rounded border-black-solid-5px mb-3 form-input" id="name" placeholder="Name" required>
-      </div>
-      <div>
-        <input type="email" class="form-control rounded border-black mb-3 form-input" placeholder="Email" required>
-      </div>
-      <div>
-        <textarea id="message" class="form-control rounded border-black mb-3 form-text-area" rows="5" cols="30" placeholder="Message" required></textarea>
-      </div>
-      <div class="submit-button-wrapper-center">
-        <input type="submit" class="submit" value="Send">
-      </div>
-    </form>
-  </div>
-</div>
-</section>
+<section class="sectionTwo pt-5" style="height: 100vh; background-color:#FFF0CB;">
 
+  <div class="container  p-0 w-50 me-auto">
+  <h4 class="me-auto p-3">Nous Contactez ! </h4>
+    <div class=" card">
+      <form action="https://formspree.io/f/xqkoadlz" class="m-3" method="POST">
+        <!-- Name input -->
+        <div class="form-outline mb-4 pt-4">
+          <label class="form-label" for="form4Example1">Nom & Prenom</label>
+          <input type="text" id="form4Example1" name="Nom" class="form-control" />
+        </div>
+
+        <!-- Email input -->
+        <div class="form-outline mb-4">
+          <label class="form-label" for="form4Example2">Adresse Email</label>
+          <input type="email" id="form4Example2" name="Email" class="form-control" />
+        </div>
+
+        <!-- Message input -->
+        <div class="form-outline mb-4">
+          <label class="form-label" for="form4Example3">Message</label>
+          <textarea class="form-control" id="form4Example3" name="Message" rows="4"></textarea>
+        </div>
+
+
+        <button type="submit" class="btn btn-warning mb-4">Envoyer</button>
+      </form>
+    </div>
+  </div>
+</section>

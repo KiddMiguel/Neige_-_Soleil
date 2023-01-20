@@ -1,7 +1,7 @@
 <header class="container-fluid">
     <nav class="navbar navbar-expand-lg p-0">
         <div class="container-fluid ">
-            <a class="navbar-brand text-light" href="#"><img src="Images/logo.png" width="50%" alt=""></a>
+            <a class="navbar-brand text-light" href="index.php?page=home"><img src="Images/logo.png" width="50%" alt=""></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -40,9 +40,12 @@
                     <div class="dropdown me-5">
                         <ul class="dropdown-menu text-small shadow">
                             <li><a class="dropdown-item" href="index.php?page=profil"><i class="bi bi-gear"></i> Profile Settings</a></li>';
+                                if(isset($_SESSION['email_locataire'])){
+                                    echo '<li><a class="dropdown-item" href="index.php?page=reservation&id_user='.$_SESSION['id_user'].'"><i class="bi bi-list-ul"></i> Mes réservations <span class="badge text-bg-warning">'.$_SESSION['nb_reservations'].'</span></a></li>';
+                         
+                                }
 
-                                echo '<li><a class="dropdown-item" href="index.php?page=reservation&id_user='.$_SESSION['id_user'].'"><i class="bi bi-list-ul"></i> Mes réservations <span class="badge text-bg-warning">'.$_SESSION['nb_reservations'].'</span></a></li>
-                            <li><a class="dropdown-item" href="index.php?page=gerer_compte"><i class="bi bi-heart"></i> Favories</a></li>
+                         echo  '<li><a class="dropdown-item" href="index.php?page=gerer_compte"><i class="bi bi-heart"></i> Favories</a></li>
                             <li><hr class="dropdown-divider"></li>
                             <li><a class="dropdown-item text-danger fw-semibold" href="index.php?page=deconnexion"><i class="bi bi-box-arrow-left text-danger"></i> Déconnexion</a></li>
                         </ul>
