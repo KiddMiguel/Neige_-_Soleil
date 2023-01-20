@@ -22,19 +22,22 @@ $unController = new Controller($server, $bdd, $user, $mdp);
 
 <body>
     <?php
-    require_once("include/header.php");
-    require_once("setting/setting_appartement.php");
-    require_once("setting/setting_reservation.php");
+        require_once("setting/setting_appartement.php");
+        require_once("setting/setting_reservation.php");
+        require_once("include/header.php");
+
     //Chaque section à l'interieur de notre balise php appel la page mentionner -->
 /************************************************-----------------------PARTIE LOCATAIRE---------------------------------------********************** */
 /********CONNEXION LOCATAIRE***** */
     if (isset($_POST["se_connecter"])) {
         $email = $_POST["email_locataire"];
         $mdp = $_POST["mdp_locataire"];
+
         $unUser = $unController->verifconnexionLocataire($email, $mdp);
         if ($unUser == null) { 
                 
         } else {
+            $_SESSION["id_user"] = $unUser["id_user"];
             $_SESSION["civilite_locataire"] = $unUser["civilite_locataire"];
             $_SESSION["email_locataire"] = $unUser["email_locataire"];
             $_SESSION["mdp_locataire"] = $unUser["mdp_locataire"];
@@ -44,7 +47,7 @@ $unController = new Controller($server, $bdd, $user, $mdp);
             $_SESSION["adresse_locataire"] = $unUser["adresse_locataire"];
             $_SESSION["cp_locataire"] = $unUser["cp_locataire"];
             $_SESSION["nb_reservations"] = $unUser["nb_reservations"];
-            header("location: index.php?page=home");
+            header("location: index.php?page=home&id_user=".$unUser["id_user"]);
         }
     }
 
@@ -60,6 +63,7 @@ $unController = new Controller($server, $bdd, $user, $mdp);
             if ($unUser == null) {
             
             } else {
+                $_SESSION["id_user"] = $unUser["id_user"];
                 $_SESSION["email_locataire"] = $unUser["email_locataire"];
                 $_SESSION["mdp_locataire"] = $unUser["mdp_locataire"];
                 $_SESSION["nom_locataire"] = $unUser["nom_locataire"];
@@ -69,16 +73,16 @@ $unController = new Controller($server, $bdd, $user, $mdp);
                 $_SESSION["adresse_locataire"] = $unUser["adresse_locataire"];
                 $_SESSION["cp_locataire"] = $unUser["cp_locataire"];
                 $_SESSION["nb_reservations"] = $unUser["nb_reservations"];
-                header("location: index.php?page=home");
+                header("location: index.php?page=home&&id_user=".$unUser["id_user"]);
             }
         }
     }
 
     /******UPDATE LOCATAIRE******/
 
-    if (isset($_POST["update_locataire"])){
-        $unController->updateLocataire($_POST);
-    }
+    // if (isset($_POST["update_locataire"])){
+    //     $unController->updateLocataire($_POST);
+    // }
 
     
 
@@ -91,7 +95,7 @@ if (isset($_POST["se_connecter_proprio"])) {
     if ($unUser == null) { 
             echo'Error: Error';
     } else {
-        $_SESSION["civilite_proprio"] = $unUser["civilite_proprio"];
+            $_SESSION["civilite_proprio"] = $unUser["civilite_proprio"];
             $_SESSION["nom_proprio"] = $unUser["nom_proprio"];
             $_SESSION["prenom_proprio"] = $unUser["prenom_proprio"];
             $_SESSION["statut_proprio"] = $unUser["statut_proprio"];
@@ -103,7 +107,7 @@ if (isset($_POST["se_connecter_proprio"])) {
             $_SESSION["ville_proprio"] = $unUser["ville_proprio"];
             $_SESSION["pays_proprio"] = $unUser["pays_proprio"];
             $_SESSION["code_adherent"] = $unUser["code_adherent"];
-            header("location: index.php?page=home");
+            header("location: index.php?page=home&id_user=".$unUser["id_user"]);
     }
 }
 
@@ -131,10 +135,15 @@ if (isset($_POST["valider_proprio"])) {
             $_SESSION["ville_proprio"] = $unUser["ville_proprio"];
             $_SESSION["pays_proprio"] = $unUser["pays_proprio"];
             $_SESSION["code_adherent"] = $unUser["code_adherent"];
-            header("location: index.php?page=home");
+            header("location: index.php?page=home&id_user=".$unUser["id_user"]);
         }
     }
 }
+
+
+
+
+/******************************************RESERVATION ********************* */
 
     if (isset($_GET["page"])) {
         $page = $_GET["page"];

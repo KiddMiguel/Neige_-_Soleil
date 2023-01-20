@@ -42,13 +42,13 @@
                                     <div class="row">
                                         <div class="col-md-6 mb-2">
                                             <div class="form-outline">
-                                                <input type="text" id="form3Example1m" class="form-control form-control-lg" name="nom_locataire" />
+                                                <input type="text" id="form3Example1m" class="form-control form-control-lg" required name="nom_locataire" />
                                                 <label class="form-label" for="form3Example1m">Nom</label>
                                             </div>
                                         </div>
                                         <div class="col-md-6 mb-2">
                                             <div class="form-outline">
-                                                <input type="text" id="form3Example1n" class="form-control form-control-lg" name="prenom_locataire" />
+                                                <input type="text" id="form3Example1n" class="form-control form-control-lg" required name="prenom_locataire" />
                                                 <label class="form-label" for="form3Example1n">Prenom</label>
                                             </div>
                                         </div>
@@ -56,13 +56,13 @@
                                     <div class="row">
                                         <div class="col-md-6 mb-2">
                                             <div class="form-outline">
-                                                <input type="email" id="form3Example1m" class="form-control form-control-lg" name="email_locataire" />
+                                                <input type="email" id="form3Example1m" class="form-control form-control-lg" required name="email_locataire" />
                                                 <label class="form-label" for="form3Example1m">Email</label>
                                             </div>
                                         </div>
                                         <div class="col-md-6 mb-2">
                                             <div class="form-outline">
-                                                <input type="text" id="form3Example1n" class="form-control form-control-lg" name="tel_locataire" />
+                                                <input type="text" id="form3Example1n" class="form-control form-control-lg" required name="tel_locataire" />
                                                 <label class="form-label" for="form3Example1n">Tel</label>
                                             </div>
                                         </div>
@@ -81,25 +81,25 @@
                                     <div class="row">
                                         <div class="col-md-6 mb-2">
                                             <div class="form-outline">
-                                                <input type="text" id="form3Example1m" class="form-control form-control-lg" name="adresse_locataire" />
+                                                <input type="text" id="form3Example1m" class="form-control form-control-lg" required name="adresse_locataire" />
                                                 <label class="form-label" for="form3Example1m">Adresse</label>
                                             </div>
                                         </div>
                                         <div class="col-md-6 mb-2">
                                             <div class="form-outline">
-                                                <input type="text" id="form3Example1n" class="form-control form-control-lg" name="cp_locataire" />
+                                                <input type="text" id="form3Example1n" class="form-control form-control-lg" required name="cp_locataire" />
                                                 <label class="form-label" for="form3Example1n">Code postal</label>
                                             </div>
                                         </div>
                                     </div>
 
                                     <div class="form-outline mb-2">
-                                        <input type="password" id="form3Example99" class="form-control form-control-lg" />
+                                        <input type="password" id="form3Example99" required class="form-control form-control-lg" />
                                         <label class="form-label" for="form3Example99">Mot de passe</label>
                                     </div>
 
                                     <div class="form-outline mb-2">
-                                        <input type="password" id="form3Example97" class="form-control form-control-lg" name="mdp_locataire" />
+                                        <input type="password" id="form3Example97" class="form-control form-control-lg" required name="mdp_locataire" />
                                         <label class="form-label" for="form3Example97">Confirmer mot de passe</label>
                                     </div>
 

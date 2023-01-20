@@ -39,8 +39,9 @@
                     <button class="btn btn-warning" type="button"><a href="index.php?page=contact" class="text-decoration-none text-black">Contactez Nous</a> </button>
                     <div class="dropdown me-5">
                         <ul class="dropdown-menu text-small shadow">
-                            <li><a class="dropdown-item" href="index.php?page=profil"><i class="bi bi-gear"></i> Profile Settings</a></li>
-                            <li><a class="dropdown-item" href="index.php?page=reservation"><i class="bi bi-list-ul"></i> Mes réservations <span class="badge text-bg-warning">4</span></a></li>
+                            <li><a class="dropdown-item" href="index.php?page=profil"><i class="bi bi-gear"></i> Profile Settings</a></li>';
+
+                                echo '<li><a class="dropdown-item" href="index.php?page=reservation&id_user='.$_SESSION['id_user'].'"><i class="bi bi-list-ul"></i> Mes réservations <span class="badge text-bg-warning">'.$_SESSION['nb_reservations'].'</span></a></li>
                             <li><a class="dropdown-item" href="index.php?page=gerer_compte"><i class="bi bi-heart"></i> Favories</a></li>
                             <li><hr class="dropdown-divider"></li>
                             <li><a class="dropdown-item text-danger fw-semibold" href="index.php?page=deconnexion"><i class="bi bi-box-arrow-left text-danger"></i> Déconnexion</a></li>

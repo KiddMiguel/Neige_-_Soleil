@@ -148,6 +148,46 @@ class Modele{
     }
 
     /***************************RECUP RESERVATION*********************************** */
+    public function insertReservation($tab){
+        if($this->unPDO != null){
+            $request = "insert into reservation values (null, 'En cours réservation', :date_debut_reservation, :date_fin_reservation, :prix_reservation, :nb_personnes, :id_user, :id_appart, null)";
+            $donnees = array (
+                ":date_debut_reservation" => $tab['date_debut_reservation'], 
+                ":date_fin_reservation" => $tab['date_fin_reservation'], 
+                ":prix_reservation" => $tab['prix_reservation'], 
+                ":nb_personnes" => $tab['nb_personnes'],
+                ":id_user" => $tab['id_user'], 
+                ":id_appart" => $tab['id_appart']);
+            $insert = $this->unPDO->prepare($request);
+            $insert->execute($donnees);
+        }
+    }
+
+    public function selectReservationLocataire($id_user)
+    {
+        if ($this->unPDO != null) {
+            $request = "select * from reservation where id_user = :id_user"; 
+            $donnees = array(":id_user" => $id_user );
+
+            $select = $this->unPDO->prepare($request);
+            $select->execute($donnees);
+            $reservations = $select->fetchAll();
+            return $reservations;
+        }
+    }
+    public function selectReservationAppartement($id_reservation)
+    {
+        if ($this->unPDO != null) {
+            $request = "select * from appartement where id_reservation = :id_reservation"; 
+            $donnees = array(":id_reservation" => $id_reservation );
+
+            $select = $this->unPDO->prepare($request);
+            $select->execute($donnees);
+            $appartement = $select->fetch();
+            return $appartement;
+        }
+    }
+
     public function recupAllReservation(){
         if($this->unPDO != null){
             $request = "select * from reservation";
