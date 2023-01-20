@@ -1,7 +1,7 @@
 
 <section class="sectionTwo sectionLocation">
     <div class="container text-center ">
-    <h3 class="pt-5 pb-2">Découvrez tous nos logements</h3>
+    <h3 class="pt-5 pb-2">Découvrez tous nos logements h</h3>
     <div class="mt-5 w-50 ms-2 justify-content-center">
             <div class="row">
                 <div class="col-md-8">
@@ -11,7 +11,8 @@
                             <button class="btn btn-outline-warning btn-lg" type="button"><i class="fa fa-search"></i></button>
                         </div>
                     </div>
-           
+                </div>
+            </div>
         </div>
         <div class="row g-2 ">
            <?php
