@@ -7,7 +7,8 @@ if(isset($_GET['id_user'])){
 }
 
 
-    if (isset($_POST["valider_form"])) {
-        $unController->insertReseravation($_POST);
-        header("location: index.php?page=home");
+    if (isset($_POST["valider_formulaire"])) {
+        $unController->insertReservation($_POST);
+       
+        // header("location: index.php?page=home");
     }

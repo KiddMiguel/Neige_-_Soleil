@@ -148,17 +148,16 @@ class Modele{
     }
 
     /***************************RECUP RESERVATION*********************************** */
-    public function insertReseravation($tab){
+    public function insertReservation($tab){
         if($this->unPDO != null){
-            $request = "insert into reservation values (null, 'En cours réservation', :date_debut_reservation, :date_fin_reservation, :prix_reservation, :nb_personnes, :id_user, :id_appart, null);";
+            $request = "insert into reservation values (null, 'En cours réservation', :date_debut_reservation, :date_fin_reservation, :prix_reservation, :nb_personnes, :id_user, :id_appart, null)";
             $donnees = array (
                 ":date_debut_reservation" => $tab['date_debut_reservation'], 
                 ":date_fin_reservation" => $tab['date_fin_reservation'], 
                 ":prix_reservation" => $tab['prix_reservation'], 
                 ":nb_personnes" => $tab['nb_personnes'],
                 ":id_user" => $tab['id_user'], 
-                ":id_appart" => $tab['id_appart']
-            );
+                ":id_appart" => $tab['id_appart']);
             $insert = $this->unPDO->prepare($request);
             $insert->execute($donnees);
         }

@@ -63,7 +63,6 @@ $unController = new Controller($server, $bdd, $user, $mdp);
             if ($unUser == null) {
             
             } else {
-                $id_user = $_GET['id_user'];
                 $_SESSION["id_user"] = $unUser["id_user"];
                 $_SESSION["email_locataire"] = $unUser["email_locataire"];
                 $_SESSION["mdp_locataire"] = $unUser["mdp_locataire"];

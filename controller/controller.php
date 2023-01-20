@@ -68,8 +68,8 @@ class Controller
   
     }
 
-    public function insertReseravation($tab){
-        $this->unModele->insertReseravation($tab);
+    public function insertReservation($tab){
+        $this->unModele->insertReservation($tab);
     }
 
     public function recupAllReservation(){

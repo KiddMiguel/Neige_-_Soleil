@@ -9,27 +9,27 @@
             <div class="row">
                 <div class="col-md-6 mb-4">
                     <div class="form-outline">
-                        <input type="text" class="form-control form-control" name=""  value="<?= $_SESSION["nom_locataire"] ?>" placeholder="Nom" />
+                        <input type="text" class="form-control form-control"   value="<?= $_SESSION["nom_locataire"] ?>" placeholder="Nom" />
                     </div>
                 </div>
                 <div class="col-md-6 mb-4">
                     <div class="form-outline">
-                        <input type="text" id="form3Example1n" class="form-control form-control"  value="<?= $_SESSION["prenom_locataire"] ?>" name="" placeholder="Prenom" />
+                        <input type="text" id="form3Example1n" class="form-control form-control"  value="<?= $_SESSION["prenom_locataire"] ?>" placeholder="Prenom" />
                     </div>
                 </div>
                 <div class="col-md-12 mb-4">
                     <div class="form-outline">
-                        <input type="text" id="form3Example1n" class="form-control form-control" value="<?= $_SESSION["email_locataire"] ?>" name="" placeholder="Email" />
+                        <input type="text" id="form3Example1n" class="form-control form-control" value="<?= $_SESSION["email_locataire"] ?>" placeholder="Email" />
                     </div>
                 </div>
                 <div class="col-md-6 mb-4">
                     <div class="form-outline">
-                        <input type="text" class="form-control form-control" name="tel_locataire"  value="<?= $_SESSION["tel_locataire"] ?>" placeholder="Numéro de téléphone" />
+                        <input type="text" class="form-control form-control" value="<?= $_SESSION["tel_locataire"] ?>" placeholder="Numéro de téléphone" />
                     </div>
                 </div>
                 <div class="col-md-6 mb-2">
                     <div class="form-outline">
-                        <input type="text" id="form3Example1n" class="form-control form-control"  value="<?= $_SESSION["nom_locataire"] ?>" name="ville_proprio" placeholder="Ville" />
+                        <input type="text" id="form3Example1n" class="form-control form-control"  value="<?= $_SESSION["nom_locataire"] ?>"  placeholder="Ville" />
                     </div>
                 </div>
             </div>
@@ -65,7 +65,7 @@
                 </div>
                 <div class="col-md-6"  style="display: none;">
                     <div class="form-outline" >
-                        <input type="text" id="form3Example1n" class="form-control form-control"  name="id_appart"   value="<?php echo  $appartement['id_appart'] ?>" placeholder="Date de fin" />
+                        <input type="text" id="form3Example1n" class="form-control form-control"  name="id_appart"   value="<?php echo  $appartement['id_appart']; ?>"  />
                         <label class="form-label" for="form3Example1n"></label>
                     </div>
                 </div>
@@ -79,7 +79,7 @@
             <div class="row ">
                 <div class="col-md-6">
                     <div class="form-outline">
-                        <button type="submit" name="valider_form" class="btn btn-warning btn-lg mb-1">Envoyer</button>
+                        <button type="submit" name="valider_formulaire" class="btn btn-warning btn-lg mb-1">Envoyer</button>
                     </div>
                 </div>
             </div>
