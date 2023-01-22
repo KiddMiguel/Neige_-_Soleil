@@ -6,8 +6,8 @@
             <div class="row">
                 <div class="col-md-8">
                     <div class="input-group mb-3">
-                        <input type="text" class="form-control input-text" placeholder="Search products...." aria-label="Recipient's username" aria-describedby="basic-addon2">
-                        <div class="input-group-append">
+                        <input type="text" class="form-control input-text " placeholder="Recherche...." aria-label="Recipient's username" aria-describedby="basic-addon2">
+                        <div class="input-group-append ms-2">
                             <button class="btn btn-outline-warning btn-lg" type="button"><i class="fa fa-search"></i></button>
                         </div>
                     </div>
@@ -20,7 +20,7 @@
                     echo '
             <div class="col-lg-4 col-md-4 col-sm-6 col-xm-12 p-3" style="width: 25%; height: 20%;">
                 <div class="card">
-                    <img src="images/image.png" class="card-img-top" alt="..." style="width: 100%;">
+                <img src="Images/'.$appartement['image_1'].'" class="card-img-top" style="width:100%; height: 15rem;" alt="...">
                     <div class="card-body d-flex">
                         <div class="pt-3 me-3">
                         <a href="index.php?page=appartement&id_appart='.$appartement["id_appart"].'"><i class="fa-solid fa-circle-chevron-right fs-3"></i> </a>

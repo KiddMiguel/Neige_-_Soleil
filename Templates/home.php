@@ -25,11 +25,17 @@
         <div class="container text-center">
         <div class="row g-2">
             <?php
+  
+                $counter = 0;
                 foreach ($appartements as $appartement){
+                    if($counter == 6){
+                        break;
+                    }
+
                     echo '
                     <div class="col-lg-4 col-md-4 col-sm-6 col-xm-12 p-3">
                     <div class="card">
-                        <img src="images/image.png" class="card-img-top" alt="...">
+                        <img src="Images/'.$appartement['image_1'].'" class="card-img-top fixed-size" alt="...">
                         <div class="card-body d-flex">
                             <div class="pt-3 me-3">
                                 <a href="index.php?page=appartement&id_appart='.$appartement["id_appart"].'"><i class="fa-solid fa-circle-chevron-right fs-3"></i> </a>
@@ -41,7 +47,8 @@
                         </div>
                     </div>
                 </div> ';
-
+       
+                $counter++;
                 }
 
 

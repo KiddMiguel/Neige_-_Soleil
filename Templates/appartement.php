@@ -1,31 +1,41 @@
 <section class="container">
-  <div class="container text-center">
-    <div class="row " style="width:80%;">
+  <div class=" text-center">
+    <div class="row container-fluid" style="width:80%;">
       <div class="col-6 ">
-        <div class="p-3 "><img src="images/chalet_1.jpg" class="card-img-top" id="full" alt="..."></div>
-      </div>
-      <div class="col-6 ">
-        <div class="container text-center">
-          <div class="row g-2">
-            <div class="col-6">
-              <div class="p-3"><img src="images/chalet_2.jpg" class="card-img-top small" alt="..."></div>
-            </div>
-            <div class="col-6">
-              <div class="p-3"><img src="images/chalet_3.jpg" class="card-img-top small" alt="..."></div>
-            </div>
-            <div class="col-6">
-              <div class="p-3"><img src="images/chalet_4.jpg" class="card-img-top small" alt="..."></div>
-            </div>
-            <div class="col-6">
-              <div class="p-3"><img src="images/chalet_5.jpg" class="card-img-top small" alt="..."></div>
-            </div>
+      <?php
+
+           echo' <div class="p-3 "><img src="Images/'.$appartement['image_1'].'" class="rounded card-img-top" style="width:100; height:20rem;" id="full" alt="..."></div>
+        </div>
+        <div class="col-6 ">
+          <div class="container text-center">
+            <div class="row g-2">';
+        
+
+              echo' 
+                 <div class="col-6">
+                <div class="p-3"><img src="images/'.$appartement['image_2'].'" class="rounded card-img-top small" style="width:100; height:8rem;" alt="..."></div>
+              </div>
+              <div class="col-6">
+                <div class="p-3"><img src="images/'.$appartement['image_3'].'" class="rounded card-img-top small" style="width:100; height:8rem;" alt="..."></div>
+              </div>
+              <div class="col-6">
+                <div class="p-3"><img src="images/'.$appartement['image_4'].'" class="rounded card-img-top small" style="width:100; height:8rem;" alt="..."></div>
+              </div>
+              <div class="col-6">
+                <div class="p-3"><img src="images/'.$appartement['image_5'].'" class="rounded card-img-top small" style="width:100; height:8rem;" alt="..."></div>
+              </div>';
+
+
+       
+
+            ?>
           </div>
         </div>
       </div>
 
     </div>
   </div>
-  <div class="d-flex py-5">
+  <div class="d-flex py-5 container">
     <div class="pe-5">
       <?php
       echo '<h2 class="text-primary fw-lighter">' . $appartement['intitule_appart'] . ' ' . $appartement['type_appart'] . ' au ' . $appartement['adresse_appart'] . ', ' . $appartement['cp_appart'] . ', ' . $appartement['ville_appart'] . '</h2>';
