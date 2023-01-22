@@ -36,10 +36,10 @@ class Controller
         $this->unModele->insertProprietaire($tab);
     }
 
-    public function updateProprietaire($tab)
-    {
-        $this->unModele->updateProprietaire($tab);
-    }
+    // public function updateProprietaire($tab)
+    // {
+    //     $this->unModele->updateProprietaire($tab);
+    // }
 
 
 
@@ -87,7 +87,7 @@ class Controller
         $images = $this->unModele->recupImages();
         return $images;
     }
-    
+
     public function selectWhereImage($id_appart)
     {
         $imagesAppart = $this->unModele->selectReservationLocataire($id_appart);
