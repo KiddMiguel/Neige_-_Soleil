@@ -200,7 +200,7 @@ class Modele{
         }
     }
 
-    public function recupImage(){
+    public function recupImages(){
         if ($this->unPDO != null) {
         $request = "select * from image";
         $select = $this->unPDO->prepare($request);
@@ -211,5 +211,20 @@ class Modele{
             return null;
         }
     } 
+
+    public function selectWhereImage($id_appart)
+    {
+        if ($this->unPDO != null) {
+            $request = "select * from images where id_appart = :id_appart"; 
+            $donnees = array(":id_appart" => $id_appart );
+
+            $select = $this->unPDO->prepare($request);
+            $select->execute($donnees);
+            $imagesAppart = $select->fetchAll();
+
+            return $imagesAppart;
+        }
+    }
+
 
 }

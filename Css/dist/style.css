@@ -61,6 +61,10 @@ body .sectionOne .overlay .mt-custom input {
 body .sectionTwo div .card {
   padding: 0;
 }
+body .sectionTwo div .card .fixed-size {
+  width: 100%;
+  height: 20rem;
+}
 body .sectionTwo div .card-body {
   background: white;
 }
