@@ -8,6 +8,7 @@ class Modele{
             $url = "mysql:host=".$server.";dbname=".$bdd;
 
             $this->unPDO = new PDO($url, $user, $mdp);
+            
         }
         catch(PDOException $exp){
             echo "<br/>Erreur de connexion à la base de données !";
