@@ -5,7 +5,7 @@
 
         <h3 class="mb-4 pb-2 pb-md-0 mb-md-5 px-md-2 text-center">Formulaire de contact</h3>
 
-        <form class="px-md-2" method="post">
+        <form class="px-md-2" method="post" >
             <div class="row">
                 <div class="col-md-6 mb-4">
                     <div class="form-outline">
@@ -19,7 +19,7 @@
                 </div>
                 <div class="col-md-12 mb-4">
                     <div class="form-outline">
-                        <input type="text" id="form3Example1n" class="form-control form-control" value="<?= $_SESSION["email_locataire"] ?>" placeholder="Email" />
+                        <input type="text" id="form3Example1n" class="form-control form-control"   value="<?= $_SESSION["email_locataire"] ?>" placeholder="Email" />
                     </div>
                 </div>
                 <div class="col-md-6 mb-4">
@@ -40,7 +40,7 @@
                         <input type="number" class="form-control form-control" name="nb_personnes" placeholder="Nb personne" />
                     </div>
                 </div>
-                <div class="col-md-6 mb-2">
+                <div class="col-md-6 mb-2" style="display: none;">
                     <div class="form-outline">
                         <input type="text" id="form3Example1n" class="form-control form-control" name="prix_reservation" value="<?php echo  $appartement['prix_appart']  ?>" placeholder="Prix" />
                         <label class="form-label" for="form3Example1n"></label>
@@ -73,7 +73,7 @@
 
             <div class="col-md-12 mb-2">
                 <div class="form-outline mb-4">
-                    <textarea class="form-control" id="" rows="3" placeholder="Votre message"></textarea>
+                    <textarea class="form-control" id="" rows="3" placeholder="Votre message" ></textarea>
                 </div>
             </div>
             <div class="row ">

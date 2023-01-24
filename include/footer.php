@@ -12,7 +12,7 @@
             </ul>
             <hr>
             <ul class="d-flex justify-content-around pt-5">
-                <li><img src="Images/logo.png" width="50%" alt=""></li>
+                <li><a href="index.php?page=home"><img src="Images/logo.png" width="50%" alt=""></a></li>
                 <li class="form-text">© 2022 Nom de l’entreprise</li>
                 <li class="form-text">6 Impasse des 2 cousins, Paris, France</li>
                 <li class="form-text">contact@nomdel’entreprise.com</li>

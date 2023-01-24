@@ -36,10 +36,10 @@
                                     <span class="btn btn-outline-secondary" disabled="disabled">'.$reservation['nb_personnes'].'</span>
                                     </td>
                                     <td class="align-middle">
-                                    <input type="date" class="btn btn-outline-secondary w-75" value="'.$reservation['date_fin_reservation'].'" disabled="disabled">
+                                    <input type="date" class=" border rounded" value="'.$reservation['date_fin_reservation'].'" disabled="disabled">
                                     </td>
                                     <td class="align-middle">
-                                       <input type="date" class="btn btn-outline-secondary w-75" value="'.$reservation['date_debut_reservation'].'" disabled="disabled">
+                                       <input type="date" class=" border rounded" value="'.$reservation['date_debut_reservation'].'" disabled="disabled">
                                     </td>
                                     <td class="align-middle">
                                         <h6 class="mb-0"><span class="badge bg-warning">'.$reservation['statut_reservation'].'</span></h6>
