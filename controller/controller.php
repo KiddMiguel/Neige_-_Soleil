@@ -55,6 +55,11 @@ class Controller
          
     }
 
+    public function FiltreLocation($mot) {
+        $this->unModele->FiltreLocation($mot);
+
+    }
+
 
     /*********************************RESERVATION************************ */
     public function selectReservationLocataire($id_user){

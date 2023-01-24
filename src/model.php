@@ -199,6 +199,22 @@ class Modele{
             return null;
         }
     }
+    public function FiltreLocation($mot)
+    {
+        if ($this->unPDO != null){
+            $requete ="select * from materiel_proprio where intitule_materiel_proprio like :mot or nb_materiel_proprio like :mot or prix_materiel_proprio like :mot or type_materiel_proprio like :mot or staut_materiel_proprio :mot  ;";
+            $donnees = array (":mot"=>"%".$mot."%");
+            //preparation de la requete
+            $select =$this->unPDO->prepare ($requete);
+            //execution de la requete
+            $select->execute($donnees);
+            //extraction des données classe
+            $lesLocation = $select->fetchAll();
+            return $lesLocation;
+        }else{
+            return null; 
+        }
+    }
 
     public function recupImage(){
         if ($this->unPDO != null) {
