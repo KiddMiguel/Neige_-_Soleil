@@ -148,6 +148,33 @@ class Modele{
         }
     }
 
+    /*********VALIDATION DU FORMUALIRE DE LA DEMANDE D'INSERT DE L'APPART */
+    public function insertAppartement($tab){
+        if($this->unPDO != null){
+            $request = "insert into appartement values (null, 'En cours', :prix_appart, :intitule_appart, :ville_appart, :cp_appart, :adresse_appart, :description_appart, :type_appart, :superficie_appart, :nb_chambres, :nb_lits, :nb_salles_bain, :capacite_appart, :atout_appart1 , :atout_appart2, :atout_appart3, null, null, null, null, null, null, null, :id_user, null)";
+            $donnees = array (
+                ":prix_appart" => $tab['prix_appart'], 
+                ":intitule_appart" => $tab['intitule_appart'], 
+                ":ville_appart" => $tab['ville_appart'], 
+                ":cp_appart" => $tab['cp_appart'],
+                ":adresse_appart" => $tab['adresse_appart'], 
+                ":description_appart" => $tab['description_appart'],
+                ":type_appart" => $tab['type_appart'],
+                ":superficie_appart" => $tab['superficie_appart'],
+                ":nb_chambres" => $tab['nb_chambres'],
+                ":nb_lits" => $tab['nb_lits'],
+                ":nb_salles_bain" => $tab['nb_salles_bain'],
+                ":capacite_appart" => $tab['capacite_appart'],
+                ":atout_appart1" => $tab['atout_appart1'],
+                ":atout_appart2" => $tab['atout_appart2'],
+                ":atout_appart3" => $tab['atout_appart3'],
+                ":id_user" => $tab['id_user']
+            );
+            $insert = $this->unPDO->prepare($request);
+            $insert->execute($donnees);
+        }
+    }
+
     /***************************RECUP RESERVATION*********************************** */
     public function insertReservation($tab){
         if($this->unPDO != null){

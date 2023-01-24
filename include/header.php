@@ -41,6 +41,9 @@
                         <ul class="dropdown-menu text-small shadow">';
                         if(isset($_SESSION["email_proprio"])){
                             echo '  <li><a class="dropdown-item" href="index.php?page=profil_prorio&id_user='.$_SESSION['id_user'].'""><i class="bi bi-gear"></i> Profil</a></li>';
+                            echo '  <li><a class="dropdown-item" href="index.php?page=demande&id_user='.$_SESSION['id_user'].'"><i class="bi bi-list-task"></i> Mes Demandes</a></li>';
+                            echo '  <li><a class="dropdown-item" href="index.php?page=contrat_proprio&id_user='.$_SESSION['id_user'].'"><i class="bi bi-file-text"></i> Mes Contrats</a></li>';
+                            echo '  <li><a class="dropdown-item" href="index.php?page=appartement_proprio&id_user='.$_SESSION['id_user'].'"><i class="bi bi-houses"></i> Mes Appratements</a></li>';
                         }else{
                             echo '  <li><a class="dropdown-item" href="index.php?page=profil_locataire&id_user='.$_SESSION['id_user'].'"><i class="bi bi-gear"></i> Profil</a></li>
                             <li><a class="dropdown-item" href="index.php?page=reservation&id_user='.$_SESSION['id_user'].'"><i class="bi bi-list-ul"></i> Mes réservations <span class="badge text-bg-warning">'.$_SESSION['nb_reservations'].'</span></a></li>';
@@ -56,6 +59,7 @@
                     </div>';
                     if(isset($_SESSION["email_proprio"])){
                     echo '
+                    
                     <button class="btn btn-outline-warning ms-4 ropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa-solid fa-user rounded"></i> '.$_SESSION["civilite_proprio"].' '.$_SESSION["nom_proprio"].'</li></button>                    
                     </ul>';}else{
                         echo '

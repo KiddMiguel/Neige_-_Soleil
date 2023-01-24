@@ -179,6 +179,21 @@ require_once("setting/setting_update_client.php");
         case "reservation":
             require_once("Templates/reservation.php");
             break;
+        case "demande":
+            require_once("Templates/demande_proprio.php");
+            break;
+        case "demande":
+            require_once("Templates/demande_proprio.php");
+            break;
+        case "appartement_proprio":
+            require_once("Templates/appartement_proprio.php");
+            break;
+        case "formulaire_appartement":
+            require_once("Templates/formulaire_appartement.php");
+            break;
+        case "contrat_proprio":
+            require_once("Templates/contrat_proprio.php");
+            break;
         case "apropos":
             require_once("Templates/apropos.php");
             break;

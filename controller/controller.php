@@ -55,6 +55,11 @@ class Controller
         return $this->unModele->selectWhereApprtement($id_appart);
     }
 
+    public function insertAppartement($tab)
+    {
+        $this->unModele->insertAppartement($tab);
+    }
+
 
     /*********************************RESERVATION************************ */
     public function selectReservationLocataire($id_user)
@@ -73,7 +78,7 @@ class Controller
     {
         $this->unModele->insertReservation($tab);
     }
-
+ 
     public function recupAllReservation()
     {
         $reservations = $this->unModele->recupAllReservation();

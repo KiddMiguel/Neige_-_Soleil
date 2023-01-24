@@ -72,7 +72,7 @@
                                     <div class="d-md-flex justify-content-start align-items-center mb-4 py-2">
 
                                         <h6 class="mb-0 me-4">Civilité: </h6>
-                                        <select class="select border" name="civilite_locataire">
+                                        <select class="select form-select w-25" name="civilite_locataire">
                                             <option value="Mme">Mme</option>
                                             <option value="Mr">Mr</option>
                                             <option value="Autre">Autre</option>
