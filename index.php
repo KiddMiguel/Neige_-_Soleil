@@ -79,11 +79,7 @@ $unController = new Controller($server, $bdd, $user, $mdp);
         }
     }
 
-    /******UPDATE LOCATAIRE******/
 
-    // if (isset($_POST["update_locataire"])){
-    //     $unController->updateLocataire($_POST);
-    // }
 
     
 
@@ -96,6 +92,7 @@ if (isset($_POST["se_connecter_proprio"])) {
     if ($unUser == null) { 
             echo'Error: Error';
     } else {
+             $_SESSION["id_user"] = $unUser["id_user"];
             $_SESSION["civilite_proprio"] = $unUser["civilite_proprio"];
             $_SESSION["nom_proprio"] = $unUser["nom_proprio"];
             $_SESSION["prenom_proprio"] = $unUser["prenom_proprio"];
@@ -124,6 +121,7 @@ if (isset($_POST["valider_proprio"])) {
         if ($unUser == null) {
         
         } else {
+            $_SESSION["id_user"] = $unUser["id_user"];
             $_SESSION["civilite_proprio"] = $unUser["civilite_proprio"];
             $_SESSION["nom_proprio"] = $unUser["nom_proprio"];
             $_SESSION["prenom_proprio"] = $unUser["prenom_proprio"];
@@ -142,7 +140,7 @@ if (isset($_POST["valider_proprio"])) {
 }
 
 
-
+require_once("setting/setting_update_client.php");
 
 /******************************************RESERVATION ********************* */
 
@@ -172,11 +170,29 @@ if (isset($_POST["valider_proprio"])) {
         case "inscription_proprio":
             require_once("Templates/inscription_proprio.php");
             break;
-        case "profil":
-            require_once("Templates/profil.php");
+        case "profil_locataire":
+            require_once("Templates/profil_locataire.php");
+            break;
+        case "profil_prorio":
+            require_once("Templates/profil_proprio.php");
             break;
         case "reservation":
             require_once("Templates/reservation.php");
+            break;
+        case "demande":
+            require_once("Templates/demande_proprio.php");
+            break;
+        case "demande":
+            require_once("Templates/demande_proprio.php");
+            break;
+        case "appartement_proprio":
+            require_once("Templates/appartement_proprio.php");
+            break;
+        case "formulaire_appartement":
+            require_once("Templates/formulaire_appartement.php");
+            break;
+        case "contrat_proprio":
+            require_once("Templates/contrat_proprio.php");
             break;
         case "apropos":
             require_once("Templates/apropos.php");
@@ -184,6 +200,7 @@ if (isset($_POST["valider_proprio"])) {
         case "deconnexion":
             session_destroy();
             unset($_SESSION["email_locataire"]);
+            unset($_SESSION["email_proprio"]);
             header("location: index.php?page=home");
             break;
         case "contact":

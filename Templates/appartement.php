@@ -36,9 +36,10 @@
     </div>
   </div>
   <div class="d-flex py-5 container">
-    <div class="pe-5">
+    <div class="pe-5 w-75">
       <?php
-      echo '<h2 class="text-primary fw-lighter">' . $appartement['intitule_appart'] . ' ' . $appartement['type_appart'] . ' au ' . $appartement['adresse_appart'] . ', ' . $appartement['cp_appart'] . ', ' . $appartement['ville_appart'] . '</h2>';
+      
+      echo '<h2 class="text-primary fw-lighter">' . $appartement['intitule_appart'] . ' ' . $appartement['type_appart'] . '<br> Au ' . $appartement['adresse_appart'] . ', ' . $appartement['cp_appart'] . ', ' . $appartement['ville_appart'] . '</h2>';
 
       echo '
       <hr>
@@ -59,7 +60,7 @@
       </div>
       <hr>
       <h4>Description de l\'appartement</h4>
-      <p style="height: 25vh;">' . $appartement['description_appart'] . '</p>
+      <p style="height: 25vh; width: 60%; ">' . $appartement['description_appart'] . '</p>
       <hr>
       <div class="d-flex">
         <div class="d-flex pe-5">

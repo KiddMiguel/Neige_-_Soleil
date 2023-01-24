@@ -14,7 +14,7 @@
                         <form class="px-md-2" method="post">
                             <div class="row">
                                 <div class="d-md-flex justify-content-start align-items-center mb-4 py-2">
-                                    <select class="select border" name="statut_proprio">
+                                    <select class="select form-select" name="statut_proprio">
                                         <option value="Loueur particulier">Vous êtes :</option>
                                         <option value="Loueur particulier">Loueur particulier</option>
                                         <option value="Agence immobilière">Agence immobilière</option>
@@ -25,7 +25,7 @@
                                         <option value="Autres">Autres</option>
                                     </select>
                                     <h6 class="mb-0 me-4 ms-5">Civilité: </h6>
-                                    <select class="select border" name="civilite_proprio">
+                                    <select class="select form-select w-25" name="civilite_proprio">
                                         <option value="Mme">Mme</option>
                                         <option value="Mr">Mr</option>
                                         <option value="Autre">Autre</option>
@@ -64,7 +64,7 @@
                                 <div class="col-md-6 mb-4">
                                     <div class="d-md-flex justify-content-start align-items-center mb-4 py-2">
                                         <h6 class="mb-0 me-4">Pays : </h6>
-                                        <select class="select border" name="pays_proprio">
+                                        <select class="select form-select w-25" name="pays_proprio">
                                             <option value="Afghanistan">Afghanistan</option>
                                             <option value="Algeria">Algeria</option>
                                             <option value="Cameroon">Cameroon</option>

@@ -8,6 +8,7 @@ class Modele{
             $url = "mysql:host=".$server.";dbname=".$bdd;
 
             $this->unPDO = new PDO($url, $user, $mdp);
+            
         }
         catch(PDOException $exp){
             echo "<br/>Erreur de connexion à la base de données !";
@@ -104,21 +105,21 @@ class Modele{
         }
     }
 
-    public function updateProprietaire($tab){
-        if($this->unPDO != null){
-            $request = "update locataire set nom_locataire=:nom_locataire, prenom_locataire=:prenom_locataire, tel_locataire=:tel_locataire ,adresse_locataire=:adresse_locataire, cp_locataire=:cp_locataire where id_user=:id_user;";
-            $donnees = array (
-                ":nom_locataire" => $tab['nom_locataire'], 
-                ":prenom_locataire" => $tab['prenom_locataire'], 
-                ":tel_locataire" => $tab['tel_locataire'], 
-                ":adresse_locataire" => $tab['adresse_locataire'], 
-                ":cp_locataire" => $tab['cp_locataire'],
-                ":id_user" => $tab['id_user']
-            );
-            $update = $this->unPDO->prepare($request);
-            $update->execute($donnees);
-        }
-    }
+    // public function updateProprietaire($tab){
+    //     if($this->unPDO != null){
+    //         $request = "update locataire set nom_locataire=:nom_locataire, prenom_locataire=:prenom_locataire, tel_locataire=:tel_locataire ,adresse_locataire=:adresse_locataire, cp_locataire=:cp_locataire where id_user=:id_user;";
+    //         $donnees = array (
+    //             ":nom_locataire" => $tab['nom_locataire'], 
+    //             ":prenom_locataire" => $tab['prenom_locataire'], 
+    //             ":tel_locataire" => $tab['tel_locataire'], 
+    //             ":adresse_locataire" => $tab['adresse_locataire'], 
+    //             ":cp_locataire" => $tab['cp_locataire'],
+    //             ":id_user" => $tab['id_user']
+    //         );
+    //         $update = $this->unPDO->prepare($request);
+    //         $update->execute($donnees);
+    //     }
+    // }
 
 
     /*********************************************APPARTEMENT ************************************** */
@@ -144,6 +145,33 @@ class Modele{
             $select->execute($donnees);
             $appartement = $select->fetch();
             return $appartement;
+        }
+    }
+
+    /*********VALIDATION DU FORMUALIRE DE LA DEMANDE D'INSERT DE L'APPART */
+    public function insertAppartement($tab){
+        if($this->unPDO != null){
+            $request = "insert into appartement values (null, 'En cours', :prix_appart, :intitule_appart, :ville_appart, :cp_appart, :adresse_appart, :description_appart, :type_appart, :superficie_appart, :nb_chambres, :nb_lits, :nb_salles_bain, :capacite_appart, :atout_appart1 , :atout_appart2, :atout_appart3, null, null, null, null, null, null, null, :id_user, null)";
+            $donnees = array (
+                ":prix_appart" => $tab['prix_appart'], 
+                ":intitule_appart" => $tab['intitule_appart'], 
+                ":ville_appart" => $tab['ville_appart'], 
+                ":cp_appart" => $tab['cp_appart'],
+                ":adresse_appart" => $tab['adresse_appart'], 
+                ":description_appart" => $tab['description_appart'],
+                ":type_appart" => $tab['type_appart'],
+                ":superficie_appart" => $tab['superficie_appart'],
+                ":nb_chambres" => $tab['nb_chambres'],
+                ":nb_lits" => $tab['nb_lits'],
+                ":nb_salles_bain" => $tab['nb_salles_bain'],
+                ":capacite_appart" => $tab['capacite_appart'],
+                ":atout_appart1" => $tab['atout_appart1'],
+                ":atout_appart2" => $tab['atout_appart2'],
+                ":atout_appart3" => $tab['atout_appart3'],
+                ":id_user" => $tab['id_user']
+            );
+            $insert = $this->unPDO->prepare($request);
+            $insert->execute($donnees);
         }
     }
 

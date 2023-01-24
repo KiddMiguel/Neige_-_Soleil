@@ -41,8 +41,12 @@
                                 <a href="index.php?page=appartement&id_appart='.$appartement["id_appart"].'"><i class="fa-solid fa-circle-chevron-right fs-3"></i> </a>
                             </div>
 
-                            <div class="ps-3 text-start border-start">
-                                <a class="card-text  text-decoration-none fw-semibold" href="index.php?page=appartement&id_appart='.$appartement["id_appart"].'"><span class="text-secondary">'.$appartement['ville_appart'].' ('.$appartement["cp_appart"].')</span><br> <span class="text-primary ">'.$appartement['prix_appart'].'</span>€ - <span>'.$appartement['superficie_appart'].'</span> m²<br><span class="text-black">'.$appartement['capacite_appart'] .' Pièce(s) . '.$appartement["intitule_appart"].' . '.$appartement['statut_appart'].'</span> </a>
+                            <div class="ps-3 text-start border-start">';
+                            $description = $appartement['intitule_appart'];
+                            if(strlen($appartement['intitule_appart']) > 6){
+                              $description = substr($description, 0, 6)."...";
+                            }
+                            echo'<a class="card-text  text-decoration-none fw-semibold" href="index.php?page=appartement&id_appart='.$appartement["id_appart"].'"><span class="text-secondary">'.$appartement['ville_appart'].' ('.$appartement["cp_appart"].')</span><br> <span class="text-primary ">'.$appartement['prix_appart'].'</span>€ - <span>'.$appartement['superficie_appart'].'</span> m²<br><span class="text-black">'.$appartement['capacite_appart'] .' Pièce(s) . '.$description.' . '; if ($appartement['statut_appart']== "Disponible"){ echo '<span class="bg-success rounded pe-1 ps-1 text-light">';}else{echo '<span class="bg-warning rounded pe-1 ps-1">';} echo ' '.$appartement['statut_appart'].'</span></span> </a>
                             </div>
                         </div>
                     </div>

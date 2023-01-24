@@ -100,7 +100,7 @@ CREATE table appartement (
     ville_appart VARCHAR (50),
     cp_appart VARCHAR (50),
     adresse_appart varchar (255),
-    description_appart VARCHAR(255),
+    description_appart VARCHAR(500),
     type_appart VARCHAR (50),
     superficie_appart VARCHAR (50),
     nb_chambres int (5),
@@ -118,12 +118,10 @@ CREATE table appartement (
     id_reservation INT(5),
     id_contrat int(5),
     id_user INT(5),
-    id_proprio int(5),
     id_materiel_proprio int(5),
     FOREIGN key (id_reservation) REFERENCES reservation(id_reservation),
     FOREIGN key (id_contrat) REFERENCES contrat(id_contrat),
     FOREIGN key (id_user) REFERENCES user(id_user),
-    FOREIGN key (id_proprio) REFERENCES proprietaire(id_proprio),
     FOREIGN key (id_materiel_proprio) REFERENCES materiel_proprio(id_materiel_proprio),
     PRIMARY key (id_appart)
 );
@@ -218,6 +216,7 @@ VALUES
 
 INSERT INTO materiel_proprio 
 VALUES
+
 (1, 'Poussette', 2, '30€/jour', 'poussette', 'disponible', 1, 1),
 (2, 'Lit parapluie', 3, '15€/jour', 'lit parapluie', 'disponible', 2, 2),
 (3, 'Chaise haute', 2, '10€/jour', 'chaise haute', 'disponible', 3, 3);
@@ -230,18 +229,18 @@ VALUES
 
 INSERT INTO appartement 
 VALUES
-(1,"disponible", "800","Nom de l'appart", "Paris", "75000", "7 rue de la Plage", "Appartement en bord de mer avec vue imprenable sur l'océan", "T2", 50, 1, 2, 1, 4, "Machine à laver","Garage","Parking", "A-1.jpg" , "A-2.jpg", "A-3.jpg", "A-4.jpg", "A-5.jpg",1,1,2,4,1),
-(2,"disponible", "1000", "Nom de l'appart","Lyon", "69000", "8 rue de la Montagne", "Chalet au pied des pistes de ski avec sauna et Jacuzzi", "T3", 70, 2, 4, 2, 6, "Parking","Balcon","Piscine","B-1.jpg" ,"B-2.jpg" ,"B-2.jpg" ,"B-3.jpg" ,"B-4.jpg" ,1,1,2,5,1),
-(3,"disponible", "1000", "Nom de l'appart","Lyon", "69000", "8 rue de la Montagne", "Chalet au pied des pistes de ski avec sauna et Jacuzzi", "T3", 70, 2, 4, 2, 6, "Parking","Balcon","Piscine","C-1.jpg" , "C-2.jpg","C-3.jpg", "C-4.jpg", "C-5.jpg",1,1,2,5,1),
-(4,"disponible", "1000", "Nom de l'appart","Lyon", "69000", "8 rue de la Montagne", "Chalet au pied des pistes de ski avec sauna et Jacuzzi", "T3", 70, 2, 4, 2, 6, "Parking","Balcon","Piscine","E-1.jpg", "E-2.jpg", "E-3.jpg", "E-4.jpg", "E-5.jpg",1,1,2,5,1),
-(5,"disponible", "1000", "Nom de l'appart","Lyon", "69000", "8 rue de la Montagne", "Chalet au pied des pistes de ski avec sauna et Jacuzzi", "T3", 70, 2, 4, 2, 6, "Parking","Balcon","Piscine","D-1.jpg", "D-2.jpg", "D-3.jpg", "D-4.jpg", "D-5.jpg",1,1,2,5,1),
-(6,"disponible", "1000", "Nom de l'appart","Lyon", "69000", "8 rue de la Montagne", "Chalet au pied des pistes de ski avec sauna et Jacuzzi", "T3", 70, 2, 4, 2, 6, "Parking","Balcon","Piscine","G-1.jpg", "G-2.jpg", "G-3.jpg", "G-4.jpg", "G-5.jpg",1,1,2,5,1),
-(7,"disponible", "1000", "Nom de l'appart","Lyon", "69000", "8 rue de la Montagne", "Chalet au pied des pistes de ski avec sauna et Jacuzzi", "T3", 70, 2, 4, 2, 6, "Parking","Balcon","Piscine","D-1.jpg", "D-2.jpg", "D-3.jpg", "D-4.jpg", "D-5.jpg",1,1,2,5,1),
-(8,"disponible", "1000", "Nom de l'appart","Lyon", "69000", "8 rue de la Montagne", "Chalet au pied des pistes de ski avec sauna et Jacuzzi", "T3", 70, 2, 4, 2, 6, "Parking","Balcon","Piscine","H-1.jpg","H-2.jpg","H-3.jpg","H-4.jpg","H-5.jpg",1,1,2,5,1),
-(9,"disponible", "1000", "Nom de l'appart","Lyon", "69000", "8 rue de la Montagne", "Chalet au pied des pistes de ski avec sauna et Jacuzzi", "T3", 70, 2, 4, 2, 6, "Parking","Balcon","Piscine","I-1.jpg","I-2.jpg", "I-3.jpg", "I-4.jpg", "I-5.jpg",1,1,2,5,1),
-(10,"disponible", "1000", "Nom de l'appart","Lyon", "69000", "8 rue de la Montagne", "Chalet au pied des pistes de ski avec sauna et Jacuzzi", "T3", 70, 2, 4, 2, 6, "Parking","Balcon","Piscine","J-1.jpg","J-2.jpg","J-3.jpg","J-4.jpg","J-5.jpg",1,1,2,5,1),
-(11,"disponible", "1000", "Nom de l'appart","Lyon", "69000", "8 rue de la Montagne", "Chalet au pied des pistes de ski avec sauna et Jacuzzi", "T3", 70, 2, 4, 2, 6, "Parking","Balcon","Piscine","K-1.jpg","K-2.jpg","K-3.jpg","K-4.jpg","K-5.jpg",1,1,2,5,1),
-(12,"disponible", "1000", "Nom de l'appart","Lyon", "69000", "8 rue de la Montagne", "Chalet au pied des pistes de ski avec sauna et Jacuzzi", "T3", 70, 2, 4, 2, 6, "Parking","Balcon","Piscine","F-1.jpg","F-2.jpg","F-3.jpg","F-4.jpg","F-5.jpg",1,1,2,5,1);
+(1,"Disponible", "1000","Chalet de luxe à la montagne", "Paris", "75000", "7 rue de la Plage", "Profitez d'un séjour inoubliable dans notre chalet de luxe, situé dans les montagnes enneigées. Avec une vue imprenable sur les sommets environnants, des équipements haut de gamme et une proximité des pistes de ski, c'est l'endroit idéal pour les vacances d'hiver. Le chalet comprend 3 chambres, 2 salles de bains, un salon confortable avec cheminée, une cuisine entièrement équipée et un balcon avec vue sur les montagnes.", "T2", 100, 1, 2, 1, 5, "Machine à laver","Garage","Parking", "A-1.jpg" , "A-2.jpg", "A-3.jpg", "A-4.jpg", "A-5.jpg",null,null,null,null),
+(2,"Disponible", "1000", "Nom de l'appart","Lyon", "69000", "8 rue de la Montagne", "Chalet au pied des pistes de ski avec sauna et Jacuzzi", "T3", 70, 2, 4, 2, 6, "Parking","Balcon","Piscine","B-1.jpg" ,"B-2.jpg" ,"B-2.jpg" ,"B-3.jpg" ,"B-4.jpg" ,1,1,2,1),
+(3,"Disponible", "1000", "Nom de l'appart","Lyon", "69000", "8 rue de la Montagne", "Chalet au pied des pistes de ski avec sauna et Jacuzzi", "T3", 70, 2, 4, 2, 6, "Parking","Balcon","Piscine","C-1.jpg" , "C-2.jpg","C-3.jpg", "C-4.jpg", "C-5.jpg",1,1,2,1),
+(4,"Disponible", "1000", "Nom de l'appart","Lyon", "69000", "8 rue de la Montagne", "Chalet au pied des pistes de ski avec sauna et Jacuzzi", "T3", 70, 2, 4, 2, 6, "Parking","Balcon","Piscine","E-1.jpg", "E-2.jpg", "E-3.jpg", "E-4.jpg", "E-5.jpg",1,1,2,1),
+(5,"Non-disponible", "1000", "Nom de l'appart","Lyon", "69000", "8 rue de la Montagne", "Chalet au pied des pistes de ski avec sauna et Jacuzzi", "T3", 70, 2, 4, 2, 6, "Parking","Balcon","Piscine","D-1.jpg", "D-2.jpg", "D-3.jpg", "D-4.jpg", "D-5.jpg",1,1,2,1),
+(6,"Non-disponible", "1000", "Nom de l'appart","Lyon", "69000", "8 rue de la Montagne", "Chalet au pied des pistes de ski avec sauna et Jacuzzi", "T3", 70, 2, 4, 2, 6, "Parking","Balcon","Piscine","G-1.jpg", "G-2.jpg", "G-3.jpg", "G-4.jpg", "G-5.jpg",1,1,2,1),
+(7,"Non-disponible", "1000", "Nom de l'appart","Lyon", "69000", "8 rue de la Montagne", "Chalet au pied des pistes de ski avec sauna et Jacuzzi", "T3", 70, 2, 4, 2, 6, "Parking","Balcon","Piscine","D-1.jpg", "D-2.jpg", "D-3.jpg", "D-4.jpg", "D-5.jpg",1,1,2,1),
+(8,"Disponible", "1000", "Nom de l'appart","Lyon", "69000", "8 rue de la Montagne", "Chalet au pied des pistes de ski avec sauna et Jacuzzi", "T3", 70, 2, 4, 2, 6, "Parking","Balcon","Piscine","H-1.jpg","H-2.jpg","H-3.jpg","H-4.jpg","H-5.jpg",1,1,2,1),
+(9,"Non-disponible", "1000", "Nom de l'appart","Lyon", "69000", "8 rue de la Montagne", "Chalet au pied des pistes de ski avec sauna et Jacuzzi", "T3", 70, 2, 4, 2, 6, "Parking","Balcon","Piscine","I-1.jpg","I-2.jpg", "I-3.jpg", "I-4.jpg", "I-5.jpg",1,1,2,1),
+(10,"Disponible", "1000", "Nom de l'appart","Lyon", "69000", "8 rue de la Montagne", "Chalet au pied des pistes de ski avec sauna et Jacuzzi", "T3", 70, 2, 4, 2, 6, "Parking","Balcon","Piscine","J-1.jpg","J-2.jpg","J-3.jpg","J-4.jpg","J-5.jpg",1,1,2,1),
+(11,"Non-disponible", "1000", "Nom de l'appart","Lyon", "69000", "8 rue de la Montagne", "Chalet au pied des pistes de ski avec sauna et Jacuzzi", "T3", 70, 2, 4, 2, 6, "Parking","Balcon","Piscine","K-1.jpg","K-2.jpg","K-3.jpg","K-4.jpg","K-5.jpg",1,2,5,1),
+(12,"Disponible", "1000", "Nom de l'appart","Lyon", "69000", "8 rue de la Montagne", "Chalet au pied des pistes de ski avec sauna et Jacuzzi", "T3", 70, 2, 4, 2, 6, "Parking","Balcon","Piscine","F-1.jpg","F-2.jpg","F-3.jpg","F-4.jpg","F-5.jpg",1,1,2,1);
 
 
 INSERT INTO images 
