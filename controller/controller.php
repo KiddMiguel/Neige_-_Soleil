@@ -41,7 +41,16 @@ class Controller
     //     $this->unModele->updateProprietaire($tab);
     // }
 
-
+    public function selectWhereDemande($id_user)
+    {
+        $demandes = $this->unModele->selectWhereDemande($id_user);
+        return $demandes;
+    }
+    public function selectAppartementLocataire($id_user)
+    {
+        $appartementProprio = $this->unModele->selectAppartementLocataire($id_user);
+        return $appartementProprio;
+    }
 
     /**************************************APPARTEMENT ******************************** */
     public function recupAllAppartement()
@@ -97,5 +106,12 @@ class Controller
     {
         $imagesAppart = $this->unModele->selectReservationLocataire($id_appart);
         return $imagesAppart;
+    }
+
+
+    /**********************************FILTRE************** */
+    public function FiltreLocation($mot) {
+        $this->unModele->FiltreLocation($mot);
+
     }
 }

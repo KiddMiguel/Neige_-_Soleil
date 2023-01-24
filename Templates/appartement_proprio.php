@@ -16,7 +16,7 @@
         </div>
         <div class="row g-2 ">
            <?php
-                foreach ($appartements as $appartement){
+                foreach ($appartementProprio as $appartement){
                     echo '
             <div class="col-lg-4 col-md-4 col-sm-6 col-xm-12 p-3" style="width: 25%; height: 20%;">
                 <div class="card">

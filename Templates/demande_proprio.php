@@ -26,8 +26,10 @@
                                 </tr>
                             </thead>
                             <tbody>
-                               
-                                <tr class="fw-normal">
+                            <?php 
+                                    foreach ($demandes as $demande){
+                                        
+                                echo '<tr class="fw-normal">
                                     <th>
                                      <span class="ms-2">Nom de l\'appartement</span>
                                     </th>
@@ -56,11 +58,11 @@
                                     <td class="align-middle">
                                         <button  class="btn btn-danger"><a href="#!" class="text-decoration-none text-light" data-mdb-toggle="tooltip" title="Done"><i class="bi bi-x-octagon"></i></a></button>
                                    </td>
-                                </tr>
+                                </tr>';
                        
-
+                                    }
                              
-                                
+                            ?>    
                             </tbody>
                         </table>
 
