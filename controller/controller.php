@@ -26,6 +26,8 @@ class Controller
 
 
     /*********************CONTROLLER PROPRIETAIRE************* */
+
+
     public function verifconnexionProprietaire($email, $mdp)
     {
         return $this->unModele->verifconnexionProprietaire($email, $mdp);
@@ -53,6 +55,8 @@ class Controller
     }
 
     /**************************************APPARTEMENT ******************************** */
+
+
     public function recupAllAppartement()
     {
         $appartements = $this->unModele->recupAllAppartement();
@@ -113,5 +117,13 @@ class Controller
     public function FiltreLocation($mot) {
         $this->unModele->FiltreLocation($mot);
 
+    }
+
+
+
+    /*********************DELETE DEMANDE /********* */
+    public function deleteDemande($id_user){
+        $demandes = $this->unModele->deleteDemande($id_user);
+        return $demandes;
     }
 }

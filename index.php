@@ -183,9 +183,6 @@ require_once("setting/setting_update_client.php");
         case "demande":
             require_once("Templates/demande_proprio.php");
             break;
-        case "demande":
-            require_once("Templates/demande_proprio.php");
-            break;
         case "appartement_proprio":
             require_once("Templates/appartement_proprio.php");
             break;

@@ -11,7 +11,7 @@ if (isset($_GET['id_appart'])) {
 if (isset($_POST["valider_appartement"])) {
     $unController->insertAppartement($_POST);
 
-    // header("location: index.php?page=home");
+   header("location: index.php?page=demande&id_user=".$_SESSION['id_user']."");
 }
 
         // if (isset($_POST['filtre'])) {

@@ -151,7 +151,7 @@ class Modele{
     /*********VALIDATION DU FORMUALIRE DE LA DEMANDE D'INSERT DE L'APPART */
     public function insertAppartement($tab){
         if($this->unPDO != null){
-            $request = "insert into appartement values (null, 'En cours', :prix_appart, :intitule_appart, :ville_appart, :cp_appart, :adresse_appart, :description_appart, :type_appart, :superficie_appart, :nb_chambres, :nb_lits, :nb_salles_bain, :capacite_appart, :atout_appart1 , :atout_appart2, :atout_appart3, null, null, null, null, null, null, null, :id_user, null)";
+            $request = "insert into appartement values (null, 'En cours de traitement', :prix_appart, :intitule_appart, :ville_appart, :cp_appart, :adresse_appart, :description_appart, :type_appart, :superficie_appart, :nb_chambres, :nb_lits, :nb_salles_bain, :capacite_appart, :atout_appart1 , :atout_appart2, :atout_appart3, 'Default.png', 'Default.png', 'Default.png', 'Default.png', 'Default.png', null, null, :id_user, null)";
             $donnees = array (
                 ":prix_appart" => $tab['prix_appart'], 
                 ":intitule_appart" => $tab['intitule_appart'], 
@@ -200,6 +200,22 @@ class Modele{
             $select->execute($donnees);
             $appartementProprio = $select->fetchAll();
             return $appartementProprio;
+        }
+    }
+
+
+    /********************SUPRESSION DES DEMANDES***************** */
+    
+    public function deleteDemande($id_user)
+    {
+        if ($this->unPDO != null) {
+            $request = "Delete from demande where id_user = :id_user"; 
+            $donnees = array(":id_user" => $id_user );
+
+            $delete = $this->unPDO->prepare($request);
+            $delete->execute($donnees);
+            $demandes = $delete->fetch();
+            return $demandes;
         }
     }
 

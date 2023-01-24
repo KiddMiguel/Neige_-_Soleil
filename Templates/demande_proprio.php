@@ -12,16 +12,10 @@
 
                         <table class="table mb-0 ">
                             <thead>
-                                <tr>
+                                <tr class="text-center">
                                     <th scope="col">Intitule</th>
-                                    <th scope="col">Nb Pièces</th>
-                                    <th scope="col">Nb Personne</th>
-                                    <th scope="col">Nb Chambre</th>
-                                    <th scope="col">Nb Lit</th>
-                                    <th scope="col">Nb Salle de bain</th>
-                                    <th scope="col">Date demande</th>
-                 
-                                    <th scope="col">Statut</th>
+                                    <th scope="col ">Statut</th>
+                                    <th scope="col">Date demande</th>    
                                     <th scope="col">Actions</th>
                                 </tr>
                             </thead>
@@ -30,33 +24,19 @@
                                     foreach ($demandes as $demande){
                                         
                                 echo '<tr class="fw-normal">
-                                    <th>
-                                     <span class="ms-2">Nom de l\'appartement</span>
+                                    <th class="text-center">
+                                     <span class=" ms-2">1</span>
                                     </th>
-                                    <td class="align-middle">
-                                    <span class="btn btn-outline-secondary" disabled="disabled"></span>
+                                    
+                                    <td class="text-center">
+                                        <h6 class="mb-0"><span class="text-center badge bg-warning w-75 fs-6">'.$demande['statut_demande'].'</span></h6>
                                     </td>
-                                    <td class="align-middle">
-                                    <span class="btn btn-outline-secondary" disabled="disabled"></span>
-                                    </td>
-                                    <td class="align-middle">
-                                    <span class="btn btn-outline-secondary" disabled="disabled"></span>
-                                    </td>
-                                    <td class="align-middle">
-                                    <span class="btn btn-outline-secondary" disabled="disabled"></span>
-                                    </td>
-                                    <td class="align-middle">
-                                    <span class="btn btn-outline-secondary" disabled="disabled"></span>
-                                    </td>
-                                    <td class="align-middle">
-                                    <input type="date" class="btn btn-outline-secondary w-75" value="" disabled="disabled">
+                                    <td class="text-center">
+                                    <input type="date" class="text-center border rounded w-50" value="'.$demande['date_demande'].'" disabled="disabled">
                                     </td>
                               
-                                    <td class="align-middle">
-                                        <h6 class="mb-0"><span class="badge bg-warning">En cours</span></h6>
-                                    </td>
-                                    <td class="align-middle">
-                                        <button  class="btn btn-danger"><a href="#!" class="text-decoration-none text-light" data-mdb-toggle="tooltip" title="Done"><i class="bi bi-x-octagon"></i></a></button>
+                                    <td class="text-center">
+                                        <button  class="btn btn-danger"><a href="index.php?page=delete&id_user='.$_SESSION['id_user'].'" class="text-decoration-none text-light" data-mdb-toggle="tooltip" title="Done"><i class="bi bi-x-octagon"></i></a></button>
                                    </td>
                                 </tr>';
                        
