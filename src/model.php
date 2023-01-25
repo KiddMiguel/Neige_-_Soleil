@@ -147,6 +147,23 @@ class Modele{
         }
     }
 
+    public function FiltreLocation($mot)
+    {
+        if ($this->unPDO != null){
+            $requete ="select * from appartement where statut_appart like :mot or prix_appart like :mot or intitule_appart like :mot or ville_appart like :mot or cp_appart :mot or adresse_appart like :mot or description_appart like :mot or type_appart like :mot or superficie_appart like :mot or nb_chambres like :mot or nb_lits like :mot nb_salles_bain like :mot or capacite_appart like :mot or atout_appart1 like :mot or atout_appart2 like :mot or atout_appart3 like :mot or image_appart like :mot ;";
+            $donnees = array (":mot"=>"%".$mot."%");
+            //preparation de la requete
+            $select = $this->unPDO->prepare ($requete);
+            //execution de la requete
+            $select->execute($donnees);
+            //extraction des données classe
+            $lesAppartement = $select->fetchAll();
+            return $lesAppartement;
+        }else{
+            return null; 
+        }
+    }
+
     /***************************RECUP RESERVATION*********************************** */
     public function insertReservation($tab){
         if($this->unPDO != null){
@@ -199,22 +216,6 @@ class Modele{
             return null;
         }
     }
-    public function FiltreLocation($mot)
-    {
-        if ($this->unPDO != null){
-            $requete ="select * from materiel_proprio where intitule_materiel_proprio like :mot or nb_materiel_proprio like :mot or prix_materiel_proprio like :mot or type_materiel_proprio like :mot or staut_materiel_proprio :mot  ;";
-            $donnees = array (":mot"=>"%".$mot."%");
-            //preparation de la requete
-            $select =$this->unPDO->prepare ($requete);
-            //execution de la requete
-            $select->execute($donnees);
-            //extraction des données classe
-            $lesLocation = $select->fetchAll();
-            return $lesLocation;
-        }else{
-            return null; 
-        }
-    }
 
     public function recupImage(){
         if ($this->unPDO != null) {
@@ -226,6 +227,8 @@ class Modele{
         }else  {
             return null;
         }
-    } 
+    }
+
+    
 
 }
