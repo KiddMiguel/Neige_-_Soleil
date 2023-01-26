@@ -24,6 +24,7 @@ $unController = new Controller($server, $bdd, $user, $mdp);
     <?php
         require_once("setting/setting_appartement.php");
         require_once("setting/setting_reservation.php");
+        require_once("setting/setting_demande.php");
         require_once("setting/setting_images.php");
         require_once("include/header.php");
 
@@ -109,6 +110,8 @@ if (isset($_POST["se_connecter_proprio"])) {
     }
 }
 
+
+
 /*******INSERT NEW PROPRIETAIRE********** */
 
 if (isset($_POST["valider_proprio"])) {
@@ -178,9 +181,6 @@ require_once("setting/setting_update_client.php");
             break;
         case "reservation":
             require_once("Templates/reservation.php");
-            break;
-        case "demande":
-            require_once("Templates/demande_proprio.php");
             break;
         case "demande":
             require_once("Templates/demande_proprio.php");

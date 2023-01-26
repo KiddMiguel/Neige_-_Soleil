@@ -91,6 +91,16 @@ CREATE table reservation (
     FOREIGN key (id_appart) REFERENCES appartement(id_appart),
     primary key (id_reservation)
 );
+CREATE table demande (
+    id_demande int (5) not null AUTO_INCREMENT,
+    statut_demande enum ("En cours", "Valider"),
+    date_demande date,
+    id_user int(5), 
+    id_appart int(5),
+    FOREIGN key (id_user) REFERENCES user(id_user), 
+    FOREIGN key (id_appart) REFERENCES appartement(id_appart),
+    primary key (id_demande)
+);
 
 CREATE table appartement (
     id_appart int(5) not null AUTO_INCREMENT,
@@ -179,16 +189,28 @@ delimiter ;
 
 -- /*Creer unn trigger qui supprime */
 
--- drop trigger if exists delete_user;
--- delimiter //
--- create trigger delete_user
--- after delete on USER
--- for each row 
--- BEGIN
---     DELETE from locataire where id_user = old.id_user;
---     DELETE from proprietaire where id_user = old.id_user;
--- end //
--- delimiter ;
+drop trigger if exists delete_user;
+delimiter //
+create trigger delete_user
+after delete on USER
+for each row 
+BEGIN
+    DELETE from locataire where id_user = old.id_user;
+    DELETE from proprietaire where id_user = old.id_user;
+end //
+delimiter ;
+
+drop trigger if exists add_demande;
+delimiter //
+create trigger add_demande
+after insert on appartement
+FOR EACH row
+    begin
+        insert into demande (id_demande,statut_demande, date_demande, id_user, id_appart)
+        VALUES (NULL, "En cours", now(), new.id_user, new.id_appart);
+    end //
+delimiter ;
+
 
 
 /*Insertion
@@ -229,7 +251,7 @@ VALUES
 
 INSERT INTO appartement 
 VALUES
-(1,"Disponible", "1000","Chalet de luxe à la montagne", "Paris", "75000", "7 rue de la Plage", "Profitez d'un séjour inoubliable dans notre chalet de luxe, situé dans les montagnes enneigées. Avec une vue imprenable sur les sommets environnants, des équipements haut de gamme et une proximité des pistes de ski, c'est l'endroit idéal pour les vacances d'hiver. Le chalet comprend 3 chambres, 2 salles de bains, un salon confortable avec cheminée, une cuisine entièrement équipée et un balcon avec vue sur les montagnes.", "T2", 100, 1, 2, 1, 5, "Machine à laver","Garage","Parking", "A-1.jpg" , "A-2.jpg", "A-3.jpg", "A-4.jpg", "A-5.jpg",null,null,null,null),
+(1,"Disponible", "1000","Chalet de luxe à la montagne", "Paris", "75000", "7 rue de la Plage", "Profitez d'un séjour inoubliable dans notre chalet de luxe, situé dans les montagnes enneigées. Avec une vue imprenable sur les sommets environnants, des équipements haut de gamme et une proximité des pistes de ski, c'est l'endroit idéal pour les vacances d'hiver. Le chalet comprend 3 chambres, 2 salles de bains, un salon confortable avec cheminée, une cuisine entièrement équipée et un balcon avec vue sur les montagnes.", "T2", 100, 1, 2, 1, 5, "Machine à laver","Garage","Parking", "A-1.jpg" , "A-2.jpg", "A-3.jpg", "A-4.jpg", "A-5.jpg",null,null,4,null),
 (2,"Disponible", "1000", "Nom de l'appart","Lyon", "69000", "8 rue de la Montagne", "Chalet au pied des pistes de ski avec sauna et Jacuzzi", "T3", 70, 2, 4, 2, 6, "Parking","Balcon","Piscine","B-1.jpg" ,"B-2.jpg" ,"B-2.jpg" ,"B-3.jpg" ,"B-4.jpg" ,1,1,2,1),
 (3,"Disponible", "1000", "Nom de l'appart","Lyon", "69000", "8 rue de la Montagne", "Chalet au pied des pistes de ski avec sauna et Jacuzzi", "T3", 70, 2, 4, 2, 6, "Parking","Balcon","Piscine","C-1.jpg" , "C-2.jpg","C-3.jpg", "C-4.jpg", "C-5.jpg",1,1,2,1),
 (4,"Disponible", "1000", "Nom de l'appart","Lyon", "69000", "8 rue de la Montagne", "Chalet au pied des pistes de ski avec sauna et Jacuzzi", "T3", 70, 2, 4, 2, 6, "Parking","Balcon","Piscine","E-1.jpg", "E-2.jpg", "E-3.jpg", "E-4.jpg", "E-5.jpg",1,1,2,1),

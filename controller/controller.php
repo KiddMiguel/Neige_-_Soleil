@@ -26,6 +26,8 @@ class Controller
 
 
     /*********************CONTROLLER PROPRIETAIRE************* */
+
+
     public function verifconnexionProprietaire($email, $mdp)
     {
         return $this->unModele->verifconnexionProprietaire($email, $mdp);
@@ -41,9 +43,20 @@ class Controller
     //     $this->unModele->updateProprietaire($tab);
     // }
 
-
+    public function selectWhereDemande($id_user)
+    {
+        $demandes = $this->unModele->selectWhereDemande($id_user);
+        return $demandes;
+    }
+    public function selectAppartementLocataire($id_user)
+    {
+        $appartementProprio = $this->unModele->selectAppartementLocataire($id_user);
+        return $appartementProprio;
+    }
 
     /**************************************APPARTEMENT ******************************** */
+
+
     public function recupAllAppartement()
     {
         $appartements = $this->unModele->recupAllAppartement();
@@ -87,15 +100,32 @@ class Controller
 
     /*************************IMAGES********************** */
 
-    public function recupImages()
-    {
-        $images = $this->unModele->recupImages();
-        return $images;
-    }
+    // public function recupImages()
+    // {
+    //     $images = $this->unModele->recupImages();
+    //     return $images;
+    // }
 
     public function selectWhereImage($id_appart)
     {
         $imagesAppart = $this->unModele->selectReservationLocataire($id_appart);
         return $imagesAppart;
+    }
+
+
+    /**********************************FILTRE************** */
+    public function FiltreLocation($mot) {
+
+        $appartements = $this->unModele->FiltreLocation($mot);
+        return $appartements;
+
+    }
+
+
+
+    /*********************DELETE DEMANDE /********* */
+    public function deleteDemande($id_user){
+        $demandes = $this->unModele->deleteDemande($id_user);
+        return $demandes;
     }
 }

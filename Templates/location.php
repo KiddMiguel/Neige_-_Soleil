@@ -5,12 +5,14 @@
     <div class="mt-5 w-50 ms-2 justify-content-center">
             <div class="row">
                 <div class="col-md-8">
-                    <div class="input-group mb-3">
-                        <input type="text" class="form-control input-text " placeholder="Recherche...." aria-label="Recipient's username" aria-describedby="basic-addon2">
-                        <div class="input-group-append ms-2">
-                            <button class="btn btn-outline-warning btn-lg" type="button"><i class="fa fa-search"></i></button>
-                        </div>
-                    </div>
+                 
+                        <form action="" class="input-group mb-3" method="post">
+                            <input type="text" class="form-control input-text " name="mot" placeholder="Recherche...." aria-label="Recipient's username" aria-describedby="basic-addon2">
+                            <div class="input-group-append ms-2">
+                                <button class="btn btn-outline-warning btn-lg" type="submit" name="filtre"><i class="fa fa-search"></i></button>
+                            </div>
+                        </form>
+                
                 </div>
             </div>
         </div>
