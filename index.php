@@ -110,6 +110,11 @@ if (isset($_POST["se_connecter_proprio"])) {
     }
 }
 
+if (isset($_POST["filtre"])){
+    $mot = $_POST["mot"];
+    $lesLocations = $unController->FiltreLocation($mot);
+}
+
 /*******INSERT NEW PROPRIETAIRE********** */
 
 if (isset($_POST["valider_proprio"])) {

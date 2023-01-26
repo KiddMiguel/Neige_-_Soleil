@@ -245,7 +245,7 @@ class Modele{
             //execution de la requete
             $select->execute($donnees);
             //extraction des données classe
-            $lesLocation = $select->fetchAll();
+            $lesLocation = $select->fetch();
             return $lesLocation;
         }else{
             return null; 
@@ -290,17 +290,17 @@ class Modele{
         }
     }
 
-    public function recupImages(){
-        if ($this->unPDO != null) {
-        $request = "select * from image";
-        $select = $this->unPDO->prepare($request);
-        $select->execute();
-        $images = $select->fetchAll();
-        return $images;
-        }else  {
-            return null;
-        }
-    } 
+    // public function recupImages(){
+    //     if ($this->unPDO != null) {
+    //     $request = "select * from image";
+    //     $select = $this->unPDO->prepare($request);
+    //     $select->execute();
+    //     $images = $select->fetchAll();
+    //     return $images;
+    //     }else  {
+    //         return null;
+    //     }
+    // } 
 
     public function selectWhereImage($id_appart)
     {

@@ -100,11 +100,11 @@ class Controller
 
     /*************************IMAGES********************** */
 
-    public function recupImages()
-    {
-        $images = $this->unModele->recupImages();
-        return $images;
-    }
+    // public function recupImages()
+    // {
+    //     $images = $this->unModele->recupImages();
+    //     return $images;
+    // }
 
     public function selectWhereImage($id_appart)
     {
@@ -115,7 +115,9 @@ class Controller
 
     /**********************************FILTRE************** */
     public function FiltreLocation($mot) {
-        $this->unModele->FiltreLocation($mot);
+
+        $lesLocation = $this->unModele->FiltreLocation($mot);
+        return $lesLocation;
 
     }
 
