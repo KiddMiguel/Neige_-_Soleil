@@ -116,8 +116,8 @@ class Controller
     /**********************************FILTRE************** */
     public function FiltreLocation($mot) {
 
-        $lesLocation = $this->unModele->FiltreLocation($mot);
-        return $lesLocation;
+        $appartements = $this->unModele->FiltreLocation($mot);
+        return $appartements;
 
     }
 

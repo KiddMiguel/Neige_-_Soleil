@@ -238,15 +238,12 @@ class Modele{
     public function FiltreLocation($mot)
     {
         if ($this->unPDO != null){
-            $requete ="select * from materiel_proprio where intitule_materiel_proprio like :mot or nb_materiel_proprio like :mot or prix_materiel_proprio like :mot or type_materiel_proprio like :mot or staut_materiel_proprio :mot  ;";
+            $requete ="select * from appartement where ville_appart like :mot or statut_appart like :mot";
             $donnees = array (":mot"=>"%".$mot."%");
-            //preparation de la requete
             $select =$this->unPDO->prepare ($requete);
-            //execution de la requete
             $select->execute($donnees);
-            //extraction des données classe
-            $lesLocation = $select->fetch();
-            return $lesLocation;
+            $appartements = $select->fetchAll();
+            return $appartements;
         }else{
             return null; 
         }
