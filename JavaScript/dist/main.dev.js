@@ -12,7 +12,7 @@ vignette.forEach(function (item) {
     console.log(item, "vignette cliqué"); // Pour récuperer la valeur de l'attribut src de l'élément cliqué
 
     var imgSource = item.getAttribute('src');
-    console.log(imgSource); // Je fixe un enouvelle valeur à l'attribut retnue
+    console.log(imgSource); // Je fixe unenouvelle valeur à l'attribut retnue
     // J'attribue la nouvelle à l'image grand format
 
     fullimg.setAttribute('src', imgSource);

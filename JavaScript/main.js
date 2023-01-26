@@ -17,7 +17,7 @@ vignette.forEach(item => {
         let imgSource = item.getAttribute('src')
         console.log(imgSource);
 
-        // Je fixe un enouvelle valeur à l'attribut retnue
+        // Je fixe unenouvelle valeur à l'attribut retnue
         // J'attribue la nouvelle à l'image grand format
         fullimg.setAttribute('src', imgSource);
     });

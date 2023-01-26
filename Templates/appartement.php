@@ -38,7 +38,7 @@
   <div class="d-flex py-5 container">
     <div class="pe-5 w-75">
       <?php
-      
+       $date = date('Y-m-d');
       echo '<h2 class="text-primary fw-lighter">' . $appartement['intitule_appart'] . ' ' . $appartement['type_appart'] . '<br> Au ' . $appartement['adresse_appart'] . ', ' . $appartement['cp_appart'] . ', ' . $appartement['ville_appart'] . '</h2>';
 
       echo '
@@ -87,18 +87,19 @@
           <div class="modal-body">';
 
       if ($appartement['id_reservation'] == null) {
+       
         echo '
-            <button type="button" class="alert alert-succes" role="alert"> Il n\'existe pas de réservation sur cette appartement</button> 
+            <button type="button" class="alert alert-success" role="alert"> Il n\'existe pas de réservation sur cette appartement</button> 
             <div class= "d-flex mt-3">
-            <input type="date" class="form-control w-25 me-1"  aria-describedby="button-addon1" >
-            <input type="date" class="form-control w-25 ms-1"  aria-describedby="button-addon1"><button type="button" class="btn btn-success ms-2">Choisir</button>  
+            <input type="date" class="form-control w-25 me-1" value="'.$date.'"  >
+            <input type="date" class="form-control w-25 ms-1" value=""><button type="button" class="btn btn-success ms-2">Choisir</button>  
           </div>';
       } else {
         echo '
             <button type="button" class="alert alert-danger" role="alert"> Il existe déjà une réservation sur cette appartement</button>   
             <div class= "d-flex mt-3">
-              <input type="date" class="form-control w-25 me-1"  aria-describedby="button-addon1" >
-              <input type="date" class="form-control w-25 ms-1"  aria-describedby="button-addon1"><button type="button" class="btn btn-success ms-2">Choisir</button>  
+              <input type="date" class="form-control w-25 me-1" value="'.$date.'"  aria-describedby="button-addon1" >
+              <input type="date" class="form-control w-25 ms-1" value=""  aria-describedby="button-addon1"><button type="button" class="btn btn-success ms-2">Choisir</button>  
             </div>
             ';
       }
