@@ -57,8 +57,8 @@ class Controller
 
     public function FiltreLocation($mot)
     {
-        $lesAppartement = $this->unModele->FiltreLocation($mot);
-        return $lesAppartement;
+         return $this->unModele->FiltreLocation($mot);
+        
     }
 
 

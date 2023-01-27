@@ -150,7 +150,23 @@ class Modele{
     public function FiltreLocation($mot)
     {
         if ($this->unPDO != null){
-            $requete ="select * from appartement where statut_appart like :mot or prix_appart like :mot or intitule_appart like :mot or ville_appart like :mot or cp_appart :mot or adresse_appart like :mot or description_appart like :mot or type_appart like :mot or superficie_appart like :mot or nb_chambres like :mot or nb_lits like :mot nb_salles_bain like :mot or capacite_appart like :mot or atout_appart1 like :mot or atout_appart2 like :mot or atout_appart3 like :mot or image_appart like :mot ;";
+            $requete ="select * from appartement where 
+            statut_appart like :mot 
+            or prix_appart like :mot 
+            or intitule_appart like :mot 
+            or ville_appart like :mot 
+            or cp_appart :mot 
+            or adresse_appart like :mot 
+            or description_appart like :mot 
+            or type_appart like :mot 
+            or superficie_appart like :mot 
+            or nb_chambres like :mot 
+            or nb_lits like :mot nb_salles_bain like :mot 
+            or capacite_appart like :mot 
+            or atout_appart1 like :mot 
+            or atout_appart2 like :mot 
+            or atout_appart3 like :mot 
+            or image_appart like :mot;";
             $donnees = array (":mot"=>"%".$mot."%");
             //preparation de la requete
             $select = $this->unPDO->prepare ($requete);
