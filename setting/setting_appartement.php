@@ -19,3 +19,12 @@ if (isset($_POST["filtre"])){
 }else{
     $appartements = $unController->recupAllAppartement();
 }
+
+if (isset($_POST["filtre_index"])){
+    $mot = $_POST["mot_index"];
+    $prixMax = $_POST["prixMax"];
+    $prixMin= $_POST["prixMin"];
+    $appartements = $unController->FiltreLocation_index($mot,$prixMax,$prixMin);
+}else{
+    $appartements = $unController->recupAllAppartement();
+}

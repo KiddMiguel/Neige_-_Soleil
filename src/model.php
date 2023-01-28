@@ -248,7 +248,25 @@ class Modele{
             return null; 
         }
     }
+    public function FiltreLocation_index($mot,$prixMax,$prixMin)
+    {
+        if ($this->unPDO != null){
 
+            $requete ="select * from appartement where ville_appart like :mot or statut_appart like :mot and prix_appart  BETWEEN :prixMin AND :prixMax";
+            $donnees = array (
+                // if $mot == null ":mot"=>% 
+                ":mot"=>"%".$mot."%" ,
+                               ":prixMax" =>"%".$prixMax."%",
+                               ":prixMin" =>"%".$prixMin."%"
+                             );
+            $select =$this->unPDO->prepare ($requete);
+            $select->execute($donnees);
+            $appartements = $select->fetchAll();
+            return $appartements;
+        }else{
+            return null; 
+        }
+    }
     public function selectReservationLocataire($id_user)
     {
         if ($this->unPDO != null) {
