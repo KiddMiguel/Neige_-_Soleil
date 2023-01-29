@@ -1,5 +1,5 @@
 
-<section class="sectionTwo sectionLocation">
+<section class="sectionTwo sectionLocation" style="height: 100vh;">
     <div class="container text-center ">
 
     <div class="mt-5 w-50 ms-2 justify-content-center">
