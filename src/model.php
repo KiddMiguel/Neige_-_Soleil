@@ -148,6 +148,28 @@ class Modele{
         }
     }
 
+    public function FiltreLocation($mot)
+    {
+        if ($this->unPDO != null){
+            $requete ="select * from appartement where ville_appart like :Ville;";
+            $donnees = array (":Ville"=>"%".$mot."%");
+            $select =$this->unPDO->prepare ($requete);
+            $select->execute($donnees);
+            $appartements = $select->fetchAll();
+            return $appartements;
+        }elseif($this->unPDO != null){
+            $requete ="select * from appartement where prix_appart like :Prix;";
+            $donnees = array (":Prix"=>"%".$mot."%");
+            $select =$this->unPDO->prepare ($requete);
+            $select->execute($donnees);
+            $appartements = $select->fetchAll();
+            return $appartements; 
+        }else{
+            return null;
+        }
+    }
+    
+
     /*********VALIDATION DU FORMUALIRE DE LA DEMANDE D'INSERT DE L'APPART */
     public function insertAppartement($tab){
         if($this->unPDO != null){
@@ -235,19 +257,7 @@ class Modele{
         }
     }
 
-    public function FiltreLocation($mot)
-    {
-        if ($this->unPDO != null){
-            $requete ="select * from appartement where ville_appart like :mot or statut_appart like :mot or prix_appart like :mot";
-            $donnees = array (":mot"=>"%".$mot."%");
-            $select =$this->unPDO->prepare ($requete);
-            $select->execute($donnees);
-            $appartements = $select->fetchAll();
-            return $appartements;
-        }else{
-            return null; 
-        }
-    }
+    
 
     public function selectReservationLocataire($id_user)
     {

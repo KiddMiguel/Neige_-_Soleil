@@ -14,8 +14,11 @@ if (isset($_POST["valider_appartement"])) {
     header("location: index.php?page=demande&id_user=" . $_SESSION['id_user'] . "");
 }
 if (isset($_POST["filtre"])){
-    $mot = $_POST["mot"];
+    $mot = $_POST["Ville"];
     $appartements = $unController->FiltreLocation($mot);
+}elseif(isset($_POST["filtre"])){
+    $mot = $_POST["Prix"];
 }else{
     $appartements = $unController->recupAllAppartement();
 }
+

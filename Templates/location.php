@@ -2,14 +2,15 @@
 <section class="sectionTwo sectionLocation">
     <div class="container text-center ">
     <h3 class="pt-5 pb-2">Découvrez tous nos logements</h3>
-    <div class="mt-5 w-50 ms-2 justify-content-center">
+    <div class="mt-5 w-55 ms-2 justify-content-center">
             <div class="row">
-                <div class="col-md-8">
-                 
-                        <form action="" class="input-group mb-3" method="post">
-                            <input type="text" class="form-control input-text " name="mot" placeholder="Recherche...." aria-label="Recipient's username" aria-describedby="basic-addon2">
+                <div class="col-md-12">
+                        <form action="" class="input-group mb-1" method="post">
+                            <input type="text" class="form-control input-text me-3 rounded" name="Ville" placeholder="Ville...." aria-label="Recipient's username" aria-describedby="basic-addon2">
+                            <input type="text" class="form-control input-text me-3 rounded" name="Prix" placeholder="Prix...." aria-label="Recipient's username" aria-describedby="basic-addon2">
+                            <input type="text" class="form-control input-text me-3 rounded" name="mot" placeholder="Pièce...." aria-label="Recipient's username" aria-describedby="basic-addon2">
                             <div class="input-group-append ms-2">
-                                <button class="btn btn-outline-warning btn-lg" type="submit" name="filtre"><i class="fa fa-search"></i></button>
+                                <button class="btn btn-outline-warning btn-lg" type="submit" name="filtre"><i class="fa fa-search "></i></button>
                             </div>
                         </form>
                 
