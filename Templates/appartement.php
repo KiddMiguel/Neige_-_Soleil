@@ -97,8 +97,8 @@
       echo '
       <div class= "d-flex mt-3">
       <input type="hidden" id="event-index" class="form-control w-25 me-1" value=""  >
-      <input type="date" id="dateDebut" class="form-control w-25 me-1" value="'.$date.'"  >
-      <input type="date" id="dateFin" class="form-control w-25 ms-1" value=""><button type="button"  class="btn btn-success ms-2">Choisir</button><button type="button" class="btn btn-danger ms-2">Reset</button>    
+      <input type="date" id="dateStart" class="form-control w-25 me-1" value="'.$date.'"  >
+      <input type="date" id="dateEnd" class="form-control w-25 ms-1" value=""><button type="button" id="choisir"  class="btn btn-success ms-2">Choisir</button><button type="button" class="btn btn-danger ms-2">Reset</button>    
       
       </div>
       <div class="calendar">

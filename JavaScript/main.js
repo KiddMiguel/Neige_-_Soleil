@@ -6,59 +6,39 @@ window.onload = () => {
 //Calendrier
 
 function calendar(event) {
-    var element = document.querySelector('.calendar')
-    console.log(element);
+    const currentYear = new Date().getFullYear();
+    var element = document.querySelector('.calendar');
     new Calendar('.calendar', {
         language: 'fr',
         style: 'background',
         minDate: new Date(),
-        maxDate: new Date(2023, 11, 31),
-
+        maxDate: new Date(currentYear, 11, 31)
     });
-    var uneDate = document.querySelector('.calendar').addEventListener('clickDay', function(data) {
-        console.log(data);
+    document.querySelector('.calendar').addEventListener('clickDay', function selectDate(data) {
+        console.log(data.element);
 
-        const [year, month, day] = [
-            data.date.getFullYear(),
-            data.date.getMonth(),
-            data.date.getDate(),
-        ];
-
-        var newMonth = parseInt([month]) + 1;
-        var monthPlus = newMonth.toString();
-        var setdate = [year] + '-' + monthPlus + '-' + [day];
-
-        while (newMonth >= 0 && newMonth < 10) {
-            monthPlus = "0" + newMonth.toString();
-            setdate = [year] + '-' + monthPlus + '-' + [day];
-            console.log(setdate);
-            break;
-
-        }
-
-        while ([day] >= 0 && [day] < 10) {
-            var dayplus = "0" + data.date.getDate();
-
-            setdate = [year] + '-' + monthPlus + '-' + dayplus;
-            console.log(setdate);
-            break;
-
-        }
-
-        console.log(setdate);
-
-
-        $('#dateFin').val(setdate);
-
+        const date = data.date;
+        const year = date.getFullYear();
+        const month = ("0" + (date.getMonth() + 1)).slice(-2);
+        const day = ("0" + date.getDate()).slice(-2);
+        const setdate = `${year}-${month}-${day}`;
+        $('#dateEnd').val(setdate);
     });
 
+    $('#choisir').click(function() {
+        let start = new Date($('#dateStart').val());
+        let end = new Date($('#dateEnd').val());
 
+        while (start <= end) {
+            console.log(start.toDateString());
+            start.setDate(start.getDate() + 1);
+        }
+    });
 }
 
 
 function ChangeImage() {
     const vignette = document.querySelectorAll(".small");
-    console.log(vignette);
 
     // je selectionne l'image en grand format 
     const fullimg = document.getElementById("full");
@@ -67,14 +47,10 @@ function ChangeImage() {
 
     vignette.forEach(item => {
         item.addEventListener("click", () => {
-            console.log(item, "vignette cliqué");
-
             // Pour récuperer la valeur de l'attribut src de l'élément cliqué
             let imgSource = item.getAttribute('src')
-            console.log(imgSource);
-
-            // Je fixe unenouvelle valeur à l'attribut retnue
-            // J'attribue la nouvelle à l'image grand format
+                // Je fixe unenouvelle valeur à l'attribut retnue
+                // J'attribue la nouvelle à l'image grand format
             fullimg.setAttribute('src', imgSource);
         });
     });
