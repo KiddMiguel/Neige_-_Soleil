@@ -21,4 +21,3 @@ if (isset($_POST["filtre"])){
 }else{
     $appartements = $unController->recupAllAppartement();
 }
-

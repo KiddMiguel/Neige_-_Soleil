@@ -3,17 +3,19 @@
             <div class="mt-custom container-fluid ms-5 ps-5 text-light">
                 <h1 class="sizing-menu">Appartements de<br> Particuliers</h1>
                 <h4>Séjour chaleureux au coeur des montagnes</h4>
-
+ 
                 <div class="row container bg-white mt-5">
-                    <div class="col-lg-12 col-md-12 col-sm-12 col-xm-12  pb-2 pt-3">
-                        <input type="search" class="w-100 border border-light p-2" name="" id="" placeholder="Indiquez une addresse, un lieu...">
+                    <form action="index.php?page=location" method="post">
+                    <div class="col- lg-12 col-md-12 col-sm-12 col-xm-12  pb-2 pt-3">
+                        <input type="search" class="w-100 border border-light p-2" name="mot_index" id="" placeholder="Indiquez une addresse, un lieu...">
                     </div>
                     <div class="d-flex justify-content-between pb-3">
-                        <input class="pe-5 w-100 border border-light p-3" type="number" name="" id="" placeholder="Budget € min">
-                        <input class="pe-5 ms-3 w-100 border border-light p-3" type="number" name="" id="" placeholder="Budget € max">
-                        <input class=" ms-3 w-100 bg-custom border border-light p-3" type="submit" name="" id="" value="Rechercher">
+                        <input class="pe-5 w-100 border border-light p-3" type="text" minlength="0" name="prixMin" id="" placeholder="Budget € min">
+                        <input class="pe-5 ms-3 w-100 border border-light p-3" type="text" minlength="0" name="prixMax" id="" placeholder="Budget € max">
+                            <button class=" ms-3 w-100 bg-custom border border-light p-3" type="submit" name="filtre_index" id="" >rechercher</button>
+                       
                     </div>
-
+                    </form>
                 </div>
             </div>
         </div>
