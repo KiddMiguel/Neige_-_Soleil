@@ -69,3 +69,24 @@ s0.parentNode.insertBefore(s1,s0);
 })();
 }
 tawk();
+
+function verifPassword () {
+    $("#buttonEnvoi").click(function(event){
+
+
+
+        let password = $("#password").val();
+        let confirmPassword=  $("#confirmPassword").val();
+        console.log('click');
+        console.log(password);
+        console.log(confirmPassword);
+    
+        if (password === confirmPassword ) {
+             $("#form").submit();
+           }else{
+            event.preventDefault();
+            console.log('not good')
+           }
+    })
+}
+verifPassword ();
