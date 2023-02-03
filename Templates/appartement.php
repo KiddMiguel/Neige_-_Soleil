@@ -38,7 +38,7 @@
   <div class="d-flex py-5 container">
     <div class="pe-5 w-75">
       <?php
-      
+       $date = date('Y-m-d');
       echo '<h2 class="text-primary fw-lighter">' . $appartement['intitule_appart'] . ' ' . $appartement['type_appart'] . '<br> Au ' . $appartement['adresse_appart'] . ', ' . $appartement['cp_appart'] . ', ' . $appartement['ville_appart'] . '</h2>';
 
       echo '
@@ -78,30 +78,32 @@
   
     <div>
     <div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
-      <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-dialog modal-dialog-centered modal-xl">
         <div class="modal-content">
           <div class="modal-header">
             <h1 class="modal-title fs-5" id="exampleModalToggleLabel">Réservation</h1>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            
           </div>
           <div class="modal-body">';
-
+    
       if ($appartement['id_reservation'] == null) {
         echo '
-            <button type="button" class="alert alert-succes" role="alert"> Il n\'existe pas de réservation sur cette appartement</button> 
-            <div class= "d-flex mt-3">
-            <input type="date" class="form-control w-25 me-1"  aria-describedby="button-addon1" >
-            <input type="date" class="form-control w-25 ms-1"  aria-describedby="button-addon1"><button type="button" class="btn btn-success ms-2">Choisir</button>  
-          </div>';
+            <button type="button" class="alert alert-success" role="alert"> Il n\'existe pas de réservation sur cette appartement</button> ';
       } else {
         echo '
-            <button type="button" class="alert alert-danger" role="alert"> Il existe déjà une réservation sur cette appartement</button>   
-            <div class= "d-flex mt-3">
-              <input type="date" class="form-control w-25 me-1"  aria-describedby="button-addon1" >
-              <input type="date" class="form-control w-25 ms-1"  aria-describedby="button-addon1"><button type="button" class="btn btn-success ms-2">Choisir</button>  
-            </div>
-            ';
+            <button type="button" class="alert alert-danger" role="alert"> Il existe déjà une réservation sur cette appartement</button>   ';
       }
+      echo '
+      <div class= "d-flex mt-3">
+      <input type="hidden" id="event-index" class="form-control w-25 me-1" value=""  >
+      <input type="date" id="dateStart" class="form-control w-25 me-1" value="'.$date.'"  >
+      <input type="date" id="dateEnd" class="form-control w-25 ms-1" value=""><button type="button" id="choisir"  class="btn btn-success ms-2">Choisir</button><button type="button" class="btn btn-danger ms-2">Reset</button>    
+      
+      </div>
+      <div class="calendar">
+      </div>
+     ';
 
       echo '</div>
           <div class="modal-footer">

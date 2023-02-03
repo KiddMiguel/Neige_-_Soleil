@@ -23,10 +23,7 @@
                             </thead>
                             <tbody>
                                 <?php 
-                                    foreach ($reservations as $reservation){
-
-                                   
-                                                 
+                                    foreach ($reservations as $reservation){                     
                                 echo '
                                 <tr class="fw-normal">
                                     <th>

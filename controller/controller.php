@@ -120,7 +120,10 @@ class Controller
         return $appartements;
 
     }
-
+    public function FiltreLocation_index($mot,$prixMax,$prixMin){
+        $appartements = $this->unModele->FiltreLocation_index($mot,$prixMax,$prixMin);
+        return $appartements;
+    }
 
 
     /*********************DELETE DEMANDE /********* */
