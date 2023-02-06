@@ -15,7 +15,7 @@
                     <div class="d-flex justify-content-between align-items-center mb-3">
                         <h4 class="text-right">Paramètre de profil</h4>
                     </div>
-                    <form method="post">
+                    <form action="" method="post">
                         <div class="row mt-2">
                             <div class="col-md-12 pt-3"> <select class="select border p-1" name="civilite_proprio">
                                         <option value="Mme">Mme</option>
@@ -30,7 +30,7 @@
                             <div class="col-md-12 pt-3"><input type="text" class="form-control" name="adresse_locataire" placeholder="Votre adresse" value="<?= ((isset($_SESSION["email_locataire"]))) ? $_SESSION['adresse_locataire'] : "" ?>"></div>
                             <div class="col-md-6 pt-3"><input type="text" class="form-control" placeholder="Votre code postal" name="cp_locataire" value="<?= ((isset($_SESSION["email_locataire"]))) ? $_SESSION['cp_locataire'] : " " ?>"></div>
                        </div>
-                        <div class="mt-5 text-center"><button class="btn btn-warning profile-button" type="submit" name="update_locataire">Sauvegarder</button></div>
+                        <div class="mt-5 text-center"><button class="btn btn-warning profile-button" type="submit" name="update_locataire" >Sauvegarder</button><p class="py-2" style="font-size: xx-small;"> <i>Merci de vous déconnecter puis vous réconnecter lors la modification de vos informations</i></p></div>
                         
                     </form>
                 </div>

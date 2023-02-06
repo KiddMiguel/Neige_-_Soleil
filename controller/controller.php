@@ -33,15 +33,15 @@ class Controller
         return $this->unModele->verifconnexionProprietaire($email, $mdp);
     }
 
-    public function insertProprietaire($tab)
+    public function insertProprietaire($id_user)
     {
-        $this->unModele->insertProprietaire($tab);
+        $this->unModele->insertProprietaire($id_user);
     }
 
-    // public function updateProprietaire($tab)
-    // {
-    //     $this->unModele->updateProprietaire($tab);
-    // }
+    public function updateProprietaire($tab)
+    {
+        return $this->unModele->updateProprietaire($tab);
+    }
 
     public function selectWhereDemande($id_user)
     {

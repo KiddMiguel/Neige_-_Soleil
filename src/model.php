@@ -53,8 +53,8 @@ class Modele{
 
     public function updateLocataire($tab){
         if($this->unPDO != null){
-
-            $request = "update locataire set nom_locataire=:nom_locataire, prenom_locataire=:prenom_locataire, tel_locataire=:tel_locataire ,adresse_locataire=:adresse_locataire, cp_locataire=:cp_locataire where locataire.id_user=2";
+            $id_user= $_GET["id_user"];
+            $request = "update locataire set nom_locataire=:nom_locataire, prenom_locataire=:prenom_locataire, tel_locataire=:tel_locataire ,adresse_locataire=:adresse_locataire, cp_locataire=:cp_locataire where locataire.id_user=$id_user";
             $donnees = array (
                 ":nom_locataire" => $tab['nom_locataire'], 
                 ":prenom_locataire" => $tab['prenom_locataire'], 
@@ -105,21 +105,26 @@ class Modele{
         }
     }
 
-    // public function updateProprietaire($tab){
-    //     if($this->unPDO != null){
-    //         $request = "update locataire set nom_locataire=:nom_locataire, prenom_locataire=:prenom_locataire, tel_locataire=:tel_locataire ,adresse_locataire=:adresse_locataire, cp_locataire=:cp_locataire where id_user=:id_user;";
-    //         $donnees = array (
-    //             ":nom_locataire" => $tab['nom_locataire'], 
-    //             ":prenom_locataire" => $tab['prenom_locataire'], 
-    //             ":tel_locataire" => $tab['tel_locataire'], 
-    //             ":adresse_locataire" => $tab['adresse_locataire'], 
-    //             ":cp_locataire" => $tab['cp_locataire'],
-    //             ":id_user" => $tab['id_user']
-    //         );
-    //         $update = $this->unPDO->prepare($request);
-    //         $update->execute($donnees);
-    //     }
-    // }
+    public function updateProprietaire($tab){
+        if($this->unPDO != null){
+            $id_user= $_GET["id_user"];
+            $request = "update proprietaire set civilite_proprio=:civilite_proprio, email_proprio=:email_proprio, nom_proprio=:nom_proprio ,prenom_proprio=:prenom_proprio, tel_proprio=:tel_proprio, adresse_proprio=:adresse_proprio, cp_proprio=:cp_proprio, pays_proprio=:pays_proprio, ville_proprio=:ville_proprio, code_adherent=:code_adherent where proprietaire.id_user=$id_user";
+            $donnees = array (
+                ":civilite_proprio" => $tab['civilite_proprio'], 
+                ":statut_proprio" => $tab['statut_proprio'], 
+                ":nom_proprio" => $tab['nom_proprio'], 
+                ":prenom_proprio" => $tab['prenom_proprio'],
+                ":tel_proprio" => $tab['tel_proprio'],
+                ":adresse_proprio" => $tab['adresse_proprio'],
+                ":cp_proprio" => $tab['cp_proprio'],
+                ":pays_proprio" => $tab['pays_proprio'],
+                ":ville_proprio" => $tab['ville_proprio'],
+                ":code_adherent" => $tab['code_adherent']
+                            );
+            $update = $this->unPDO->prepare($request);
+            $update->execute($donnees);
+        }
+    }
 
 
     /*********************************************APPARTEMENT ************************************** */

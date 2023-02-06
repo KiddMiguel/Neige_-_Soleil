@@ -27,7 +27,7 @@ $unController = new Controller($server, $bdd, $user, $mdp);
         require_once("setting/setting_reservation.php");
         require_once("setting/setting_demande.php");
         require_once("setting/setting_images.php");
-        require_once("setting/setting_update_client.php");
+        require_once("setting/setting_update.php");
         require_once("include/header.php");
 
     //Chaque section à l'interieur de notre balise php appel la page mentionner -->

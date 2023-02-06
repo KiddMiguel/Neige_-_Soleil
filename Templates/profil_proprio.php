@@ -23,7 +23,7 @@
                                     </select></div>
                             <?php
                                 if(isset($_SESSION["email_proprio"])){
-                                    echo '<div class="col-md-12 pt-3"><select class="select border p-1" >
+                                    echo '<div class="col-md-12 pt-3"><select name="statut_proprio" class="select border p-1" >
                                     <option value="statut_proprio">'.$_SESSION["statut_proprio"].'</option>
                                     <option value="Loueur particulier">Loueur particulier</option>
                                     <option value="Agence immobilière">Agence immobilière</option>
@@ -61,22 +61,10 @@
                                 }
                             ?>
                        </div>
-                        <div class="mt-5 text-center"><button class="btn btn-warning profile-button" type="submit" name="update_proprio" data-bs-target="#exampleModalToggle" data-bs-toggle="modal">Sauvegarder</button></div>
+                        <div class="mt-5 text-center"><button class="btn btn-warning profile-button" type="submit" name="update_proprio">Sauvegarder</button><p class="py-2" style="font-size: xx-small;"> <i>Merci de vous déconnecter puis vous réconnecter lors la modification de vos informations</i></p></div>
 
 
-                        <!-- <div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
-                            <div class="modal-dialog modal-dialog-centered">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h1 class="modal-title fs-5 text-center" id="exampleModalToggleLabel">Modification du profil</h1>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                    </div>
-                                    <div class="modal-body">
-                                        Les modification ont été effctuées avec success ! <i class="fa-solid fa-circle-check fs-3 text-success"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </div> -->
+            
                     </form>
                 </div>
             </div>
