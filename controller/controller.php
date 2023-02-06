@@ -19,9 +19,9 @@ class Controller
         $this->unModele->insertLocataire($tab);
     }
 
-    public function updateLocataire($tab)
+    public function updateLocataire($id_user)
     {
-        $this->unModele->updateLocataire($tab);
+       return $this->unModele->updateLocataire($id_user);
     }
 
 

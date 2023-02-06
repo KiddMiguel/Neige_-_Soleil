@@ -64,7 +64,7 @@
                         <div class="mt-5 text-center"><button class="btn btn-warning profile-button" type="submit" name="update_proprio" data-bs-target="#exampleModalToggle" data-bs-toggle="modal">Sauvegarder</button></div>
 
 
-                        <div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+                        <!-- <div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
                             <div class="modal-dialog modal-dialog-centered">
                                 <div class="modal-content">
                                     <div class="modal-header">
@@ -76,7 +76,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
                     </form>
                 </div>
             </div>

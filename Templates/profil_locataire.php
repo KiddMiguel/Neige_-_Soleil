@@ -15,7 +15,7 @@
                     <div class="d-flex justify-content-between align-items-center mb-3">
                         <h4 class="text-right">Paramètre de profil</h4>
                     </div>
-                    <form action="" method="post">
+                    <form method="post">
                         <div class="row mt-2">
                             <div class="col-md-12 pt-3"> <select class="select border p-1" name="civilite_proprio">
                                         <option value="Mme">Mme</option>
@@ -30,20 +30,8 @@
                             <div class="col-md-12 pt-3"><input type="text" class="form-control" name="adresse_locataire" placeholder="Votre adresse" value="<?= ((isset($_SESSION["email_locataire"]))) ? $_SESSION['adresse_locataire'] : "" ?>"></div>
                             <div class="col-md-6 pt-3"><input type="text" class="form-control" placeholder="Votre code postal" name="cp_locataire" value="<?= ((isset($_SESSION["email_locataire"]))) ? $_SESSION['cp_locataire'] : " " ?>"></div>
                        </div>
-                        <div class="mt-5 text-center"><button class="btn btn-warning profile-button" type="submit" name="update_locataire" data-bs-target="#exampleModalToggle" data-bs-toggle="modal">Sauvegarder</button></div>
-                        <div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
-                            <div class="modal-dialog modal-dialog-centered">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h1 class="modal-title fs-5 text-center" id="exampleModalToggleLabel">Modification du profil</h1>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                    </div>
-                                    <div class="modal-body">
-                                        Les modification ont été effctuées avec success ! <i class="fa-solid fa-circle-check fs-3 text-success"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        <div class="mt-5 text-center"><button class="btn btn-warning profile-button" type="submit" name="update_locataire">Sauvegarder</button></div>
+                        
                     </form>
                 </div>
             </div>

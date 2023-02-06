@@ -53,15 +53,15 @@ class Modele{
 
     public function updateLocataire($tab){
         if($this->unPDO != null){
-            $request = "update locataire set nom_locataire=:nom_locataire, prenom_locataire=:prenom_locataire, tel_locataire=:tel_locataire ,adresse_locataire=:adresse_locataire, cp_locataire=:cp_locataire where id_user=:id_user;";
+
+            $request = "update locataire set nom_locataire=:nom_locataire, prenom_locataire=:prenom_locataire, tel_locataire=:tel_locataire ,adresse_locataire=:adresse_locataire, cp_locataire=:cp_locataire where locataire.id_user=2";
             $donnees = array (
                 ":nom_locataire" => $tab['nom_locataire'], 
                 ":prenom_locataire" => $tab['prenom_locataire'], 
                 ":tel_locataire" => $tab['tel_locataire'], 
                 ":adresse_locataire" => $tab['adresse_locataire'], 
                 ":cp_locataire" => $tab['cp_locataire'],
-                ":id_user" => $tab['id_user']
-            );
+                            );
             $update = $this->unPDO->prepare($request);
             $update->execute($donnees);
         }
