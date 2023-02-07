@@ -108,19 +108,30 @@ class Modele{
     public function updateProprietaire($tab){
         if($this->unPDO != null){
             $id_user= $_GET["id_user"];
-            $request = "update proprietaire set civilite_proprio=:civilite_proprio, email_proprio=:email_proprio, nom_proprio=:nom_proprio ,prenom_proprio=:prenom_proprio, tel_proprio=:tel_proprio, adresse_proprio=:adresse_proprio, cp_proprio=:cp_proprio, pays_proprio=:pays_proprio, ville_proprio=:ville_proprio, code_adherent=:code_adherent where proprietaire.id_user=$id_user";
+            $request = "update proprietaire set civilite_proprio=:civilite_proprio, nom_proprio=:nom_proprio, prenom_proprio=:prenom_proprio ,statut_proprio=:statut_proprio, tel_proprio=:tel_proprio, adresse_proprio=:adresse_proprio, cp_proprio=:cp_proprio, ville_proprio=:ville_proprio, pays_proprio=:pays_proprio, code_adherent=:code_adherent where proprietaire.id_user=$id_user";
             $donnees = array (
                 ":civilite_proprio" => $tab['civilite_proprio'], 
-                ":statut_proprio" => $tab['statut_proprio'], 
                 ":nom_proprio" => $tab['nom_proprio'], 
-                ":prenom_proprio" => $tab['prenom_proprio'],
+                ":prenom_proprio" => $tab['prenom_proprio'], 
+                ":statut_proprio" => $tab['statut_proprio'],
                 ":tel_proprio" => $tab['tel_proprio'],
                 ":adresse_proprio" => $tab['adresse_proprio'],
                 ":cp_proprio" => $tab['cp_proprio'],
-                ":pays_proprio" => $tab['pays_proprio'],
                 ":ville_proprio" => $tab['ville_proprio'],
+                ":pays_proprio" => $tab['pays_proprio'],
                 ":code_adherent" => $tab['code_adherent']
                             );
+            $update = $this->unPDO->prepare($request);
+            $update->execute($donnees);
+        }
+    }
+    public function updateProprietaireEmailMdp($tab){
+        if($this->unPDO != null){
+            $id_user= $_GET["id_user"];
+            $request = "update proprietaire set email_proprio=:email_proprio, mdp_proprio=:mdp_proprio where proprietaire.id_user=$id_user";
+            $donnees = array (
+                ":email_proprio" => $tab['email_proprio'], 
+                ":mdp_proprio" => $tab['mdp_proprio'] );
             $update = $this->unPDO->prepare($request);
             $update->execute($donnees);
         }

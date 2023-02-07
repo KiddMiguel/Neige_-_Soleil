@@ -21,7 +21,7 @@ class Controller
 
     public function updateLocataire($id_user)
     {
-       return $this->unModele->updateLocataire($id_user);
+        return $this->unModele->updateLocataire($id_user);
     }
 
 
@@ -38,9 +38,13 @@ class Controller
         $this->unModele->insertProprietaire($id_user);
     }
 
-    public function updateProprietaire($tab)
+    public function updateProprietaire($id_user)
     {
-        return $this->unModele->updateProprietaire($tab);
+        return $this->unModele->updateProprietaire($id_user);
+    }
+    public function updateProprietaireEmailMdp($id_user)
+    {
+        return $this->unModele->updateProprietaireEmailMdp($id_user);
     }
 
     public function selectWhereDemande($id_user)
@@ -91,7 +95,7 @@ class Controller
     {
         $this->unModele->insertReservation($tab);
     }
- 
+
     public function recupAllReservation()
     {
         $reservations = $this->unModele->recupAllReservation();
@@ -114,20 +118,22 @@ class Controller
 
 
     /**********************************FILTRE************** */
-    public function FiltreLocation($mot) {
+    public function FiltreLocation($mot)
+    {
 
         $appartements = $this->unModele->FiltreLocation($mot);
         return $appartements;
-
     }
-    public function FiltreLocation_index($mot,$prixMax,$prixMin){
-        $appartements = $this->unModele->FiltreLocation_index($mot,$prixMax,$prixMin);
+    public function FiltreLocation_index($mot, $prixMax, $prixMin)
+    {
+        $appartements = $this->unModele->FiltreLocation_index($mot, $prixMax, $prixMin);
         return $appartements;
     }
 
 
     /*********************DELETE DEMANDE /********* */
-    public function deleteDemande($id_user){
+    public function deleteDemande($id_user)
+    {
         $demandes = $this->unModele->deleteDemande($id_user);
         return $demandes;
     }
