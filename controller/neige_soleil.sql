@@ -43,8 +43,8 @@ create table proprietaire (
     code_adherent varchar(50),
     id_contrat int (5),
     id_appart int(5),
-     FOREIGN key (id_user) REFERENCES user(id_user) on delete cascade,
-    foreign key (id_contrat) references contrat(id_contrat),
+    FOREIGN key (id_user) REFERENCES user(id_user) on delete cascade,
+    Foreign key (id_contrat) references contrat(id_contrat),
     FOREIGN key (id_appart) REFERENCES appartement(id_appart),
     PRIMARY KEY (id_user)
 );

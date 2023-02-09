@@ -100,11 +100,11 @@ class Controller
 
     /*************************IMAGES********************** */
 
-    // public function recupImages()
-    // {
-    //     $images = $this->unModele->recupImages();
-    //     return $images;
-    // }
+     public function recupImages()
+     {
+         $images = $this->unModele->recupImages();
+         return $images;
+     }
 
     public function selectWhereImage($id_appart)
     {

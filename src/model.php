@@ -105,21 +105,21 @@ class Modele{
         }
     }
 
-    // public function updateProprietaire($tab){
-    //     if($this->unPDO != null){
-    //         $request = "update locataire set nom_locataire=:nom_locataire, prenom_locataire=:prenom_locataire, tel_locataire=:tel_locataire ,adresse_locataire=:adresse_locataire, cp_locataire=:cp_locataire where id_user=:id_user;";
-    //         $donnees = array (
-    //             ":nom_locataire" => $tab['nom_locataire'], 
-    //             ":prenom_locataire" => $tab['prenom_locataire'], 
-    //             ":tel_locataire" => $tab['tel_locataire'], 
-    //             ":adresse_locataire" => $tab['adresse_locataire'], 
-    //             ":cp_locataire" => $tab['cp_locataire'],
-    //             ":id_user" => $tab['id_user']
-    //         );
-    //         $update = $this->unPDO->prepare($request);
-    //         $update->execute($donnees);
-    //     }
-    // }
+    public function updateProprietaire($tab){
+        if($this->unPDO != null){
+            $request = "update locataire set nom_locataire=:nom_locataire, prenom_locataire=:prenom_locataire, tel_locataire=:tel_locataire ,adresse_locataire=:adresse_locataire, cp_locataire=:cp_locataire where id_user=:id_user;";
+         $donnees = array (
+                 ":nom_locataire" => $tab['nom_locataire'], 
+                 ":prenom_locataire" => $tab['prenom_locataire'], 
+                 ":tel_locataire" => $tab['tel_locataire'], 
+                 ":adresse_locataire" => $tab['adresse_locataire'], 
+                ":cp_locataire" => $tab['cp_locataire'],
+                ":id_user" => $tab['id_user']
+             );
+             $update = $this->unPDO->prepare($request);
+            $update->execute($donnees);
+        }
+     }
 
 
     /*********************************************APPARTEMENT ************************************** */
@@ -148,7 +148,7 @@ class Modele{
         }
     }
 
-    public function FiltreLocation($mot)
+    /* public function FiltreLocation($mot)
     {
         if ($this->unPDO != null){
             $requete ="select * from appartement where ville_appart like :Ville;";
@@ -167,7 +167,7 @@ class Modele{
         }else{
             return null;
         }
-    }
+    } */
     
 
     /*********VALIDATION DU FORMUALIRE DE LA DEMANDE D'INSERT DE L'APPART */
@@ -270,7 +270,10 @@ class Modele{
             return null; 
         }
     }
+    public function FiltreLocation_index($mot,$prixMax,$prixMin)
+    {
 
+        if ($this->unPDO != null){
             $requete ="select * from appartement where ville_appart like :mot or statut_appart like :mot and prix_appart  BETWEEN :prixMin AND :prixMax";
             $donnees = array (
                 // if $mot == null ":mot"=>% 
@@ -324,17 +327,17 @@ class Modele{
         }
     }
 
-    // public function recupImages(){
-    //     if ($this->unPDO != null) {
-    //     $request = "select * from image";
-    //     $select = $this->unPDO->prepare($request);
-    //     $select->execute();
-    //     $images = $select->fetchAll();
-    //     return $images;
-    //     }else  {
-    //         return null;
-    //     }
-    // } 
+     public function recupImages(){
+         if ($this->unPDO != null) {
+         $request = "select * from image";
+        $select = $this->unPDO->prepare($request);
+         $select->execute();
+         $images = $select->fetchAll();
+        return $images;
+        }else  {
+            return null;
+        }
+    } 
 
     public function selectWhereImage($id_appart)
     {
