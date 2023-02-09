@@ -1,4 +1,5 @@
 
+<<<<<<< HEAD
 <section class="sectionTwo sectionLocation" >
     <div class="container text-center " >
     <h3 class="pt-5 pb-2">Découvrez tous nos logements</h3>
@@ -14,6 +15,22 @@
                             </div>
                         </form>
                 
+=======
+<section class="sectionTwo sectionLocation">
+    <div class="container text-center ">
+    <h3 class="pt-5 pb-2">Découvrez tous nos logements </h3>
+    <div class="mt-5 w-50 ms-2 justify-content-center">
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control input-text" placeholder="Search products...." aria-label="Recipient's username" aria-describedby="basic-addon2">
+                        <Form method="post">
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-warning btn-lg" type="submit"><i class="fa fa-search" name="filtre"></i></button>
+                        </div>
+                        </Form>
+                    </div>
+>>>>>>> 8fa0d004d4b147d067d35dd7be9dba43a12c4be1
                 </div>
             </div>
         </div>

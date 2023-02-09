@@ -73,6 +73,12 @@ class Controller
         $this->unModele->insertAppartement($tab);
     }
 
+    public function FiltreLocation($mot)
+    {
+         return $this->unModele->FiltreLocation($mot);
+        
+    }
+
 
     /*********************************RESERVATION************************ */
     public function selectReservationLocataire($id_user)
