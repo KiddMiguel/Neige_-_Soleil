@@ -24,6 +24,13 @@ class Controller
         return $this->unModele->updateLocataire($id_user);
     }
 
+        
+    public function selectWhereLocataire($id_user)
+    {
+        $locataire = $this->unModele->selectWhereLocataire($id_user);
+        return $locataire;
+    }
+
 
     /*********************CONTROLLER PROPRIETAIRE************* */
 

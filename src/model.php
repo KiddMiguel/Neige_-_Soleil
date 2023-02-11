@@ -190,7 +190,28 @@ class Modele{
             $insert->execute($donnees);
         }
     }
+    public function selectWhereLocataire($id_user){
+        if($this->unPDO != null){
+            $request = "select * from locataire where id_user =:id_user ";
+            $donnees = array(":id_user" => $id_user);
+            $select = $this->unPDO->prepare($request);
+            $select->execute($donnees);
+            $locataire = $select->fetchAll();
+            return $locataire;
+        }
+    }
 
+    // public function recupAllLocataire(){
+    //     if($this->unPDO != null){
+    //         $request = "select * from locataire";
+    //         $select = $this->unPDO->prepare($request);
+    //         $select->execute();
+    //         $locataires = $select->fetchAll();
+    //         return $locataires;
+    //     }else{
+    //         return null;
+    //     }
+    // }
 
     public function selectWhereDemande($id_user)
     {
