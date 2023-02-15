@@ -136,6 +136,29 @@ class Modele{
             $update->execute($donnees);
         }
     }
+    public function updateLocataireEmailMdp($tab){
+        if($this->unPDO != null){
+            $id_user= $_GET["id_user"];
+            $request = "update locataire set email_locataire=:email_locataire, mdp_locataire=:mdp_locataire where id_user=$id_user";
+            $donnees = array (
+                ":email_locataire" => $tab['email_locataire'], 
+                ":mdp_locataire" => $tab['mdp_locataire'] );
+            $update = $this->unPDO->prepare($request);
+            $update->execute($donnees);
+        }
+    }
+
+
+    public function selectWhereProprietaire($id_user){
+        if($this->unPDO != null){
+            $request = "select * from proprietaire where id_user =:id_user ";
+            $select = $this->unPDO->prepare($request);
+            $select->bindValue(':id_user', $id_user, PDO::PARAM_INT);
+            $select->execute();
+            $proprietaire = $select->fetch();
+            return $proprietaire;
+        }
+    }
 
 
     /*********************************************APPARTEMENT ************************************** */
@@ -193,10 +216,10 @@ class Modele{
     public function selectWhereLocataire($id_user){
         if($this->unPDO != null){
             $request = "select * from locataire where id_user =:id_user ";
-            $donnees = array(":id_user" => $id_user);
             $select = $this->unPDO->prepare($request);
-            $select->execute($donnees);
-            $locataire = $select->fetchAll();
+            $select->bindValue(':id_user', $id_user, PDO::PARAM_INT);
+            $select->execute();
+            $locataire = $select->fetch();
             return $locataire;
         }
     }

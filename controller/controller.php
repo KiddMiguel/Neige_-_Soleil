@@ -24,17 +24,26 @@ class Controller
         return $this->unModele->updateLocataire($id_user);
     }
 
-        
+
     public function selectWhereLocataire($id_user)
     {
         $locataire = $this->unModele->selectWhereLocataire($id_user);
         return $locataire;
     }
+    public function updateLocataireEmailMdp($id_user)
+    {
+        return $this->unModele->updateLocataireEmailMdp($id_user);
+    }
+
 
 
     /*********************CONTROLLER PROPRIETAIRE************* */
 
-
+    public function selectWhereProprietaire($id_user)
+    {
+        $proprietaire = $this->unModele->selectWhereProprietaire($id_user);
+        return $proprietaire;
+    }
     public function verifconnexionProprietaire($email, $mdp)
     {
         return $this->unModele->verifconnexionProprietaire($email, $mdp);
@@ -49,6 +58,7 @@ class Controller
     {
         return $this->unModele->updateProprietaire($id_user);
     }
+
     public function updateProprietaireEmailMdp($id_user)
     {
         return $this->unModele->updateProprietaireEmailMdp($id_user);

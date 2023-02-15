@@ -1,6 +1,5 @@
 <?php
 session_start();
-session_regenerate_id();
 require_once("controller/config_database.php");
 require_once("controller/controller.php");
 $unController = new Controller($server, $bdd, $user, $mdp);
