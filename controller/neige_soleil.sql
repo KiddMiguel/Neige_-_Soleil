@@ -9,7 +9,7 @@ create table user (
 ); 
 CREATE table appartement (
     id_appart int(5) not null AUTO_INCREMENT,
-    statut_appart VARCHAR (50),
+    statut_appart enum ("Disponible", "Vendu"),
     prix_appart VARCHAR (100),
     intitule_appart VARCHAR(100),
     ville_appart VARCHAR (50),
@@ -224,25 +224,25 @@ delimiter ;
 /*Insertion
 INSERT INTO user (id_user) VALUES (1), (2), (3);*/
 
-INSERT INTO locataire (civilite_locataire, nom_locataire, prenom_locataire, email_locataire, mdp_locataire, tel_locataire, adresse_locataire, cp_locataire, nb_reservations, id_appart, id_user)
+INSERT INTO locataire (civilite_locataire, nom_locataire, prenom_locataire, email_locataire, mdp_locataire, tel_locataire, adresse_locataire, cp_locataire, nb_reservations, id_appart)
 VALUES 
-('Mr', 'Dupont', 'Pierre', 'pierre.dupont@gmail.com', 'motdepasse', '0123456789', '5 Rue des Lilas', '75020', 3, 1, 1),
-('Mme', 'Martin', 'Sophie', 'sophie.martin@gmail.com', 'motdepasse', '0123456789', '12 Rue de la Gare', '69002', 2, 2, 2),
-('Mr', 'Garcia', 'Antonio', 'antonio.garcia@gmail.com', 'motdepasse', '0123456789', '7 Avenue des Roses', '13010', 1, 3, 3),
-('Mme', 'Dumont', 'Laura', 'laura.dumont@gmail.com', 'motdepasse', '0123456789', '14 Rue des Pivoines', '34000', 0, 4, 4),
-('Mr', 'Lefebvre', 'Luc', 'luc.lefebvre@gmail.com', 'motdepasse', '0123456789', '8 Rue des Tilleuls', '25000', 2, 5, 5),
-('Mme', 'Moreau', 'Céline', 'celine.moreau@gmail.com', 'motdepasse', '0123456789', '25 Rue des Cerisiers', '44000', 1, 1, 6),
-('Mr', 'Roux', 'Nicolas', 'nicolas.roux@gmail.com', 'motdepasse', '0123456789', '10 Rue des Peupliers', '57000', 0, 2, 7),
-('Mme', 'Le Gall', 'Anne', 'anne.legall@gmail.com', 'motdepasse', '0123456789', '9 Rue des Coquelicots', '29000', 4, 3, 8),
-('Mr', 'Fernandez', 'José', 'jose.fernandez@gmail.com', 'motdepasse', '0123456789', '3 Rue des Iris', '13005', 2, 4, 9),
-('Mme', 'Dubois', 'Elodie', 'elodie.dubois@gmail.com', 'motdepasse', '0123456789', '15 Rue des Azalées', '54000', 1, 5, 10);
+('Mr', 'Dupont', 'Pierre', 'pierre.dupont@gmail.com', 'motdepasse', '0123456789', '5 Rue des Lilas', '75020', 3, 1 ),
+('Mme', 'Martin', 'Sophie', 'sophie.martin@gmail.com', 'motdepasse', '0123456789', '12 Rue de la Gare', '69002', 2, 2 ),
+('Mr', 'Garcia', 'Antonio', 'antonio.garcia@gmail.com', 'motdepasse', '0123456789', '7 Avenue des Roses', '13010', 1, 3 ),
+('Mme', 'Dumont', 'Laura', 'laura.dumont@gmail.com', 'motdepasse', '0123456789', '14 Rue des Pivoines', '34000', 0, 4),
+('Mr', 'Lefebvre', 'Luc', 'luc.lefebvre@gmail.com', 'motdepasse', '0123456789', '8 Rue des Tilleuls', '25000', 2, 5),
+('Mme', 'Moreau', 'Céline', 'celine.moreau@gmail.com', 'motdepasse', '0123456789', '25 Rue des Cerisiers', '44000', 1, 1),
+('Mr', 'Roux', 'Nicolas', 'nicolas.roux@gmail.com', 'motdepasse', '0123456789', '10 Rue des Peupliers', '57000', 0, 2),
+('Mme', 'Le Gall', 'Anne', 'anne.legall@gmail.com', 'motdepasse', '0123456789', '9 Rue des Coquelicots', '29000', 4, 3),
+('Mr', 'Fernandez', 'José', 'jose.fernandez@gmail.com', 'motdepasse', '0123456789', '3 Rue des Iris', '13005', 2, 4),
+('Mme', 'Dubois', 'Elodie', 'elodie.dubois@gmail.com', 'motdepasse', '0123456789', '15 Rue des Azalées', '54000', 1, 5);
 
 
-INSERT INTO proprietaire (id_user, civilite_proprio, nom_proprio, prenom_proprio, statut_proprio, email_proprio, mdp_proprio, tel_proprio, adresse_proprio, cp_proprio, ville_proprio, pays_proprio, code_adherent, id_contrat, id_appart)
-VALUES (1, 'Mr', 'Durand', 'Jean', 'Particulier', 'jean.durand@email.com', 'motdepasse123', '01 23 45 67 89', '1 rue du Pont', '75001', 'Paris', 'France', '0123456789', 1, 1),
-       (2, 'Mme', 'Lefebvre', 'Marie', 'Professionnel', 'marie.lefebvre@email.com', 'password456', '01 34 56 78 90', '2 rue de la Gare', '69001', 'Lyon', 'France', '0123456789', 2, 2),
-       (3, 'Mr', 'Garcia', 'Luis', 'Particulier', 'luis.garcia@email.com', 'azerty123', '01 23 45 67 89', '3 rue de la Paix', '13001', 'Marseille', 'France', '0123456789', 3, 3),
-       (4, 'Mme', 'Chang', 'Li', 'Professionnel', 'li.chang@email.com', 'secret789', '01 34 56 78 90', '4 avenue des Fleurs', '69002', 'Lyon', 'France', '0123456789', 4, 4);
+INSERT INTO proprietaire ( civilite_proprio, nom_proprio, prenom_proprio, statut_proprio, email_proprio, mdp_proprio, tel_proprio, adresse_proprio, cp_proprio, ville_proprio, pays_proprio, code_adherent, id_contrat, id_appart)
+VALUES ( 'Mr', 'Durand', 'Jean', 'Particulier', 'jean.durand@email.com', 'motdepasse123', '01 23 45 67 89', '1 rue du Pont', '75001', 'Paris', 'France', '0123456789', 1, 1),
+       ( 'Mme', 'Lefebvre', 'Marie', 'Professionnel', 'marie.lefebvre@email.com', 'password456', '01 34 56 78 90', '2 rue de la Gare', '69001', 'Lyon', 'France', '0123456789', 2, 2),
+       ( 'Mr', 'Garcia', 'Luis', 'Particulier', 'luis.garcia@email.com', 'azerty123', '01 23 45 67 89', '3 rue de la Paix', '13001', 'Marseille', 'France', '0123456789', 3, 3),
+       ( 'Mme', 'Chang', 'Li', 'Professionnel', 'li.chang@email.com', 'secret789', '01 34 56 78 90', '4 avenue des Fleurs', '69002', 'Lyon', 'France', '0123456789', 4, 4);
 
 INSERT INTO contrat (statut_contrat, date_debut_contrat, date_fin_contrat, date_sign_contrat, id_user, id_appart)
 VALUES ('En cours', '2022-03-01', '2022-08-31', '2022-03-01', 1, 1),
@@ -278,14 +278,14 @@ VALUES
 
 INSERT INTO appartement (statut_appart, prix_appart, intitule_appart, ville_appart, cp_appart, adresse_appart, description_appart, type_appart, superficie_appart,image, nb_chambre, nb_cuisine, nb_salon, nb_salle_bain, nb_piece, id_user)
 VALUES 
-('disponible', '150000', 'Bel appartement en centre-ville', 'Paris', '75001', '10 Rue de Rivoli', 'Bel appartement lumineux de 75m² situé en plein coeur de Paris', 'Appartement', '75m²','A-1.jpg', 2, 1, 1, 1, 6, 1),
-('vendu', '220000', 'Grand appartement avec vue sur la mer', 'Marseille', '13008', '30 Avenue du Prado', 'Spacieux appartement de 100m² avec vue imprenable sur la mer Méditerranée', 'Appartement', '100m²','B-1.jpg', 3, 1, 1, 2, 7, 2),
-('disponible', '80000', 'Studio au calme dans quartier résidentiel', 'Lyon', '69006', '20 Rue de la République', 'Joli petit studio de 30m² au calme dans un quartier résidentiel de Lyon', 'Studio', '30m²','C-1.jpg', 1, 1, 0, 1, 3, 3),
-('vendu', '120000', 'Appartement rénové dans immeuble haussmannien', 'Paris', '75009', '15 Rue La Fayette', 'Appartement récemment rénové de 50m² dans un bel immeuble haussmannien', 'Appartement', '50m²','D-1.jpg', 1, 1, 1, 1, 4, 4),
-('disponible', '250000', 'Appartement duplex avec terrasse', 'Toulouse', '31000', '5 Rue Saint-Rome', 'Bel appartement duplex de 120m² avec grande terrasse en plein centre-ville de Toulouse', 'Appartement', '120m²','E-1.jpg', 4, 1, 1, 2, 8, 1),
-('vendu', '180000', 'Appartement lumineux avec balcon', 'Nantes', '44000', '10 Rue de Strasbourg', 'Appartement de 80m² très lumineux avec balcon donnant sur un parc arboré', 'Appartement', '80m²','F-1.jpg', 2, 1, 1, 1, 5, 2),
-('disponible', '90000', 'Appartement avec vue sur la montagne', 'Grenoble', '38000', '5 Rue de la République', 'Bel appartement de 60m² avec vue sur la montagne', 'Appartement', '60m²','J-1.jpg', 2, 1, 1, 1, 5, 5),
-('vendu', '150000', 'Appartement en rez-de-jardin', 'Nice', '06000', '10 Avenue des Fleurs', 'Appartement de 70m² en rez-de-jardin avec terrasse et accès direct à la piscine de la résidence', 'Appartement', '70m²','G-1.jpg', 2, 1, 1, 1, 5, 4);
+('Disponible', '150000', 'Bel appartement en centre-ville', 'Paris', '75001', '10 Rue de Rivoli', 'Bel appartement lumineux de 75m² situé en plein coeur de Paris', 'Appartement', '75m²','A-1.jpg', 2, 1, 1, 1, 6, 1),
+('Vendu', '220000', 'Grand appartement avec vue sur la mer', 'Marseille', '13008', '30 Avenue du Prado', 'Spacieux appartement de 100m² avec vue imprenable sur la mer Méditerranée', 'Appartement', '100m²','B-1.jpg', 3, 1, 1, 2, 7, 2),
+('Disponible', '80000', 'Studio au calme dans quartier résidentiel', 'Lyon', '69006', '20 Rue de la République', 'Joli petit studio de 30m² au calme dans un quartier résidentiel de Lyon', 'Studio', '30m²','C-1.jpg', 1, 1, 0, 1, 3, 3),
+('Vendu', '120000', 'Appartement rénové dans immeuble haussmannien', 'Paris', '75009', '15 Rue La Fayette', 'Appartement récemment rénové de 50m² dans un bel immeuble haussmannien', 'Appartement', '50m²','D-1.jpg', 1, 1, 1, 1, 4, 4),
+('Disponible', '250000', 'Appartement duplex avec terrasse', 'Toulouse', '31000', '5 Rue Saint-Rome', 'Bel appartement duplex de 120m² avec grande terrasse en plein centre-ville de Toulouse', 'Appartement', '120m²','E-1.jpg', 4, 1, 1, 2, 8, 1),
+('Vendu', '180000', 'Appartement lumineux avec balcon', 'Nantes', '44000', '10 Rue de Strasbourg', 'Appartement de 80m² très lumineux avec balcon donnant sur un parc arboré', 'Appartement', '80m²','F-1.jpg', 2, 1, 1, 1, 5, 2),
+('Disponible', '90000', 'Appartement avec vue sur la montagne', 'Grenoble', '38000', '5 Rue de la République', 'Bel appartement de 60m² avec vue sur la montagne', 'Appartement', '60m²','J-1.jpg', 2, 1, 1, 1, 5, 5),
+('Vendu', '150000', 'Appartement en rez-de-jardin', 'Nice', '06000', '10 Avenue des Fleurs', 'Appartement de 70m² en rez-de-jardin avec terrasse et accès direct à la piscine de la résidence', 'Appartement', '70m²','G-1.jpg', 2, 1, 1, 1, 5, 4);
 
 INSERT INTO equipement_appart (intitule_equip_appart, nb_equi_appart, prix_equip_appart, type_equip_appart, statut_equip_appart, id_appart)
 VALUES 

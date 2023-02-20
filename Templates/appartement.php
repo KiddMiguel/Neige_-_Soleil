@@ -71,7 +71,7 @@
           </div>
           <div class="modal-body">';
     
-      if ($appartement['id_reservation'] == null) {
+      if ($appartement['statut_appart'] != "Vendu") {
         echo '
             <button type="button" class="alert alert-success" role="alert"> Il n\'existe pas de réservation sur cette appartement</button> ';
       } else {
@@ -117,13 +117,13 @@
     }else{
       echo '<button class="btn btn-warning w-100" data-bs-target="#exampleModalToggle" data-bs-toggle="modal">Réserver</button>';
     }
- 
+      $nb_piece = $appartement['nb_salon'] + $appartement['nb_cuisine'] + $appartement['nb_chambre'] + $appartement['nb_salle_bain'];
         echo '<hr class="y-5">
         <div>
           <ul class="list-group">
             <li class="list-group-item bg-warning fw-semibold">' . $appartement['prix_appart'] . ' €/mois</li>
             <li class="list-group-item">' . $appartement['type_appart'] . ' </li>
-            <li class="list-group-item">' . $appartement['nb_piece'] . ' Pièce(s)</li>
+            <li class="list-group-item">' . $nb_piece . ' Pièce(s)</li>
             <li class="list-group-item">' . $appartement['nb_salon'] . ' Salon(s)</li>
             <li class="list-group-item">' . $appartement['nb_cuisine'] . ' Cuisine(s)</li>
             <li class="list-group-item">' . $appartement['nb_chambre'] . ' Chambre(s)</li>
