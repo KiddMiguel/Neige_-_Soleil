@@ -3,9 +3,12 @@
 $appartements = $unController->recupAllAppartement();
 $appartement = null;
 
+
 if (isset($_GET['id_appart'])) {
     $id_appart = $_GET['id_appart'];
     $appartement = $unController->selectWhereApprtement($id_appart);
+    $images =$unController->selectWhereImage($id_appart);
+    $atouts =$unController->selectWhereAtout($id_appart);
 }
 
 if (isset($_POST["valider_appartement"])) {

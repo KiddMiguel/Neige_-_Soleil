@@ -1,3 +1,4 @@
+-- Active: 1676905549513@@127.0.0.1@3306@neige_soleil
 drop database if exists neige_soleil;
 create database neige_soleil;
 use neige_soleil;
@@ -17,18 +18,12 @@ CREATE table appartement (
     description_appart VARCHAR(500),
     type_appart VARCHAR (50),
     superficie_appart VARCHAR (50),
-    nb_chambres int (5),
-    nb_lits int(5),
-    nb_salles_bain int(5),
-    capacite_appart int(5),
-    atout_appart1 VARCHAR (50),
-    atout_appart2 VARCHAR (50),
-    atout_appart3 VARCHAR (50),
-    image_1 VARCHAR (50),
-    image_2 VARCHAR (50),
-    image_3 VARCHAR (50),
-    image_4 VARCHAR (50),
-    image_5 VARCHAR (50),
+    image VARCHAR (50),
+    nb_chambre int (5),
+    nb_cuisine int(5),
+    nb_salon int(5),
+    nb_salle_bain int(5),
+    nb_piece int(5),
     id_user INT(5),
     FOREIGN key (id_user) REFERENCES user(id_user),
     PRIMARY key (id_appart)
@@ -45,6 +40,7 @@ CREATE TABLE equipement_appart (
     FOREIGN key (id_appart) REFERENCES appartement(id_appart),
     primary key(id_equip_appart)
     );
+
 CREATE table demande (
     id_demande int (5) not null AUTO_INCREMENT,
     statut_demande enum ("En cours", "Valider"),
@@ -100,7 +96,7 @@ CREATE table reservation (
 
 create table locataire (
     id_locataire int(5) not null auto_increment,
-    civilite_locataire enum ("Mr", "Mme"),
+    civilite_locataire enum ("Mr", "Mme", "Autre"),
     nom_locataire varchar(50),
     prenom_locataire varchar(50), 
     email_locataire varchar(100),
@@ -120,7 +116,7 @@ create table locataire (
 create table proprietaire (
     id_proprietaire int(5) not null auto_increment,
     id_user int(5), 
-    civilite_proprio enum ("Mr", "Mme"),
+    civilite_proprio enum ("Mr", "Mme", "Autre"),
     nom_proprio varchar(50) ,
     prenom_proprio varchar(50),
     statut_proprio varchar(50),
@@ -140,21 +136,34 @@ create table proprietaire (
     PRIMARY KEY (id_proprietaire)
 );
 
+CREATE TABLE statistique (
+    id_statistique INT(5) NOT NULL AUTO_INCREMENT,
+    id_locataire INT(5),
+    id_appart INT(5),
+    nb_reservations INT(5),
+    prix_total_reservations INT(10),
+    revenu_total_locataire INT(10),
+    FOREIGN KEY (id_locataire) REFERENCES locataire(id_locataire),
+    FOREIGN KEY (id_appart) REFERENCES appartement(id_appart),
+    PRIMARY KEY (id_statistique)
+);
 
-
-
-
-
-
-
-/* Create table images (
+Create table images (
     id_img int(10) not null AUTO_INCREMENT,
     nom_img varchar(100) not null,
     type_img varchar(100) not null,
     id_appart int(10),
     foreign key (id_appart) references appartement(id_appart),
     primary key (id_img)
-); */
+);
+
+create table atouts(
+    id_atout int(10) not null AUTO_INCREMENT,
+    nom_atout varchar(100) not null, 
+    id_appart int(5),
+    Foreign Key (id_appart) REFERENCES appartement(id_appart),
+    primary key (id_atout)
+);
 
 -- On va  créer un trigger qui insert automatiquement l'id dans la table user lors de ll'insertion dans une table enfant.*/
 drop trigger if exists insert_locataire;
@@ -215,93 +224,116 @@ delimiter ;
 /*Insertion
 INSERT INTO user (id_user) VALUES (1), (2), (3);*/
 
-INSERT INTO locataire 
+INSERT INTO locataire (civilite_locataire, nom_locataire, prenom_locataire, email_locataire, mdp_locataire, tel_locataire, adresse_locataire, cp_locataire, nb_reservations, id_appart, id_user)
 VALUES 
-(1, 'Mme', 'Dupont', 'Marie', 'marie.dupont@gmail.com', 'motdepasse', '0612345678', '1 rue de la Paix', '75000', 0,1, 1),
-(2, 'Mme', 'Durand', 'Sophie', 'sophie.durand@gmail.com', 'motdepasse', '0698765432', '2 rue de la Liberté', '75000', 0,2, 2),
-(3, 'Mr', 'Martin', 'Luc', 'luc.martin@gmail.com', 'motdepasse', '0698765432', '3 rue de l Egalité', '75000', 0, 3,3);
+('Mr', 'Dupont', 'Pierre', 'pierre.dupont@gmail.com', 'motdepasse', '0123456789', '5 Rue des Lilas', '75020', 3, 1, 1),
+('Mme', 'Martin', 'Sophie', 'sophie.martin@gmail.com', 'motdepasse', '0123456789', '12 Rue de la Gare', '69002', 2, 2, 2),
+('Mr', 'Garcia', 'Antonio', 'antonio.garcia@gmail.com', 'motdepasse', '0123456789', '7 Avenue des Roses', '13010', 1, 3, 3),
+('Mme', 'Dumont', 'Laura', 'laura.dumont@gmail.com', 'motdepasse', '0123456789', '14 Rue des Pivoines', '34000', 0, 4, 4),
+('Mr', 'Lefebvre', 'Luc', 'luc.lefebvre@gmail.com', 'motdepasse', '0123456789', '8 Rue des Tilleuls', '25000', 2, 5, 5),
+('Mme', 'Moreau', 'Céline', 'celine.moreau@gmail.com', 'motdepasse', '0123456789', '25 Rue des Cerisiers', '44000', 1, 1, 6),
+('Mr', 'Roux', 'Nicolas', 'nicolas.roux@gmail.com', 'motdepasse', '0123456789', '10 Rue des Peupliers', '57000', 0, 2, 7),
+('Mme', 'Le Gall', 'Anne', 'anne.legall@gmail.com', 'motdepasse', '0123456789', '9 Rue des Coquelicots', '29000', 4, 3, 8),
+('Mr', 'Fernandez', 'José', 'jose.fernandez@gmail.com', 'motdepasse', '0123456789', '3 Rue des Iris', '13005', 2, 4, 9),
+('Mme', 'Dubois', 'Elodie', 'elodie.dubois@gmail.com', 'motdepasse', '0123456789', '15 Rue des Azalées', '54000', 1, 5, 10);
+
+
+INSERT INTO proprietaire (id_user, civilite_proprio, nom_proprio, prenom_proprio, statut_proprio, email_proprio, mdp_proprio, tel_proprio, adresse_proprio, cp_proprio, ville_proprio, pays_proprio, code_adherent, id_contrat, id_appart)
+VALUES (1, 'Mr', 'Durand', 'Jean', 'Particulier', 'jean.durand@email.com', 'motdepasse123', '01 23 45 67 89', '1 rue du Pont', '75001', 'Paris', 'France', '0123456789', 1, 1),
+       (2, 'Mme', 'Lefebvre', 'Marie', 'Professionnel', 'marie.lefebvre@email.com', 'password456', '01 34 56 78 90', '2 rue de la Gare', '69001', 'Lyon', 'France', '0123456789', 2, 2),
+       (3, 'Mr', 'Garcia', 'Luis', 'Particulier', 'luis.garcia@email.com', 'azerty123', '01 23 45 67 89', '3 rue de la Paix', '13001', 'Marseille', 'France', '0123456789', 3, 3),
+       (4, 'Mme', 'Chang', 'Li', 'Professionnel', 'li.chang@email.com', 'secret789', '01 34 56 78 90', '4 avenue des Fleurs', '69002', 'Lyon', 'France', '0123456789', 4, 4);
+
+INSERT INTO contrat (statut_contrat, date_debut_contrat, date_fin_contrat, date_sign_contrat, id_user, id_appart)
+VALUES ('En cours', '2022-03-01', '2022-08-31', '2022-03-01', 1, 1),
+       ('Résilié', '2022-04-01', '2022-08-31', '2022-04-01', 2, 2),
+       ('En cours', '2022-02-01', '2022-07-31', '2022-02-01', 3, 3),
+       ('En cours', '2022-01-01', '2022-06-30', '2022-01-01', 4, 4),
+       ('Résilié', '2022-05-01', '2022-08-31', '2022-05-01', 5, 5);
 
 
 
-INSERT INTO proprietaire 
-VALUES
-( null, 'Mme', 'Lefebvre', 'Anne','Louer particulier', 'anne.lefebvre@gmail.com', 'motdepasse', '0612345678', '4 rue des Fleurs', '75000','Paris','France','KI78545', 1, 1),
-( null, 'Mme', 'Garcia', 'Emilie', 'Société', 'emilie.garcia@gmail.com', 'motdepasse', '0698765432', '5 rue des Arbres', '75000','Nanterre','Espagne','KI78565', 2, 2),
-( null, 'Mr', 'Dupuis', 'Thomas','Louer particulier', 'thomas.dupuis@gmail.com', 'motdepasse', '0698765432', '6 rue des Oiseaux', '75000','Nanterre','France','KH8565', 3, 3);
-
-INSERT INTO contrat
-VALUES
-(1, 'actif', '2022-01-01', '2022-12-31', '2022-01-15', 1, 1),
-(2, 'actif', '2022-01-01', '2022-12-31', '2022-01-15', 2, 2),
-(3, 'actif', '2022-01-01', '2022-12-31', '2022-01-15', 3, 3);
-
-INSERT INTO materiel_proprio 
-VALUES
-
-(1, 'Poussette', 2, '30€/jour', 'poussette', 'disponible', 1, 1),
-(2, 'Lit parapluie', 3, '15€/jour', 'lit parapluie', 'disponible', 2, 2),
-(3, 'Chaise haute', 2, '10€/jour', 'chaise haute', 'disponible', 3, 3);
-
-INSERT INTO reservation 
-VALUES
-(1, "Réservé",  '2022-01-15','2022-02-01', '500', 2, 1, 1,1),
-(2, "Réservé", '2022-06-11','2022-12-25',  '700', 4, 2, 2,1),
-(3, "Réservé",  '2022-03-26','2022-03-05', '600', 3, 3, 3, 1);
-
-INSERT INTO appartement 
-VALUES
-(1,"Disponible", "1000","Chalet de luxe à la montagne", "Paris", "75000", "7 rue de la Plage", "Profitez d'un séjour inoubliable dans notre chalet de luxe, situé dans les montagnes enneigées. Avec une vue imprenable sur les sommets environnants, des équipements haut de gamme et une proximité des pistes de ski, c'est l'endroit idéal pour les vacances d'hiver. Le chalet comprend 3 chambres, 2 salles de bains, un salon confortable avec cheminée, une cuisine entièrement équipée et un balcon avec vue sur les montagnes.", "T2", 100, 1, 2, 1, 5, "Machine à laver","Garage","Parking", "A-1.jpg" , "A-2.jpg", "A-3.jpg", "A-4.jpg", "A-5.jpg",null),
-(2,"Disponible", "1000", "Nom de l'appart","Lyon", "69000", "8 rue de la Montagne", "Chalet au pied des pistes de ski avec sauna et Jacuzzi", "T3", 70, 2, 4, 2, 6, "Parking","Balcon","Piscine","B-1.jpg" ,"B-2.jpg" ,"B-2.jpg" ,"B-3.jpg" ,"B-4.jpg" ,1),
-(3,"Disponible", "1000", "Nom de l'appart","Lyon", "69000", "8 rue de la Montagne", "Chalet au pied des pistes de ski avec sauna et Jacuzzi", "T3", 70, 2, 4, 2, 6, "Parking","Balcon","Piscine","C-1.jpg" , "C-2.jpg","C-3.jpg", "C-4.jpg", "C-5.jpg",1),
-(4,"Disponible", "1000", "Nom de l'appart","Lyon", "69000", "8 rue de la Montagne", "Chalet au pied des pistes de ski avec sauna et Jacuzzi", "T3", 70, 2, 4, 2, 6, "Parking","Balcon","Piscine","E-1.jpg", "E-2.jpg", "E-3.jpg", "E-4.jpg", "E-5.jpg",1),
-(5,"Non-disponible", "1000", "Nom de l'appart","Lyon", "69000", "8 rue de la Montagne", "Chalet au pied des pistes de ski avec sauna et Jacuzzi", "T3", 70, 2, 4, 2, 6, "Parking","Balcon","Piscine","D-1.jpg", "D-2.jpg", "D-3.jpg", "D-4.jpg", "D-5.jpg",1),
-(6,"Non-disponible", "1000", "Nom de l'appart","Lyon", "69000", "8 rue de la Montagne", "Chalet au pied des pistes de ski avec sauna et Jacuzzi", "T3", 70, 2, 4, 2, 6, "Parking","Balcon","Piscine","G-1.jpg", "G-2.jpg", "G-3.jpg", "G-4.jpg", "G-5.jpg",1),
-(7,"Non-disponible", "1000", "Nom de l'appart","Lyon", "69000", "8 rue de la Montagne", "Chalet au pied des pistes de ski avec sauna et Jacuzzi", "T3", 70, 2, 4, 2, 6, "Parking","Balcon","Piscine","D-1.jpg", "D-2.jpg", "D-3.jpg", "D-4.jpg", "D-5.jpg",1),
-(8,"Disponible", "1000", "Nom de l'appart","Lyon", "69000", "8 rue de la Montagne", "Chalet au pied des pistes de ski avec sauna et Jacuzzi", "T3", 70, 2, 4, 2, 6, "Parking","Balcon","Piscine","H-1.jpg","H-2.jpg","H-3.jpg","H-4.jpg","H-5.jpg",1),
-(9,"Non-disponible", "1000", "Nom de l'appart","Lyon", "69000", "8 rue de la Montagne", "Chalet au pied des pistes de ski avec sauna et Jacuzzi", "T3", 70, 2, 4, 2, 6, "Parking","Balcon","Piscine","I-1.jpg","I-2.jpg", "I-3.jpg", "I-4.jpg", "I-5.jpg",1),
-(10,"Disponible", "1000", "Nom de l'appart","Lyon", "69000", "8 rue de la Montagne", "Chalet au pied des pistes de ski avec sauna et Jacuzzi", "T3", 70, 2, 4, 2, 6, "Parking","Balcon","Piscine","J-1.jpg","J-2.jpg","J-3.jpg","J-4.jpg","J-5.jpg",1),
-(11,"Non-disponible", "1000", "Nom de l'appart","Lyon", "69000", "8 rue de la Montagne", "Chalet au pied des pistes de ski avec sauna et Jacuzzi", "T3", 70, 2, 4, 2, 6, "Parking","Balcon","Piscine","K-1.jpg","K-2.jpg","K-3.jpg","K-4.jpg","K-5.jpg",1),
-(12,"Disponible", "1000", "Nom de l'appart","Lyon", "69000", "8 rue de la Montagne", "Chalet au pied des pistes de ski avec sauna et Jacuzzi", "T3", 70, 2, 4, 2, 6, "Parking","Balcon","Piscine","F-1.jpg","F-2.jpg","F-3.jpg","F-4.jpg","F-5.jpg",1);
+INSERT INTO materiel_proprio (intitule_materiel_proprio, nb_materiel_proprio, prix_materiel_proprio, type_materiel_proprio, staut_materiel_proprio, id_user, id_appart) 
+VALUES 
+    ('Télévision', 1, '100', 'Electronique', 'Disponible', 2, 1),
+    ('Four', 1, '200', 'Electroménager', 'Disponible', 3, 1),
+    ('Machine à laver', 1, '250', 'Electroménager', 'Disponible', 4, 1),
+    ('Cafetière', 1, '30', 'Electroménager', 'Disponible', 5, 1),
+    ('Fer à repasser', 1, '20', 'Electroménager', 'Disponible', 6, 1),
+    ('Sèche-cheveux', 1, '15', 'Electroménager', 'Disponible', 7, 1),
+    ('Draps', 2, '30', 'Linge de maison', 'Disponible', 8, 1),
+    ('Serviettes', 4, '20', 'Linge de maison', 'Disponible', 9, 1),
+    ('Tondeuse', 1, '150', 'Jardinage', 'Disponible', 10, 1),
+    ('Bicyclette', 1, '100', 'Sport', 'Disponible', 11, 1);
 
 
-/* INSERT INTO images 
-VALUES (1,'A-1', 'jpg', 1),
-       (2,'A-2', 'jpg', 1),
-       (3,'A-3','jpg', 1),
-       (4,'A-4','jpg', 1),
-       (5,'A-5','jpg', 1),
-       (6,'B-1', 'jpg', 1),
-       (7,'B-2', 'jpg', 2),
-       (8,'B-3', 'jpg', 2),
-       (9,'B-4', 'jpg', 2),
-       (10,'B-5', 'jpg', 2),
-       (11,'C-1', 'jpg', 3),
-       (12,'C-2', 'jpg', 3),
-       (13,'C-3', 'jpg', 3),
-       (14,'C-4', 'jpg', 3),
-       (15,'C-5', 'jpg', 3),
-       (16,'D-1', 'jpg', 4),
-       (17,'D-2', 'jpg', 4),
-       (18,'D-3', 'jpg', 4),
-       (19,'D-4', 'jpg', 4),
-       (20,'D-5', 'jpg', 4),
-       (21,'E-1', 'jpg', 5),
-       (22,'E-2', 'jpg', 5),
-       (23,'E-3', 'jpg', 5),
-       (24,'E-4', 'jpg', 5),
-       (25,'E-5', 'jpg', 5),
-       (26,'F-1', 'jpg', 6),
-       (27,'F-2', 'jpg', 6),
-       (28,'F-3', 'jpg', 6),
-       (29,'F-4', 'jpg', 6),
-       (30,'F-5', 'jpg', 6),
-       (31,'G-1', 'jpg', 7),
-       (32,'G-2', 'jpg', 7),
-       (33,'G-3', 'jpg', 7),
-       (34,'G-4', 'jpg', 7),
-       (35,'G-5', 'jpg', 7),
-       (36,'H-1', 'jpg', 7),
-       (37,'H-2', 'jpg', 7),
-       (38,'H-3', 'jpg', 7),
-       (39,'H-4', 'jpg', 7),
-       (40,'H-5', 'jpg', 7); */
+INSERT INTO reservation (statut_reservation, date_debut_reservation, date_fin_reservation, prix_reservation, nb_personnes, id_user, id_appart, id_materiel_proprio)
+VALUES 
+('En cours réservation', '2023-03-01', '2023-03-07', '600 euros', 2, 1, 2, 1),
+('Réservé', '2023-04-15', '2023-04-22', '800 euros', 4, 3, 4, 2),
+('En cours réservation', '2023-05-01', '2023-05-15', '1200 euros', 3, 2, 1, 3),
+('Réservé', '2023-06-10', '2023-06-15', '500 euros', 2, 4, 5, 4),
+('Réservé', '2023-07-20', '2023-07-25', '400 euros', 2, 1, 2, 5);
+
+
+INSERT INTO appartement (statut_appart, prix_appart, intitule_appart, ville_appart, cp_appart, adresse_appart, description_appart, type_appart, superficie_appart,image, nb_chambre, nb_cuisine, nb_salon, nb_salle_bain, nb_piece, id_user)
+VALUES 
+('disponible', '150000', 'Bel appartement en centre-ville', 'Paris', '75001', '10 Rue de Rivoli', 'Bel appartement lumineux de 75m² situé en plein coeur de Paris', 'Appartement', '75m²','A-1.jpg', 2, 1, 1, 1, 6, 1),
+('vendu', '220000', 'Grand appartement avec vue sur la mer', 'Marseille', '13008', '30 Avenue du Prado', 'Spacieux appartement de 100m² avec vue imprenable sur la mer Méditerranée', 'Appartement', '100m²','B-1.jpg', 3, 1, 1, 2, 7, 2),
+('disponible', '80000', 'Studio au calme dans quartier résidentiel', 'Lyon', '69006', '20 Rue de la République', 'Joli petit studio de 30m² au calme dans un quartier résidentiel de Lyon', 'Studio', '30m²','C-1.jpg', 1, 1, 0, 1, 3, 3),
+('vendu', '120000', 'Appartement rénové dans immeuble haussmannien', 'Paris', '75009', '15 Rue La Fayette', 'Appartement récemment rénové de 50m² dans un bel immeuble haussmannien', 'Appartement', '50m²','D-1.jpg', 1, 1, 1, 1, 4, 4),
+('disponible', '250000', 'Appartement duplex avec terrasse', 'Toulouse', '31000', '5 Rue Saint-Rome', 'Bel appartement duplex de 120m² avec grande terrasse en plein centre-ville de Toulouse', 'Appartement', '120m²','E-1.jpg', 4, 1, 1, 2, 8, 1),
+('vendu', '180000', 'Appartement lumineux avec balcon', 'Nantes', '44000', '10 Rue de Strasbourg', 'Appartement de 80m² très lumineux avec balcon donnant sur un parc arboré', 'Appartement', '80m²','F-1.jpg', 2, 1, 1, 1, 5, 2),
+('disponible', '90000', 'Appartement avec vue sur la montagne', 'Grenoble', '38000', '5 Rue de la République', 'Bel appartement de 60m² avec vue sur la montagne', 'Appartement', '60m²','J-1.jpg', 2, 1, 1, 1, 5, 5),
+('vendu', '150000', 'Appartement en rez-de-jardin', 'Nice', '06000', '10 Avenue des Fleurs', 'Appartement de 70m² en rez-de-jardin avec terrasse et accès direct à la piscine de la résidence', 'Appartement', '70m²','G-1.jpg', 2, 1, 1, 1, 5, 4);
+
+INSERT INTO equipement_appart (intitule_equip_appart, nb_equi_appart, prix_equip_appart, type_equip_appart, statut_equip_appart, id_appart)
+VALUES 
+('Lave-linge', 1, 500, 'Electromenager', 'Disponible', 1),
+('Lave-vaisselle', 1, 600, 'Electromenager', 'Disponible', 1),
+('Réfrigérateur', 1, 800, 'Electromenager', 'Disponible', 1),
+('Four', 1, 700, 'Electromenager', 'Disponible', 1),
+('Micro-ondes', 1, 300, 'Electromenager', 'Disponible', 2),
+('Cafetière', 1, 50, 'Electromenager', 'Disponible', 2),
+('Aspirateur', 1, 100, 'Electromenager', 'Disponible', 2),
+('Fer à repasser', 1, 80, 'Electromenager', 'Disponible', 2),
+('Télévision', 1, 900, 'Multimedia', 'Disponible', 3),
+('Ordinateur portable', 1, 1200, 'Multimedia', 'Disponible', 3),
+('Enceinte Bluetooth', 1, 100, 'Multimedia', 'Disponible', 3),
+('Lecteur DVD', 1, 50, 'Multimedia', 'Disponible', 3),
+('Table de ping-pong', 1, 250, 'Sport', 'Disponible', 4),
+('Tapis de course', 1, 600, 'Sport', 'Disponible', 4),
+('Set de golf', 1, 800, 'Sport', 'Disponible', 4);
+
+INSERT INTO images (nom_img, type_img, id_appart) VALUES 
+("A-1", "jpg", 1), ("A-2", "jpg", 1), ("A-3", "jpg", 1), ("A-4", "jpg", 1), ("A-5", "jpg", 1),
+("B-1", "jpg", 2), ("B-2", "jpg", 2), ("B-3", "jpg", 2), ("B-4", "jpg", 2), ("B-5", "jpg", 2),
+("C-1", "jpg", 3), ("C-2", "jpg", 3), ("C-3", "jpg", 3), ("C-4", "jpg", 3), ("C-5", "jpg", 3),
+("D-1", "jpg", 4), ("D-2", "jpg", 4), ("D-3", "jpg", 4), ("D-4", "jpg", 4), ("D-5", "jpg", 4),
+("E-1", "jpg", 5), ("E-2", "jpg", 5), ("E-3", "jpg", 5), ("E-4", "jpg", 5), ("E-5", "jpg", 5),
+("F-1", "jpg", 6), ("F-2", "jpg", 6), ("F-3", "jpg", 6), ("F-4", "jpg", 6), ("F-5", "jpg", 6),
+("G-1", "jpg", 7), ("G-2", "jpg", 7), ("G-3", "jpg", 7), ("G-4", "jpg", 7), ("G-5", "jpg", 7);
+
+INSERT INTO atouts (nom_atout, id_appart)
+VALUES 
+    ("Vue sur la mer", 1),  ("Piscine", 1),("Parking", 1),  
+    ("Terrasse", 2),("Jardin", 2),("Ascenseur", 2), 
+    ("Internet haut débit", 3),("Cuisine équipée", 3),("Climatisation", 3),
+    ("Jacuzzi", 4), ("Sauna", 4),("Salle de sport", 4),
+    ("Vue panoramique", 5),("Proximité des commerces", 5),("Belle luminosité", 5),
+    ("Cheminée", 6),("Accès handicapé", 6),("Animaux acceptés", 6),
+    ("Spacieux", 7),("Très calme", 7),("Beau design", 7),
+    ("Bien isolé", 8),("Bonne distribution", 8),("Décoration moderne", 8),
+    ("Quartier animé", 9),("Proximité des transports", 9),("Proche de la plage", 9);
+    
+    
+
+
+INSERT INTO statistique (id_locataire, id_appart, nb_reservations, prix_total_reservations, revenu_total_locataire)
+SELECT r.id_user, r.id_appart, COUNT(r.id_reservation), SUM(prix_reservation), SUM(prix_reservation * 0.8)
+FROM reservation r
+WHERE r.statut_reservation = "Réservé"
+GROUP BY r.id_user, r.id_appart;
+
+
+

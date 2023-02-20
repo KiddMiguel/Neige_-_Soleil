@@ -1,33 +1,21 @@
 <section class="container">
   <div class=" text-center">
     <div class="row container-fluid" style="width:80%;">
-      <div class="col-6 ">
+      <div class="col-5 ">
       <?php
-
-           echo' <div class="p-3 "><img src="Images/'.$appartement['image_1'].'" class="rounded card-img-top" style="width:100; height:20rem;" id="full" alt="..."></div>
+           echo' <div class=" mt-5"><img src="Images/'.$appartement['image'].'" class="rounded card-img-top" style="width:100; height:20rem;" id="full" alt="..."></div>
         </div>
-        <div class="col-6 ">
+        <div class="col-7 ">
           <div class="container text-center">
             <div class="row g-2">';
-        
 
+        foreach ($images as $image){
               echo' 
-                 <div class="col-6">
-                <div class="p-3"><img src="images/'.$appartement['image_2'].'" class="rounded card-img-top small" style="width:100; height:8rem;" alt="..."></div>
-              </div>
-              <div class="col-6">
-                <div class="p-3"><img src="images/'.$appartement['image_3'].'" class="rounded card-img-top small" style="width:100; height:8rem;" alt="..."></div>
-              </div>
-              <div class="col-6">
-                <div class="p-3"><img src="images/'.$appartement['image_4'].'" class="rounded card-img-top small" style="width:100; height:8rem;" alt="..."></div>
-              </div>
-              <div class="col-6">
-                <div class="p-3"><img src="images/'.$appartement['image_5'].'" class="rounded card-img-top small" style="width:100; height:8rem;" alt="..."></div>
+                 <div class="col-4">
+                <div class="mt-5"><img src="images/'.$image['nom_img'].'.'.$image['type_img'].'" class="rounded card-img-top small" style="width:100; height:8rem;" alt="..."></div>
               </div>';
-
-
-       
-
+              
+            }
             ?>
           </div>
         </div>
@@ -39,24 +27,20 @@
     <div class="pe-5 w-75">
       <?php
        $date = date('Y-m-d');
-      echo '<h2 class="text-primary fw-lighter">' . $appartement['intitule_appart'] . ' ' . $appartement['type_appart'] . '<br> Au ' . $appartement['adresse_appart'] . ', ' . $appartement['cp_appart'] . ', ' . $appartement['ville_appart'] . '</h2>';
+      echo '<h2 class="text-primary fw-lighter">' . $appartement['intitule_appart'] . ' <br> Au ' . $appartement['adresse_appart'] . ', ' . $appartement['cp_appart'] . ', ' . $appartement['ville_appart'] . '</h2>';
 
       echo '
       <hr>
       <h4 class="mt-5 ps-3 text-primary fw-lighter">Les atouts du bien</h4>
-      <div class="d-flex">
-        <div class="text-center p-3">
-          <i class="fa-solid fa-circle-plus fs-1 text-primary m-2"></i>
-          <p>' . $appartement['atout_appart1'] . '</p>
-        </div>
-        <div class="text-center p-3">
-          <i class="fa-solid fa-circle-plus fs-1 text-primary m-2"></i>
-          <p>' . $appartement['atout_appart2'] . '</p>
-        </div>
-        <div class="text-center p-3">
-          <i class="fa-solid fa-circle-plus fs-1 text-primary m-2"></i>
-          <p >' . $appartement['atout_appart3'] . '</p>
-        </div>
+      <div class="d-flex">';
+      foreach ($atouts as $atout){
+        echo'   <div class="text-center p-3">
+        <i class="fa-solid fa-circle-plus fs-1 text-primary m-2"></i>
+        <p>' . $atout['nom_atout'] . '</p>
+      </div>';
+      }
+     
+    echo'
       </div>
       <hr>
       <h4>Description de l\'appartement</h4>
@@ -133,14 +117,17 @@
     }else{
       echo '<button class="btn btn-warning w-100" data-bs-target="#exampleModalToggle" data-bs-toggle="modal">Réserver</button>';
     }
+ 
         echo '<hr class="y-5">
         <div>
           <ul class="list-group">
             <li class="list-group-item bg-warning fw-semibold">' . $appartement['prix_appart'] . ' €/mois</li>
-            <li class="list-group-item">' . $appartement['capacite_appart'] . ' Pièce(s)</li>
-            <li class="list-group-item">' . $appartement['nb_chambres'] . ' Chambre(s)</li>
-            <li class="list-group-item">' . $appartement['nb_lits'] . ' Lit(s)</li>
-            <li class="list-group-item">' . $appartement['nb_salles_bain'] . ' Salle de bain(s)</li>
+            <li class="list-group-item">' . $appartement['type_appart'] . ' </li>
+            <li class="list-group-item">' . $appartement['nb_piece'] . ' Pièce(s)</li>
+            <li class="list-group-item">' . $appartement['nb_salon'] . ' Salon(s)</li>
+            <li class="list-group-item">' . $appartement['nb_cuisine'] . ' Cuisine(s)</li>
+            <li class="list-group-item">' . $appartement['nb_chambre'] . ' Chambre(s)</li>
+            <li class="list-group-item">' . $appartement['nb_salle_bain'] . ' Salle de bain(s)</li>
             <li class="list-group-item">' . $appartement['superficie_appart'] . ' m²</li>
           </ul>
         </div>

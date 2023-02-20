@@ -121,16 +121,16 @@ class Controller
 
     /*************************IMAGES********************** */
 
-    // public function recupImages()
-    // {
-    //     $images = $this->unModele->recupImages();
-    //     return $images;
-    // }
 
     public function selectWhereImage($id_appart)
     {
-        $imagesAppart = $this->unModele->selectReservationLocataire($id_appart);
+        $imagesAppart = $this->unModele->selectWhereImage($id_appart);
         return $imagesAppart;
+    }
+    public function selectWhereAtout($id_appart)
+    {
+        $atouts = $this->unModele->selectWhereAtout($id_appart);
+        return $atouts;
     }
 
 

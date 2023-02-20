@@ -224,17 +224,6 @@ class Modele{
         }
     }
 
-    // public function recupAllLocataire(){
-    //     if($this->unPDO != null){
-    //         $request = "select * from locataire";
-    //         $select = $this->unPDO->prepare($request);
-    //         $select->execute();
-    //         $locataires = $select->fetchAll();
-    //         return $locataires;
-    //     }else{
-    //         return null;
-    //     }
-    // }
 
     public function selectWhereDemande($id_user)
     {
@@ -365,31 +354,30 @@ class Modele{
         }
     }
 
-    // public function recupImages(){
-    //     if ($this->unPDO != null) {
-    //     $request = "select * from image";
-    //     $select = $this->unPDO->prepare($request);
-    //     $select->execute();
-    //     $images = $select->fetchAll();
-    //     return $images;
-    //     }else  {
-    //         return null;
-    //     }
-    // } 
-
-    public function selectWhereImage($id_appart)
-    {
-        if ($this->unPDO != null) {
-            $request = "select * from images where id_appart = :id_appart"; 
-            $donnees = array(":id_appart" => $id_appart );
-
+    public function selectWhereImage($id_appart){
+        if($this->unPDO != null){
+            $request = "select * from images where id_appart =:id_appart ";
             $select = $this->unPDO->prepare($request);
-            $select->execute($donnees);
-            $imagesAppart = $select->fetchAll();
-
-            return $imagesAppart;
+            $select->bindValue(':id_appart', $id_appart, PDO::PARAM_INT);
+            $select->execute();
+            $image = $select->fetchAll();
+            return $image;
         }
     }
+
+    public function selectWhereAtout($id_appart){
+        if($this->unPDO != null){
+            $request = "select * from atouts where id_appart =:id_appart ";
+            $select = $this->unPDO->prepare($request);
+            $select->bindValue(':id_appart', $id_appart, PDO::PARAM_INT);
+            $select->execute();
+            $atouts = $select->fetchAll();
+            return $atouts;
+        }
+    }
+
+ 
+
 
 
 }
