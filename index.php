@@ -198,6 +198,9 @@ if (isset($_POST["valider_proprio"])) {
         case "apropos":
             require_once("Templates/apropos.php");
             break;
+        case "dashboard":
+            require_once("Templates/dashboardAdmin.php");
+            break;
         case "deconnexion":
             session_destroy();
             unset($_SESSION["email_locataire"]);

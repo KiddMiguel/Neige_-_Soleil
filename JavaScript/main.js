@@ -2,6 +2,7 @@ window.onload = () => {
     ChangeImage();
     calendar();
     tawk();
+    
 };
 
 //Calendrier
@@ -17,23 +18,23 @@ function calendar(event) {
     });
     document.querySelector('.calendar').addEventListener('clickDay', function selectDate(data) {
         console.log(data.element);
-
         const date = data.date;
         const year = date.getFullYear();
         const month = ("0" + (date.getMonth() + 1)).slice(-2);
         const day = ("0" + date.getDate()).slice(-2);
         const setdate = `${year}-${month}-${day}`;
         $('#dateEnd').val(setdate);
-    });
-
-    $('#choisir').click(function() {
         let start = new Date($('#dateStart').val());
         let end = new Date($('#dateEnd').val());
-
         while (start <= end) {
+            console.log(data.element);
             console.log(start.toDateString());
             start.setDate(start.getDate() + 1);
         }
+    });
+
+    $('#choisir').click(function() {
+
     });
 }
 

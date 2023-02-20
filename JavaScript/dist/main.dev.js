@@ -24,16 +24,16 @@ function calendar(event) {
     var day = ("0" + date.getDate()).slice(-2);
     var setdate = "".concat(year, "-").concat(month, "-").concat(day);
     $('#dateEnd').val(setdate);
-  });
-  $('#choisir').click(function () {
     var start = new Date($('#dateStart').val());
     var end = new Date($('#dateEnd').val());
 
     while (start <= end) {
+      console.log(data.element);
       console.log(start.toDateString());
       start.setDate(start.getDate() + 1);
     }
   });
+  $('#choisir').click(function () {});
 }
 
 function ChangeImage() {
