@@ -2,7 +2,7 @@ window.onload = () => {
     ChangeImage();
     calendar();
     tawk();
-    
+    inscription();
 };
 
 //Calendrier
@@ -57,6 +57,38 @@ function ChangeImage() {
         });
     });
 }
+
+function inscription(){
+    const page_1 = document.getElementById('page_1');
+    const page_2 = document.getElementById('page_2');
+    const page_3 = document.getElementById('page_3');
+    const back_and_go = document.getElementById('back_and_go');
+    const btn_back = document.getElementById('back');
+    const btn_cont_1 = document.getElementById('continue_1');
+    const btn_cont_2 = document.getElementById('continue_2');
+
+    btn_cont_1.addEventListener('click', () => {
+        page_1.classList.add("desactive_page");
+        page_2.classList.remove("desactive_page");
+        back_and_go.classList.add('active_page');
+        back_and_go.classList.remove('desactive_page');
+    });
+
+    btn_back.addEventListener('click', () => {
+        page_1.classList.remove('desactive_page');
+        page_2.classList.add("desactive_page");
+        page_3.classList.add("desactive_page");
+        back_and_go.classList.add('desactive_page');
+    });
+
+    btn_cont_2.addEventListener('click', () => {
+        page_2.classList.add("desactive_page");
+        page_3.classList.remove("desactive_page");
+    });
+}
+
+inscription();
+
 
 function tawk() {
     var Tawk_API = Tawk_API || {},

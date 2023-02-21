@@ -4,11 +4,6 @@
             <div class="col-md-3 border-right">
                 <?php
                 if (isset($_SESSION["email_proprio"])) {
-                    // echo '
-                    // <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img class="rounded-circle mt-5" width="150px" src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"><span class="font-weight-bold">' . $_SESSION["nom_proprio"] . ' ' . $_SESSION['prenom_proprio'] . '</span><span class="text-black-50">' . $_SESSION["email_proprio"] . '</span><span> </span></div>
-                    // ';
-
-
                     echo '
                     <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img class="rounded-circle mt-5" width="150px" src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"><span class="font-weight-bold">' . $proprietaire["nom_proprio"] . ' ' . $proprietaire['prenom_proprio'] . '</span><span class="text-black-50">' . $proprietaire["email_proprio"] . '</span><span> </span></div>
                     ';
@@ -30,7 +25,8 @@
                             <?php
                             if (isset($proprietaire["email_proprio"])) {
                                 echo '<div class="col-md-12 pt-3"><select name="statut_proprio" class="select border p-1" >
-                                    <option value="' . $proprietaire["statut_proprio"] . '">Vous êtes</option>
+                                    <option value="" disabled>Vous êtes</option>
+                                    <option value="" selected>' . $proprietaire["statut_proprio"] . '</option>
                                     <option value="Loueur particulier">Loueur particulier</option>
                                     <option value="Agence immobilière">Agence immobilière</option>
                                     <option value="Société">Société</option>
@@ -52,10 +48,11 @@
                             <?php
                             if (isset($_SESSION["email_proprio"])) {
                                 echo  '<div class="col-md-6 pt-3 "> <select class="select border pe-5 pt-1 pb-2" name="pays_proprio">
-                                    <option value="Afghanistan">' . $proprietaire["pays_proprio"] . '</option>
+                                <option value="" disabled>Votre pays</option>
+                                    <option value="" selected>' . $proprietaire["pays_proprio"] . '</option>
                                     <option value="Afghanistan">Afghanistan</option>
                                     <option value="Algeria">Algeria</option>
-                                    <option value="Cameroon">Cameroon</option>
+                                     <option value="Cameroon">Cameroon</option>
                                     <option value="Canada">Canada</option>
                                     <option value="Belgium">Belgium</option>
                                     <option value="Congo">Congo</option>

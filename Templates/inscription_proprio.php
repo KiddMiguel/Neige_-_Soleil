@@ -1,122 +1,70 @@
-<section class="h-100 h-custom"  style="background-color: #FFF0CB;">
-    <div class="container py-5 h-100">
-        <div class="row d-flex justify-content-center align-items-center h-100">
-            <div class="col-lg-10 col-xl-10"  >
+<section class="sectionInscription" style="background-color: #FFF0CB; height: 100vh;">
+    <div class="container w-50 py-5 h-100">
+        <form class="row d-flex justify-content-center align-items-center h-100" method="post">
+            <div class="col-lg-10 col-xl-10">
                 <div class="card rounded-3">
-                    <img src="Images/Logo-noir.png"
-            class="h-50" style="border-top-left-radius: .3rem; border-top-right-radius: .3rem; margin: auto;"
-            alt="Sample photo" width="20%">
-            <hr>
-                    <div class="card-body pe-4 ps-4 pt-0">
-                
-                        <h3 class="mb-4 pb-2 pb-md-0 mb-md-5 px-md-2">Registration Info</h3>
+                    <img src="Images/Logo-noir.png" class="h-50" style="border-top-left-radius: .3rem; border-top-right-radius: .3rem; margin: auto;" alt="Sample photo" width="20%">
+                    <hr>
+                    <div class="position-relative desactive_page" id="back_and_go">
+                        <div class="position-absolute top-0 start-0 ms-5">
+                            <button type="button" class="border border-white" id="back"><i class="bi bi-arrow-left fs-4"></i></button>
+                        </div>
+                    </div>
+                    <div class="card-body pt-0  m-auto" id="page_1" style="width: 60%;">
+                        <h1 class="fs-3">Créez votre compte partenaire</h1>
+                        <p class="" style="font-size :0.8rem;">Créez un compte pour répertorier et gérer votre propriété.</p>
+                        <div class="form-outline mb-4">
+                            <label for="" class="pb-1 fw-semibold">Adresse e-mail</label>
+                            <input type="email" id="" name="email_proprio" class="form-control w-100" required placeholder="" /><br>
+                            <button type="button" class="btn btn-warning w-100" id="continue_1">Continuer</button>
+                            <hr>
+                            <p class="text-center " style="font-size :0.8rem;">Vous avez des questions concernant votre établissement ou l'extranet ? Rendez-vous sur le <a href="#" class="text-decoration-none">Centre d'aide aux partenaires</a> pour en savoir plus.</p>
+                            <button class="btn btn-outline-warning w-100 text-black"><a class="text-decoration-none" href="index.php?page=connexion">Se connecter</a></button>
+                            <hr>
+                            <p class="text-center " style="font-size :0.8rem;">En créant ou en vous connectant à un compte, vous acceptez nos <a href="" class="text-decoration-none">conditions générales</a> et notre charte de <a href="" class="text-decoration-none">confidentialité</a>.</p>
+                        </div>
+                    </div>
 
-                        <form class="px-md-2" method="post" id="form">
-                            <div class="row">
-                                <div class="d-md-flex justify-content-start align-items-center mb-4 py-2">
-                                    <select class="select form-select" name="statut_proprio" required>
-                                        <option value="" disabled>Vous êtes :</option>
-                                        <option value="Loueur particulier">Loueur particulier</option>
-                                        <option value="Agence immobilière">Agence immobilière</option>
-                                        <option value="Société">Société</option>
-                                        <option value="Association / Regroupement de propriétaires">Association / Regroupement de propriétaires</option>
-                                        <option value="Office de tourisme">Office de tourisme</option>
-                                        <option value="Entreprise individuelle / LMP">Entreprise individuelle / LMP</option>
-                                        <option value="Autres">Autres</option>
-                                    </select>
-                                    <h6 class="mb-0 me-4 ms-5">Civilité: </h6>
-                                    <select class="select form-select w-25" name="civilite_proprio" required>
-                                        <option value="Mme">Mme</option>
-                                        <option value="Mr">Mr</option>
-                                        <option value="Autre">Autre</option>
-                                    </select>
+                    <div class="card-body pt-0  m-auto desactive_page" id="page_2" style="width: 60%;">
+                        <h1 class="fs-3">Coordonnées</h1>
+                        <p class="pb-2" style="font-size :0.8rem;">Veuillez fournir votre nom complet ainsi que votre numéro de téléphone pour garantir la sécurité de votre compte neige&Soliel.com.</p>
+                        <div class="form-outline mb-4">
+                            <select class="select form-select w-25 mb-2" name="civilite_proprio">
+                                <option value="Mme">Mme</option>
+                                <option value="Mr">Mr</option>
+                                <option value="Autre">Autre</option>
+                            </select>
+                            <label for="" class=" fw-semibold">Prenom</label>
+                            <input type="text" id="" name="prenom_proprio" class="form-control w-100 mb-2" required placeholder="" />
 
-                                </div>
+                            <label for="" class=" fw-semibold">Nom</label>
+                            <input type="text" id="" name="nom_proprio" class="form-control w-100 mb-2" required placeholder="" />
 
-                                <div class="col-md-6 mb-4">
-                                    <div class="form-outline">
-                                        <input type="text" class="form-control form-control" name="nom_proprio" placeholder="Nom" required/>
-                                    </div>
-                                </div>
-                                <div class="col-md-6 mb-4">
-                                    <div class="form-outline">
-                                        <input type="text" id="form3Example1n" class="form-control form-control" name="prenom_proprio" placeholder="Prenom" required/>
-                                    </div>
-                                </div>
-                                <div class="col-md-12 mb-4">
-                                    <div class="form-outline">
-                                        <input type="text" id="form3Example1n" class="form-control form-control" name="adresse_proprio" placeholder="Adresse" required/>
-                                    </div>
-                                </div>
-                                <div class="col-md-6 mb-4">
-                                    <div class="form-outline">
-                                        <input type="text" class="form-control form-control" name="cp_proprio" placeholder="Code postal" required/>
-                                    </div>
-                                </div>
-                                <div class="col-md-6 mb-2">
-                                    <div class="form-outline">
-                                        <input type="text" id="form3Example1n" class="form-control form-control" name="ville_proprio" placeholder="Ville" required/>
-                                    </div>
-                                </div>
-                            </div>
+                            <label for="" class="pb-1 fw-semibold">Numéro de téléphone</label>
+                            <input type="number" id="" name="tel_proprio" class="form-control w-100 mb-2" required placeholder="" /><br>
 
-                            <div class="row">
-                                <div class="col-md-6 mb-4">
-                                    <div class="d-md-flex justify-content-start align-items-center mb-4 py-2">
-                                        <h6 class="mb-0 me-4">Pays : </h6>
-                                        <select class="select form-select w-25" name="pays_proprio">
-                                            <option value="Afghanistan">Afghanistan</option>
-                                            <option value="Algeria">Algeria</option>
-                                            <option value="Cameroon">Cameroon</option>
-                                            <option value="Canada">Canada</option>
-                                            <option value="Belgium">Belgium</option>
-                                            <option value="Congo">Congo</option>
-                                            <option value="Congo, Democratic Republic of the">Congo, Democratic Republic of the</option>
-                                            <option value="France">France</option>
-                                        </select>
-                                    </div>
+                            <p class="text-center " style="font-size :0.8rem;">Nous enverrons un SMS comportant un code d'authentification à 2 facteurs à ce numéro lorsque vous vous connecterez.</p>
+                            <button class="btn btn-warning w-100" type="button" id="continue_2">Continuer</button>
+                            <hr>
+                            <p class="text-center " style="font-size :0.8rem;">En créant ou en vous connectant à un compte, vous acceptez nos <a href="" class="text-decoration-none">conditions générales</a> et notre charte de <a href="" class="text-decoration-none">confidentialité</a>.</p>
+                        </div>
+                    </div>
+                    <div class="card-body pt-0  m-auto desactive_page" id="page_3" style="width: 60%;">
+                        <h1 class="fs-3">Créer un mot de passe</h1>
+                        <p class="pb-2" style="font-size :0.8rem;">Il doit comporter au moins 10 caractères, dont 1 majuscule, 1 minuscule et 1 chiffre.</p>
+                        <div class="form-outline mb-4">
+                            <label for="" class=" fw-semibold">Mot de passe</label>
+                            <input type="password" id="" name="mdp_proprio" class="form-control w-100 mb-2" required placeholder="" />
 
-                                </div>
-                                <div class="col-md-6 mb-2">
-                                    <div class="form-outline">
-                                        <input type="email" class="form-control form-control" name="email_proprio" placeholder="Email" required/>
-                                    </div>
-                                </div>
-                                <div class="col-md-6 mb-2">
-                                    <div class="form-outline">
-                                        <input type="text" id="form3Example1n" class="form-control form-control" name="tel_proprio" placeholder="Numéro de téléphone" required/>
-                                        <label class="form-label" for="form3Example1n"></label>
-                                    </div>
-                                </div>
-                                <div class="col-md-6 mb-2">
-                                    <div class="form-outline">
-                                        <input type="text" id="form3Example1n" class="form-control form-control" name="code_adherent" placeholder="Code adhérent de votre parrain" />
-                                        <label class="form-label" for="form3Example1n"></label>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-md-12 mb-2">
-                                <div class="form-outline mb-4">
-                                    <input type="password" id="password" class="form-control form-control" name="" placeholder="Mot de passe" required/>
-                                </div>
-                                <div class="form-outline">
-                                    <input type="password" id="confirmPassword" class="form-control form-control" name="mdp_proprio" placeholder="Confirmer votre mot de passe" required/>
-                              
-                                </div>
-                            </div>
-                            <div class="row mb-4 pb-2 pb-md-0 mb-md-5">
-                                <div class="col-md-6">
-                                    <div class="form-outline mt-5">
-                                        <button type="submit" name="valider_proprio" class="btn btn-warning btn-lg mb-1" id="buttonEnvoi">Envoyer</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
-
+                            <label for="" class=" fw-semibold">Confirmez le mot de passe</label>
+                            <input type="password" id="" name="" class="form-control w-100 mb-2" required placeholder="" />
+                            <button class="btn btn-warning w-100" type="submit" name="valider_proprio">Créer un compte</button>
+                            <hr>
+                            <p class="text-center " style="font-size :0.8rem;">En créant ou en vous connectant à un compte, vous acceptez nos <a href="" class="text-decoration-none">conditions générales</a> et notre charte de <a href="" class="text-decoration-none">confidentialité</a>.</p>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </form>
     </div>
 </section>

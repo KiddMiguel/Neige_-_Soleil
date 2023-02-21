@@ -35,7 +35,7 @@ class Modele{
     }
     public function insertLocataire($tab){
         if($this->unPDO != null){
-            $request = "insert into locataire values (null, :civilite_locataire, :nom_locataire, :prenom_locataire, :email_locataire, :mdp_locataire, :tel_locataire ,:adresse_locataire, :cp_locataire, null, null, null);";
+            $request = "insert into locataire values (null, :civilite_locataire, :nom_locataire, :prenom_locataire, :email_locataire, :mdp_locataire, :tel_locataire, :adresse_locataire, :cp_locataire, null, null, null)";
             $donnees = array (
                 ":civilite_locataire" => $tab['civilite_locataire'], 
                 ":nom_locataire" => $tab['nom_locataire'], 
@@ -85,20 +85,14 @@ class Modele{
     }
     public function insertProprietaire($tab){
         if($this->unPDO != null){
-            $request = "insert into proprietaire values (null, :civilite_proprio, :nom_proprio, :prenom_proprio, :statut_proprio, :email_proprio, :mdp_proprio, :tel_proprio ,:adresse_proprio, :cp_proprio, :ville_proprio, :pays_proprio, :code_adherent, null, null);";
+            $request = "insert into proprietaire values (null,null, :civilite_proprio, :nom_proprio, :prenom_proprio, null, :email_proprio, :mdp_proprio, :tel_proprio ,null, null, null, null, null, null, null);";
             $donnees = array (
                 ":civilite_proprio" => $tab['civilite_proprio'], 
                 ":nom_proprio" => $tab['nom_proprio'], 
                 ":prenom_proprio" => $tab['prenom_proprio'], 
-                ":statut_proprio" => $tab['statut_proprio'], 
                 ":email_proprio" => $tab['email_proprio'], 
                 ":mdp_proprio" => $tab['mdp_proprio'], 
-                ":tel_proprio" => $tab['tel_proprio'], 
-                ":adresse_proprio" => $tab['adresse_proprio'], 
-                ":cp_proprio" => $tab['cp_proprio'],
-                ":ville_proprio" => $tab['ville_proprio'],
-                ":pays_proprio" => $tab['pays_proprio'],
-                ":code_adherent" => $tab['code_adherent']
+                ":tel_proprio" => $tab['tel_proprio'] 
             );
             $insert = $this->unPDO->prepare($request);
             $insert->execute($donnees);

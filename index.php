@@ -59,13 +59,12 @@ $unController = new Controller($server, $bdd, $user, $mdp);
 
     if (isset($_POST["valider"])) {
         $unController->insertLocataire($_POST);
-        echo"Inscription okay";
         if (isset($_POST["valider"])) {
             $email = $_POST["email_locataire"];
             $mdp = $_POST["mdp_locataire"];
             $unUser = $unController->verifconnexionLocataire($email, $mdp);
             if ($unUser == null) {
-            
+                echo'Hell';
             } else {
                 $_SESSION["id_user"] = $unUser["id_user"];
                 $_SESSION["email_locataire"] = $unUser["email_locataire"];
@@ -118,13 +117,12 @@ if (isset($_POST["se_connecter_proprio"])) {
 
 if (isset($_POST["valider_proprio"])) {
     $unController->insertProprietaire($_POST);
-    echo"Inscription okay";
     if (isset($_POST["valider_proprio"])) {
         $email = $_POST["email_proprio"];
         $mdp = $_POST["mdp_proprio"];
         $unUser = $unController->verifconnexionProprietaire($email, $mdp);
         if ($unUser == null) {
-        
+            echo"Inscription okay";
         } else {
             $_SESSION["id_user"] = $unUser["id_user"];
             $_SESSION["civilite_proprio"] = $unUser["civilite_proprio"];

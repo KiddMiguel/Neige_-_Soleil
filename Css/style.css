@@ -138,6 +138,12 @@ body .SectionProfil {
 body .SectionProfil .divProfil a {
   background-color: #FFC839;
 }
+body .sectionInscription .container .card .active_page {
+  display: block;
+}
+body .sectionInscription .container .card .desactive_page {
+  display: none;
+}
 body footer {
   background-color: #093A7A;
 }

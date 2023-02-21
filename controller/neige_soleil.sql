@@ -165,50 +165,74 @@ create table atouts(
     primary key (id_atout)
 );
 
--- On va  créer un trigger qui insert automatiquement l'id dans la table user lors de ll'insertion dans une table enfant.*/
-drop trigger if exists insert_locataire;
-delimiter //
-CREATE trigger insert_locataire
-before insert on locataire
-for each ROW
+CREATE table visite (
+id_visite int(5) not null auto_increment,
+id_user int(5),
+id_appart int(5),
+date_visite datetime,
+commentaire varchar(255),
+FOREIGN key (id_user) REFERENCES user(id_user),
+FOREIGN key (id_appart) REFERENCES appartement(id_appart),
+primary key (id_visite)
+);
+
+
+CREATE table reglement (
+id_reglement int(5) not null auto_increment,
+date_reglement date,
+type_reglement enum ("Espèce", "Chèque", "Virement bancaire", "Carte bancaire"),
+montant_reglement VARCHAR (50),
+id_contrat int(5),
+FOREIGN key (id_contrat) REFERENCES contrat(id_contrat),
+primary key (id_reglement)
+);
+
+CREATE table facture (
+id_facture int(5) not null auto_increment,
+date_facture date,
+montant_facture VARCHAR (50),
+id_contrat int(5),
+FOREIGN key (id_contrat) REFERENCES contrat(id_contrat),
+primary key (id_facture)
+);
+
+
+----TRIGGER QUI INSERT UN id_user automatiquement dans la table user et dans la table locataire
+DROP TRIGGER IF EXISTS insert_locataire;
+DELIMITER //
+CREATE TRIGGER insert_locataire
+BEFORE INSERT ON locataire
+FOR EACH ROW
 BEGIN
-    declare nb_ligne int;
-    SELECT count(*) into nb_ligne from user where id_user = new.id_user;
-    if nb_ligne = 0 then
-        insert into user values (new.id_user);
-    end if;
-    end //
-delimiter ;
-
--- Déclencher insert proprio 
-drop trigger if exists insert_proprio;
-delimiter //
-CREATE trigger insert_proprio
-before insert on proprietaire
-for each ROW
+    DECLARE nb_ligne INT;
+    SELECT COUNT(*) INTO nb_ligne FROM user WHERE id_user = NEW.id_user;
+    IF nb_ligne = 0 THEN
+        INSERT INTO user (id_user) values (DEFAULT);
+        SET NEW.id_user = LAST_INSERT_ID();
+    END IF;
+END //
+DELIMITER ;
+----TRIGGER QUI INSERT UN id_user automatiquement dans la table user et dans la table proprietaire
+DROP TRIGGER IF EXISTS insert_proprietaire;
+DELIMITER //
+CREATE TRIGGER insert_proprietaire
+BEFORE INSERT ON proprietaire
+FOR EACH ROW
 BEGIN
-    declare nb_ligne int;
-    SELECT count(*) into nb_ligne from user where id_user = new.id_user;
-    if nb_ligne = 0 then
-        insert into user values (new.id_user);
-    end if;
-    end //
-delimiter ;
+    DECLARE nb_ligne INT;
+    SELECT COUNT(*) INTO nb_ligne FROM user WHERE id_user = NEW.id_user;
+    IF nb_ligne = 0 THEN
+        INSERT INTO user (id_user) values (DEFAULT);
+        SET NEW.id_user = LAST_INSERT_ID();
+    END IF;
+END //
+DELIMITER ;
 
--- /*Creer unn trigger qui supprime */
 
-drop trigger if exists delete_user;
-delimiter //
-create trigger delete_user
-after delete on USER
-for each row 
-BEGIN
-    DELETE from locataire where id_user = old.id_user;
-    DELETE from proprietaire where id_user = old.id_user;
-end //
-delimiter ;
 
-drop trigger if exists add_demande;
+
+----TRIGGER QUI AJOUTER UNE DEMANDE après un insert dans appartement.
+Drop trigger if exists add_demande;
 delimiter //
 create trigger add_demande
 after insert on appartement
@@ -236,7 +260,6 @@ VALUES
 ('Mme', 'Le Gall', 'Anne', 'anne.legall@gmail.com', 'motdepasse', '0123456789', '9 Rue des Coquelicots', '29000', 4, 3),
 ('Mr', 'Fernandez', 'José', 'jose.fernandez@gmail.com', 'motdepasse', '0123456789', '3 Rue des Iris', '13005', 2, 4),
 ('Mme', 'Dubois', 'Elodie', 'elodie.dubois@gmail.com', 'motdepasse', '0123456789', '15 Rue des Azalées', '54000', 1, 5);
-
 
 INSERT INTO proprietaire ( civilite_proprio, nom_proprio, prenom_proprio, statut_proprio, email_proprio, mdp_proprio, tel_proprio, adresse_proprio, cp_proprio, ville_proprio, pays_proprio, code_adherent, id_contrat, id_appart)
 VALUES ( 'Mr', 'Durand', 'Jean', 'Particulier', 'jean.durand@email.com', 'motdepasse123', '01 23 45 67 89', '1 rue du Pont', '75001', 'Paris', 'France', '0123456789', 1, 1),
@@ -329,11 +352,11 @@ VALUES
     
 
 
-INSERT INTO statistique (id_locataire, id_appart, nb_reservations, prix_total_reservations, revenu_total_locataire)
+/* INSERT INTO statistique (id_locataire, id_appart, nb_reservations, prix_total_reservations, revenu_total_locataire)
 SELECT r.id_user, r.id_appart, COUNT(r.id_reservation), SUM(prix_reservation), SUM(prix_reservation * 0.8)
 FROM reservation r
 WHERE r.statut_reservation = "Réservé"
-GROUP BY r.id_user, r.id_appart;
+GROUP BY r.id_user, r.id_appart; */
 
 
-
+select * from proprietaire where id_user =:id_user ;
