@@ -44,7 +44,7 @@
                             echo '  <li><a class="dropdown-item" href="index.php?page=demande&id_user='.$_SESSION['id_user'].'"><i class="bi bi-list-task"></i> Mes Demandes</a></li>';
                             echo '  <li><a class="dropdown-item" href="index.php?page=contrat_proprio&id_user='.$_SESSION['id_user'].'"><i class="bi bi-file-text"></i> Mes Contrats</a></li>';
                             echo '  <li><a class="dropdown-item" href="index.php?page=appartement_proprio&id_user='.$_SESSION['id_user'].'"><i class="bi bi-houses"></i> Mes Appratements</a></li>';
-                            echo '  <li><a class="dropdown-item" href="index.php?page=dashboard"><i class="bi bi-houses"></i> Dashboard</a></li>';
+                            echo '  <li><a class="dropdown-item" href="index.php?page=dashboard&id_proprietaire='.$_SESSION['id_proprietaire'].'"><i class="bi bi-houses"></i> Dashboard</a></li>';
 
                         }else{
                             echo '  <li><a class="dropdown-item" href="index.php?page=profil_locataire&id_user='.$_SESSION['id_user'].'"><i class="bi bi-gear"></i> Profil</a></li>

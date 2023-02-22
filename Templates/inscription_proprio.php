@@ -19,7 +19,7 @@
                             <button type="button" class="btn btn-warning w-100" id="continue_1">Continuer</button>
                             <hr>
                             <p class="text-center " style="font-size :0.8rem;">Vous avez des questions concernant votre établissement ou l'extranet ? Rendez-vous sur le <a href="#" class="text-decoration-none">Centre d'aide aux partenaires</a> pour en savoir plus.</p>
-                            <button class="btn btn-outline-warning w-100 text-black"><a class="text-decoration-none" href="index.php?page=connexion">Se connecter</a></button>
+                            <button class="btn btn-outline-warning w-100 text-black"><a class="text-decoration-none  text-black" href="index.php?page=connexion_proprietaire">Se connecter</a></button>
                             <hr>
                             <p class="text-center " style="font-size :0.8rem;">En créant ou en vous connectant à un compte, vous acceptez nos <a href="" class="text-decoration-none">conditions générales</a> et notre charte de <a href="" class="text-decoration-none">confidentialité</a>.</p>
                         </div>

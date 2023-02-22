@@ -35,16 +35,13 @@ class Modele{
     }
     public function insertLocataire($tab){
         if($this->unPDO != null){
-            $request = "insert into locataire values (null, :civilite_locataire, :nom_locataire, :prenom_locataire, :email_locataire, :mdp_locataire, :tel_locataire, :adresse_locataire, :cp_locataire, null, null, null)";
+            $request = "insert into locataire values (null, :civilite_locataire, :nom_locataire, :prenom_locataire, :email_locataire, :mdp_locataire, null, null, null, null, null, null, null)";
             $donnees = array (
                 ":civilite_locataire" => $tab['civilite_locataire'], 
                 ":nom_locataire" => $tab['nom_locataire'], 
                 ":prenom_locataire" => $tab['prenom_locataire'], 
                 ":email_locataire" => $tab['email_locataire'], 
-                ":mdp_locataire" => $tab['mdp_locataire'], 
-                ":tel_locataire" => $tab['tel_locataire'], 
-                ":adresse_locataire" => $tab['adresse_locataire'], 
-                ":cp_locataire" => $tab['cp_locataire']
+                ":mdp_locataire" => $tab['mdp_locataire']
             );
             $insert = $this->unPDO->prepare($request);
             $insert->execute($donnees);
@@ -92,7 +89,7 @@ class Modele{
                 ":prenom_proprio" => $tab['prenom_proprio'], 
                 ":email_proprio" => $tab['email_proprio'], 
                 ":mdp_proprio" => $tab['mdp_proprio'], 
-                ":tel_proprio" => $tab['tel_proprio'] 
+                ":tel_proprio" => $tab['tel_proprio']
             );
             $insert = $this->unPDO->prepare($request);
             $insert->execute($donnees);
@@ -151,6 +148,16 @@ class Modele{
             $select->execute();
             $proprietaire = $select->fetch();
             return $proprietaire;
+        }
+    }
+    public function selectWhereLocataireProprietaire($id_proprietaire){
+        if($this->unPDO != null){
+            $request = "select * from locataire where id_proprietaire =:id_proprietaire ";
+            $select = $this->unPDO->prepare($request);
+            $select->bindValue(':id_proprietaire', $id_proprietaire, PDO::PARAM_INT);
+            $select->execute();
+            $locataireProprio = $select->fetchAll();
+            return $locataireProprio;
         }
     }
 
@@ -233,16 +240,28 @@ class Modele{
     }
 
     
-    public function selectAppartementLocataire($id_user)
+    public function selectAppartementProprietaire($id_proprietaire)
     {
         if ($this->unPDO != null) {
-            $request = "select * from appartement where id_user = :id_user"; 
-            $donnees = array(":id_user" => $id_user );
+            $request = "select * from appartement where id_proprietaire = :id_proprietaire"; 
+            $donnees = array(":id_proprietaire" => $id_proprietaire);
 
             $select = $this->unPDO->prepare($request);
             $select->execute($donnees);
             $appartementProprio = $select->fetchAll();
             return $appartementProprio;
+        }
+    }
+    public function selectAppartementLocataire($id_locataire)
+    {
+        if ($this->unPDO != null) {
+            $request = "select * from appartement where id_locataire = :id_locataire"; 
+            $donnees = array(":id_locataire" => $id_locataire);
+
+            $select = $this->unPDO->prepare($request);
+            $select->execute($donnees);
+            $appartementLocataire = $select->fetchAll();
+            return $appartementLocataire;
         }
     }
 

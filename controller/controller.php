@@ -69,10 +69,15 @@ class Controller
         $demandes = $this->unModele->selectWhereDemande($id_user);
         return $demandes;
     }
-    public function selectAppartementLocataire($id_user)
+    public function selectAppartementProprietaire($id_proprietaire)
     {
-        $appartementProprio = $this->unModele->selectAppartementLocataire($id_user);
+        $appartementProprio = $this->unModele->selectAppartementProprietaire($id_proprietaire);
         return $appartementProprio;
+    }
+    public function selectWhereLocataireProprietaire($id_proprietaire)
+    {
+        $locataireProprio = $this->unModele->selectWhereLocataireProprietaire($id_proprietaire);
+        return $locataireProprio;
     }
 
     /**************************************APPARTEMENT ******************************** */

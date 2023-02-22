@@ -71,7 +71,7 @@
           </div>
           <div class="modal-body">';
     
-      if ($appartement['statut_appart'] != "Vendu") {
+      if ($appartement['statut_appart'] != "En location") {
         echo '
             <button type="button" class="alert alert-success" role="alert"> Il n\'existe pas de réservation sur cette appartement</button> ';
       } else {

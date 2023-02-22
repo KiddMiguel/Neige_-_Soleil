@@ -9,7 +9,7 @@ create table user (
 ); 
 CREATE table appartement (
     id_appart int(5) not null AUTO_INCREMENT,
-    statut_appart enum ("Disponible", "Vendu"),
+    statut_appart enum ("Disponible", "En location"),
     prix_appart VARCHAR (100),
     intitule_appart VARCHAR(100),
     ville_appart VARCHAR (50),
@@ -24,7 +24,11 @@ CREATE table appartement (
     nb_salon int(5),
     nb_salle_bain int(5),
     nb_piece int(5),
+    id_locataire INT(5),
+    id_proprietaire INT(5),
     id_user INT(5),
+    FOREIGN key (id_locataire) REFERENCES locataire(id_locataire),
+    FOREIGN key (id_proprietaire) REFERENCES proprietaire(id_proprietaire),
     FOREIGN key (id_user) REFERENCES user(id_user),
     PRIMARY key (id_appart)
 );
@@ -93,26 +97,6 @@ CREATE table reservation (
     FOREIGN key (id_appart) REFERENCES appartement(id_appart),
     primary key (id_reservation)
 );
-
-create table locataire (
-    id_locataire int(5) not null auto_increment,
-    civilite_locataire enum ("Mr", "Mme", "Autre"),
-    nom_locataire varchar(50),
-    prenom_locataire varchar(50), 
-    email_locataire varchar(100),
-    mdp_locataire varchar(100) not null,
-    tel_locataire varchar(50),
-    adresse_locataire varchar(50),
-    cp_locataire varchar(50),
-    nb_reservations int(5),
-    id_appart int(5),
-    id_user int(5), 
-    FOREIGN key (id_user) REFERENCES user(id_user),
-    FOREIGN key (id_appart) REFERENCES appartement(id_appart),
-    PRIMARY KEY (id_locataire)
-    
-);
-
 create table proprietaire (
     id_proprietaire int(5) not null auto_increment,
     id_user int(5), 
@@ -135,6 +119,28 @@ create table proprietaire (
     FOREIGN key (id_appart) REFERENCES appartement(id_appart),
     PRIMARY KEY (id_proprietaire)
 );
+create table locataire (
+    id_locataire int(5) not null auto_increment,
+    civilite_locataire enum ("Mr", "Mme", "Autre"),
+    nom_locataire varchar(50),
+    prenom_locataire varchar(50), 
+    email_locataire varchar(100),
+    mdp_locataire varchar(100) not null,
+    tel_locataire varchar(50),
+    adresse_locataire varchar(50),
+    cp_locataire varchar(50),
+    nb_reservations int(5),
+    id_appart int(5),
+    id_proprietaire int(5), 
+    id_user int(5), 
+    FOREIGN key (id_appart) REFERENCES appartement(id_appart),
+    FOREIGN key (id_proprietaire) REFERENCES proprietaire(id_proprietaire),
+    FOREIGN key (id_user) REFERENCES user(id_user),
+    PRIMARY KEY (id_locataire)
+    
+);
+
+
 
 CREATE TABLE statistique (
     id_statistique INT(5) NOT NULL AUTO_INCREMENT,
@@ -248,7 +254,7 @@ delimiter ;
 /*Insertion
 INSERT INTO user (id_user) VALUES (1), (2), (3);*/
 
-INSERT INTO locataire (civilite_locataire, nom_locataire, prenom_locataire, email_locataire, mdp_locataire, tel_locataire, adresse_locataire, cp_locataire, nb_reservations, id_appart)
+INSERT INTO locataire (civilite_locataire, nom_locataire, prenom_locataire, email_locataire, mdp_locataire, tel_locataire, adresse_locataire, cp_locataire, nb_reservations, id_appart )
 VALUES 
 ('Mr', 'Dupont', 'Pierre', 'pierre.dupont@gmail.com', 'motdepasse', '0123456789', '5 Rue des Lilas', '75020', 3, 1 ),
 ('Mme', 'Martin', 'Sophie', 'sophie.martin@gmail.com', 'motdepasse', '0123456789', '12 Rue de la Gare', '69002', 2, 2 ),
@@ -299,16 +305,16 @@ VALUES
 ('Réservé', '2023-07-20', '2023-07-25', '400 euros', 2, 1, 2, 5);
 
 
-INSERT INTO appartement (statut_appart, prix_appart, intitule_appart, ville_appart, cp_appart, adresse_appart, description_appart, type_appart, superficie_appart,image, nb_chambre, nb_cuisine, nb_salon, nb_salle_bain, nb_piece, id_user)
+INSERT INTO appartement (statut_appart, prix_appart, intitule_appart, ville_appart, cp_appart, adresse_appart, description_appart, type_appart, superficie_appart,image, nb_chambre, nb_cuisine, nb_salon, nb_salle_bain, nb_piece,id_locataire, id_proprietaire, id_user)
 VALUES 
-('Disponible', '150000', 'Bel appartement en centre-ville', 'Paris', '75001', '10 Rue de Rivoli', 'Bel appartement lumineux de 75m² situé en plein coeur de Paris', 'Appartement', '75m²','A-1.jpg', 2, 1, 1, 1, 6, 1),
-('Vendu', '220000', 'Grand appartement avec vue sur la mer', 'Marseille', '13008', '30 Avenue du Prado', 'Spacieux appartement de 100m² avec vue imprenable sur la mer Méditerranée', 'Appartement', '100m²','B-1.jpg', 3, 1, 1, 2, 7, 2),
-('Disponible', '80000', 'Studio au calme dans quartier résidentiel', 'Lyon', '69006', '20 Rue de la République', 'Joli petit studio de 30m² au calme dans un quartier résidentiel de Lyon', 'Studio', '30m²','C-1.jpg', 1, 1, 0, 1, 3, 3),
-('Vendu', '120000', 'Appartement rénové dans immeuble haussmannien', 'Paris', '75009', '15 Rue La Fayette', 'Appartement récemment rénové de 50m² dans un bel immeuble haussmannien', 'Appartement', '50m²','D-1.jpg', 1, 1, 1, 1, 4, 4),
-('Disponible', '250000', 'Appartement duplex avec terrasse', 'Toulouse', '31000', '5 Rue Saint-Rome', 'Bel appartement duplex de 120m² avec grande terrasse en plein centre-ville de Toulouse', 'Appartement', '120m²','E-1.jpg', 4, 1, 1, 2, 8, 1),
-('Vendu', '180000', 'Appartement lumineux avec balcon', 'Nantes', '44000', '10 Rue de Strasbourg', 'Appartement de 80m² très lumineux avec balcon donnant sur un parc arboré', 'Appartement', '80m²','F-1.jpg', 2, 1, 1, 1, 5, 2),
-('Disponible', '90000', 'Appartement avec vue sur la montagne', 'Grenoble', '38000', '5 Rue de la République', 'Bel appartement de 60m² avec vue sur la montagne', 'Appartement', '60m²','J-1.jpg', 2, 1, 1, 1, 5, 5),
-('Vendu', '150000', 'Appartement en rez-de-jardin', 'Nice', '06000', '10 Avenue des Fleurs', 'Appartement de 70m² en rez-de-jardin avec terrasse et accès direct à la piscine de la résidence', 'Appartement', '70m²','G-1.jpg', 2, 1, 1, 1, 5, 4);
+('Disponible', '150000', 'Bel appartement en centre-ville', 'Paris', '75001', '10 Rue de Rivoli', 'Bel appartement lumineux de 75m² situé en plein coeur de Paris', 'Appartement', '75m²','A-1.jpg', 2, 1, 1, 1, 6,1 ,4,1),
+('En location', '220000', 'Grand appartement avec vue sur la mer', 'Marseille', '13008', '30 Avenue du Prado', 'Spacieux appartement de 100m² avec vue imprenable sur la mer Méditerranée', 'Appartement', '100m²','B-1.jpg', 3, 1, 1, 2, 7,3,6, 2),
+('Disponible', '80000', 'Studio au calme dans quartier résidentiel', 'Lyon', '69006', '20 Rue de la République', 'Joli petit studio de 30m² au calme dans un quartier résidentiel de Lyon', 'Studio', '30m²','C-1.jpg', 1, 1, 0, 1, 3,3,2, 3),
+('En location', '120000', 'Appartement rénové dans immeuble haussmannien', 'Paris', '75009', '15 Rue La Fayette', 'Appartement récemment rénové de 50m² dans un bel immeuble haussmannien', 'Appartement', '50m²','D-1.jpg', 1, 1, 1, 1, 4,8,5, 4),
+('Disponible', '250000', 'Appartement duplex avec terrasse', 'Toulouse', '31000', '5 Rue Saint-Rome', 'Bel appartement duplex de 120m² avec grande terrasse en plein centre-ville de Toulouse', 'Appartement', '120m²','E-1.jpg', 4, 1, 1, 2, 8,4,4, 1),
+('En location', '180000', 'Appartement lumineux avec balcon', 'Nantes', '44000', '10 Rue de Strasbourg', 'Appartement de 80m² très lumineux avec balcon donnant sur un parc arboré', 'Appartement', '80m²','F-1.jpg', 2, 1, 1, 1, 5,6,8, 2),
+('Disponible', '90000', 'Appartement avec vue sur la montagne', 'Grenoble', '38000', '5 Rue de la République', 'Bel appartement de 60m² avec vue sur la montagne', 'Appartement', '60m²','J-1.jpg', 2, 1, 1, 1, 5,7,3, 5),
+('En location', '150000', 'Appartement en rez-de-jardin', 'Nice', '06000', '10 Avenue des Fleurs', 'Appartement de 70m² en rez-de-jardin avec terrasse et accès direct à la piscine de la résidence', 'Appartement', '70m²','G-1.jpg', 2, 1, 1, 1, 5,10,2,16);
 
 INSERT INTO equipement_appart (intitule_equip_appart, nb_equi_appart, prix_equip_appart, type_equip_appart, statut_equip_appart, id_appart)
 VALUES 
@@ -359,4 +365,3 @@ WHERE r.statut_reservation = "Réservé"
 GROUP BY r.id_user, r.id_appart; */
 
 
-select * from proprietaire where id_user =:id_user ;

@@ -1,6 +1,7 @@
-<section class="sectionFive py-5" style="background-color:#DEE2E6;">
-    <div class="container">
+<section class="sectionFive py-5" style="background-color:#DEE2E6; height: 100vh;">
+    <div class="container-fluid">
         <div>
+            <h1 class="fs-3 ms-2 fw-bolder">Mon dashbord</h1>
             <div class="row">
                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 row ">
 
@@ -31,9 +32,9 @@
                                     <p><i class="bi bi-align-start text-danger"></i> Autres</p>
                                 </div>
                                 <div class="mt-3 pt-3 pe-4">
-                                    <p ><i class="bi bi-arrow-up-short text-success"></i> 7,660 €</p>
-                                    <p ><i class="bi bi-arrow-up-short text-success"></i> 2,820 €</p>
-                                    <p ><i class="bi bi-arrow-down-short text-danger"></i> 8,820 €</p>
+                                    <p><i class="bi bi-arrow-up-short text-success"></i> 7,660 €</p>
+                                    <p><i class="bi bi-arrow-up-short text-success"></i> 2,820 €</p>
+                                    <p><i class="bi bi-arrow-down-short text-danger"></i> 8,820 €</p>
                                 </div>
 
                             </div>
@@ -51,8 +52,8 @@
                                 </div>
                                 <div class="pe-4">
                                     <p><i class="bi bi-arrow-up-short text-success"></i>7.8<span class="text-muted">/10</span></p>
-                                    <p ><i class="bi bi-arrow-down-short text-danger"></i>730</p>
-                                    <p ><i class="bi bi-arrow-up-short text-success"></i>$2,309</p>
+                                    <p><i class="bi bi-arrow-down-short text-danger"></i>730</p>
+                                    <p><i class="bi bi-arrow-up-short text-success"></i>$2,309</p>
                                 </div>
                             </div>
                         </div>
@@ -72,8 +73,17 @@
                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 p-3">
                     <div class="rounded m-1 text-black bg-white" style="height: 36.5rem;">
                         <div class="container ps-4 pe-4">
-                            <h4 class="m-0">Authors Achievements</h4>
-                            <p>Avg. 69.34% Conv. Rate</p>
+                            <div class="d-flex">
+                                <div class="me-auto">
+                                    <h4 class="m-0 pt-3">Réalisation d'auteur</h4>
+                                    <p>Avg. 69.34% Conv. Rate</p>
+                                </div>
+                                <div class=" me-2 pt-3">
+                                <button type="button" class="btn btn-success mb-0 ms-auto"> <a href="index.php?page=formulaire_appartement" class="text-decoration-none text-light"><i class="bi bi-plus-circle"></i> </a></button>
+                                </div>
+                          
+                            </div>
+
                             <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
                                 <li class="nav-item  me-4 " role="presentation ">
                                     <button class=" bg-white rounded p-2 active border fw-semibold" id="pills-locataires-tab" data-bs-toggle="pill" data-bs-target="#pills-locataires" type="button" role="tab" aria-controls="pills-locataires" aria-selected="true"> <i class="bi bi-people fs-4 text-muted "></i><br>Locataires</button>
@@ -93,28 +103,95 @@
                                     <table class="table table-hover">
                                         <thead>
                                             <tr>
-                                                <th scope="col" style="color: #646477 !important;">AUTHOR</th>
-                                                <th scope="col" style="color: #646477 !important;">CONV</th>
-                                                <th scope="col" style="color: #646477 !important;">CHART</th>
-                                                <th scope="col" style="color: #646477 !important;">VIEW</th>
+                                                <th scope="col" style="color: #646477 !important;">USER</th>
+                                                <th scope="col" style="color: #646477 !important;">CONTRAT</th>
+                                                <th scope="col" style="color: #646477 !important;">APPARTEMENT</th>
+                                                <th scope="col" style="color: #646477 !important;">PRIX</th>
+                                                <th scope="col" style="color: #646477 !important;">DATE FIN</th>
                                             </tr>
                                         </thead>
                                         <tbody>
+                                            <?php
+                                            foreach ($locataireProprio as $locataire){
+                                                echo'<tr>
+                                                <th scope="row ">
+                                                    <div class="d-flex"><i class="bi bi-person-circle fs-1 "></i>
+                                                        <p class="mt-3 ps-2">'.$locataire['nom_locataire'].'</p>
+                                                    </div>
+                                                </th>
+                                            
+                                                <td class="m-auto pt-4 text-muted fw-semibold"><span class="bg-warning p-2 rounded text-light">En cours</span></td>
+                                                <td class="m-auto pt-4 text-muted fw-semibold pe-0" style="text-align: justify;">Bel appartement en centre-ville...</td>
+                                                <td class="m-auto pt-4 text-muted fw-semibold">1 500€</td>
+                                                <td class="m-auto pt-4 text-muted fw-semibold">2023-06-04</td>
+                                            </tr>';
+                                        }
+                                        ?>
+                                    
                                             <tr>
                                                 <th scope="row ">
                                                     <div class="d-flex"><i class="bi bi-person-circle fs-1 "></i>
-                                                        <p class="mt-3 ps-2">Name</p>
+                                                        <p class="mt-3 ps-2">John Fil</p>
                                                     </div>
                                                 </th>
-                                                <td class="m-auto pt-4 text-muted fw-semibold">52.45%</td>
-                                                <td class="m-auto pt-4 text-muted fw-semibold">-------</td>
-                                                <td class="m-auto pt-4 text-muted fw-semibold"><i class="bi bi-arrow-right fs-3"></i></td>
+                                                <td class="m-auto pt-4 text-muted fw-semibold"><span class="bg-danger p-2 rounded text-light">Terminer</span></td>
+                                                <td class="m-auto pt-4 text-muted fw-semibold pe-0" style="text-align: justify;">Studio au calme dans quartier ...</td>
+                                                <td class="m-auto pt-4 text-muted fw-semibold">1 900€</td>
+                                                <td class="m-auto pt-4 text-muted fw-semibold">2023-06-10</td>
                                             </tr>
 
                                         </tbody>
                                     </table>
                                 </div>
-                                <div class="tab-pane fade" id="pills-appartement" role="tabpanel" aria-labelledby="pills-appartement-tab" tabindex="0">...</div>
+                                <div class="tab-pane fade" style="border: none !important" id="pills-appartement" role="tabpanel" aria-labelledby="pills-appartement-tab" tabindex="0">
+                                <table class="table table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col" style="color: #646477 !important;">INTITULE</th>
+                                                <th scope="col" style="color: #646477 !important;">STATUT</th>
+                                                <th scope="col" style="color: #646477 !important;">PRIX</th>
+                                                <th scope="col" style="color: #646477 !important;">VILLE</th>
+                                                <th scope="col" style="color: #646477 !important;">CP</th>
+                                                <th scope="col" style="color: #646477 !important;">TYPE</th>
+                                                <th scope="col" style="color: #646477 !important;">PIECES</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        <?php
+                                        foreach ($appartementProprio as $appartement){
+                                            $nb_piece = $appartement['nb_salon'] + $appartement['nb_cuisine'] + $appartement['nb_chambre'] + $appartement['nb_salle_bain'];
+                                            $intitule = $appartement['intitule_appart'];
+                                            if(strlen($appartement['intitule_appart']) > 16){
+                                              $intitule = substr($intitule, 0, 16)."...";
+                                            }
+                                            echo '
+                                            <tr>
+                                                <th scope="row ">
+                                                    <a href="index.php?page=appartement&id_appart='.$appartement["id_appart"].'" class="d-flex text-decoration-none text-dark">
+                                                        <img src="Images/'.$appartement['image'].'" alt="" class="rounded" sizes="150" srcset="" width="70">
+                                                        <p class="mt-3 ps-2"  style="text-align: justify;">'.$intitule.'</p>
+                                                    </a>
+                                                </th>';
+                                                if($appartement['statut_appart'] != 'Disponible'){
+                                                    echo'  <td class="m-auto pt-4 text-muted fw-semibold"><span class="bg-warning p-2 rounded text-light">'.$appartement['statut_appart'] .'</span></td>';
+                                                }else{
+                                                    echo'  <td class="m-auto pt-4 text-muted fw-semibold"><span class="bg-success p-2 rounded text-light">'.$appartement['statut_appart'] .'</span></td>';
+                                                }
+                                                echo '
+                                                <td class="m-auto pt-4 text-muted fw-semibold pe-0">1 500€</td>
+                                                <td class="m-auto pt-4 text-muted fw-semibold">' . $appartement['ville_appart'] . '</td>
+                                                <td class="m-auto pt-4 text-muted fw-semibold">' . $appartement['cp_appart'] . '</td>
+                                                <td class="m-auto pt-4 text-muted fw-semibold">' . $appartement['type_appart'] . '</td>
+                                                <td class="m-auto pt-4 text-muted fw-semibold">' . $nb_piece . '</td>
+                                            </tr>';
+                                        }
+                                        ?>
+                                     
+                                            
+                                            
+                                        </tbody>
+                                    </table>
+                                </div>
                                 <div class="tab-pane fade" id="pills-demandes" role="tabpanel" aria-labelledby="pills-demandes-tab" tabindex="0">...</div>
                                 <div class="tab-pane fade" id="pills-contrats" role="tabpanel" aria-labelledby="pills-contrats-tab" tabindex="0">...</div>
                             </div>

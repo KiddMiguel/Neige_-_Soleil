@@ -95,6 +95,7 @@ if (isset($_POST["se_connecter_proprio"])) {
             echo'Error: Error';
     } else {
              $_SESSION["id_user"] = $unUser["id_user"];
+             $_SESSION["id_proprietaire"] = $unUser["id_proprietaire"];
             $_SESSION["civilite_proprio"] = $unUser["civilite_proprio"];
             $_SESSION["nom_proprio"] = $unUser["nom_proprio"];
             $_SESSION["prenom_proprio"] = $unUser["prenom_proprio"];
@@ -125,6 +126,7 @@ if (isset($_POST["valider_proprio"])) {
             echo"Inscription okay";
         } else {
             $_SESSION["id_user"] = $unUser["id_user"];
+            $_SESSION["id_proprietaire"] = $unUser["id_proprietaire"];
             $_SESSION["civilite_proprio"] = $unUser["civilite_proprio"];
             $_SESSION["nom_proprio"] = $unUser["nom_proprio"];
             $_SESSION["prenom_proprio"] = $unUser["prenom_proprio"];
