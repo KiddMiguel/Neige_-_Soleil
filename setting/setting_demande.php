@@ -1,10 +1,10 @@
 <?php
 $demandes = null;
-if (isset($_GET['id_proprietaire'])) {  
-    $id_proprietaire = $_GET['id_proprietaire'];
-    $demandes = $unController->selectWhereDemande($id_proprietaire);
-    $appartementProprio = $unController->selectAppartementProprietaire($id_proprietaire);
-    $locataireProprio = $unController->selectWhereLocataireProprietaire($id_proprietaire);
+if (isset($_GET['id_user'])) {  
+    $id_proprietaire = $_GET['id_user'];
+    $demandes = $unController->selectWhereDemande($id_user);
+    $appartementProprio = $unController->selectAppartementProprietaire($id_user);
+    // $locataireProprio = $unController->selectWhereLocataireProprietaire($id_user);
     $action = $_GET['page'];
     switch ($action) {
         case 'delete':

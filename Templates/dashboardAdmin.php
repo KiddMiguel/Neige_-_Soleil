@@ -1,4 +1,4 @@
-<section class="sectionFive py-5" style="background-color:#DEE2E6; height: 100vh;">
+<section class="sectionFive py-5" style="background-color:#DEE2E6;">
     <div class="container-fluid">
         <div>
             <h1 class="fs-3 ms-2 fw-bolder">Mon dashbord</h1>
@@ -111,12 +111,10 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <?php
-                                            foreach ($locataireProprio as $locataire){
-                                                echo'<tr>
+                                                <tr>
                                                 <th scope="row ">
                                                     <div class="d-flex"><i class="bi bi-person-circle fs-1 "></i>
-                                                        <p class="mt-3 ps-2">'.$locataire['nom_locataire'].'</p>
+                                                        <p class="mt-3 ps-2">Miguel</p>
                                                     </div>
                                                 </th>
                                             
@@ -124,9 +122,8 @@
                                                 <td class="m-auto pt-4 text-muted fw-semibold pe-0" style="text-align: justify;">Bel appartement en centre-ville...</td>
                                                 <td class="m-auto pt-4 text-muted fw-semibold">1 500€</td>
                                                 <td class="m-auto pt-4 text-muted fw-semibold">2023-06-04</td>
-                                            </tr>';
-                                        }
-                                        ?>
+                                            </tr>
+                                   
                                     
                                             <tr>
                                                 <th scope="row ">
@@ -161,8 +158,8 @@
                                         foreach ($appartementProprio as $appartement){
                                             $nb_piece = $appartement['nb_salon'] + $appartement['nb_cuisine'] + $appartement['nb_chambre'] + $appartement['nb_salle_bain'];
                                             $intitule = $appartement['intitule_appart'];
-                                            if(strlen($appartement['intitule_appart']) > 16){
-                                              $intitule = substr($intitule, 0, 16)."...";
+                                            if(strlen($appartement['intitule_appart']) > 10){
+                                              $intitule = substr($intitule, 0, 10)."...";
                                             }
                                             echo '
                                             <tr>
@@ -172,10 +169,12 @@
                                                         <p class="mt-3 ps-2"  style="text-align: justify;">'.$intitule.'</p>
                                                     </a>
                                                 </th>';
-                                                if($appartement['statut_appart'] != 'Disponible'){
+                                                if($appartement['statut_appart'] == 'Vendu'){
                                                     echo'  <td class="m-auto pt-4 text-muted fw-semibold"><span class="bg-warning p-2 rounded text-light">'.$appartement['statut_appart'] .'</span></td>';
-                                                }else{
+                                                }elseif($appartement['statut_appart'] == 'Disponible'){
                                                     echo'  <td class="m-auto pt-4 text-muted fw-semibold"><span class="bg-success p-2 rounded text-light">'.$appartement['statut_appart'] .'</span></td>';
+                                                }elseif($appartement['statut_appart'] == ''){
+                                                    echo'  <td class="m-auto pt-4 text-muted fw-semibold"><span class="p-2 rounded text-light">'.$appartement['statut_appart'] .'</span></td>';
                                                 }
                                                 echo '
                                                 <td class="m-auto pt-4 text-muted fw-semibold pe-0">1 500€</td>
@@ -192,8 +191,69 @@
                                         </tbody>
                                     </table>
                                 </div>
-                                <div class="tab-pane fade" id="pills-demandes" role="tabpanel" aria-labelledby="pills-demandes-tab" tabindex="0">...</div>
-                                <div class="tab-pane fade" id="pills-contrats" role="tabpanel" aria-labelledby="pills-contrats-tab" tabindex="0">...</div>
+                                <div class="tab-pane fade" style="border: none !important" id="pills-demandes" role="tabpanel" aria-labelledby="pills-demandes-tab" tabindex="0">
+                                <table class="table table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col" style="color: #646477 !important;">INTITULE</th>
+                                                <th scope="col" style="color: #646477 !important;">STATUT</th>
+                                                <th scope="col" style="color: #646477 !important;">DATE</th>
+                                                <th scope="col" style="color: #646477 !important;">ACTION</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php
+                                                  foreach ($demandes as $demande){
+                                                    echo '
+                                                <tr>
+                                                <th scope="m-auto"><p class="pt-2">Demande</p></th>';
+                                                    
+                                                if($demande['statut_demande'] != "Valider"){
+                                              echo' <td class="m-auto pt-4 text-muted fw-semibold"><span class="bg-warning p-2 rounded text-light">'.$demande['statut_demande'].'</span></td>';
+                                            }else{
+                                               echo' <td class="m-auto pt-4 text-muted fw-semibold"><span class="bg-success p-2 rounded text-light">'.$demande['statut_demande'].'</span></td>';
+                                            }
+                                             echo'  <td class="m-auto pt-4 text-muted fw-semibold pe-0" style="text-align: justify;">'.$demande['date_demande'].'</td>
+                                                <td class="m-auto pt-4 text-muted fw-semibold"><button class="btn btn-danger"><i class="bi bi-trash3 fs-6" style="color:#DEE2E6 !important;"></i></button></td>
+                                            </tr>';
+                                                  }
+                                            ?>
+                                   
+                                    
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="tab-pane fade" style="border: none !important" id="pills-contrats" role="tabpanel" aria-labelledby="pills-contrats-tab" tabindex="0">
+                                <table class="table table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col" style="color: #646477 !important;">DAET DEBUT</th>
+                                                <th scope="col" style="color: #646477 !important;">STATUT</th>
+                                                <th scope="col" style="color: #646477 !important;">DATE FIN</th>
+                                                <th scope="col" style="color: #646477 !important;">DATE SIGN</th>
+                                                <th scope="col" style="color: #646477 !important;">APPARTEMENT</th>
+                                                <th scope="col" style="color: #646477 !important;">ACTION</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                <td class="m-auto pt-4 text-muted fw-semibold">2023-06-04</td>
+                                                <td class="m-auto pt-4 text-muted fw-semibold"><span class="bg-warning p-2 rounded text-light">En cours</span></td>
+                                                <td class="m-auto pt-4 text-muted fw-semibold">2023-06-04</td>
+                                                <td class="m-auto pt-4 text-muted fw-semibold">2023-06-04</td>
+                                                <td class="m-auto text-muted fw-semibold pe-0" style="text-align: justify;"><a  class="d-flex text-decoration-none text-dark">
+                                                        <img src="Images/A-1.jpg" alt="" class="rounded" sizes="150" srcset="" width="70">
+                                                    </a></td>
+                                                <td class="m-auto text-muted fw-semibold"><button class="btn btn-primary"><i class="bi bi-clipboard2-fill fs-6" style="color:#DEE2E6 !important;"></i></button></td>
+                                            </tr>
+                                   
+                                    
+                                          
+
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     </div>

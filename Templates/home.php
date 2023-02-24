@@ -30,6 +30,7 @@
   
                 $counter = 0;
                 foreach ($appartements as $appartement){
+                    if($appartement['statut_appart']!= "" ){
                     if($counter == 6){
                         break;
                     }
@@ -56,7 +57,7 @@
        
                 $counter++;
                 }
-
+            }
 
             ?>  
        

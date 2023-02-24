@@ -191,7 +191,7 @@ class Modele{
     /*********VALIDATION DU FORMUALIRE DE LA DEMANDE D'INSERT DE L'APPART */
     public function insertAppartement($tab){
         if($this->unPDO != null){
-            $request = "insert into appartement values (null, 'En cours de traitement', :prix_appart, :intitule_appart, :ville_appart, :cp_appart, :adresse_appart, :description_appart, :type_appart, :superficie_appart, :nb_chambres, :nb_lits, :nb_salles_bain, :capacite_appart, :atout_appart1 , :atout_appart2, :atout_appart3, 'Default.png', 'Default.png', 'Default.png', 'Default.png', 'Default.png', null, null, :id_user, null)";
+            $request = "insert into appartement values (null, null, :prix_appart, :intitule_appart, :ville_appart, :cp_appart, :adresse_appart, :description_appart, :type_appart, :superficie_appart,'Default.png', :nb_chambre , :nb_cuisine, :nb_salon, :nb_salle_bain, :nb_piece, :id_user)";
             $donnees = array (
                 ":prix_appart" => $tab['prix_appart'], 
                 ":intitule_appart" => $tab['intitule_appart'], 
@@ -201,13 +201,11 @@ class Modele{
                 ":description_appart" => $tab['description_appart'],
                 ":type_appart" => $tab['type_appart'],
                 ":superficie_appart" => $tab['superficie_appart'],
-                ":nb_chambres" => $tab['nb_chambres'],
-                ":nb_lits" => $tab['nb_lits'],
-                ":nb_salles_bain" => $tab['nb_salles_bain'],
-                ":capacite_appart" => $tab['capacite_appart'],
-                ":atout_appart1" => $tab['atout_appart1'],
-                ":atout_appart2" => $tab['atout_appart2'],
-                ":atout_appart3" => $tab['atout_appart3'],
+                ":nb_chambre" => $tab['nb_chambre'],
+                ":nb_cuisine" => $tab['nb_cuisine'],
+                ":nb_salon" => $tab['nb_salon'],
+                ":nb_salle_bain" => $tab['nb_salle_bain'],
+                ":nb_piece" => $tab['nb_piece'],
                 ":id_user" => $tab['id_user']
             );
             $insert = $this->unPDO->prepare($request);
@@ -240,11 +238,11 @@ class Modele{
     }
 
     
-    public function selectAppartementProprietaire($id_proprietaire)
+    public function selectAppartementProprietaire($id_user)
     {
         if ($this->unPDO != null) {
-            $request = "select * from appartement where id_proprietaire = :id_proprietaire"; 
-            $donnees = array(":id_proprietaire" => $id_proprietaire);
+            $request = "select * from appartement where id_user = :id_user"; 
+            $donnees = array(":id_user" => $id_user);
 
             $select = $this->unPDO->prepare($request);
             $select->execute($donnees);
@@ -252,11 +250,11 @@ class Modele{
             return $appartementProprio;
         }
     }
-    public function selectAppartementLocataire($id_locataire)
+    public function selectAppartementLocataire($id_user)
     {
         if ($this->unPDO != null) {
-            $request = "select * from appartement where id_locataire = :id_locataire"; 
-            $donnees = array(":id_locataire" => $id_locataire);
+            $request = "select * from appartement where id_user = :id_user"; 
+            $donnees = array(":id_user" => $id_user);
 
             $select = $this->unPDO->prepare($request);
             $select->execute($donnees);

@@ -14,7 +14,7 @@ if (isset($_GET['id_appart'])) {
 if (isset($_POST["valider_appartement"])) {
     $unController->insertAppartement($_POST);
 
-    header("location: index.php?page=demande&id_user=" . $_SESSION['id_user'] . "");
+    header("location: index.php?page=dashbord&id_user=" . $_SESSION['id_user'] . "");
 }
 if (isset($_POST["filtre"])){
     $mot = $_POST["mot"];

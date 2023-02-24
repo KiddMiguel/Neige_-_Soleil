@@ -1,4 +1,4 @@
-<section class=" sectionInscription" style="height: 100vh;">
+<section class=" sectionInscription">
     <div class="container py-5 w-50 h-100 ">
         <div class="row d-flex justify-content-center align-items-center h-100" method="post">
             <div class="col-lg-10 col-xl-10">

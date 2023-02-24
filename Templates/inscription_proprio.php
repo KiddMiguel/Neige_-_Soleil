@@ -1,4 +1,4 @@
-<section class="sectionInscription" style="background-color: #FFF0CB; height: 100vh;">
+<section class="sectionInscription" style="background-color: #FFF0CB; ">
     <div class="container w-50 py-5 h-100">
         <form class="row d-flex justify-content-center align-items-center h-100" method="post">
             <div class="col-lg-10 col-xl-10">
