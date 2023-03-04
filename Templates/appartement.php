@@ -61,8 +61,8 @@
     </div>
   
     <div>
-    <div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
-      <div class="modal-dialog modal-dialog-centered modal-xl">
+    <div  class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+      <div class="modal-dialog modal-dialog-centered modal-xl" >
         <div class="modal-content">
           <div class="modal-header">
             <h1 class="modal-title fs-5" id="exampleModalToggleLabel">Réservation</h1>
@@ -85,8 +85,11 @@
       <input type="date" id="dateEnd" class="form-control w-25 ms-1" value=""><button type="button" id="choisir"  class="btn btn-success ms-2">Choisir</button><button type="button" class="btn btn-danger ms-2">Reset</button>    
       
       </div>
-      <div class="calendar">
+      <div>
+        <div id="calendar" >
+        </div>
       </div>
+  
      ';
 
       echo '</div>

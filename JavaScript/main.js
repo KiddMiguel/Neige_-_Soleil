@@ -7,37 +7,68 @@ window.onload = () => {
 
 //Calendrier
 
-function calendar(event) {
-    const currentYear = new Date().getFullYear();
-    var element = document.querySelector('.calendar');
-    new Calendar('.calendar', {
-        language: 'fr',
-        style: 'background',
-        minDate: new Date(),
-        maxDate: new Date(currentYear, 11, 31)
-    });
-    document.querySelector('.calendar').addEventListener('clickDay', function selectDate(data) {
-        console.log(data.element);
-        const date = data.date;
-        const year = date.getFullYear();
-        const month = ("0" + (date.getMonth() + 1)).slice(-2);
-        const day = ("0" + date.getDate()).slice(-2);
-        const setdate = `${year}-${month}-${day}`;
-        $('#dateEnd').val(setdate);
-        let start = new Date($('#dateStart').val());
-        let end = new Date($('#dateEnd').val());
-        while (start <= end) {
-            console.log(data.element);
-            console.log(start.toDateString());
-            start.setDate(start.getDate() + 1);
-        }
-    });
+// function calendar(event) {
+//     const currentYear = new Date().getFullYear();
+//     var element = document.querySelector('.calendar');
+//     new Calendar('.calendar', {
+//         language: 'fr',
+//         style: 'background',
+//         minDate: new Date(),
+//         maxDate: new Date(currentYear, 11, 31)
+//     });
+//     document.querySelector('.calendar').addEventListener('clickDay', function selectDate(data) {
+//         console.log(data.element);
+//         const date = data.date;
+//         const year = date.getFullYear();
+//         const month = ("0" + (date.getMonth() + 1)).slice(-2);
+//         const day = ("0" + date.getDate()).slice(-2);
+//         const setdate = `${year}-${month}-${day}`;
+//         $('#dateEnd').val(setdate);
+//         let start = new Date($('#dateStart').val());
+//         let end = new Date($('#dateEnd').val());
+//         while (start <= end) {
+//             console.log(data.element);
+//             console.log(start.toDateString());
+//             start.setDate(start.getDate() + 1);
+//         }
+//     });
 
-    $('#choisir').click(function() {
+//     $('#choisir').click(function() {
 
-    });
+//     });
+// }
+
+function calendar(){
+    document.addEventListener('DOMContentLoaded', function() {
+        var calendarEl = document.getElementById('calendar');
+        var startDate, endDate;
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+          initialView: 'dayGridMonth',
+          selectable: true,
+          
+          select:function(info){ 
+            alert('vous avez selctionné la date '+info.startStr+ ' a '+info.endStr);
+          },
+          events: [
+            {
+              title: 'Event 1',
+              start: '2023-03-05'
+            },
+            {
+              title: 'Event 2',
+              start: '2023-03-09',
+              end: '2023-03-12'
+            },
+            // more events here...
+          ]
+        });
+        calendar.setOption('locale', 'fr');
+
+        calendar.render();
+      });
 }
 
+calendar();
 
 function ChangeImage() {
     const vignette = document.querySelectorAll(".small");
