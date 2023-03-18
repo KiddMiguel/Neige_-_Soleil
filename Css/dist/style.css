@@ -115,6 +115,13 @@ body .sectionFour .help .sendHelp .bouton {
   border: none;
   background-color: #FFC839;
 }
+body .sectionFive .active {
+  border: 1.5px solid #093A7A !important;
+  color: #093A7A !important;
+}
+body .sectionFive .active i {
+  color: #093A7A !important;
+}
 body .sectionLocation div .pagination .actives {
   background-color: #FFC839 !important;
   color: white;

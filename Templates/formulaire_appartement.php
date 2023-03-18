@@ -31,33 +31,33 @@
                                 <input type="text" class="form-control form-control" value="<?= $_SESSION["tel_proprio"] ?>" placeholder="Numéro de téléphone" />
                             </div>
                         </div>
-                        <div class="col-md-4 mb-2">
-                            <div class="form-outline">
-                                <input type="text" id="form3Example1n" class="form-control form-control" value="<?= $_SESSION["code_adherent"] ?>" placeholder="Code adhérent" />
-                            </div>
-                        </div>
                     </div>
 
                     <div class="row border rounded pe-5 ps-5 pb-4 m-5">
                         <h6 class="col-md-12 text-center pb-3 pt-3">Informations appartement</h6>
                         <div class="col-md-2 mb-2">
                             <div class="form-outline">
-                                <input type="number" class="form-control form-control" name="capacite_appart" placeholder="Nb pièce(s)" />
+                                <input type="number" class="form-control form-control" name="nb_piece" placeholder="Nb pièce(s)" />
                             </div>
                         </div>
                         <div class="col-md-2 mb-2">
                             <div class="form-outline">
-                                <input type="number" id="form3Example1n" class="form-control form-control" name="nb_chambres" value="" placeholder="Nb chambre(s)" />
+                                <input type="number" id="form3Example1n" class="form-control form-control" name="nb_chambre" value="" placeholder="Nb chambre(s)" />
                             </div>
                         </div>
                         <div class="col-md-2 mb-2">
                             <div class="form-outline">
-                                <input type="number" id="form3Example1n" class="form-control form-control" name="nb_lits" value="" placeholder="Nb lit(s)" />
+                                <input type="number" id="form3Example1n" class="form-control form-control" name="nb_cuisine" value="" placeholder="Nb cuisine(s)" />
                             </div>
                         </div>
                         <div class="col-md-2 mb-2">
                             <div class="form-outline">
-                                <input type="number" id="form3Example1n" class="form-control form-control" name="nb_salles_bain" value="" placeholder="Nb salle de bain(s)" />
+                                <input type="number" id="form3Example1n" class="form-control form-control" name="nb_salon" value="" placeholder="Nb salon(s)" />
+                            </div>
+                        </div>
+                        <div class="col-md-2 mb-2">
+                            <div class="form-outline">
+                                <input type="number" id="form3Example1n" class="form-control form-control" name="nb_salle_bain" value="" placeholder="Nb Salle de bain(s)" />
                             </div>
                         </div>
                         <div class="col-md-2 mb-2">
@@ -67,24 +67,10 @@
                         </div>
                         <div class="col-md-2 mb-2">
                             <div class="form-outline">
-                                <input type="text" id="form3Example1n" class="form-control form-control" name="type_appart" value="" placeholder="Type (T3, T3, ..)" />
+                                <input type="text" id="form3Example1n" class="form-control form-control" name="type_appart" value="" placeholder="Type (Appartement, Studio, ...)" />
                             </div>
                         </div>
-                        <div class="col-md-4 mb-2">
-                            <div class="form-outline">
-                                <input type="text" id="form3Example1n" class="form-control form-control" name="atout_appart1" value="" placeholder="Atout 1" />
-                            </div>
-                        </div>
-                        <div class="col-md-4 mb-2">
-                            <div class="form-outline">
-                                <input type="text" id="form3Example1n" class="form-control form-control" name="atout_appart2" value="" placeholder="Atout 2" />
-                            </div>
-                        </div>
-                        <div class="col-md-4 mb-2">
-                            <div class="form-outline">
-                                <input type="text" id="form3Example1n" class="form-control form-control" name="atout_appart3" value="" placeholder="Atout 3" />
-                            </div>
-                        </div>
+                        
                         <!-- Champ placement -->
                         <div class="col-md-4 mb-2">
                             <div class="form-outline">
@@ -96,7 +82,7 @@
                                 <input type="text" id="form3Example1n" class="form-control form-control" name="adresse_appart" placeholder="Adresse appart" />
                             </div>
                         </div>
-                        <div class="col-md-4 mb-2">
+                        <div class="col-md-2 mb-2">
                             <div class="form-outline">
                                 <input type="text" id="form3Example1n" class="form-control form-control" name="cp_appart" placeholder="Code postal" />
                             </div>

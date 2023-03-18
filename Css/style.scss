@@ -137,6 +137,16 @@ body {
             }
         }
     }
+    .sectionFive{
+        .active{
+            border: 1.5px solid $color_blue !important;
+            color: $color_blue !important;
+            i{
+                color: $color_blue !important
+            }
+            
+        }
+    }
     .sectionLocation {
         div {
             .pagination {
@@ -161,6 +171,18 @@ body {
         .divProfil {
             a {
                 background-color: $color_button;
+            }
+        }
+    }
+    .sectionInscription{
+        .container{
+            .card{
+                .active_page{
+                    display: block;
+                }
+                .desactive_page{
+                    display: none;
+                }
             }
         }
     }

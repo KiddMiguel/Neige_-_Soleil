@@ -19,39 +19,65 @@ class Controller
         $this->unModele->insertLocataire($tab);
     }
 
-    public function updateLocataire($tab)
+    public function updateLocataire($id_user)
     {
-        $this->unModele->updateLocataire($tab);
+        return $this->unModele->updateLocataire($id_user);
     }
+
+
+    public function selectWhereLocataire($id_user)
+    {
+        $locataire = $this->unModele->selectWhereLocataire($id_user);
+        return $locataire;
+    }
+    public function updateLocataireEmailMdp($id_user)
+    {
+        return $this->unModele->updateLocataireEmailMdp($id_user);
+    }
+
 
 
     /*********************CONTROLLER PROPRIETAIRE************* */
 
-
+    public function selectWhereProprietaire($id_user)
+    {
+        $proprietaire = $this->unModele->selectWhereProprietaire($id_user);
+        return $proprietaire;
+    }
     public function verifconnexionProprietaire($email, $mdp)
     {
         return $this->unModele->verifconnexionProprietaire($email, $mdp);
     }
 
-    public function insertProprietaire($tab)
+    public function insertProprietaire($id_user)
     {
-        $this->unModele->insertProprietaire($tab);
+        $this->unModele->insertProprietaire($id_user);
     }
 
-    // public function updateProprietaire($tab)
-    // {
-    //     $this->unModele->updateProprietaire($tab);
-    // }
+    public function updateProprietaire($id_user)
+    {
+        return $this->unModele->updateProprietaire($id_user);
+    }
+
+    public function updateProprietaireEmailMdp($id_user)
+    {
+        return $this->unModele->updateProprietaireEmailMdp($id_user);
+    }
 
     public function selectWhereDemande($id_user)
     {
         $demandes = $this->unModele->selectWhereDemande($id_user);
         return $demandes;
     }
-    public function selectAppartementLocataire($id_user)
+    public function selectAppartementProprietaire($id_user)
     {
-        $appartementProprio = $this->unModele->selectAppartementLocataire($id_user);
+        $appartementProprio = $this->unModele->selectAppartementProprietaire($id_user);
         return $appartementProprio;
+    }
+    public function selectWhereLocataireProprietaire($id_proprietaire)
+    {
+        $locataireProprio = $this->unModele->selectWhereLocataireProprietaire($id_proprietaire);
+        return $locataireProprio;
     }
 
     /**************************************APPARTEMENT ******************************** */
@@ -91,7 +117,7 @@ class Controller
     {
         $this->unModele->insertReservation($tab);
     }
- 
+
     public function recupAllReservation()
     {
         $reservations = $this->unModele->recupAllReservation();
@@ -100,34 +126,36 @@ class Controller
 
     /*************************IMAGES********************** */
 
-    // public function recupImages()
-    // {
-    //     $images = $this->unModele->recupImages();
-    //     return $images;
-    // }
 
     public function selectWhereImage($id_appart)
     {
-        $imagesAppart = $this->unModele->selectReservationLocataire($id_appart);
+        $imagesAppart = $this->unModele->selectWhereImage($id_appart);
         return $imagesAppart;
+    }
+    public function selectWhereAtout($id_appart)
+    {
+        $atouts = $this->unModele->selectWhereAtout($id_appart);
+        return $atouts;
     }
 
 
     /**********************************FILTRE************** */
-    public function FiltreLocation($mot) {
+    public function FiltreLocation($mot)
+    {
 
         $appartements = $this->unModele->FiltreLocation($mot);
         return $appartements;
-
     }
-    public function FiltreLocation_index($mot,$prixMax,$prixMin){
-        $appartements = $this->unModele->FiltreLocation_index($mot,$prixMax,$prixMin);
+    public function FiltreLocation_index($mot, $prixMax, $prixMin)
+    {
+        $appartements = $this->unModele->FiltreLocation_index($mot, $prixMax, $prixMin);
         return $appartements;
     }
 
 
     /*********************DELETE DEMANDE /********* */
-    public function deleteDemande($id_user){
+    public function deleteDemande($id_user)
+    {
         $demandes = $this->unModele->deleteDemande($id_user);
         return $demandes;
     }

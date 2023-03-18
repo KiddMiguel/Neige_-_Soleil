@@ -15,8 +15,10 @@ $unController = new Controller($server, $bdd, $user, $mdp);
     <link rel="stylesheet" href="Css/style.css" class="css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
     <!--Integration du css boostrap -->
+    
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
-    <link rel="stylesheet" type="text/css" href="https://unpkg.com/js-year-calendar@latest/dist/js-year-calendar.min.css" />
+    <!-- <link rel="stylesheet" type="text/css" href="https://unpkg.com/js-year-calendar@latest/dist/js-year-calendar.min.css" /> -->
+    <link href='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.0/fullcalendar.min.css' rel='stylesheet' />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
     <title>Home</title>
 </head>
@@ -26,127 +28,10 @@ $unController = new Controller($server, $bdd, $user, $mdp);
         require_once("setting/setting_appartement.php");
         require_once("setting/setting_reservation.php");
         require_once("setting/setting_demande.php");
-        require_once("setting/setting_images.php");
+        require_once("setting/setting_update.php");
+        require_once("setting/setting_locataire_proprio.php");
+        require_once("setting/setting_verifConnexion.php");
         require_once("include/header.php");
-
-    //Chaque section à l'interieur de notre balise php appel la page mentionner -->
-/************************************************-----------------------PARTIE LOCATAIRE---------------------------------------********************** */
-/********CONNEXION LOCATAIRE***** */
-    if (isset($_POST["se_connecter"])) {
-        $email = $_POST["email_locataire"];
-        $mdp = $_POST["mdp_locataire"];
-
-        $unUser = $unController->verifconnexionLocataire($email, $mdp);
-        if ($unUser == null) { 
-                
-        } else {
-            $_SESSION["id_user"] = $unUser["id_user"];
-            $_SESSION["civilite_locataire"] = $unUser["civilite_locataire"];
-            $_SESSION["email_locataire"] = $unUser["email_locataire"];
-            $_SESSION["mdp_locataire"] = $unUser["mdp_locataire"];
-            $_SESSION["nom_locataire"] = $unUser["nom_locataire"];
-            $_SESSION["prenom_locataire"] = $unUser["prenom_locataire"];
-            $_SESSION["tel_locataire"] = $unUser["tel_locataire"];
-            $_SESSION["adresse_locataire"] = $unUser["adresse_locataire"];
-            $_SESSION["cp_locataire"] = $unUser["cp_locataire"];
-            $_SESSION["nb_reservations"] = $unUser["nb_reservations"];
-            header("location: index.php?page=home&id_user=".$unUser["id_user"]);
-        }
-    }
-
-    /*******INSERT NEW LOCATAIRE********** */
-
-    if (isset($_POST["valider"])) {
-        $unController->insertLocataire($_POST);
-        echo"Inscription okay";
-        if (isset($_POST["valider"])) {
-            $email = $_POST["email_locataire"];
-            $mdp = $_POST["mdp_locataire"];
-            $unUser = $unController->verifconnexionLocataire($email, $mdp);
-            if ($unUser == null) {
-            
-            } else {
-                $_SESSION["id_user"] = $unUser["id_user"];
-                $_SESSION["email_locataire"] = $unUser["email_locataire"];
-                $_SESSION["mdp_locataire"] = $unUser["mdp_locataire"];
-                $_SESSION["nom_locataire"] = $unUser["nom_locataire"];
-                $_SESSION["prenom_locataire"] = $unUser["prenom_locataire"];
-                $_SESSION["civilite_locataire"] = $unUser["civilite_locataire"];
-                $_SESSION["tel_locataire"] = $unUser["tel_locataire"];
-                $_SESSION["adresse_locataire"] = $unUser["adresse_locataire"];
-                $_SESSION["cp_locataire"] = $unUser["cp_locataire"];
-                $_SESSION["nb_reservations"] = $unUser["nb_reservations"];
-                header("location: index.php?page=home&&id_user=".$unUser["id_user"]);
-            }
-        }
-    }
-
-
-
-    
-
-    /************************************************-----------------------PARTIE PROPRIETAIRE---------------------------------------********************** */
-/********CONNEXION PROPRIETAIRE***** */
-if (isset($_POST["se_connecter_proprio"])) {
-    $email = $_POST["email_proprio"];
-    $mdp = $_POST["mdp_proprio"];
-    $unUser = $unController->verifconnexionProprietaire($email, $mdp);
-    if ($unUser == null) { 
-            echo'Error: Error';
-    } else {
-             $_SESSION["id_user"] = $unUser["id_user"];
-            $_SESSION["civilite_proprio"] = $unUser["civilite_proprio"];
-            $_SESSION["nom_proprio"] = $unUser["nom_proprio"];
-            $_SESSION["prenom_proprio"] = $unUser["prenom_proprio"];
-            $_SESSION["statut_proprio"] = $unUser["statut_proprio"];
-            $_SESSION["email_proprio"] = $unUser["email_proprio"];
-            $_SESSION["mdp_proprio"] = $unUser["mdp_proprio"];
-            $_SESSION["tel_proprio"] = $unUser["tel_proprio"];
-            $_SESSION["adresse_proprio"] = $unUser["adresse_proprio"];
-            $_SESSION["cp_proprio"] = $unUser["cp_proprio"];
-            $_SESSION["ville_proprio"] = $unUser["ville_proprio"];
-            $_SESSION["pays_proprio"] = $unUser["pays_proprio"];
-            $_SESSION["code_adherent"] = $unUser["code_adherent"];
-            header("location: index.php?page=home&id_user=".$unUser["id_user"]);
-    }
-}
-
-
-
-/*******INSERT NEW PROPRIETAIRE********** */
-
-if (isset($_POST["valider_proprio"])) {
-    $unController->insertProprietaire($_POST);
-    echo"Inscription okay";
-    if (isset($_POST["valider_proprio"])) {
-        $email = $_POST["email_proprio"];
-        $mdp = $_POST["mdp_proprio"];
-        $unUser = $unController->verifconnexionProprietaire($email, $mdp);
-        if ($unUser == null) {
-        
-        } else {
-            $_SESSION["id_user"] = $unUser["id_user"];
-            $_SESSION["civilite_proprio"] = $unUser["civilite_proprio"];
-            $_SESSION["nom_proprio"] = $unUser["nom_proprio"];
-            $_SESSION["prenom_proprio"] = $unUser["prenom_proprio"];
-            $_SESSION["statut_proprio"] = $unUser["statut_proprio"];
-            $_SESSION["email_proprio"] = $unUser["email_proprio"];
-            $_SESSION["mdp_proprio"] = $unUser["mdp_proprio"];
-            $_SESSION["tel_proprio"] = $unUser["tel_proprio"];
-            $_SESSION["adresse_proprio"] = $unUser["adresse_proprio"];
-            $_SESSION["cp_proprio"] = $unUser["cp_proprio"];
-            $_SESSION["ville_proprio"] = $unUser["ville_proprio"];
-            $_SESSION["pays_proprio"] = $unUser["pays_proprio"];
-            $_SESSION["code_adherent"] = $unUser["code_adherent"];
-            header("location: index.php?page=home&id_user=".$unUser["id_user"]);
-        }
-    }
-}
-
-
-require_once("setting/setting_update_client.php");
-
-/******************************************RESERVATION ********************* */
 
     if (isset($_GET["page"])) {
         $page = $_GET["page"];
@@ -198,6 +83,9 @@ require_once("setting/setting_update_client.php");
         case "apropos":
             require_once("Templates/apropos.php");
             break;
+        case "dashboard":
+            require_once("Templates/dashboardAdmin.php");
+            break;
         case "deconnexion":
             session_destroy();
             unset($_SESSION["email_locataire"]);
@@ -212,13 +100,17 @@ require_once("setting/setting_update_client.php");
     }
  
 
+
 /******Calling footer****/
     require_once("include/footer.php");
     ?>
       
     <!-- JavaScript Bundle with Popper -->
-    <script src="https://unpkg.com/js-year-calendar@latest/dist/js-year-calendar.min.js"></script>
-    <script src="https://unpkg.com/js-year-calendar@next/dist/js-year-calendar.min.js"></script>
+    <!-- <script src="https://unpkg.com/js-year-calendar@latest/dist/js-year-calendar.min.js"></script> -->
+    <!-- <script src="https://unpkg.com/js-year-calendar@next/dist/js-year-calendar.min.js"></script> -->
+    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.4/index.global.min.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.0/fullcalendar.min.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js'></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
     <script src="//code.jquery.com/jquery-1.12.0.min.js"></script>
     <script src="JavaScript/main.js"></script>
