@@ -23,7 +23,7 @@ create table user (
 CREATE table appartement (
     id_appart int(5) not null AUTO_INCREMENT,
     statut_appart enum ("Disponible", "En location"),
-    prix_appart VARCHAR (100),
+    prix_appart FLOAT,
     intitule_appart VARCHAR(100),
     ville_appart VARCHAR (50),
     cp_appart VARCHAR (50),
@@ -50,7 +50,7 @@ CREATE TABLE equipement_appart (
     id_equip_appart int(5) not null AUTO_INCREMENT,
     intitule_equip_appart VARCHAR(50),
     nb_equi_appart INT(5),
-    prix_equip_appart int(50),
+    prix_equip_appart FLOAT,
     type_equip_appart VARCHAR(50),
     statut_equip_appart VARCHAR(50),
     id_appart int(5),
@@ -85,7 +85,7 @@ CREATE Table materiel_proprio (
     id_materiel_proprio int(5) not null AUTO_INCREMENT,
     intitule_materiel_proprio VARCHAR (50), 
     nb_materiel_proprio INT(5),
-    prix_materiel_proprio VARCHAR(50),
+    prix_materiel_proprio FLOAT,
     type_materiel_proprio VARCHAR (50),
     staut_materiel_proprio VARCHAR (50),
     id_user int(5),
@@ -100,7 +100,7 @@ CREATE table reservation (
     statut_reservation enum ("En cours", "Réservé"),
     date_debut_reservation date,
     date_fin_reservation date,
-    prix_reservation VARCHAR (50),
+    prix_reservation FLOAT,
     nb_personnes int(5),
     id_user int(5), 
     id_appart int(5),
@@ -160,7 +160,7 @@ CREATE TABLE statistique (
     id_locataire INT(5),
     id_appart INT(5),
     nb_reservations INT(5),
-    prix_total_reservations INT(10),
+    prix_total_reservations FLOAT,
     revenu_total_locataire INT(10),
     FOREIGN KEY (id_locataire) REFERENCES locataire(id_locataire),
     FOREIGN KEY (id_appart) REFERENCES appartement(id_appart),
@@ -200,7 +200,7 @@ CREATE table reglement (
 id_reglement int(5) not null auto_increment,
 date_reglement date,
 type_reglement enum ("Espèce", "Chèque", "Virement bancaire", "Carte bancaire"),
-montant_reglement VARCHAR (50),
+montant_reglement FLOAT,
 id_contrat int(5),
 FOREIGN key (id_contrat) REFERENCES contrat(id_contrat),
 primary key (id_reglement)
@@ -209,7 +209,8 @@ primary key (id_reglement)
 CREATE table facture (
 id_facture int(5) not null auto_increment,
 date_facture date,
-montant_facture VARCHAR (50),
+statut_facture enum ("En attente", "Payée"),
+montant_facture FLOAT,
 id_contrat int(5),
 FOREIGN key (id_contrat) REFERENCES contrat(id_contrat),
 primary key (id_facture)
@@ -262,11 +263,42 @@ FOR EACH row
     end //
 delimiter ;
 
+/*PROCEDURE QUI AFFICHE LES FACTURES PAR MOIS ET PAR ANNEE*/
+/*Revenue du mois*/
+Drop PROCEDURE if exists afficher_montant_factures_par_mois;
+delimiter //
+CREATE  PROCEDURE `afficher_montant_factures_par_mois`(IN user_id INT)
+BEGIN
+    SELECT MONTH(date_facture) AS mois_facture, SUM(montant_facture) AS total_facture
+    FROM facture
+    INNER JOIN contrat ON facture.id_contrat = contrat.id_contrat
+    WHERE contrat.id_user = user_id
+    GROUP BY MONTH(date_facture) ORDER BY `date_facture` DESC;
+END //
+delimiter ;
+Drop PROCEDURE if exists afficher_montant_factures;
+delimiter //
+CREATE DEFINER=`root`@`localhost` PROCEDURE `afficher_montant_factures`(IN user_id INT)
+BEGIN
+    SELECT date_facture AS mois_facture, SUM(montant_facture) AS total_facture
+    FROM facture
+    INNER JOIN contrat ON facture.id_contrat = contrat.id_contrat
+    WHERE contrat.id_user = user_id
+    ORDER BY `date_facture` DESC;
+END //
+delimiter ;
 
-
-/*Insertion
-INSERT INTO user (id_user) VALUES (1), (2), (3);*/
-
+/*------------------------------------------------------------------*/
+Drop PROCEDURE if exists total_locataire;
+delimiter //
+CREATE PROCEDURE total_locataire(IN user_id INT)
+BEGIN
+    SELECT COUNT(id_locataire) AS nb_Locataire
+    FROM locataire
+    INNER JOIN proprietaire ON locataire.id_proprietaire = proprietaire.id_proprietaire
+    WHERE locataire.id_proprietaire = user_id;
+END //
+delimiter ;
 INSERT INTO locataire (civilite_locataire, nom_locataire, prenom_locataire, email_locataire, mdp_locataire, tel_locataire, adresse_locataire, cp_locataire, nb_reservations, id_appart )
 VALUES 
 ('Mr', 'Dupont', 'Pierre', 'pierre.dupont@gmail.com', 'motdepasse', '0123456789', '5 Rue des Lilas', '75020', 3, 1 ),
@@ -297,37 +329,37 @@ VALUES ('En cours', '2022-03-01', '2022-08-31', '2022-03-01', 1, 1),
 
 INSERT INTO materiel_proprio (intitule_materiel_proprio, nb_materiel_proprio, prix_materiel_proprio, type_materiel_proprio, staut_materiel_proprio, id_user, id_appart) 
 VALUES 
-    ('Télévision', 1, '100', 'Electronique', 'Disponible', 2, 1),
-    ('Four', 1, '200', 'Electroménager', 'Disponible', 3, 1),
-    ('Machine à laver', 1, '250', 'Electroménager', 'Disponible', 4, 1),
-    ('Cafetière', 1, '30', 'Electroménager', 'Disponible', 5, 1),
-    ('Fer à repasser', 1, '20', 'Electroménager', 'Disponible', 6, 1),
-    ('Sèche-cheveux', 1, '15', 'Electroménager', 'Disponible', 7, 1),
-    ('Draps', 2, '30', 'Linge de maison', 'Disponible', 8, 1),
-    ('Serviettes', 4, '20', 'Linge de maison', 'Disponible', 9, 1),
-    ('Tondeuse', 1, '150', 'Jardinage', 'Disponible', 10, 1),
-    ('Bicyclette', 1, '100', 'Sport', 'Disponible', 11, 1);
+    ('Télévision', 1, 100, 'Electronique', 'Disponible', 2, 1),
+    ('Four', 1, 200, 'Electroménager', 'Disponible', 3, 1),
+    ('Machine à laver', 1, 250, 'Electroménager', 'Disponible', 4, 1),
+    ('Cafetière', 1, 30, 'Electroménager', 'Disponible', 5, 1),
+    ('Fer à repasser', 1, 20, 'Electroménager', 'Disponible', 6, 1),
+    ('Sèche-cheveux', 1, 15, 'Electroménager', 'Disponible', 7, 1),
+    ('Draps', 2, 30, 'Linge de maison', 'Disponible', 8, 1),
+    ('Serviettes', 4, 20, 'Linge de maison', 'Disponible', 9, 1),
+    ('Tondeuse', 1, 15, 'Jardinage', 'Disponible', 10, 1),
+    ('Bicyclette', 1, 100, 'Sport', 'Disponible', 11, 1);
 
 
 INSERT INTO reservation (statut_reservation, date_debut_reservation, date_fin_reservation, prix_reservation, nb_personnes, id_user, id_appart, id_materiel_proprio)
 VALUES 
-('En cours', '2023-03-01', '2023-03-07', '600 euros', 2, 1, 2, 1),
-('Réservé', '2023-04-15', '2023-04-22', '800 euros', 4, 3, 4, 2),
-('En cours', '2023-05-01', '2023-05-15', '1200 euros', 3, 2, 1, 3),
-('Réservé', '2023-06-10', '2023-06-15', '500 euros', 2, 4, 5, 4),
-('Réservé', '2023-07-20', '2023-07-25', '400 euros', 2, 1, 2, 5);
+('En cours', '2023-03-01', '2023-03-07', 600, 2, 1, 2, 1),
+('Réservé', '2023-04-15', '2023-04-22', 800, 4, 3, 4, 2),
+('En cours', '2023-05-01', '2023-05-15', 1200, 3, 2, 1, 3),
+('Réservé', '2023-06-10', '2023-06-15', 500, 2, 4, 5, 4),
+('Réservé', '2023-07-20', '2023-07-25', 400, 2, 1, 2, 5);
 
 
 INSERT INTO appartement (statut_appart, prix_appart, intitule_appart, ville_appart, cp_appart, adresse_appart, description_appart, type_appart, superficie_appart,image, nb_chambre, nb_cuisine, nb_salon, nb_salle_bain, nb_piece,id_locataire, id_proprietaire, id_user)
 VALUES 
-('Disponible', '150000', 'Bel appartement en centre-ville', 'Paris', '75001', '10 Rue de Rivoli', 'Bel appartement lumineux de 75m² situé en plein coeur de Paris', 'Appartement', '75m²','A-1.jpg', 2, 1, 1, 1, 6,1 ,4,1),
-('En location', '220000', 'Grand appartement avec vue sur la mer', 'Marseille', '13008', '30 Avenue du Prado', 'Spacieux appartement de 100m² avec vue imprenable sur la mer Méditerranée', 'Appartement', '100m²','B-1.jpg', 3, 1, 1, 2, 7,3,6, 2),
-('Disponible', '80000', 'Studio au calme dans quartier résidentiel', 'Lyon', '69006', '20 Rue de la République', 'Joli petit studio de 30m² au calme dans un quartier résidentiel de Lyon', 'Studio', '30m²','C-1.jpg', 1, 1, 0, 1, 3,3,2, 3),
-('En location', '120000', 'Appartement rénové dans immeuble haussmannien', 'Paris', '75009', '15 Rue La Fayette', 'Appartement récemment rénové de 50m² dans un bel immeuble haussmannien', 'Appartement', '50m²','D-1.jpg', 1, 1, 1, 1, 4,8,5, 4),
-('Disponible', '250000', 'Appartement duplex avec terrasse', 'Toulouse', '31000', '5 Rue Saint-Rome', 'Bel appartement duplex de 120m² avec grande terrasse en plein centre-ville de Toulouse', 'Appartement', '120m²','E-1.jpg', 4, 1, 1, 2, 8,4,4, 1),
-('En location', '180000', 'Appartement lumineux avec balcon', 'Nantes', '44000', '10 Rue de Strasbourg', 'Appartement de 80m² très lumineux avec balcon donnant sur un parc arboré', 'Appartement', '80m²','F-1.jpg', 2, 1, 1, 1, 5,6,8, 2),
-('Disponible', '90000', 'Appartement avec vue sur la montagne', 'Grenoble', '38000', '5 Rue de la République', 'Bel appartement de 60m² avec vue sur la montagne', 'Appartement', '60m²','J-1.jpg', 2, 1, 1, 1, 5,7,3, 5),
-('En location', '150000', 'Appartement en rez-de-jardin', 'Nice', '06000', '10 Avenue des Fleurs', 'Appartement de 70m² en rez-de-jardin avec terrasse et accès direct à la piscine de la résidence', 'Appartement', '70m²','G-1.jpg', 2, 1, 1, 1, 5,10,2,16);
+('Disponible', 150000, 'Bel appartement en centre-ville', 'Paris', '75001', '10 Rue de Rivoli', 'Bel appartement lumineux de 75m² situé en plein coeur de Paris', 'Appartement', '75m²','A-1.jpg', 2, 1, 1, 1, 6,1 ,4,1),
+('En location', 220000, 'Grand appartement avec vue sur la mer', 'Marseille', '13008', '30 Avenue du Prado', 'Spacieux appartement de 100m² avec vue imprenable sur la mer Méditerranée', 'Appartement', '100m²','B-1.jpg', 3, 1, 1, 2, 7,3,6, 2),
+('Disponible', 80000, 'Studio au calme dans quartier résidentiel', 'Lyon', '69006', '20 Rue de la République', 'Joli petit studio de 30m² au calme dans un quartier résidentiel de Lyon', 'Studio', '30m²','C-1.jpg', 1, 1, 0, 1, 3,3,2, 3),
+('En location', 120000, 'Appartement rénové dans immeuble haussmannien', 'Paris', '75009', '15 Rue La Fayette', 'Appartement récemment rénové de 50m² dans un bel immeuble haussmannien', 'Appartement', '50m²','D-1.jpg', 1, 1, 1, 1, 4,8,5, 4),
+('Disponible', 250000, 'Appartement duplex avec terrasse', 'Toulouse', '31000', '5 Rue Saint-Rome', 'Bel appartement duplex de 120m² avec grande terrasse en plein centre-ville de Toulouse', 'Appartement', '120m²','E-1.jpg', 4, 1, 1, 2, 8,4,4, 1),
+('En location', 180000, 'Appartement lumineux avec balcon', 'Nantes', '44000', '10 Rue de Strasbourg', 'Appartement de 80m² très lumineux avec balcon donnant sur un parc arboré', 'Appartement', '80m²','F-1.jpg', 2, 1, 1, 1, 5,6,8, 2),
+('Disponible', 90000, 'Appartement avec vue sur la montagne', 'Grenoble', '38000', '5 Rue de la République', 'Bel appartement de 60m² avec vue sur la montagne', 'Appartement', '60m²','J-1.jpg', 2, 1, 1, 1, 5,7,3, 5),
+('En location', 150000, 'Appartement en rez-de-jardin', 'Nice', '06000', '10 Avenue des Fleurs', 'Appartement de 70m² en rez-de-jardin avec terrasse et accès direct à la piscine de la résidence', 'Appartement', '70m²','G-1.jpg', 2, 1, 1, 1, 5,10,2,16);
 
 INSERT INTO equipement_appart (intitule_equip_appart, nb_equi_appart, prix_equip_appart, type_equip_appart, statut_equip_appart, id_appart)
 VALUES 
@@ -368,13 +400,12 @@ VALUES
     ("Bien isolé", 8),("Bonne distribution", 8),("Décoration moderne", 8),
     ("Quartier animé", 9),("Proximité des transports", 9),("Proche de la plage", 9);
     
-    
-
-
-/* INSERT INTO statistique (id_locataire, id_appart, nb_reservations, prix_total_reservations, revenu_total_locataire)
-SELECT r.id_user, r.id_appart, COUNT(r.id_reservation), SUM(prix_reservation), SUM(prix_reservation * 0.8)
-FROM reservation r
-WHERE r.statut_reservation = "Réservé"
-GROUP BY r.id_user, r.id_appart; */
-
+INSERT INTO facture (date_facture, statut_facture, montant_facture, id_contrat)
+VALUES
+('2022-01-05', 'En attente', 500, 1),
+('2022-02-05', 'Payée', 500.9, 1),
+('2022-03-05', 'Payée', 500.45, 2),
+('2022-04-05', 'Payée', 500.4, 2),
+('2022-05-05', 'En attente', 500.85, 3),
+('2022-06-05', 'En attente', 500, 3);
 
