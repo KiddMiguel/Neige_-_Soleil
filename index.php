@@ -90,7 +90,7 @@ $unController = new Controller($server, $bdd, $user, $mdp);
             session_destroy();
             unset($_SESSION["email_locataire"]);
             unset($_SESSION["email_proprio"]);
-            header("location: index.php?page=home");
+            require_once("Templates/home.php");
             break;
         case "contact":
             require_once("Templates/contact.php");

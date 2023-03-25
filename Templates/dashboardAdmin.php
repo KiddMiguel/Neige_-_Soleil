@@ -1,3 +1,4 @@
+<?php require_once("setting/setting_dashbord.php"); ?>
 <section class="sectionFive py-5" style="background-color:#DEE2E6;">
     <div class="container-fluid">
         <div>
@@ -7,34 +8,32 @@
 
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 p-3 text-white">
                         <div class="rounded m-1 pb-3" style="background-color:#2469CE;height: 17rem;">
-                            <p class="fs-2 fw-bold pt-3 ps-4 m-0 pb-1">60 <span class="fs-5 fw-lighter">Contrat(s)</span></p>
-                            <p class="ps-4 fw-semibold">Dernier contrat active (Avril)</p>
+                            <p class="fs-2 fw-bold pt-3 ps-4 m-0 pb-1"><?php echo $contrats?> <span class="fs-5 fw-lighter">Contrat(s)</span></p>
+                            <p class="ps-4 fw-semibold">Dernier contrat active (<?php echo $mois ?>)</p>
                             <div class="d-flex">
                                 <div class="mt-5 pt-5 me-auto ps-4">
-                                    <p>43 En attente</p>
+                                    <p><?php echo $factures_wait ?> Facture(s) en attente</p>
                                 </div>
-                                <p class="mt-5 pt-5 pe-4">72%</p>
+                                <!--<p class="mt-5 pt-5 pe-4">72%</p>-->
                             </div>
                             <div class="progress ms-4" style="height: 6px; width: 75%;" role="progressbar" aria-label="Example with label" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
-                                <div class="progress-bar bg-success" style="width: 75%;"></div>
+                                <div class="progress-bar bg-success" style="width: 100%;"></div>
                             </div>
                         </div>
 
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 p-3 text-black">
                         <div class="rounded bg-light m-1 pb-3" style="height: 17rem;">
-                            <p class="fs-2 fw-bold pt-3 ps-4 m-0">690,7 € <span class="badge text-bg-success fw-semibold fs-6 ms-5"><i class="bi bi-arrow-up-short"></i>2.2%</span></p>
-                            <p class="ps-4 ">Revenue du moi (Avril)</p>
+                            <p class="fs-2 fw-bold pt-3 ps-4 m-0"><?php echo $revenu ?>  € <span class="badge text-bg-success fw-semibold fs-6 ms-5"><i class="bi bi-arrow-up-short"></i>0.0%</span></p>
+                            <p class="ps-4 ">Revenue du mois</p>
                             <div class="d-flex">
-                                <div class="mt-3 pt-3 me-auto ps-4">
+                                <div class="mt-3 pt-4 me-auto ps-4">
                                     <p><i class="bi bi-align-start text-success"></i> Locataires</p>
                                     <p><i class="bi bi-align-start text-warning"></i> Appartements</p>
-                                    <p><i class="bi bi-align-start text-danger"></i> Autres</p>
                                 </div>
-                                <div class="mt-3 pt-3 pe-4">
-                                    <p><i class="bi bi-arrow-up-short text-success"></i> 7,660 €</p>
-                                    <p><i class="bi bi-arrow-up-short text-success"></i> 2,820 €</p>
-                                    <p><i class="bi bi-arrow-down-short text-danger"></i> 8,820 €</p>
+                                <div class="mt-3 pt-4 pe-4">
+                                    <p><i class="bi bi-arrow-up-short text-success"></i></p>
+                                    <p><i class="bi bi-arrow-up-short text-success"></i></p>
                                 </div>
 
                             </div>
@@ -45,26 +44,30 @@
                             <p class="fs-5 fw-bold pt-3 ps-4 m-0 pb-5">Highlights</p>
 
                             <div class="d-flex">
-                                <div class=" me-auto ps-4">
-                                    <p>Avg. Client Rating</p>
-                                    <p>Avg. Quotes</p>
-                                    <p>Avg. Agent Earnings</p>
+                                <div class="mt-3 pt-4 me-auto ps-4">
+                                    <p><i class="bi bi-align-start text-success"></i> Locataire(s)</p>
+                                    <p><i class="bi bi-align-start text-warning"></i> Appartement(s)</p>
+                                    <p style="font-size: 10px;"><i class="bi bi-align-start text-danger " ></i> Le nombre de vos locatires et d'appartements</p>
                                 </div>
-                                <div class="pe-4">
-                                    <p><i class="bi bi-arrow-up-short text-success"></i>7.8<span class="text-muted">/10</span></p>
-                                    <p><i class="bi bi-arrow-down-short text-danger"></i>730</p>
-                                    <p><i class="bi bi-arrow-up-short text-success"></i>$2,309</p>
+                                <div class="mt-3 pt-4 pe-4">
+                                    <p><i class="bi bi-arrow-up-short text-success"></i> <?php echo $nbLocataire ?></p>
+                                    <p><i class="bi bi-arrow-up-short text-success"></i> <?php echo $nbAppart?></p>
+                                    
                                 </div>
+
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 p-3 text-light">
                         <div class="rounded m-1" style="background-color:#2469CE;height: 17rem;">
-                            <p class="fs-2 fw-bold pt-3 ps-4 m-0"><span class="fs-5 fw-lighter">Total</span> 800.70 €</p>
-                            <p class="ps-4">Active Projects in April</p>
+                            <p class="fs-2 fw-bold pt-3 ps-4 m-0"><span class="fs-5 fw-lighter">Total </span><?php echo $revenus ?> €</p>
+                            <p class="ps-4">La somme total de votre revenu</p>
                             <div class="d-flex">
-                                <p class="mt-5 pt-5 me-auto ps-4">43 Pending</p>
-                                <p class="mt-5 pt-5 pe-4">72%</p>
+                                <p class="mt-5 pt-5 me-auto ps-4">Plafond</p>
+                                <p class="mt-5 pt-5 pe-4">100%</p>
+                            </div>
+                            <div class="progress ms-4" style="height: 6px; width: 85%;" role="progressbar" aria-label="Example with label" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+                                <div class="progress-bar bg-warning" style="width: 100%;"></div>
                             </div>
                         </div>
                     </div>
