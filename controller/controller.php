@@ -137,8 +137,7 @@ class Controller
         $atouts = $this->unModele->selectWhereAtout($id_appart);
         return $atouts;
     }
-
-
+   
     /**********************************FILTRE************** */
     public function FiltreLocation($mot)
     {
@@ -158,5 +157,45 @@ class Controller
     {
         $demandes = $this->unModele->deleteDemande($id_user);
         return $demandes;
+    }
+
+    /****************************DASHBORD************************* */
+    public function dashBordContrat($id_user)
+    {
+        $contrats = $this->unModele->dashBordContrat($id_user);
+        return $contrats;
+    }
+    public function dashBordContrat_last($id_user)
+    {
+        $mois = $this->unModele->dashBordContrat_last($id_user);
+        return $mois;
+    }
+    public function dashBordFacture_wait($id_user)
+    {
+        $factures_wait = $this->unModele->dashBordFacture_wait($id_user);
+        return $factures_wait;
+    }
+    public function dashBordRevenu_month($id_user)
+    {
+        $revenu = $this->unModele->dashBordRevenu_month($id_user);
+        return $revenu;
+    }
+    public function dashBordRevenu($id_user)
+    {
+        $revenus = $this->unModele->dashBordRevenu($id_user);
+        return $revenus;
+    }
+
+    /*NBLOCATAIRE*/
+    public function dashBordNbLocataire($id_user)
+    {
+        $nbLocataire = $this->unModele->dashBordNbLocataire($id_user);
+        return $nbLocataire;
+    }
+    /*NBAPPARTEMENT*/
+    public function dashBordNbAppartement($id_user)
+    {
+        $nbAppartement = $this->unModele->dashBordNbAppartement($id_user);
+        return $nbAppartement;
     }
 }
