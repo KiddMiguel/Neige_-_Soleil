@@ -34,7 +34,7 @@
                     </div>
 
                     <div class="row border rounded pe-5 ps-5 pb-4 m-5">
-                        <h6 class="col-md-12 text-center pb-3 pt-3">Informations appartement</h6>
+                        <h6 class="col-md-12 text-center pb-3 pt-3">Informations appartements</h6>
                         <div class="col-md-2 mb-2">
                             <div class="form-outline">
                                 <input type="number" class="form-control form-control" name="nb_piece" placeholder="Nb pièce(s)" />

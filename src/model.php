@@ -203,7 +203,7 @@ class Modele
     public function insertAppartement($tab)
     {
         if ($this->unPDO != null) {
-            $request = "insert into appartement values (null, null, :prix_appart, :intitule_appart, :ville_appart, :cp_appart, :adresse_appart, :description_appart, :type_appart, :superficie_appart,'Default.png', :nb_chambre , :nb_cuisine, :nb_salon, :nb_salle_bain, :nb_piece, :id_user)";
+            $request = "insert into appartement values (null, 'Disponible', :prix_appart, :intitule_appart, :ville_appart, :cp_appart, :adresse_appart, :description_appart, :type_appart, :superficie_appart,'Default.png', :nb_chambre , :nb_cuisine, :nb_salon, :nb_salle_bain, :nb_piece,null, null, :id_user)";
             $donnees = array(
                 ":prix_appart" => $tab['prix_appart'],
                 ":intitule_appart" => $tab['intitule_appart'],
