@@ -48,25 +48,22 @@ function calendar() {
 
       select: function (info) {
         if (!startDate) {
-          // Si aucune date de début n'a été sélectionnée
           startDate = info.start; // Stocke la date de début
         } else if (!endDate) {
-          // Si aucune date de fin n'a été sélectionnée
           if (info.start > startDate) {
-            // Vérifie que la date de fin est postérieure à la date de début
             endDate = info.start; // Stocke la date de fin
-            // Crée un nouvel objet événement avec les dates sélectionnées
+
+            endDate = moment(endDate).add(1, 'day').format('YYYY-MM-DD');
             var newEvent = {
               title: "Nouvelle réservation",
               start: moment(startDate).format('YYYY-MM-DD'),
-              end: moment(endDate).format('YYYY-MM-DD'),
+              end: endDate,
             };
-            calendar.addEvent(newEvent); // Ajoute l'événement à la liste des événements
+            calendar.addEvent(newEvent); 
           } else {
-            alert("La date de fin doit être postérieure à la date de début."); // Affiche une erreur si la date de fin n'est pas valide
+            alert("La date de fin doit être postérieure à la date de début."); 
           }
         } else {
-          // Si les deux dates ont été sélectionnées
           startDate = info.start; // Remplace la date de début avec la nouvelle sélection
           endDate = null; // Réinitialise la date de fin
         }
