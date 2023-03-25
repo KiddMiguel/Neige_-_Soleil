@@ -289,6 +289,7 @@ END //
 delimiter ;
 
 /*------------------------------------------------------------------*/
+/*PROCEDURE POUR AVOIR LE NOMBRE TOTAL DES LOCATAIRES*/
 Drop PROCEDURE if exists total_locataire;
 delimiter //
 CREATE PROCEDURE total_locataire(IN user_id INT)
@@ -297,6 +298,18 @@ BEGIN
     FROM locataire
     INNER JOIN proprietaire ON locataire.id_proprietaire = proprietaire.id_proprietaire
     WHERE locataire.id_proprietaire = user_id;
+END //
+delimiter ;
+/*PROCEDURE POUR AVOIR LE NOMBRE TOTAL DES APPARTEMENTS*/
+
+Drop PROCEDURE if exists total_locataire;
+delimiter //
+CREATE PROCEDURE total_locataire(IN user_id INT)
+BEGIN
+SELECT COUNT(id_appart) AS nb_appart
+    FROM appartement
+    INNER JOIN user ON appartement.id_user = user.id_user
+    WHERE appartement.id_user = user_id;
 END //
 delimiter ;
 INSERT INTO locataire (civilite_locataire, nom_locataire, prenom_locataire, email_locataire, mdp_locataire, tel_locataire, adresse_locataire, cp_locataire, nb_reservations, id_appart )
