@@ -105,14 +105,11 @@ $unController = new Controller($server, $bdd, $user, $mdp);
     require_once("include/footer.php");
     ?>
       
-    <!-- JavaScript Bundle with Popper -->
-    <!-- <script src="https://unpkg.com/js-year-calendar@latest/dist/js-year-calendar.min.js"></script> -->
-    <!-- <script src="https://unpkg.com/js-year-calendar@next/dist/js-year-calendar.min.js"></script> -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.4/index.global.min.js'></script>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.0/fullcalendar.min.js'></script>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js'></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
-    <script src="//code.jquery.com/jquery-1.12.0.min.js"></script>
     <script src="JavaScript/main.js"></script>
 </body>
 
