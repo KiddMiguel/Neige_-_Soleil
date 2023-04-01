@@ -170,9 +170,9 @@ class Controller
         $mois = $this->unModele->dashBordContrat_last($id_user);
         return $mois;
     }
-    public function dashBordFacture_wait($id_user)
+    public function dashBordFacture_wait()
     {
-        $factures_wait = $this->unModele->dashBordFacture_wait($id_user);
+        $factures_wait = $this->unModele->dashBordFacture_wait();
         return $factures_wait;
     }
     public function dashBordRevenu_month($id_user)

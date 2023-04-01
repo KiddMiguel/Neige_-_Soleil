@@ -436,12 +436,11 @@ class Modele
         }
     }
     /*Affiche les factures en attentes*/
-    public function dashBordFacture_wait($id_user)
+    public function dashBordFacture_wait()
     {
         if ($this->unPDO != null) {
-            $request = "SELECT COUNT(id_facture) FROM facture WHERE statut_facture ='En attente' AND id_user =:id_user";
+            $request = "select count(id_facture) from facture Inner join contrat on facture.id_facture= contrat.id_contrat where facture.statut_facture ='En attente'";
             $select = $this->unPDO->prepare($request);
-            $select->bindValue(':id_user', $id_user, PDO::PARAM_INT);
             $select->execute();
             $factures_wait = $select->fetchColumn();
             return $factures_wait;

@@ -49,20 +49,23 @@ function calendar() {
 
       events: function (fetchInfo, successCallback, failureCallback) {
         $.ajax({
-          url: 'http://ppe/Neige_-_Soleil/src/recup_reservations.php',
+          url: 'http://localhost/PPE/Neige_-_Soleil/src/recup_reservations.php',
           dataType: 'json',
           success: function (reservations) {
             var events = [];
       
-            reservations.forEach(function (reservation) {
+            reservations.forEach(function (reservations) {
               events.push({
                 title: 'Réservation',
-                start: reservation.date_debut_reservation,
-                end: reservation.date_fin_reservation,
+                start: reservations.start,
+                end: reservations.end,
               });
+
+              console.log(reservations.end);
             });
       
             successCallback(events);
+            console.log(events);
           },
           error: function () {
             failureCallback('Erreur lors de la récupération des réservations.');

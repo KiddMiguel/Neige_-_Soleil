@@ -5,12 +5,9 @@ $conn = mysqli_connect("localhost", "root", "", "neige_soleil");
 // Vérification de la connexion
 if (!$conn) {
     die("Connexion échouée : " . mysqli_connect_error());
-}else{
-    echo 'connection good';
 }
-
 // Requête SELECT pour récupérer les réservations
-$sql = "SELECT id_reservation, date_debut_reservation, date_fin_reservation, statut_reservation FROM reservation";
+ $sql = "SELECT id_reservation, date_debut_reservation, date_fin_reservation, statut_reservation FROM reservation";
 
 // Exécution de la requête
 $result = mysqli_query($conn, $sql);
@@ -33,7 +30,6 @@ while ($row = mysqli_fetch_assoc($result)) {
 }
 
 // Encodage du tableau en JSON pour l'affichage dans FullCalendar
-echo json_encode($event);
-echo 'Hello wolrd';
+echo json_encode($events);
 
 

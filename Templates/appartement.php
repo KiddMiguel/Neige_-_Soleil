@@ -1,4 +1,4 @@
-<section class="container">
+<section class="container section_appart">
   <div class=" text-center">
     <div class="row container-fluid" style="width:80%;">
       <div class="col-5 ">

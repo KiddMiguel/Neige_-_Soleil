@@ -302,9 +302,9 @@ END //
 delimiter ;
 /*PROCEDURE POUR AVOIR LE NOMBRE TOTAL DES APPARTEMENTS*/
 
-Drop PROCEDURE if exists total_locataire;
+Drop PROCEDURE if exists total_appartement;
 delimiter //
-CREATE PROCEDURE total_locataire(IN user_id INT)
+CREATE PROCEDURE total_appartement(IN user_id INT)
 BEGIN
 SELECT COUNT(id_appart) AS nb_appart
     FROM appartement
@@ -333,7 +333,7 @@ VALUES ( 'Mr', 'Durand', 'Jean', 'Particulier', 'jean.durand@email.com', 'motdep
 
 INSERT INTO contrat (statut_contrat, date_debut_contrat, date_fin_contrat, date_sign_contrat, id_user, id_appart)
 VALUES ('En cours', '2022-03-01', '2022-08-31', '2022-03-01', 1, 1),
-       ('Résilié', '2022-04-01', '2022-08-31', '2022-04-01', 2, 2),
+       ('Résilié', '2022-04-01', '2022-08-31', '2022-04-01', 1, 2),
        ('En cours', '2022-02-01', '2022-07-31', '2022-02-01', 3, 3),
        ('En cours', '2022-01-01', '2022-06-30', '2022-01-01', 4, 4),
        ('Résilié', '2022-05-01', '2022-08-31', '2022-05-01', 5, 5);
@@ -418,7 +418,7 @@ VALUES
 ('2022-01-05', 'En attente', 500, 1),
 ('2022-02-05', 'Payée', 500.9, 1),
 ('2022-03-05', 'Payée', 500.45, 2),
-('2022-04-05', 'Payée', 500.4, 2),
-('2022-05-05', 'En attente', 500.85, 3),
+('2022-04-05', 'En attente', 500.4, 2),
+('2022-05-05', 'En attente', 500.85, 1),
 ('2022-06-05', 'En attente', 500, 3);
 

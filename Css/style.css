@@ -144,6 +144,10 @@ body .sectionInscription .container .card .active_page {
 body .sectionInscription .container .card .desactive_page {
   display: none;
 }
+body .section_appart :root {
+  --fc-event-bg-color: #dc3545;
+  --fc-event-border-color: #dc3545;
+}
 body footer {
   background-color: #093A7A;
 }
