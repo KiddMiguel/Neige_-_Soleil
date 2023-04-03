@@ -9,27 +9,27 @@
             <div class="row">
                 <div class="col-md-6 mb-4">
                     <div class="form-outline">
-                        <input type="text" class="form-control form-control"   value="<?= $_SESSION["nom_locataire"] ?>" placeholder="Nom" />
+                        <input type="text" class="form-control form-control" required  value="<?= $_SESSION["nom_locataire"] ?>" placeholder="Nom" />
                     </div>
                 </div>
                 <div class="col-md-6 mb-4">
                     <div class="form-outline">
-                        <input type="text" id="form3Example1n" class="form-control form-control"  value="<?= $_SESSION["prenom_locataire"] ?>" placeholder="Prenom" />
+                        <input type="text" id="form3Example1n" class="form-control form-control" required  value="<?= $_SESSION["prenom_locataire"] ?>" placeholder="Prenom" />
                     </div>
                 </div>
                 <div class="col-md-12 mb-4">
                     <div class="form-outline">
-                        <input type="text" id="form3Example1n" class="form-control form-control"   value="<?= $_SESSION["email_locataire"] ?>" placeholder="Email" />
+                        <input type="text" id="form3Example1n" class="form-control form-control" required   value="<?= $_SESSION["email_locataire"] ?>" placeholder="Email" />
                     </div>
                 </div>
                 <div class="col-md-6 mb-4">
                     <div class="form-outline">
-                        <input type="text" class="form-control form-control" value="<?= $_SESSION["tel_locataire"] ?>" placeholder="Numéro de téléphone" />
+                        <input type="text" class="form-control form-control" required value="<?= $_SESSION["tel_locataire"] ?>" placeholder="Numéro de téléphone" />
                     </div>
                 </div>
                 <div class="col-md-6 mb-2">
                     <div class="form-outline">
-                        <input type="text" id="" class="form-control form-control"  value="<?= $_SESSION["nom_locataire"] ?>"  placeholder="Ville" />
+                        <input type="text" id="" class="form-control form-control" required  value="<?= $_SESSION["cp_locataire"] ?>"  placeholder="Code Postal" />
                     </div>
                 </div>
             </div>
@@ -37,7 +37,7 @@
             <div class="row">
                 <div class="col-md-6 mb-2">
                     <div class="form-outline">
-                        <input type="number" class="form-control form-control" name="nb_personnes" placeholder="Nb personne" />
+                        <input type="number" class="form-control form-control" required name="nb_personnes" placeholder="Nb personne" />
                     </div>
                 </div>
                 <div class="col-md-6 mb-2" style="display: none;">

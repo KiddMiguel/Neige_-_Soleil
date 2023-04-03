@@ -90,6 +90,9 @@ $unController = new Controller($server, $bdd, $user, $mdp);
         case "paiement":
             require_once("Templates/paiement.php");
             break;
+        case "delete":
+            require_once("Templates/delete.php");
+            break;
         case "deconnexion":
             session_destroy();
             unset($_SESSION["email_locataire"]);
