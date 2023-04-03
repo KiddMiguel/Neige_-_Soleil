@@ -5,44 +5,17 @@ window.onload = function () {
   calendar();
   tawk();
   inscription();
-}; //Calendrier
-// function calendar(event) {
-//     const currentYear = new Date().getFullYear();
-//     var element = document.querySelector('.calendar');
-//     new Calendar('.calendar', {
-//         language: 'fr',
-//         style: 'background',
-//         minDate: new Date(),
-//         maxDate: new Date(currentYear, 11, 31)
-//     });
-//     document.querySelector('.calendar').addEventListener('clickDay', function selectDate(data) {
-//         console.log(data.element);
-//         const date = data.date;
-//         const year = date.getFullYear();
-//         const month = ("0" + (date.getMonth() + 1)).slice(-2);
-//         const day = ("0" + date.getDate()).slice(-2);
-//         const setdate = `${year}-${month}-${day}`;
-//         $('#dateEnd').val(setdate);
-//         let start = new Date($('#dateStart').val());
-//         let end = new Date($('#dateEnd').val());
-//         while (start <= end) {
-//             console.log(data.element);
-//             console.log(start.toDateString());
-//             start.setDate(start.getDate() + 1);
-//         }
-//     });
-//     $('#choisir').click(function() {
-//     });
-// }
-
+};
 
 function calendar() {
   document.addEventListener("DOMContentLoaded", function () {
     var calendarEl = document.getElementById("calendar");
     var startDate, endDate;
+    var eventSelected = false;
     var calendar = new FullCalendar.Calendar(calendarEl, {
       initialView: "dayGridMonth",
       selectable: true,
+      height: 650,
       select: function select(info) {
         if (!startDate) {
           startDate = info.start; // Stocke la date de début
@@ -54,7 +27,9 @@ function calendar() {
             var newEvent = {
               title: "Nouvelle réservation",
               start: moment(startDate).format('YYYY-MM-DD'),
-              end: endDate
+              end: endDate,
+              backgroundColor: 'green',
+              borderColor: 'green'
             };
             calendar.addEvent(newEvent);
           } else {
@@ -64,27 +39,56 @@ function calendar() {
           startDate = info.start; // Remplace la date de début avec la nouvelle sélection
 
           endDate = null; // Réinitialise la date de fin
-        } // Affiche les dates sélectionnées
-
+        }
 
         if (startDate) {
-          console.log('Date de début : ' + moment(startDate).format('YYYY-MM-DD')); // alert('Date de début : ' + startDate.toLocaleDateString());
+          var dateStart = moment(startDate).format('YYYY-MM-DD');
+          document.getElementById('dateStart').value = dateStart;
+          document.getElementById('dateStart_form').value = dateStart;
         }
 
         if (endDate) {
-          console.log('Date de début : ' + moment(endDate).format('YYYY-MM-DD')); // console.log(endDate);
-          //  alert('Date de fin : ' + endDate.toLocaleDateString());
+          var dateEnd = moment(endDate).format('YYYY-MM-DD');
+          document.getElementById('dateEnd').value = dateEnd;
+          document.getElementById('dateEnd_form').value = dateEnd;
         }
       },
-      events: [{
-        title: "Test",
-        start: "2023-03-20",
-        end: "2023-03-12"
-      }, {
-        title: "Event 2",
-        start: "2023-03-09",
-        end: "2023-03-12"
-      }]
+      events: function events(fetchInfo, successCallback, failureCallback) {
+        $.ajax({
+          type: "GET",
+          url: 'http://localhost/PPE/Neige_-_Soleil/src/recup_reservations.php',
+          dataType: 'json',
+          success: function success(reservations) {
+            var events = [];
+            reservations.forEach(function (reservations) {
+              events.push({
+                title: 'Réservé',
+                start: reservations.start,
+                end: reservations.end,
+                backgroundColor: 'red',
+                borderColor: 'red'
+              });
+            });
+            successCallback(events);
+          },
+          error: function error() {
+            failureCallback('Erreur lors de la récupération des réservations.');
+          }
+        });
+      },
+      validRange: function validRange(nowDate) {
+        return {
+          start: nowDate,
+          // La date d'aujourd'hui
+          end: '9999-01-01' // Une date éloignée dans le futur
+
+        };
+      }
+    });
+    calendar.on('eventClick', function (info) {
+      if (info.event.title === 'Nouvelle réservation' && confirm("Voulez-vous supprimer cet événement ?")) {
+        info.event.remove(); // Supprime l'événement
+      }
     });
     calendar.setOption("locale", "fr");
     calendar.render();
@@ -94,16 +98,12 @@ function calendar() {
 calendar();
 
 function ChangeImage() {
-  var vignette = document.querySelectorAll(".small"); // je selectionne l'image en grand format
-
+  var vignette = document.querySelectorAll(".small");
   var fullimg = document.getElementById("full");
-  var btn = document.querySelector(".btn-add");
   vignette.forEach(function (item) {
     item.addEventListener("click", function () {
       // Pour récuperer la valeur de l'attribut src de l'élément cliqué
-      var imgSource = item.getAttribute("src"); // Je fixe unenouvelle valeur à l'attribut retnue
-      // J'attribue la nouvelle à l'image grand format
-
+      var imgSource = item.getAttribute("src");
       fullimg.setAttribute("src", imgSource);
     });
   });

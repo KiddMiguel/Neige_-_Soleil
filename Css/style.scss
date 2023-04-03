@@ -137,14 +137,13 @@ body {
             }
         }
     }
-    .sectionFive{
-        .active{
+    .sectionFive {
+        .active {
             border: 1.5px solid $color_blue !important;
             color: $color_blue !important;
-            i{
+            i {
                 color: $color_blue !important
             }
-            
         }
     }
     .sectionLocation {
@@ -174,20 +173,18 @@ body {
             }
         }
     }
-    .sectionInscription{
-        .container{
-            .card{
-                .active_page{
+    .sectionInscription {
+        .container {
+            .card {
+                .active_page {
                     display: block;
                 }
-                .desactive_page{
+                .desactive_page {
                     display: none;
                 }
             }
         }
     }
-
-    
     footer {
         background-color: $color_blue;
         li {

@@ -203,7 +203,7 @@ class Modele
     public function insertAppartement($tab)
     {
         if ($this->unPDO != null) {
-            $request = "insert into appartement values (null, null, :prix_appart, :intitule_appart, :ville_appart, :cp_appart, :adresse_appart, :description_appart, :type_appart, :superficie_appart,'Default.png', :nb_chambre , :nb_cuisine, :nb_salon, :nb_salle_bain, :nb_piece, :id_user)";
+            $request = "insert into appartement values (null, 'Disponible', :prix_appart, :intitule_appart, :ville_appart, :cp_appart, :adresse_appart, :description_appart, :type_appart, :superficie_appart,'Default.png', :nb_chambre , :nb_cuisine, :nb_salon, :nb_salle_bain, :nb_piece,null, null, :id_user)";
             $donnees = array(
                 ":prix_appart" => $tab['prix_appart'],
                 ":intitule_appart" => $tab['intitule_appart'],
@@ -296,7 +296,7 @@ class Modele
     public function insertReservation($tab)
     {
         if ($this->unPDO != null) {
-            $request = "insert into reservation values (null, 'En cours réservation', :date_debut_reservation, :date_fin_reservation, :prix_reservation, :nb_personnes, :id_user, :id_appart, null)";
+            $request = "insert into reservation values (null, 'En cours', :date_debut_reservation, :date_fin_reservation, :prix_reservation, :nb_personnes, :id_user, :id_appart)";
             $donnees = array(
                 ":date_debut_reservation" => $tab['date_debut_reservation'],
                 ":date_fin_reservation" => $tab['date_fin_reservation'],
@@ -355,32 +355,31 @@ class Modele
         }
     }
 
-    public function selectReservationAppartement($id_reservation)
+    public function deleteReservation($id_reservation)
     {
         if ($this->unPDO != null) {
-            $request = "select * from appartement where id_reservation = :id_reservation";
+            $request = "DELETE from reservation where id_reservation = :id_reservation";
             $donnees = array(":id_reservation" => $id_reservation);
 
             $select = $this->unPDO->prepare($request);
             $select->execute($donnees);
-            $appartement = $select->fetch();
+            $delete = $select->fetch();
+            return $delete;
+        }
+    }
+
+    public function selectReservationAppartement($id_user)
+    {
+        if ($this->unPDO != null) {
+            $request = "select * from appartement as a LEFT JOIN reservation as r ON a.id_appart = r.id_appart WHERE r.id_user =:id_user";
+            $donnees = array(":id_user" => $id_user);
+
+            $select = $this->unPDO->prepare($request);
+            $select->execute($donnees);
+            $appartement = $select->fetchAll();
             return $appartement;
         }
     }
-
-    public function recupAllReservation()
-    {
-        if ($this->unPDO != null) {
-            $request = "select * from reservation";
-            $select = $this->unPDO->prepare($request);
-            $select->execute();
-            $reservations = $select->fetchAll();
-            return $reservations;
-        } else {
-            return null;
-        }
-    }
-
     public function selectWhereImage($id_appart)
     {
         if ($this->unPDO != null) {
@@ -436,12 +435,11 @@ class Modele
         }
     }
     /*Affiche les factures en attentes*/
-    public function dashBordFacture_wait($id_user)
+    public function dashBordFacture_wait()
     {
         if ($this->unPDO != null) {
-            $request = "SELECT COUNT(id_facture) FROM facture WHERE statut_facture ='En attente' AND id_user =:id_user";
+            $request = "select count(id_facture) from facture Inner join contrat on facture.id_facture= contrat.id_contrat where facture.statut_facture ='En attente'";
             $select = $this->unPDO->prepare($request);
-            $select->bindValue(':id_user', $id_user, PDO::PARAM_INT);
             $select->execute();
             $factures_wait = $select->fetchColumn();
             return $factures_wait;
@@ -479,19 +477,19 @@ class Modele
         }
     }
     /*Afficher le nombre de locataire */
-    public function dashBordNbLocataire($id_user)
-    {
-        if ($this->unPDO != null) {
-            $request = "CALL total_locataire(:id_user);";
-            $select = $this->unPDO->prepare($request);
-            $select->bindValue(':id_user', $id_user, PDO::PARAM_INT);
-            $select->execute();
-            $nbLocataire = $select->fetchColumn();
-            return $nbLocataire;
-        } else {
-            return null;
-        }
-    }
+    // public function dashBordNbLocataire($id_user)
+    // {
+    //     if ($this->unPDO != null) {
+    //         $request = "CALL total_locataire(:id_user);";
+    //         $select = $this->unPDO->prepare($request);
+    //         $select->bindValue(':id_user', $id_user, PDO::PARAM_INT);
+    //         $select->execute();
+    //         $nbLocataire = $select->fetch();
+    //         return $nbLocataire;
+    //     } else {
+    //         return null;
+    //     }
+    // }
 
     /*Afficher le nombre de appartements */
     public function dashBordNbAppartement($id_user)
@@ -508,5 +506,7 @@ class Modele
         }
     }
 
+
+    /*********************AUTOMATIME LOCATAIRE */
     
 }
