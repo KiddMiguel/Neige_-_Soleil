@@ -188,11 +188,11 @@ class Controller
     }
 
     /*NBLOCATAIRE*/
-    public function dashBordNbLocataire($id_user)
-    {
-        $nbLocataire = $this->unModele->dashBordNbLocataire($id_user);
-        return $nbLocataire;
-    }
+    // public function dashBordNbLocataire($id_user)
+    // {
+    //     $nbLocataire = $this->unModele->dashBordNbLocataire($id_user);
+    //     return $nbLocataire;
+    // }
     /*NBAPPARTEMENT*/
     public function dashBordNbAppartement($id_user)
     {
