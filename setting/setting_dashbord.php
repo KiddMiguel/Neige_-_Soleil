@@ -1,7 +1,7 @@
 <?php
 $contrats = $unController->dashBordContrat($id_user);
 $mois = $unController->dashBordContrat_last($id_user);
-$factures_wait = $unController->dashBordFacture_wait($id_user);
+$factures_wait = $unController->dashBordFacture_wait();
 $revenu = $unController->dashBordRevenu_month($id_user);
 $revenus = $unController->dashBordRevenu($id_user);
 $nbLocataire = $unController->dashBordNbLocataire($id_user);

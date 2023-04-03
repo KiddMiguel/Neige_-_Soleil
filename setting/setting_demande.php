@@ -1,7 +1,7 @@
 <?php
 $demandes = null;
 if (isset($_GET['id_user'])) {  
-    $id_proprietaire = $_GET['id_user'];
+    $id_user = $_GET['id_user'];
     $demandes = $unController->selectWhereDemande($id_user);
     $appartementProprio = $unController->selectAppartementProprietaire($id_user);
     // $locataireProprio = $unController->selectWhereLocataireProprietaire($id_user);

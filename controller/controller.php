@@ -101,15 +101,15 @@ class Controller
 
 
     /*********************************RESERVATION************************ */
-    public function selectReservationLocataire($id_user)
+    public function selectReservationLocataire($id_appart)
     {
-        $reservations = $this->unModele->selectReservationLocataire($id_user);
+        $reservations = $this->unModele->selectReservationLocataire($id_appart);
         return $reservations;
     }
 
-    public function selectReservationAppartement($id_reservation)
+    public function selectReservationAppartement($id_user)
     {
-        $reservationsAppart = $this->unModele->selectReservationAppartement($id_reservation);
+        $reservationsAppart = $this->unModele->selectReservationAppartement($id_user);
         return $reservationsAppart;
     }
 
@@ -118,10 +118,11 @@ class Controller
         $this->unModele->insertReservation($tab);
     }
 
-    public function recupAllReservation()
+
+    public function deleteReservation($id_reservation)
     {
-        $reservations = $this->unModele->recupAllReservation();
-        return $reservations;
+        $delete = $this->unModele->deleteReservation($id_reservation);
+        return $delete;
     }
 
     /*************************IMAGES********************** */
@@ -170,9 +171,9 @@ class Controller
         $mois = $this->unModele->dashBordContrat_last($id_user);
         return $mois;
     }
-    public function dashBordFacture_wait($id_user)
+    public function dashBordFacture_wait()
     {
-        $factures_wait = $this->unModele->dashBordFacture_wait($id_user);
+        $factures_wait = $this->unModele->dashBordFacture_wait();
         return $factures_wait;
     }
     public function dashBordRevenu_month($id_user)
