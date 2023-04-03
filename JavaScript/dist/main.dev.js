@@ -16,14 +16,6 @@ function calendar() {
       initialView: "dayGridMonth",
       selectable: true,
       height: 650,
-      aspectRatio: 2,
-      selectAllow: function selectAllow(selectInfo) {
-        if (eventSelected) {
-          return false; // Désactiver la sélection si un événement a déjà été sélectionné
-        } else {
-          return true; // Autoriser la sélection si aucun événement n'a été sélectionné
-        }
-      },
       select: function select(info) {
         if (!startDate) {
           startDate = info.start; // Stocke la date de début
@@ -83,6 +75,14 @@ function calendar() {
             failureCallback('Erreur lors de la récupération des réservations.');
           }
         });
+      },
+      validRange: function validRange(nowDate) {
+        return {
+          start: nowDate,
+          // La date d'aujourd'hui
+          end: '9999-01-01' // Une date éloignée dans le futur
+
+        };
       }
     });
     calendar.on('eventClick', function (info) {

@@ -355,32 +355,31 @@ class Modele
         }
     }
 
-    public function selectReservationAppartement($id_reservation)
+    public function deleteReservation($id_reservation)
     {
         if ($this->unPDO != null) {
-            $request = "select * from appartement where id_reservation = :id_reservation";
-            $donnees = array(":id_reservation" => $id_reservation);
+            $request = "DELETE from reservation where id_reservation = :id_reservation";
+            $donnees = array(":id_user" => $id_reservation);
 
             $select = $this->unPDO->prepare($request);
             $select->execute($donnees);
-            $appartement = $select->fetch();
+            $delete = $select->fetch();
+            return $delete;
+        }
+    }
+
+    public function selectReservationAppartement($id_user)
+    {
+        if ($this->unPDO != null) {
+            $request = "select * from appartement as a LEFT JOIN reservation as r ON a.id_appart = r.id_appart WHERE r.id_user =:id_user";
+            $donnees = array(":id_user" => $id_user);
+
+            $select = $this->unPDO->prepare($request);
+            $select->execute($donnees);
+            $appartement = $select->fetchAll();
             return $appartement;
         }
     }
-
-    public function recupAllReservation()
-    {
-        if ($this->unPDO != null) {
-            $request = "select * from reservation";
-            $select = $this->unPDO->prepare($request);
-            $select->execute();
-            $reservations = $select->fetchAll();
-            return $reservations;
-        } else {
-            return null;
-        }
-    }
-
     public function selectWhereImage($id_appart)
     {
         if ($this->unPDO != null) {
@@ -507,5 +506,7 @@ class Modele
         }
     }
 
+
+    /*********************AUTOMATIME LOCATAIRE */
     
 }

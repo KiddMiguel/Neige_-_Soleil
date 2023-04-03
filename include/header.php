@@ -45,7 +45,7 @@
 
                         }else{
                             echo '  <li><a class="dropdown-item" href="index.php?page=profil_locataire&id_user='.$_SESSION['id_user'].'"><i class="bi bi-gear"></i> Profil</a></li>
-                            <li><a class="dropdown-item" href="index.php?page=reservation&id_user='.$_SESSION['id_user'].'"><i class="bi bi-list-ul"></i> Mes réservations <span class="badge text-bg-warning">'.$_SESSION['nb_reservations'].'</span></a></li>';
+                            <li><a class="dropdown-item" href="index.php?page=reservation&id_user='.$_SESSION['id_user'].'"><i class="bi bi-list-ul"></i> Mes réservations</a></li>';
                         }
                           
                                 echo '
