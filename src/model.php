@@ -296,7 +296,7 @@ class Modele
     public function insertReservation($tab)
     {
         if ($this->unPDO != null) {
-            $request = "insert into reservation values (null, 'En cours réservation', :date_debut_reservation, :date_fin_reservation, :prix_reservation, :nb_personnes, :id_user, :id_appart, null)";
+            $request = "insert into reservation values (null, 'En cours', :date_debut_reservation, :date_fin_reservation, :prix_reservation, :nb_personnes, :id_user, :id_appart)";
             $donnees = array(
                 ":date_debut_reservation" => $tab['date_debut_reservation'],
                 ":date_fin_reservation" => $tab['date_fin_reservation'],

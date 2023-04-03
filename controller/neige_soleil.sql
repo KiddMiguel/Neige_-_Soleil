@@ -1,4 +1,3 @@
--- Active: 1676905549513@@127.0.0.1@3306@neige_soleil
 drop database if exists neige_soleil;
 create database neige_soleil;
 use neige_soleil;
@@ -37,11 +36,7 @@ CREATE table appartement (
     nb_salon int(5),
     nb_salle_bain int(5),
     nb_piece int(5),
-    id_locataire INT(5),
-    id_proprietaire INT(5),
     id_user INT(5),
-    FOREIGN key (id_locataire) REFERENCES locataire(id_locataire),
-    FOREIGN key (id_proprietaire) REFERENCES proprietaire(id_proprietaire),
     FOREIGN key (id_user) REFERENCES user(id_user),
     PRIMARY key (id_appart)
 );
@@ -81,20 +76,6 @@ create table contrat (
     primary key (id_contrat)
 ); 
 
-CREATE Table materiel_proprio (
-    id_materiel_proprio int(5) not null AUTO_INCREMENT,
-    intitule_materiel_proprio VARCHAR (50), 
-    nb_materiel_proprio INT(5),
-    prix_materiel_proprio FLOAT,
-    type_materiel_proprio VARCHAR (50),
-    staut_materiel_proprio VARCHAR (50),
-    id_user int(5),
-    id_appart int(5),
-    FOREIGN key (id_appart) REFERENCES appartement(id_appart),
-    FOREIGN key (id_user) REFERENCES user(id_user),
-    primary key (id_materiel_proprio)
-); 
-
 CREATE table reservation (
     id_reservation int (5) not null AUTO_INCREMENT,
     statut_reservation enum ("En cours", "Réservé"),
@@ -104,9 +85,7 @@ CREATE table reservation (
     nb_personnes int(5),
     id_user int(5), 
     id_appart int(5),
-    id_materiel_proprio int(5),
     FOREIGN key (id_user) REFERENCES user(id_user), 
-    FOREIGN key (id_materiel_proprio) REFERENCES materiel_proprio (id_materiel_proprio),
     FOREIGN key (id_appart) REFERENCES appartement(id_appart),
     primary key (id_reservation)
 );
@@ -153,8 +132,6 @@ create table locataire (
     
 );
 
-
-
 CREATE TABLE statistique (
     id_statistique INT(5) NOT NULL AUTO_INCREMENT,
     id_locataire INT(5),
@@ -184,18 +161,6 @@ create table atouts(
     primary key (id_atout)
 );
 
-CREATE table visite (
-id_visite int(5) not null auto_increment,
-id_user int(5),
-id_appart int(5),
-date_visite datetime,
-commentaire varchar(255),
-FOREIGN key (id_user) REFERENCES user(id_user),
-FOREIGN key (id_appart) REFERENCES appartement(id_appart),
-primary key (id_visite)
-);
-
-
 CREATE table reglement (
 id_reglement int(5) not null auto_increment,
 date_reglement date,
@@ -217,7 +182,7 @@ primary key (id_facture)
 );
 
 
-----TRIGGER QUI INSERT UN id_user automatiquement dans la table user et dans la table locataire
+--TRIGGER QUI INSERT UN id_user automatiquement dans la table user et dans la table locataire
 DROP TRIGGER IF EXISTS insert_locataire;
 DELIMITER //
 CREATE TRIGGER insert_locataire
@@ -232,7 +197,8 @@ BEGIN
     END IF;
 END //
 DELIMITER ;
-----TRIGGER QUI INSERT UN id_user automatiquement dans la table user et dans la table proprietaire
+
+--TRIGGER QUI INSERT UN id_user automatiquement dans la table user et dans la table proprietaire
 DROP TRIGGER IF EXISTS insert_proprietaire;
 DELIMITER //
 CREATE TRIGGER insert_proprietaire
@@ -251,7 +217,7 @@ DELIMITER ;
 
 
 
-----TRIGGER QUI AJOUTER UNE DEMANDE après un insert dans appartement.
+--TRIGGER QUI AJOUTER UNE DEMANDE après un insert dans appartement.
 Drop trigger if exists add_demande;
 delimiter //
 create trigger add_demande
@@ -278,7 +244,7 @@ END //
 delimiter ;
 Drop PROCEDURE if exists afficher_montant_factures;
 delimiter //
-CREATE DEFINER=`root`@`localhost` PROCEDURE `afficher_montant_factures`(IN user_id INT)
+CREATE  PROCEDURE `afficher_montant_factures`(IN user_id INT)
 BEGIN
     SELECT date_facture AS mois_facture, SUM(montant_facture) AS total_facture
     FROM facture
@@ -339,40 +305,25 @@ VALUES ('En cours', '2022-03-01', '2022-08-31', '2022-03-01', 1, 1),
        ('Résilié', '2022-05-01', '2022-08-31', '2022-05-01', 5, 5);
 
 
-
-INSERT INTO materiel_proprio (intitule_materiel_proprio, nb_materiel_proprio, prix_materiel_proprio, type_materiel_proprio, staut_materiel_proprio, id_user, id_appart) 
+INSERT INTO reservation (statut_reservation, date_debut_reservation, date_fin_reservation, prix_reservation, nb_personnes, id_user, id_appart)
 VALUES 
-    ('Télévision', 1, 100, 'Electronique', 'Disponible', 2, 1),
-    ('Four', 1, 200, 'Electroménager', 'Disponible', 3, 1),
-    ('Machine à laver', 1, 250, 'Electroménager', 'Disponible', 4, 1),
-    ('Cafetière', 1, 30, 'Electroménager', 'Disponible', 5, 1),
-    ('Fer à repasser', 1, 20, 'Electroménager', 'Disponible', 6, 1),
-    ('Sèche-cheveux', 1, 15, 'Electroménager', 'Disponible', 7, 1),
-    ('Draps', 2, 30, 'Linge de maison', 'Disponible', 8, 1),
-    ('Serviettes', 4, 20, 'Linge de maison', 'Disponible', 9, 1),
-    ('Tondeuse', 1, 15, 'Jardinage', 'Disponible', 10, 1),
-    ('Bicyclette', 1, 100, 'Sport', 'Disponible', 11, 1);
+('En cours', '2023-03-01', '2023-03-07', 600, 2, 1, 2),
+('Réservé', '2023-04-15', '2023-04-22', 800, 4, 3, 4),
+('En cours', '2023-05-01', '2023-05-15', 1200, 3, 2, 1),
+('Réservé', '2023-06-10', '2023-06-15', 500, 2, 4, 5),
+('Réservé', '2023-07-20', '2023-07-25', 400, 2, 1, 2);
 
 
-INSERT INTO reservation (statut_reservation, date_debut_reservation, date_fin_reservation, prix_reservation, nb_personnes, id_user, id_appart, id_materiel_proprio)
+INSERT INTO appartement (statut_appart, prix_appart, intitule_appart, ville_appart, cp_appart, adresse_appart, description_appart, type_appart, superficie_appart,image, nb_chambre, nb_cuisine, nb_salon, nb_salle_bain, nb_piece, id_user)
 VALUES 
-('En cours', '2023-03-01', '2023-03-07', 600, 2, 1, 2, 1),
-('Réservé', '2023-04-15', '2023-04-22', 800, 4, 3, 4, 2),
-('En cours', '2023-05-01', '2023-05-15', 1200, 3, 2, 1, 3),
-('Réservé', '2023-06-10', '2023-06-15', 500, 2, 4, 5, 4),
-('Réservé', '2023-07-20', '2023-07-25', 400, 2, 1, 2, 5);
-
-
-INSERT INTO appartement (statut_appart, prix_appart, intitule_appart, ville_appart, cp_appart, adresse_appart, description_appart, type_appart, superficie_appart,image, nb_chambre, nb_cuisine, nb_salon, nb_salle_bain, nb_piece,id_locataire, id_proprietaire, id_user)
-VALUES 
-('Disponible', 150000, 'Bel appartement en centre-ville', 'Paris', '75001', '10 Rue de Rivoli', 'Bel appartement lumineux de 75m² situé en plein coeur de Paris', 'Appartement', '75m²','A-1.jpg', 2, 1, 1, 1, 6,1 ,4,1),
-('En location', 220000, 'Grand appartement avec vue sur la mer', 'Marseille', '13008', '30 Avenue du Prado', 'Spacieux appartement de 100m² avec vue imprenable sur la mer Méditerranée', 'Appartement', '100m²','B-1.jpg', 3, 1, 1, 2, 7,3,6, 2),
-('Disponible', 80000, 'Studio au calme dans quartier résidentiel', 'Lyon', '69006', '20 Rue de la République', 'Joli petit studio de 30m² au calme dans un quartier résidentiel de Lyon', 'Studio', '30m²','C-1.jpg', 1, 1, 0, 1, 3,3,2, 3),
-('En location', 120000, 'Appartement rénové dans immeuble haussmannien', 'Paris', '75009', '15 Rue La Fayette', 'Appartement récemment rénové de 50m² dans un bel immeuble haussmannien', 'Appartement', '50m²','D-1.jpg', 1, 1, 1, 1, 4,8,5, 4),
-('Disponible', 250000, 'Appartement duplex avec terrasse', 'Toulouse', '31000', '5 Rue Saint-Rome', 'Bel appartement duplex de 120m² avec grande terrasse en plein centre-ville de Toulouse', 'Appartement', '120m²','E-1.jpg', 4, 1, 1, 2, 8,4,4, 1),
-('En location', 180000, 'Appartement lumineux avec balcon', 'Nantes', '44000', '10 Rue de Strasbourg', 'Appartement de 80m² très lumineux avec balcon donnant sur un parc arboré', 'Appartement', '80m²','F-1.jpg', 2, 1, 1, 1, 5,6,8, 2),
-('Disponible', 90000, 'Appartement avec vue sur la montagne', 'Grenoble', '38000', '5 Rue de la République', 'Bel appartement de 60m² avec vue sur la montagne', 'Appartement', '60m²','J-1.jpg', 2, 1, 1, 1, 5,7,3, 5),
-('En location', 150000, 'Appartement en rez-de-jardin', 'Nice', '06000', '10 Avenue des Fleurs', 'Appartement de 70m² en rez-de-jardin avec terrasse et accès direct à la piscine de la résidence', 'Appartement', '70m²','G-1.jpg', 2, 1, 1, 1, 5,10,2,16);
+('Disponible', 150000, 'Bel appartement en centre-ville', 'Paris', '75001', '10 Rue de Rivoli', 'Bel appartement lumineux de 75m² situé en plein coeur de Paris', 'Appartement', '75m²','A-1.jpg', 2, 1, 1, 1, 6,1),
+('En location', 220000, 'Grand appartement avec vue sur la mer', 'Marseille', '13008', '30 Avenue du Prado', 'Spacieux appartement de 100m² avec vue imprenable sur la mer Méditerranée', 'Appartement', '100m²','B-1.jpg', 3, 1, 1, 2, 7, 2),
+('Disponible', 80000, 'Studio au calme dans quartier résidentiel', 'Lyon', '69006', '20 Rue de la République', 'Joli petit studio de 30m² au calme dans un quartier résidentiel de Lyon', 'Studio', '30m²','C-1.jpg', 1, 1, 0, 1, 3, 3),
+('En location', 120000, 'Appartement rénové dans immeuble haussmannien', 'Paris', '75009', '15 Rue La Fayette', 'Appartement récemment rénové de 50m² dans un bel immeuble haussmannien', 'Appartement', '50m²','D-1.jpg', 1, 1, 1, 1, 4, 4),
+('Disponible', 250000, 'Appartement duplex avec terrasse', 'Toulouse', '31000', '5 Rue Saint-Rome', 'Bel appartement duplex de 120m² avec grande terrasse en plein centre-ville de Toulouse', 'Appartement', '120m²','E-1.jpg', 4, 1, 1, 2, 8, 1),
+('En location', 180000, 'Appartement lumineux avec balcon', 'Nantes', '44000', '10 Rue de Strasbourg', 'Appartement de 80m² très lumineux avec balcon donnant sur un parc arboré', 'Appartement', '80m²','F-1.jpg', 2, 1, 1, 1, 5, 2),
+('Disponible', 90000, 'Appartement avec vue sur la montagne', 'Grenoble', '38000', '5 Rue de la République', 'Bel appartement de 60m² avec vue sur la montagne', 'Appartement', '60m²','J-1.jpg', 2, 1, 1, 1, 5, 5),
+('En location', 150000, 'Appartement en rez-de-jardin', 'Nice', '06000', '10 Avenue des Fleurs', 'Appartement de 70m² en rez-de-jardin avec terrasse et accès direct à la piscine de la résidence', 'Appartement', '70m²','G-1.jpg', 2, 1, 1, 1, 5,16);
 
 INSERT INTO equipement_appart (intitule_equip_appart, nb_equi_appart, prix_equip_appart, type_equip_appart, statut_equip_appart, id_appart)
 VALUES 

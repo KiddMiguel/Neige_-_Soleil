@@ -44,3 +44,19 @@ Utilisation de fullCalendar
           //  alert('Date de fin : ' + endDate.toLocaleDateString());
         }
       },
+
+      $.ajax({
+        url: "http://localhost/PPE/Neige_-_Soleil/src/insert_reservations.php",
+        type: "POST",
+        data: {
+            start_date: moment(startDate).format('YYYY-MM-DD'),
+            end_date: moment(endDate).add(1, 'day').format('YYYY-MM-DD'),
+        },
+        success: function(response) {
+            alert(response);
+        },
+        error: function() {
+            alert('Erreur ');
+        }
+
+    });

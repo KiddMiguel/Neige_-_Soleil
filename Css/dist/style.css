@@ -145,9 +145,15 @@ body .sectionInscription .container .card .active_page {
 body .sectionInscription .container .card .desactive_page {
   display: none;
 }
-body .section_appart :root {
-  --fc-event-bg-color: #dc3545;
-  --fc-event-border-color: #dc3545;
+body #calendar .fc-day {
+  background-color: #ffffff;
+}
+body #calendar .fc-day-number {
+  color: #000000;
+  text-decoration: none;
+}
+body #calendar .fc-day {
+  border: 1px solid #dfd10c;
 }
 body footer {
   background-color: #093A7A;

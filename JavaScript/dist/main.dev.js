@@ -11,9 +11,19 @@ function calendar() {
   document.addEventListener("DOMContentLoaded", function () {
     var calendarEl = document.getElementById("calendar");
     var startDate, endDate;
+    var eventSelected = false;
     var calendar = new FullCalendar.Calendar(calendarEl, {
       initialView: "dayGridMonth",
       selectable: true,
+      height: 650,
+      aspectRatio: 2,
+      selectAllow: function selectAllow(selectInfo) {
+        if (eventSelected) {
+          return false; // Désactiver la sélection si un événement a déjà été sélectionné
+        } else {
+          return true; // Autoriser la sélection si aucun événement n'a été sélectionné
+        }
+      },
       select: function select(info) {
         if (!startDate) {
           startDate = info.start; // Stocke la date de début
@@ -25,7 +35,9 @@ function calendar() {
             var newEvent = {
               title: "Nouvelle réservation",
               start: moment(startDate).format('YYYY-MM-DD'),
-              end: endDate
+              end: endDate,
+              backgroundColor: 'green',
+              borderColor: 'green'
             };
             calendar.addEvent(newEvent);
           } else {
@@ -35,39 +47,47 @@ function calendar() {
           startDate = info.start; // Remplace la date de début avec la nouvelle sélection
 
           endDate = null; // Réinitialise la date de fin
-        } // Affiche les dates sélectionnées
-
+        }
 
         if (startDate) {
-          console.log('Date de début : ' + moment(startDate).format('YYYY-MM-DD')); // alert('Date de début : ' + startDate.toLocaleDateString());
+          var dateStart = moment(startDate).format('YYYY-MM-DD');
+          document.getElementById('dateStart').value = dateStart;
+          document.getElementById('dateStart_form').value = dateStart;
         }
 
         if (endDate) {
-          console.log('Date de début : ' + moment(endDate).format('YYYY-MM-DD')); // console.log(endDate);
-          //  alert('Date de fin : ' + endDate.toLocaleDateString());
+          var dateEnd = moment(endDate).format('YYYY-MM-DD');
+          document.getElementById('dateEnd').value = dateEnd;
+          document.getElementById('dateEnd_form').value = dateEnd;
         }
       },
       events: function events(fetchInfo, successCallback, failureCallback) {
         $.ajax({
+          type: "GET",
           url: 'http://localhost/PPE/Neige_-_Soleil/src/recup_reservations.php',
           dataType: 'json',
           success: function success(reservations) {
             var events = [];
             reservations.forEach(function (reservations) {
               events.push({
-                title: 'Réservation',
+                title: 'Réservé',
                 start: reservations.start,
-                end: reservations.end
+                end: reservations.end,
+                backgroundColor: 'red',
+                borderColor: 'red'
               });
-              console.log(reservations.end);
             });
             successCallback(events);
-            console.log(events);
           },
           error: function error() {
             failureCallback('Erreur lors de la récupération des réservations.');
           }
         });
+      }
+    });
+    calendar.on('eventClick', function (info) {
+      if (info.event.title === 'Nouvelle réservation' && confirm("Voulez-vous supprimer cet événement ?")) {
+        info.event.remove(); // Supprime l'événement
       }
     });
     calendar.setOption("locale", "fr");
@@ -78,16 +98,12 @@ function calendar() {
 calendar();
 
 function ChangeImage() {
-  var vignette = document.querySelectorAll(".small"); // je selectionne l'image en grand format
-
+  var vignette = document.querySelectorAll(".small");
   var fullimg = document.getElementById("full");
-  var btn = document.querySelector(".btn-add");
   vignette.forEach(function (item) {
     item.addEventListener("click", function () {
       // Pour récuperer la valeur de l'attribut src de l'élément cliqué
-      var imgSource = item.getAttribute("src"); // Je fixe unenouvelle valeur à l'attribut retnue
-      // J'attribue la nouvelle à l'image grand format
-
+      var imgSource = item.getAttribute("src");
       fullimg.setAttribute("src", imgSource);
     });
   });

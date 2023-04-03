@@ -101,9 +101,9 @@ class Controller
 
 
     /*********************************RESERVATION************************ */
-    public function selectReservationLocataire($id_user)
+    public function selectReservationLocataire($id_appart)
     {
-        $reservations = $this->unModele->selectReservationLocataire($id_user);
+        $reservations = $this->unModele->selectReservationLocataire($id_appart);
         return $reservations;
     }
 

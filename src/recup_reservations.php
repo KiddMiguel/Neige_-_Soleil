@@ -1,22 +1,21 @@
 <?php
+
 // Connexion à la base de données
 $conn = mysqli_connect("localhost", "root", "", "neige_soleil");
-
-// Vérification de la connexion
 if (!$conn) {
     die("Connexion échouée : " . mysqli_connect_error());
 }
-// Requête SELECT pour récupérer les réservations
- $sql = "SELECT id_reservation, date_debut_reservation, date_fin_reservation, statut_reservation FROM reservation";
 
-// Exécution de la requête
+//Récupération de la variable $id_appart depuis la fiche setting_reservation grace à un $_GET
+session_start();
+$id_appart = $_SESSION['id_appart'];
+
+$sql = "SELECT id_reservation, date_debut_reservation, date_fin_reservation, statut_reservation FROM reservation where id_appart = $id_appart";
 $result = mysqli_query($conn, $sql);
-
-// Création d'un tableau pour stocker les événements
 $events = [];
 
 // Parcours des résultats de la requête
-while ($row = mysqli_fetch_assoc($result)) {
+foreach ($result as $row) {
     // Transformation de chaque réservation en un événement
     $event = [
         'id' => $row['id_reservation'],
@@ -31,5 +30,4 @@ while ($row = mysqli_fetch_assoc($result)) {
 
 // Encodage du tableau en JSON pour l'affichage dans FullCalendar
 echo json_encode($events);
-
-
+unset($_SESSION['id_appart']);

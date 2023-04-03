@@ -137,14 +137,13 @@ body {
             }
         }
     }
-    .sectionFive{
-        .active{
+    .sectionFive {
+        .active {
             border: 1.5px solid $color_blue !important;
             color: $color_blue !important;
-            i{
+            i {
                 color: $color_blue !important
             }
-            
         }
     }
     .sectionLocation {
@@ -174,26 +173,30 @@ body {
             }
         }
     }
-    .sectionInscription{
-        .container{
-            .card{
-                .active_page{
+    .sectionInscription {
+        .container {
+            .card {
+                .active_page {
                     display: block;
                 }
-                .desactive_page{
+                .desactive_page {
                     display: none;
                 }
             }
         }
     }
-    .section_appart{
-        :root{
-            --fc-event-bg-color : #dc3545;
-            --fc-event-border-color : #dc3545;
+    #calendar {
+        .fc-day {
+            background-color: #ffffff;
+        }
+        .fc-day-number {
+            color: #000000;
+            text-decoration: none;
+        }
+        .fc-day {
+            border: 1px solid #dfd10c;
         }
     }
-
-    
     footer {
         background-color: $color_blue;
         li {

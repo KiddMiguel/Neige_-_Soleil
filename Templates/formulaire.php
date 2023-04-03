@@ -29,7 +29,7 @@
                 </div>
                 <div class="col-md-6 mb-2">
                     <div class="form-outline">
-                        <input type="text" id="form3Example1n" class="form-control form-control"  value="<?= $_SESSION["nom_locataire"] ?>"  placeholder="Ville" />
+                        <input type="text" id="" class="form-control form-control"  value="<?= $_SESSION["nom_locataire"] ?>"  placeholder="Ville" />
                     </div>
                 </div>
             </div>
@@ -48,12 +48,12 @@
                 </div>
                 <div class="col-md-6 mb-2">
                     <div class="form-outline">
-                        <input type="date" class="form-control form-control" name="date_debut_reservation" placeholder="Date de début" />
+                        <input type="date" id="dateStart_form"  readonly class="form-control form-control" name="date_debut_reservation"  />
                     </div>
                 </div>
                 <div class="col-md-6 mb-2">
                     <div class="form-outline">
-                        <input type="date" id="form3Example1n" class="form-control form-control" name="date_fin_reservation" placeholder="Date de fin" />
+                        <input type="date" readonly id="dateEnd_form"  class="form-control form-control" name="date_fin_reservation"  />
                         <label class="form-label" for="form3Example1n"></label>
                     </div>
                 </div>

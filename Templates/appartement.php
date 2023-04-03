@@ -2,7 +2,7 @@
   <div class=" text-center">
     <div class="row container-fluid" style="width:80%;">
       <div class="col-5 ">
-      <?php
+      <?php     
            echo' <div class=" mt-5"><img src="Images/'.$appartement['image'].'" class="rounded card-img-top" style="width:100; height:20rem;" id="full" alt="..."></div>
         </div>
         <div class="col-7 ">
@@ -12,7 +12,7 @@
         foreach ($images as $image){
               echo' 
                  <div class="col-4">
-                <div class="mt-5"><img src="images/'.$image['nom_img'].'.'.$image['type_img'].'" class="rounded card-img-top small" style="width:100; height:8rem;" alt="..."></div>
+                <div class="mt-5"><img src="images/'.$image['nom_img'].'.'.$image['type_img'].'" class="rounded card-img-top small" style="width:100; height:8rem;" alt="Appartement"></div>
               </div>';
               
             }
@@ -79,22 +79,21 @@
             <button type="button" class="alert alert-danger" role="alert"> Il existe déjà une réservation sur cette appartement</button>   ';
       }
       echo '
+  
       <div class= "d-flex mt-3">
       <input type="hidden" id="event-index" class="form-control w-25 me-1" value=""  >
-      <input type="date" id="dateStart" class="form-control w-25 me-1" value="'.$date.'"  >
-      <input type="date" id="dateEnd" class="form-control w-25 ms-1" value=""><button type="button" id="choisir"  class="btn btn-success ms-2">Choisir</button><button type="button" class="btn btn-danger ms-2">Reset</button>    
-      
+      <input type="date" id="dateStart" disabled class="form-control w-25 me-1" value="'.$date.'"  >
+      <input type="date" id="dateEnd" disabled class="form-control w-25 ms-1" value=""><button type="button" id="choisir" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal" class="btn btn-success ms-2">Choisir</button><button type="reset" class="btn btn-danger ms-2">Reset</button>    
       </div>
-      <div>
-        <div id="calendar" >
+      <div class="mt-4">
+        <div id="calendar">
         </div>
       </div>
-  
      ';
 
       echo '</div>
           <div class="modal-footer">
-            <button class="btn btn-outline-warning" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal">Contacter le propriétaire</button>
+            <button class="btn btn-warning" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal">Contacter le propriétaire</button>
           </div>
         </div>
       </div>
