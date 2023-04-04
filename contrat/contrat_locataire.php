@@ -1,23 +1,61 @@
 <?php
-
+$chemin_image = "../images/Logo-noir.PNG";
 require_once("../vendor/autoload.php");
+$signature_img ="../images/approuver.png";
+$color = [255, 0, 0]; 
 
 use Spipu\Html2Pdf\Html2Pdf;
 
-$html2pdf = new Html2Pdf('P', 'A4', 'fr');
+$html2pdf = new Html2Pdf('P', 'A4', 'fr', true, 'UTF-8', [10, 5, 10, 0]);/* pour modifier la hauteur du text */
 
 $html = "
-<page backtop='7mm' backbottom='7mm' backleft='10mm' backright='10mm'>
+<page backtop='7mm' backbottom='7mm' backleft='10mm' backright='10mm' backcolor='#FFF' footer='page; date;'>
 	<page_header>
 	<style> 
 		.center{
 			text-align:center;
 		}
+	
+	
+		nav {
+		background-color: blue;
+		color: red;
+		padding: 10px;
+		}
+
+		hr { 
+		background: #717375; height:2px; border:none;
+		}
+
+		.imag {
+            display: block;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+
+
+
+
+		#Siignature {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
 	</style>
 
-	<h1 class='center'>Contrat de location saisonnière</h1>
 	
-	<h4>Le propriétaire :
+
+	<h1 class='center'>Contrat de location saisonnière</h1>
+
+	<hr />
+
+	
+	<h4> Le propriétaire :
 	[Nom et prénom du propriétaire] <br>
 	
 	Le locataire :
@@ -56,15 +94,36 @@ $html = "
 	
 	Fait en deux exemplaires originaux à <strong>[lieu de signature]</strong>, le <strong>[date de signature]</strong><br><br><br><br><br>
 	
-	<strong>Signature du propriétaire</strong>
-		[Signature]<br><br><br><br><br>
+	<strong>Signature du propriétaire</strong><br>
+	<img src='$signature_img' width='100' height='50' /><br><br>
 	
 	
-		<strong>Signature du locataire</strong>
-		[Signature]
+		<strong>Signature du locataire</strong><br>
+
+		<img src='$signature_img' width='100' height='50' />
+
+
+
+		
 
 
 		</page_header>
+
+		<page_footer>
+		<hr />
+		<div class='imag'>
+		<img  src='$chemin_image' width='100' height='50' />
+		</div>
+
+
+
+		</page_footer>
+
+
+
+
+
+	
 	
 
 	</page>

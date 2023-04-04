@@ -19,4 +19,3 @@ if (isset($_POST["supprimer_reserv"])) {
     header("location: index.php?page=home");
     }
 }
-

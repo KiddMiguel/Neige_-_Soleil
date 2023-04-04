@@ -16,18 +16,13 @@ if (isset($_POST["valider_appartement"])) {
 
     header("location: index.php?page=dashboard&id_user=" . $_SESSION['id_user'] . "");
 }
-if (isset($_POST["filtre"])){
-    $mot = $_POST["mot"];
-    $appartements = $unController->FiltreLocation($mot);
-}else{
-    $appartements = $unController->recupAllAppartement();
-}
 
 if (isset($_POST["filtre_index"])){
     $mot_index = $_POST["mot_index"];
+    $statut= $_POST["statut"];
     $prixMax = $_POST["prixMax"];
     $prixMin= $_POST["prixMin"];
-    $appartements = $unController->FiltreLocation_index($mot_index,$prixMin,$prixMax);
+    $appartements = $unController->FiltreLocation_index($mot_index, $statut, $prixMax, $prixMin);
 }else{
     $appartements = $unController->recupAllAppartement();
 }

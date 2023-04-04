@@ -145,9 +145,9 @@ class Controller
         $appartements = $this->unModele->FiltreLocation($mot);
         return $appartements;
     }
-    public function FiltreLocation_index($mot_index,$prixMin,$prixMax)
+    public function FiltreLocation_index($mot_index, $statut, $prixMax, $prixMin)
     {
-        $appartements = $this->unModele->FiltreLocation_index($mot_index,$prixMin,$prixMax);
+        $appartements = $this->unModele->FiltreLocation_index($mot_index, $statut, $prixMax, $prixMin);
         return $appartements;
     }
 

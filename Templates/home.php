@@ -3,17 +3,25 @@
             <div class="mt-custom container-fluid ms-5 ps-5 text-light">
                 <h1 class="sizing-menu">Appartements de<br> Particuliers</h1>
                 <h4>Séjour chaleureux au coeur des montagnes</h4>
- 
+
                 <div class="row container bg-white mt-5">
                     <form action="index.php?page=location" method="post">
-                    <div class="col- lg-12 col-md-12 col-sm-12 col-xm-12  pb-2 pt-3">
-                        <input type="search" class="w-100 border border-light p-2" name="mot_index" id="" placeholder="Indiquez une addresse, un lieu...">
-                    </div>
-                    <div class="d-flex justify-content-between pb-3">
-                        <input class="pe-5 w-100 border border-light p-3" type="text" minlength="0" name="prixMin" id="" placeholder="Budget € min">
-                        <input class="pe-5 ms-3 w-100 border border-light p-3" type="text" minlength="0" name="prixMax" id="" placeholder="Budget € max">
-                            <button class=" ms-3 w-100 bg-custom border border-light p-3" type="submit" name="filtre_index" id="">rechercher</button>                      
-                    </div>
+                        <div class="col- lg-12 col-md-12 col-sm-12 col-xm-12  pb-2 pt-3">
+                            <input type="search" class="w-100 border border-light p-2" name="mot_index" id="" placeholder="Indiquez une addresse, un lieu...">
+                        </div>
+                        <div class="d-flex justify-content-between pb-3">
+                            <input class="pe-5 w-100 border border-light p-3" type="text" minlength="0" name="prixMin" id="" placeholder="Budget € min">
+                            <input class="pe-5 ms-3 w-100 border border-light p-3" type="text" minlength="0" name="prixMax" id="" placeholder="Budget € max">
+                            <select id="monselect"   class="form-select p-3 ms-3 bg-warning" name="statut">
+                                <optgroup label="Statut appart">
+                                    <option value="">Dispo + Location</option>
+                                    <option value="Disponible">Disponible</option>
+                                    <option value="En location">En location</option>
+                                </optgroup>
+                            </select>
+                            <button class=" ms-3 w-100 bg-custom border border-light p-3" type="submit" name="filtre_index" id="">rechercher</button>
+
+                        </div>
                     </form>
                 </div>
             </div>
@@ -24,44 +32,50 @@
     <section class="sectionTwo container">
         <h3 class="text-center py-5">Nos logements à la une</h3>
         <div class="container text-center">
-        <div class="row g-2">
-            <?php
-  
-                $counter = 0;
-                foreach ($appartements as $appartement){
-                    if($appartement['statut_appart']!= "" ){
-                    if($counter == 6){
-                        break;
-                    }
+            <div class="row g-2">
+                <?php
 
-                    echo '
+                $counter = 0;
+                foreach ($appartements as $appartement) {
+                    if ($appartement['statut_appart'] != "") {
+                        if ($counter == 6) {
+                            break;
+                        }
+
+                        echo '
                     <div class="col-lg-4 col-md-4 col-sm-6 col-xm-12 p-3">
                     <div class="card">
-                        <img src="Images/'.$appartement['image'].'" class="card-img-top fixed-size" alt="...">
+                        <img src="Images/' . $appartement['image'] . '" class="card-img-top fixed-size" alt="...">
                         <div class="card-body d-flex">
                             <div class="pt-3 me-3">
-                                <a href="index.php?page=appartement&id_appart='.$appartement["id_appart"].'"><i class="fa-solid fa-circle-chevron-right fs-3"></i> </a>
+                                <a href="index.php?page=appartement&id_appart=' . $appartement["id_appart"] . '"><i class="fa-solid fa-circle-chevron-right fs-3"></i> </a>
                             </div>
 
                             <div class="ps-3 text-start border-start">';
-                            $description = $appartement['intitule_appart'];
-                            if(strlen($appartement['intitule_appart']) > 6){
-                              $description = substr($description, 0, 6)."...";
-                            }
-                            echo'<a class="card-text  text-decoration-none fw-semibold" href="index.php?page=appartement&id_appart='.$appartement["id_appart"].'"><span class="text-secondary">'.$appartement['ville_appart'].' ('.$appartement["cp_appart"].')</span><br> <span class="text-primary ">'.$appartement['prix_appart'].'</span>€ - <span>'.$appartement['superficie_appart'].'</span> m²<br><span class="text-black">'.$appartement['nb_piece'] .' Pièce(s) . '.$description.' . '; if ($appartement['statut_appart']== "Disponible"){ echo '<span class="bg-success rounded pe-1 ps-1 text-light">';}else{echo '<span class="bg-warning rounded pe-1 ps-1">';} echo ' '.$appartement['statut_appart'].'</span></span> </a>
+                        $description = $appartement['intitule_appart'];
+                        if (strlen($appartement['intitule_appart']) > 6) {
+                            $description = substr($description, 0, 6) . "...";
+                        }
+                        echo '<a class="card-text  text-decoration-none fw-semibold" href="index.php?page=appartement&id_appart=' . $appartement["id_appart"] . '"><span class="text-secondary">' . $appartement['ville_appart'] . ' (' . $appartement["cp_appart"] . ')</span><br> <span class="text-primary ">' . $appartement['prix_appart'] . '</span>€ - <span>' . $appartement['superficie_appart'] . '</span> m²<br><span class="text-black">' . $appartement['nb_piece'] . ' Pièce(s) . ' . $description . ' . ';
+                        if ($appartement['statut_appart'] == "Disponible") {
+                            echo '<span class="bg-success rounded pe-1 ps-1 text-light">';
+                        } else {
+                            echo '<span class="bg-warning rounded pe-1 ps-1">';
+                        }
+                        echo ' ' . $appartement['statut_appart'] . '</span></span> </a>
                             </div>
                         </div>
                     </div>
                 </div> ';
-       
-                $counter++;
-                }
-            }
 
-            ?>  
-       
-                
-                
+                        $counter++;
+                    }
+                }
+
+                ?>
+
+
+
             </div>
         </div>
     </section>
@@ -178,4 +192,3 @@
 
         </div>
     </section>
-    

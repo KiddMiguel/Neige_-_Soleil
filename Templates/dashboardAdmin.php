@@ -50,7 +50,7 @@
                                     <p style="font-size: 10px;"><i class="bi bi-align-start text-danger " ></i> Le nombre de vos locatires et d'appartements</p>
                                 </div>
                                 <div class="mt-3 pt-4 pe-4">
-                                    <p><i class="bi bi-arrow-up-short text-success"></i> <?php  ?></p>
+                                    <p><i class="bi bi-arrow-up-short text-success"></i> <?php echo $nbLocataire ?></p>
                                     <p><i class="bi bi-arrow-up-short text-success"></i> <?php echo $nbAppart?></p>
                                     
                                 </div>
@@ -248,7 +248,7 @@
                                                 <td class="m-auto text-muted fw-semibold pe-0" style="text-align: justify;"><a  class="d-flex text-decoration-none text-dark">
                                                         <img src="Images/A-1.jpg" alt="" class="rounded" sizes="150" srcset="" width="70">
                                                     </a></td>
-                                                <td class="m-auto text-muted fw-semibold"> <a href="contrat/contrat_locataire.php" target="blank"> <button class="btn btn-primary"><i class="bi bi-clipboard2-fill fs-6" style="color:#DEE2E6 !important;"></i></button> </a> </td>
+                                                <td class="m-auto text-muted fw-semibold"> <a href="contrat/contrat_locataire.php"> <button class="btn btn-primary"><i class="bi bi-clipboard2-fill fs-6" style="color:#DEE2E6 !important;"></i></button> </a> </td>
                                             </tr>
                                    
                                     
