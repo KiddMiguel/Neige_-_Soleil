@@ -24,10 +24,10 @@ if (isset($_POST["filtre"])){
 }
 
 if (isset($_POST["filtre_index"])){
-    $mot = $_POST["mot_index"];
+    $mot_index = $_POST["mot_index"];
     $prixMax = $_POST["prixMax"];
     $prixMin= $_POST["prixMin"];
-    $appartements = $unController->FiltreLocation_index($mot,$prixMax,$prixMin);
+    $appartements = $unController->FiltreLocation_index($mot_index,$prixMin,$prixMax);
 }else{
     $appartements = $unController->recupAllAppartement();
 }

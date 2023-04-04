@@ -323,16 +323,14 @@ class Modele
             return null;
         }
     }
-    public function FiltreLocation_index($mot, $prixMax, $prixMin)
+    public function FiltreLocation_index($mot_index, $prixMax, $prixMin)
     {
         if ($this->unPDO != null) {
-
-            $requete = "select * from appartement where ville_appart like :mot or statut_appart like :mot and prix_appart  BETWEEN :prixMin AND :prixMax";
+            $requete = "SELECT * from appartement where ville_appart like :mot_index OR (prix_appart BETWEEN :prixMin and :prixMax)";
             $donnees = array(
-                // if $mot == null ":mot"=>% 
-                ":mot" => "%" . $mot . "%",
-                ":prixMax" => "%" . $prixMax . "%",
-                ":prixMin" => "%" . $prixMin . "%"
+                ":mot_index" => "%" . $mot_index . "%",
+                ":prixMax" => $prixMax,
+                ":prixMin" => $prixMin
             );
             $select = $this->unPDO->prepare($requete);
             $select->execute($donnees);

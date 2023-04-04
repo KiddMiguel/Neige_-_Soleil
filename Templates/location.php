@@ -2,17 +2,22 @@
 <section class="sectionTwo sectionLocation" >
     <div class="container text-center " >
     <h3 class="pt-5 pb-2">Découvrez tous nos logements</h3>
-    <div class="mt-5 w-50 ms-2 justify-content-center">
+    <div class="mt-5 w-50 justify-content-center">
             <div class="row">
-                <div class="col-md-8">
+                <div class="col-md-12">
                  
-                        <form action="" class="input-group mb-3" method="post">
-                            <input type="text" class="form-control input-text " name="mot" placeholder="Recherche...." aria-label="Recipient's username" aria-describedby="basic-addon2">
-                            <div class="input-group-append ms-2">
-                                <button class="btn btn-outline-warning btn-lg" type="submit" name="filtre"><i class="fa fa-search"></i></button>
-                            </div>
-                        </form>
-                
+                <div class="container">
+                    <form action="index.php?page=location" method="post">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xm-12  pb-2 pt-3">
+                        <input type="search" class="w-100 border border-black rounded p-2 " style="border:none; outline:none;" name="mot_index" id="" placeholder="Indiquez une addresse, un lieu...">
+                    </div>
+                    <div class="d-flex justify-content-between pb-3 col-lg-12 col-md-12 col-sm-12 col-xm-12">
+                        <input class="pe-5 w-100 border border-black p-3 rounded" style="border:none; outline:none;" type="text" minlength="0" name="prixMin" id="" placeholder="Budget € min">
+                        <input class="pe-5 ms-3 w-100 border border-black p-3" style="border:none; outline:none;" type="text" minlength="0" name="prixMax" id="" placeholder="Budget € max">
+                        <button class="ms-3 w-100 bg-custom border rounded bg-warning" type="submit" name="filtre_index" id="">rechercher</button>                      
+                    </div>
+                    </form>
+                </div>
                 </div>
             </div>
         </div>
