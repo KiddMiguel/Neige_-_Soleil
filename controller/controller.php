@@ -142,13 +142,12 @@ class Controller
     /**********************************FILTRE************** */
     public function FiltreLocation($mot)
     {
-
         $appartements = $this->unModele->FiltreLocation($mot);
         return $appartements;
     }
-    public function FiltreLocation_index($mot, $prixMax, $prixMin)
+    public function FiltreLocation_index($mot_index, $statut, $prixMax, $prixMin)
     {
-        $appartements = $this->unModele->FiltreLocation_index($mot, $prixMax, $prixMin);
+        $appartements = $this->unModele->FiltreLocation_index($mot_index, $statut, $prixMax, $prixMin);
         return $appartements;
     }
 
@@ -188,11 +187,11 @@ class Controller
     }
 
     /*NBLOCATAIRE*/
-    public function dashBordNbLocataire($id_user)
-    {
-        $nbLocataire = $this->unModele->dashBordNbLocataire($id_user);
-        return $nbLocataire;
-    }
+    // public function dashBordNbLocataire($id_user)
+    // {
+    //     $nbLocataire = $this->unModele->dashBordNbLocataire($id_user);
+    //     return $nbLocataire;
+    // }
     /*NBAPPARTEMENT*/
     public function dashBordNbAppartement($id_user)
     {

@@ -323,16 +323,15 @@ class Modele
             return null;
         }
     }
-    public function FiltreLocation_index($mot, $prixMax, $prixMin)
+    public function FiltreLocation_index($mot_index, $statut, $prixMax, $prixMin)
     {
         if ($this->unPDO != null) {
-
-            $requete = "select * from appartement where ville_appart like :mot or statut_appart like :mot and prix_appart  BETWEEN :prixMin AND :prixMax";
+            $requete = "SELECT * from appartement where ville_appart like :mot_index and statut_appart like :statut OR (prix_appart BETWEEN :prixMin and :prixMax)";
             $donnees = array(
-                // if $mot == null ":mot"=>% 
-                ":mot" => "%" . $mot . "%",
-                ":prixMax" => "%" . $prixMax . "%",
-                ":prixMin" => "%" . $prixMin . "%"
+                ":mot_index" => "%" . $mot_index . "%",
+                ":statut" => "%" . $statut . "%",
+                ":prixMax" => $prixMax,
+                ":prixMin" => $prixMin
             );
             $select = $this->unPDO->prepare($requete);
             $select->execute($donnees);
@@ -359,7 +358,7 @@ class Modele
     {
         if ($this->unPDO != null) {
             $request = "DELETE from reservation where id_reservation = :id_reservation";
-            $donnees = array(":id_user" => $id_reservation);
+            $donnees = array(":id_reservation" => $id_reservation);
 
             $select = $this->unPDO->prepare($request);
             $select->execute($donnees);
@@ -477,19 +476,19 @@ class Modele
         }
     }
     /*Afficher le nombre de locataire */
-    public function dashBordNbLocataire($id_user)
-    {
-        if ($this->unPDO != null) {
-            $request = "CALL total_locataire(:id_user);";
-            $select = $this->unPDO->prepare($request);
-            $select->bindValue(':id_user', $id_user, PDO::PARAM_INT);
-            $select->execute();
-            $nbLocataire = $select->fetchColumn();
-            return $nbLocataire;
-        } else {
-            return null;
-        }
-    }
+    // public function dashBordNbLocataire($id_user)
+    // {
+    //     if ($this->unPDO != null) {
+    //         $request = "CALL total_locataire(:id_user);";
+    //         $select = $this->unPDO->prepare($request);
+    //         $select->bindValue(':id_user', $id_user, PDO::PARAM_INT);
+    //         $select->execute();
+    //         $nbLocataire = $select->fetch();
+    //         return $nbLocataire;
+    //     } else {
+    //         return null;
+    //     }
+    // }
 
     /*Afficher le nombre de appartements */
     public function dashBordNbAppartement($id_user)
