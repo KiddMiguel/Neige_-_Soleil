@@ -12,8 +12,7 @@
                     <div class="d-flex justify-content-between pb-3">
                         <input class="pe-5 w-100 border border-light p-3" type="text" minlength="0" name="prixMin" id="" placeholder="Budget € min">
                         <input class="pe-5 ms-3 w-100 border border-light p-3" type="text" minlength="0" name="prixMax" id="" placeholder="Budget € max">
-                            <button class=" ms-3 w-100 bg-custom border border-light p-3" type="submit" name="filtre_index" id="" >rechercher</button>
-                       
+                            <button class=" ms-3 w-100 bg-custom border border-light p-3" type="submit" name="filtre_index" id="">rechercher</button>                      
                     </div>
                     </form>
                 </div>
