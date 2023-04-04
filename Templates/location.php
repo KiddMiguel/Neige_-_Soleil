@@ -11,7 +11,7 @@
                                 <div class="w-50 me-3">
                                 <select id="monselect" class="form-select p-3" name="statut">
                                 <optgroup label="Statut appart">
-                                    <option value="" selected>Dispo + Location</option>
+                                    <option value="" >Dispo + Location</option>
                                     <option value="Disponible">Disponible</option>
                                     <option value="En location">En location</option>
                                 </optgroup>
