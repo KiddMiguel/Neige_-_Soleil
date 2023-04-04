@@ -50,7 +50,7 @@
                                     <p style="font-size: 10px;"><i class="bi bi-align-start text-danger " ></i> Le nombre de vos locatires et d'appartements</p>
                                 </div>
                                 <div class="mt-3 pt-4 pe-4">
-                                    <p><i class="bi bi-arrow-up-short text-success"></i> <?php echo $nbLocataire ?></p>
+                                    <p><i class="bi bi-arrow-up-short text-success"></i> <?php //echo $nbLocataire ?></p>
                                     <p><i class="bi bi-arrow-up-short text-success"></i> <?php echo $nbAppart?></p>
                                     
                                 </div>

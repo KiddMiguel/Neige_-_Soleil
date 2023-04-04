@@ -1,12 +1,30 @@
 <?php
+session_start();
+
 $chemin_image = "../images/Logo-noir.PNG";
 require_once("../vendor/autoload.php");
-$signature_img ="../images/approuver.png";
+require_once("connect_bdd_contrat.php");
+$signature_img ="../Images/approuver.png";
 $color = [255, 0, 0]; 
 
 use Spipu\Html2Pdf\Html2Pdf;
 
 $html2pdf = new Html2Pdf('P', 'A4', 'fr', true, 'UTF-8', [10, 5, 10, 0]);/* pour modifier la hauteur du text */
+
+
+if(isset($_SESSION['email_locataire'])){
+	$nom = $_SESSION['nom_locataire'];
+	$prenom = $_SESSION['prenom_locataire'];
+}
+if(isset($_GET['id_appart'])){
+	$id_appart = $_GET['id_appart'];
+}
+//-------------------------------------------REQUESTES POUR RECUPERER LES INFOS 
+$sql_appart = "select * from appartement WHERE id_user = ".$_SESSION['id_user']." And id_appart= ".$id_appart.";";
+$sql_reserv = "select * from reservation WHERE id_user = ".$_SESSION['id_user']." And id_appart= ".$id_appart.";";
+$result_appart = mysqli_query($conn, $sql_appart);
+
+foreach($result_appart as $row){
 
 $html = "
 <page backtop='7mm' backbottom='7mm' backleft='10mm' backright='10mm' backcolor='#FFF' footer='page; date;'>
@@ -56,22 +74,22 @@ $html = "
 
 	
 	<h4> Le propriétaire :
-	[Nom et prénom du propriétaire] <br>
+	 Neige & Soleil <br>
 	
 	Le locataire :
-	[Nom et prénom du locataire]</h4>
+	$nom $prenom</h4>
 	
 	Il est convenu ce qui suit :<br><br>
 	
 	
 	<strong>Objet de la location :</strong><br>
-			Le propriétaire loue au locataire le chalet situé à <strong>[adresse du chalet]</strong>, pour une période de <strong>[nombre de jours/semaines/mois]</strong> à compter du <strong>[date de début de la location]</strong> à <strong>[heure de début de la location]</strong>,<br> jusqu'au <strong>[date de fin de la location]</strong> à <strong>[heure de fin de la location]</strong>.<br><br>
+			Le propriétaire loue au locataire le chalet situé à <strong>{$row['adresse_appart']}</strong>, pour une période de <strong>[nombre de jours/semaines/mois]</strong> à compter du <strong>[date de début de la location]</strong> à <strong>[heure de début de la location]</strong>,<br> jusqu'au <strong>[date de fin de la location]</strong> à <strong>[heure de fin de la location]</strong>.<br><br>
 		
 			<strong>Montant du loyer :</strong><br>
-			Le locataire paiera au propriétaire un loyer total de <strong>[montant en euros]</strong> pour la période de location,<br>payable comme suit : <strong>[détails des versements et échéances]</strong>.<br><br>
+			Le locataire paiera au propriétaire un loyer total de <strong>{$row['prix_appart']}</strong> pour la période de location,<br>payable comme suit : <strong>{$row['prix_appart']}/mois</strong>.<br><br>
 		
 			<strong>Caution :</strong><br>
-			Le locataire versera au propriétaire une caution de <strong>[montant en euros]</strong> à titre de garantie de la bonne exécution de ses obligations contractuelles.<br> Cette caution sera restituée au locataire dans un délai de <strong>[nombre de jours]</strong> après la fin de la location,<br> sous réserve de l'absence de dégradations constatées dans le chalet.<br><br>
+			Le locataire versera au propriétaire une caution de <strong>{$row['prix_appart']}</strong> à titre de garantie de la bonne exécution de ses obligations contractuelles.<br> Cette caution sera restituée au locataire dans un délai de <strong>[nombre de jours]</strong> après la fin de la location,<br> sous réserve de l'absence de dégradations constatées dans le chalet.<br><br>
 		
 			<strong>État des lieux :</strong><br>
 			Un état des lieux contradictoire sera établi entre le propriétaire et le locataire à l'arrivée et au départ du locataire.<br> Tout désaccord sera mentionné sur l'état des lieux et signé par les deux parties.<br> L'état des lieux sera annexé au présent contrat.<br><br>
@@ -92,7 +110,7 @@ $html = "
 			<strong>Annexes :</strong><br>
 			Le présent contrat est constitué de <strong>[nombre]</strong> pages, y compris l'état des lieux annexé. Les parties reconnaissent avoir pris connaissance de chacune des pages et les avoir paraphées et signées.<br><br>
 	
-	Fait en deux exemplaires originaux à <strong>[lieu de signature]</strong>, le <strong>[date de signature]</strong><br><br><br><br><br>
+	Fait en deux exemplaires originaux à <strong>...</strong>, le <strong>[date de signature]</strong><br><br><br><br><br>
 	
 	<strong>Signature du propriétaire</strong><br>
 	<img src='$signature_img' width='100' height='50' /><br><br>
@@ -132,7 +150,7 @@ $html = "
 	
 	
 	";
-
+}
 
 $html2pdf->writeHTML($html);
 $html2pdf->output("Contrat_doc.pdf");
