@@ -1,4 +1,4 @@
-<section class="sectionTwo sectionLocation ">
+<section class="sectionTwo sectionLocation">
     <div class="container text-center vh-100">
         <h3 class="pt-5 pb-2">Découvrez tous nos logements</h3>
         <div class="mt-5 w-100 justify-content-center">
@@ -60,11 +60,11 @@
 
         </div>
     </div>
-    <div class="py-5">
+    <div class="py-5 my-5">
         <nav aria-label="...">
             <ul class="pagination justify-content-center">
                 <li class="page-item">
-                    <a class="page-link text-black" href="#">Previous</a>
+                    <a class="page-link text-black" href="#">Précédent</a>
                 </li>
                 <li class="page-item "><a class="page-link actives" href="#">1</a></li>
                 <li class="page-item " aria-current="page">
@@ -72,7 +72,7 @@
                 </li>
                 <li class="page-item"><a class="page-link" href="#">3</a></li>
                 <li class="page-item">
-                    <a class="page-link text-black" href="#">Next</a>
+                    <a class="page-link text-black" href="#">Suivant</a>
                 </li>
             </ul>
         </nav>
