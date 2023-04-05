@@ -15,16 +15,9 @@ $html2pdf = new Html2Pdf('P', 'A4', 'fr', true, 'UTF-8', [10, 5, 10, 0]);/* pour
 if(isset($_SESSION['email_locataire'])){
 	$nom = $_SESSION['nom_locataire'];
 	$prenom = $_SESSION['prenom_locataire'];
+	$civilite_locataire = $_SESSION['civilite_locataire'];
 }
-if(isset($_GET['id_appart'])){
-	$id_appart = $_GET['id_appart'];
-}
-//-------------------------------------------REQUESTES POUR RECUPERER LES INFOS 
-$sql_appart = "select * from appartement WHERE id_user = ".$_SESSION['id_user']." And id_appart= ".$id_appart.";";
-$sql_reserv = "select * from reservation WHERE id_user = ".$_SESSION['id_user']." And id_appart= ".$id_appart.";";
-$result_appart = mysqli_query($conn, $sql_appart);
 
-foreach($result_appart as $row){
 
 $html = "
 <page backtop='7mm' backbottom='7mm' backleft='10mm' backright='10mm' backcolor='#FFF' footer='page; date;'>
@@ -51,6 +44,9 @@ $html = "
             text-align: center;
         }
 
+		p{
+			text-align: justify;
+		}
 
 
 
@@ -72,59 +68,58 @@ $html = "
 
 	<hr />
 
+	<img style='float:left;'  src='$chemin_image' width='100' height='70' />
+
+	<h4 style='text-align: right; margin-top:50px;'>Neige & Soleil</h4>
+	<h4>Locataire : $civilite_locataire $nom $prenom</h4>
 	
-	<h4> Le propriétaire :
-	 Neige & Soleil <br>
-	
-	Le locataire :
-	$nom $prenom</h4>
-	
-	Il est convenu ce qui suit :<br><br>
+	<p>Il est convenu ce qui suit :</p>
 	
 	
-	<strong>Objet de la location :</strong><br>
-			Le propriétaire loue au locataire le chalet situé à <strong>{$row['adresse_appart']}</strong>, pour une période de <strong>[nombre de jours/semaines/mois]</strong> à compter du <strong>[date de début de la location]</strong> à <strong>[heure de début de la location]</strong>,<br> jusqu'au <strong>[date de fin de la location]</strong> à <strong>[heure de fin de la location]</strong>.<br><br>
+	<p><strong>Objet de la location :</strong><br>
+			Le propriétaire loue au locataire le chalet situé à <strong>{$appartement['adresse_appart']}</strong>, pour une période de <strong>$duree_en_mois mois ($duree_en_jours jours )</strong> à compter du <strong>$date_debut_fr</strong>, jusqu'au <strong>$date_fin_fr</strong>.<br><br>
 		
 			<strong>Montant du loyer :</strong><br>
-			Le locataire paiera au propriétaire un loyer total de <strong>{$row['prix_appart']}</strong> pour la période de location,<br>payable comme suit : <strong>{$row['prix_appart']}/mois</strong>.<br><br>
+			Le locataire paiera au propriétaire un loyer total de <strong>$prix_total €</strong> pour la période de location,<br>payable comme suit : <strong>{$appartement['prix_appart']}/mois</strong>.<br><br>
 		
 			<strong>Caution :</strong><br>
-			Le locataire versera au propriétaire une caution de <strong>{$row['prix_appart']}</strong> à titre de garantie de la bonne exécution de ses obligations contractuelles.<br> Cette caution sera restituée au locataire dans un délai de <strong>[nombre de jours]</strong> après la fin de la location,<br> sous réserve de l'absence de dégradations constatées dans le chalet.<br><br>
+			Le locataire versera au propriétaire une caution de <strong>75 €</strong> à titre de garantie de la bonne exécution de ses obligations contractuelles.<br> Cette caution sera restituée au locataire dans un délai de <strong>$duree_en_jours jours</strong> après la fin de la location, sous réserve de l'absence de dégradations constatées dans le chalet.<br><br>
 		
 			<strong>État des lieux :</strong><br>
-			Un état des lieux contradictoire sera établi entre le propriétaire et le locataire à l'arrivée et au départ du locataire.<br> Tout désaccord sera mentionné sur l'état des lieux et signé par les deux parties.<br> L'état des lieux sera annexé au présent contrat.<br><br>
+			Un état des lieux contradictoire sera établi entre le propriétaire et le locataire à l'arrivée et au départ du locataire.<br> Tout désaccord sera mentionné sur l'état des lieux et signé par les deux parties. L'état des lieux sera annexé au présent contrat.<br><br>
 		
 			<strong>Obligations du locataire :</strong><br>
-			Le locataire s'engage à utiliser le chalet en bon père de famille, à respecter les lieux et le voisinage,<br> à ne pas sous-louer le chalet ni y exercer une activité professionnelle, à ne pas fumer à l'intérieur du chalet,<br> à ne pas y introduire d'animaux domestiques, et à ne pas y organiser de fêtes ou de réunions sans l'accord préalable du propriétaire.<br><br>
+			Le locataire s'engage à utiliser le chalet en bon père de famille, à respecter les lieux et le voisinage, à ne pas sous-louer le chalet ni y exercer une activité professionnelle, à ne pas fumer à l'intérieur du chalet, à ne pas y introduire d'animaux domestiques, et à ne pas y organiser de fêtes ou de réunions sans l'accord préalable du propriétaire.<br><br>
 		
 			
 			<strong>Assurance :</strong><br>
 			Le locataire est responsable de souscrire une assurance responsabilité civile pour couvrir les dommages qu'il pourrait causer au chalet ou à autrui pendant la durée de la location.<br><br>
 		
 			<strong>Résiliation :</strong><br>
-			En cas de manquement par l'une ou l'autre des parties aux obligations découlant du présent contrat, celui-ci pourra être résilié de plein droit par la partie lésée,<br> sans formalité judiciaire et sans préjudice des dommages et intérêts qui pourraient être réclamés.<br><br>
+			En cas de manquement par l'une ou l'autre des parties aux obligations découlant du présent contrat, celui-ci pourra être résilié de plein droit par la partie lésée, sans formalité judiciaire et sans préjudice des dommages et intérêts qui pourraient être réclamés.<br><br>
 		
 			<strong>Loi applicable et juridiction :</strong><br>
 			Le présent contrat est régi par la loi française. Tout litige relatif à l'interprétation ou à l'exécution du présent contrat sera de la compétence exclusive des tribunaux français.<br><br>
 		
 			<strong>Annexes :</strong><br>
-			Le présent contrat est constitué de <strong>[nombre]</strong> pages, y compris l'état des lieux annexé. Les parties reconnaissent avoir pris connaissance de chacune des pages et les avoir paraphées et signées.<br><br>
+			Le présent contrat est constitué de <strong>1</strong> pages, y compris l'état des lieux annexé. Les parties reconnaissent avoir pris connaissance de chacune des pages et les avoir paraphées et signées.<br><br>
+	</p>
 	
-	Fait en deux exemplaires originaux à <strong>...</strong>, le <strong>[date de signature]</strong><br><br><br><br><br>
+			<div style=''>
+			<div style='text-align: right;'>
+				<strong>Signature du locataire</strong><br>
+				<img src='$signature_img' width='100' height='50' />
+				<p style='text-align: right;'>Date de signature, le <strong>$date_debut_fr</strong></p>
+
+			</div>
+			<div >
+				<strong>Signature du propriétaire</strong><br><br>
+				<img src='$signature_img' width='100' height='50' /><br><br>
+			</div>
 	
-	<strong>Signature du propriétaire</strong><br>
-	<img src='$signature_img' width='100' height='50' /><br><br>
 	
-	
-		<strong>Signature du locataire</strong><br>
-
-		<img src='$signature_img' width='100' height='50' />
-
-
-
 		
-
-
+	</div>
 		</page_header>
 
 		<page_footer>
@@ -150,7 +145,7 @@ $html = "
 	
 	
 	";
-}
+
 
 $html2pdf->writeHTML($html);
 $html2pdf->output("Contrat_doc.pdf");

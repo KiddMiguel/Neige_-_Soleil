@@ -18,10 +18,12 @@
                     <form action="" method="post">
                         <div class="row mt-2">
                             <div class="col-md-12 pt-3"> <select class="select border p-1" name="civilite_locataire">
-                                        <option  value="" disabled><?= ((isset($_SESSION["email_locataire"]))) ? $locataire['civilite_locataire'] : "" ?></option>
+                                    <optgroup label="Civilité">
+                                        <option  value=""><?= ((isset($_SESSION["email_locataire"]))) ? $locataire['civilite_locataire'] : "" ?></option>
                                         <option name="civilite_locataire" value="Mme">Mme</option>
                                         <option name="civilite_locataire" value="Mr">Mr</option>
                                         <option name="civilite_locataire" value="Autre">Autre</option>
+                                        </optgroup>
                                     </select></div>
                             <div class="col-md-6 pt-3"><input type="text" class="form-control" name="nom_locataire" placeholder="Votre nom" value="<?= ((isset($_SESSION["email_locataire"]))) ? $locataire['nom_locataire'] : "" ?>"></div>
                             <div class="col-md-6 pt-3"><input type="text" class="form-control" name="prenom_locataire" placeholder="Votre prenom" value="<?= ((isset($_SESSION["email_locataire"]))) ? $locataire['prenom_locataire'] : "" ?>"></div>
@@ -31,7 +33,7 @@
                             <div class="col-md-12 pt-3"><input type="text" class="form-control" name="adresse_locataire" placeholder="Votre adresse" value="<?= ((isset($_SESSION["email_locataire"]))) ? $locataire['adresse_locataire'] : "" ?>"></div>
                             <div class="col-md-6 pt-3"><input type="text" class="form-control" placeholder="Votre code postal" name="cp_locataire" value="<?= ((isset($_SESSION["email_locataire"]))) ? $locataire['cp_locataire'] : " " ?>"></div>
                        </div>
-                        <div class="mt-5 text-center"><button class="btn btn-warning profile-button" type="submit" name="update_locataire" data-bs-toggle="modal" data-bs-target="#exampleModal" >Sauvegarder</button><p class="py-2" style="font-size: xx-small;"> <i>Merci de vous déconnecter puis vous réconnecter lors la modification de vos informations</i></p></div>
+                        <div class="mt-5 text-center"><button class="btn btn-warning profile-button" type="submit" name="update_locataire" data-bs-toggle="modal" data-bs-target="#exampleModal" >Sauvegarder</button><p class="py-2" style="font-size: xx-small;"><span></span> <i>Merci de vous déconnecter puis vous réconnecter lors la modification de vos informations</i></p></div>
                     </form>
           
                 </div>
@@ -40,7 +42,7 @@
                 <div class="p-3 py-5">
                     <div class="d-flex justify-content-between align-items-center experience"><span class="fw-semibold">Paramètre Confidentialité</span><a class="border px-3 p-1 add-experience text-decoration-none text-black rounded" data-bs-toggle="modal" data-bs-target="#modalGerer" href="#">Gérer</a></div><br>
                     <div class="col-md-12"><label class="labels">Email</label><input type="text" class="form-control " disabled="disabled" placeholder="Email" value="<?= ((isset($_SESSION["email_locataire"]))) ? $locataire['email_locataire'] : "" ?>"></div> <br>
-                    <div class="col-md-12"><label class="labels">Mot de Passe</label><input type="password" class="form-control" disabled="disabled" placeholder="Mot de passe" value="<?= ((isset($_SESSION["email_locataire"]))) ? $locataire['mdp_locataire'] : "" ?>"></div>
+                    <div class="col-md-12"><label class="labels">Mot de Passe</label><input type="password" class="form-control" disabled="disabled" placeholder="Mot de passe" value="..............."></div>
                      <div class="modal fade" id="modalGerer" tabindex="-1" aria-labelledby="modalGerer" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered">
                             <div class="modal-content">

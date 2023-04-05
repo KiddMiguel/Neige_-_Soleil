@@ -272,6 +272,21 @@ BEGIN
 END //
 DELIMITER ;
 
+-- TRIGGER QUI MODIFIE LE STATUT DE L4APPARTEMENT SI IL EXISTE UN ID_USER
+drop trigger IF EXISTS update_appart;
+DELIMITER //
+CREATE TRIGGER update_appart
+BEFORE UPDATE on appartement
+FOR EACH ROW
+BEGIN
+    IF NEW.id_user IS NULL THEN
+        SET NEW.statut_appart = 'Disponible';
+    ELSE
+        SET NEW.statut_appart = 'En location';
+    END IF;
+END //
+DELIMITER ;
+
 /*------------------------------------------------------------------*/
 /*PROCEDURE POUR AVOIR LE NOMBRE TOTAL DES LOCATAIRES*/
 Drop PROCEDURE if exists total_locataire;
@@ -317,7 +332,7 @@ VALUES ( 'Mr', 'Durand', 'Jean', 'Particulier', 'jean.durand@email.com', 'motdep
 
 INSERT INTO contrat (statut_contrat, date_debut_contrat, date_fin_contrat, date_sign_contrat, id_user, id_appart)
 VALUES ('En cours', '2022-03-01', '2022-08-31', '2022-03-01', 1, 1),
-       ('Résilié', '2022-04-01', '2022-08-31', '2022-04-01', 1, 2),
+       ('Résilié', '2022-04-01', '2022-08-31', '2022-04-01', 1, 2), 
        ('En cours', '2022-02-01', '2022-07-31', '2022-02-01', 3, 3),
        ('En cours', '2022-01-01', '2022-06-30', '2022-01-01', 4, 4),
        ('Résilié', '2022-05-01', '2022-08-31', '2022-05-01', 5, 5);
@@ -325,21 +340,21 @@ VALUES ('En cours', '2022-03-01', '2022-08-31', '2022-03-01', 1, 1),
 INSERT INTO appartement (statut_appart, prix_appart, intitule_appart, ville_appart, cp_appart, adresse_appart, description_appart, type_appart, superficie_appart,image, nb_chambre, nb_cuisine, nb_salon, nb_salle_bain, nb_piece)
 VALUES 
 ('Disponible', 150000, 'Bel appartement en centre-ville', 'Paris', '75001', '10 Rue de Rivoli', 'Bel appartement lumineux de 75m² situé en plein coeur de Paris', 'Appartement', '75m²','A-1.jpg', 2, 1, 1, 1, 6),
-('En location', 220000, 'Grand appartement avec vue sur la mer', 'Marseille', '13008', '30 Avenue du Prado', 'Spacieux appartement de 100m² avec vue imprenable sur la mer Méditerranée', 'Appartement', '100m²','B-1.jpg', 3, 1, 1, 2, 7),
+('Disponible', 220000, 'Grand appartement avec vue sur la mer', 'Marseille', '13008', '30 Avenue du Prado', 'Spacieux appartement de 100m² avec vue imprenable sur la mer Méditerranée', 'Appartement', '100m²','B-1.jpg', 3, 1, 1, 2, 7),
 ('Disponible', 80000, 'Studio au calme dans quartier résidentiel', 'Lyon', '69006', '20 Rue de la République', 'Joli petit studio de 30m² au calme dans un quartier résidentiel de Lyon', 'Studio', '30m²','C-1.jpg', 1, 1, 0, 1, 3),
-('En location', 120000, 'Appartement rénové dans immeuble haussmannien', 'Paris', '75009', '15 Rue La Fayette', 'Appartement récemment rénové de 50m² dans un bel immeuble haussmannien', 'Appartement', '50m²','D-1.jpg', 1, 1, 1, 1, 4),
+('Disponible', 120000, 'Appartement rénové dans immeuble haussmannien', 'Paris', '75009', '15 Rue La Fayette', 'Appartement récemment rénové de 50m² dans un bel immeuble haussmannien', 'Appartement', '50m²','D-1.jpg', 1, 1, 1, 1, 4),
 ('Disponible', 250000, 'Appartement duplex avec terrasse', 'Toulouse', '31000', '5 Rue Saint-Rome', 'Bel appartement duplex de 120m² avec grande terrasse en plein centre-ville de Toulouse', 'Appartement', '120m²','E-1.jpg', 4, 1, 1, 2, 8),
-('En location', 180000, 'Appartement lumineux avec balcon', 'Nantes', '44000', '10 Rue de Strasbourg', 'Appartement de 80m² très lumineux avec balcon donnant sur un parc arboré', 'Appartement', '80m²','F-1.jpg', 2, 1, 1, 1, 5),
+('Disponible', 180000, 'Appartement lumineux avec balcon', 'Nantes', '44000', '10 Rue de Strasbourg', 'Appartement de 80m² très lumineux avec balcon donnant sur un parc arboré', 'Appartement', '80m²','F-1.jpg', 2, 1, 1, 1, 5),
 ('Disponible', 90000, 'Appartement avec vue sur la montagne', 'Grenoble', '38000', '5 Rue de la République', 'Bel appartement de 60m² avec vue sur la montagne', 'Appartement', '60m²','J-1.jpg', 2, 1, 1, 1, 5),
-('En location', 150000, 'Appartement en rez-de-jardin', 'Nice', '06000', '10 Avenue des Fleurs', 'Appartement de 70m² en rez-de-jardin avec terrasse et accès direct à la piscine de la résidence', 'Appartement', '70m²','G-1.jpg', 2, 1, 1, 1, 5);
+('Disponible', 150000, 'Appartement en rez-de-jardin', 'Nice', '06000', '10 Avenue des Fleurs', 'Appartement de 70m² en rez-de-jardin avec terrasse et accès direct à la piscine de la résidence', 'Appartement', '70m²','G-1.jpg', 2, 1, 1, 1, 5);
 
-INSERT INTO reservation (statut_reservation, date_debut_reservation, date_fin_reservation, prix_reservation, nb_personnes, id_user, id_appart)
+/* INSERT INTO reservation (statut_reservation, date_debut_reservation, date_fin_reservation, prix_reservation, nb_personnes, id_user, id_appart)
 VALUES 
 ('En cours', '2023-03-01', '2023-03-07', 600, 2, 1, 1),
 ('Réservé', '2023-04-15', '2023-04-22', 800, 4, 3, 2),
 ('En cours', '2023-05-01', '2023-05-15', 1200, 3, 2, 1),
 ('Réservé', '2023-06-10', '2023-06-15', 500, 2, 1, 1),
-('Réservé', '2023-07-20', '2023-07-25', 400, 2, 1, 3);
+('Réservé', '2023-07-20', '2023-07-25', 400, 2, 1, 3); */
 INSERT INTO equipement_appart (intitule_equip_appart, nb_equi_appart, prix_equip_appart, type_equip_appart, statut_equip_appart, id_appart)
 VALUES 
 ('Lave-linge', 1, 500, 'Electromenager', 'Disponible', 1),
