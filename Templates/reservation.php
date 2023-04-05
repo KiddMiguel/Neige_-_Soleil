@@ -70,9 +70,13 @@
                                     <td>
                                         <button  class=" border rounded">' . $reservation['prix_reservation'] . ' €/Mois</button>
                                     </td>
-                                    <td>
-                                        <button  class="btn btn-danger"><a href="index.php?page=delete&id_reservation='.$reservation['id_reservation'].'" class="text-decoration-none text-light" data-mdb-toggle="tooltip" title="Done">Annuler</i></a></button>
-                                    </td>
+                                    <td>';
+                                    if($reservation['statut_reservation'] != 'Réservé'){
+                                        echo '<button  class="btn btn-danger"><a href="index.php?page=delete&id_reservation='.$reservation['id_reservation'].'" class="text-decoration-none text-light" data-mdb-toggle="tooltip" title="Done">Annuler</i></a></button>';
+                                    }else {
+                                        echo '<a href="contrat/contrat_locataire.php?id_appart='.$reservation['id_appart'].'" target="blank"> <button class="btn btn-primary"><i class="bi bi-clipboard2-fill fs-6" style="color:#DEE2E6 !important;"></i>Contrat</button> </a>';
+                                    }
+                                     echo'</td>
                                 </tr>';
                                     }
 

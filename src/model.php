@@ -53,8 +53,9 @@ class Modele
     {
         if ($this->unPDO != null) {
             $id_user = $_GET["id_user"];
-            $request = "update locataire set nom_locataire=:nom_locataire, prenom_locataire=:prenom_locataire, tel_locataire=:tel_locataire ,adresse_locataire=:adresse_locataire, cp_locataire=:cp_locataire where locataire.id_user=$id_user";
+            $request = "update locataire set civilite_locataire=:civilite_locataire,  nom_locataire=:nom_locataire, prenom_locataire=:prenom_locataire, tel_locataire=:tel_locataire ,adresse_locataire=:adresse_locataire, cp_locataire=:cp_locataire where locataire.id_user=$id_user";
             $donnees = array(
+                ":civilite_locataire" => $tab['civilite_locataire'],
                 ":nom_locataire" => $tab['nom_locataire'],
                 ":prenom_locataire" => $tab['prenom_locataire'],
                 ":tel_locataire" => $tab['tel_locataire'],
@@ -323,16 +324,15 @@ class Modele
             return null;
         }
     }
-    public function FiltreLocation_index($mot, $prixMax, $prixMin)
+    public function FiltreLocation_index($mot_index, $statut, $prixMax, $prixMin)
     {
         if ($this->unPDO != null) {
-
-            $requete = "select * from appartement where ville_appart like :mot or statut_appart like :mot and prix_appart  BETWEEN :prixMin AND :prixMax";
+            $requete = "SELECT * from appartement where ville_appart like :mot_index and statut_appart like :statut OR (prix_appart BETWEEN :prixMin and :prixMax)";
             $donnees = array(
-                // if $mot == null ":mot"=>% 
-                ":mot" => "%" . $mot . "%",
-                ":prixMax" => "%" . $prixMax . "%",
-                ":prixMin" => "%" . $prixMin . "%"
+                ":mot_index" => "%" . $mot_index . "%",
+                ":statut" => "%" . $statut . "%",
+                ":prixMax" => $prixMax,
+                ":prixMin" => $prixMin
             );
             $select = $this->unPDO->prepare($requete);
             $select->execute($donnees);

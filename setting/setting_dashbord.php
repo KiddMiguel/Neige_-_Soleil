@@ -4,7 +4,8 @@ $mois = $unController->dashBordContrat_last($id_user);
 $factures_wait = $unController->dashBordFacture_wait();
 $revenu = $unController->dashBordRevenu_month($id_user);
 $revenus = $unController->dashBordRevenu($id_user);
-// x$nbAppart = $unController->dashBordNbAppartement($id_user);
+// $nbLocataire = $unController->dashBordNbLocataire($id_user);
+$nbAppart = $unController->dashBordNbAppartement($id_user);
 
 //on crèe crée un tableau associatif avec les noms de mois correspondants aux numéros de mois.
 $mois_noms = [

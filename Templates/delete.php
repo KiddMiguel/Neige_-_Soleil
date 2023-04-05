@@ -1,3 +1,5 @@
+<section class="vh-100">
+
 <section class="vh-100" style="background-color: #757573;">
     <div class="w-25 text-center position-absolute top-50 start-50 translate-middle card pt-5 pb-5">
         <form action="" method="post">
@@ -9,4 +11,5 @@
             </div>
         </form>
     </div>
+</section>
 </section>

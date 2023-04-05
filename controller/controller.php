@@ -142,13 +142,12 @@ class Controller
     /**********************************FILTRE************** */
     public function FiltreLocation($mot)
     {
-
         $appartements = $this->unModele->FiltreLocation($mot);
         return $appartements;
     }
-    public function FiltreLocation_index($mot, $prixMax, $prixMin)
+    public function FiltreLocation_index($mot_index, $statut, $prixMax, $prixMin)
     {
-        $appartements = $this->unModele->FiltreLocation_index($mot, $prixMax, $prixMin);
+        $appartements = $this->unModele->FiltreLocation_index($mot_index, $statut, $prixMax, $prixMin);
         return $appartements;
     }
 
