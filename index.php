@@ -96,9 +96,7 @@ $unController = new Controller($server, $bdd, $user, $mdp);
             
         case "deconnexion":
             session_destroy();
-            unset($_SESSION["email_locataire"]);
-            unset($_SESSION["email_proprio"]);
-            require_once("Templates/home.php");
+            header("location: index.php?page=home");
             break;
         case "contact":
             require_once("Templates/contact.php");

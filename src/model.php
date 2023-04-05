@@ -53,8 +53,9 @@ class Modele
     {
         if ($this->unPDO != null) {
             $id_user = $_GET["id_user"];
-            $request = "update locataire set nom_locataire=:nom_locataire, prenom_locataire=:prenom_locataire, tel_locataire=:tel_locataire ,adresse_locataire=:adresse_locataire, cp_locataire=:cp_locataire where locataire.id_user=$id_user";
+            $request = "update locataire set civilite_locataire=:civilite_locataire,  nom_locataire=:nom_locataire, prenom_locataire=:prenom_locataire, tel_locataire=:tel_locataire ,adresse_locataire=:adresse_locataire, cp_locataire=:cp_locataire where locataire.id_user=$id_user";
             $donnees = array(
+                ":civilite_locataire" => $tab['civilite_locataire'],
                 ":nom_locataire" => $tab['nom_locataire'],
                 ":prenom_locataire" => $tab['prenom_locataire'],
                 ":tel_locataire" => $tab['tel_locataire'],
