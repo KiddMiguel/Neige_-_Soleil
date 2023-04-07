@@ -1,5 +1,5 @@
-<section class="sectionTwo sectionLocation">
-    <div class="container text-center vh-100">
+<section class="sectionTwo sectionLocation" style="height: 80rem;">
+    <div class="container text-center">
         <h3 class="pt-5 pb-2">Découvrez tous nos logements</h3>
         <div class="mt-5 w-100 justify-content-center">
             <div class="row">

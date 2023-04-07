@@ -348,13 +348,13 @@ VALUES
 ('Disponible', 90000, 'Appartement avec vue sur la montagne', 'Grenoble', '38000', '5 Rue de la République', 'Bel appartement de 60m² avec vue sur la montagne', 'Appartement', '60m²','J-1.jpg', 2, 1, 1, 1, 5),
 ('Disponible', 150000, 'Appartement en rez-de-jardin', 'Nice', '06000', '10 Avenue des Fleurs', 'Appartement de 70m² en rez-de-jardin avec terrasse et accès direct à la piscine de la résidence', 'Appartement', '70m²','G-1.jpg', 2, 1, 1, 1, 5);
 
-/* INSERT INTO reservation (statut_reservation, date_debut_reservation, date_fin_reservation, prix_reservation, nb_personnes, id_user, id_appart)
+INSERT INTO reservation (statut_reservation, date_debut_reservation, date_fin_reservation, prix_reservation, nb_personnes, id_user, id_appart)
 VALUES 
 ('En cours', '2023-03-01', '2023-03-07', 600, 2, 1, 1),
 ('Réservé', '2023-04-15', '2023-04-22', 800, 4, 3, 2),
 ('En cours', '2023-05-01', '2023-05-15', 1200, 3, 2, 1),
 ('Réservé', '2023-06-10', '2023-06-15', 500, 2, 1, 1),
-('Réservé', '2023-07-20', '2023-07-25', 400, 2, 1, 3); */
+('Réservé', '2023-07-20', '2023-07-25', 400, 2, 1, 3);
 INSERT INTO equipement_appart (intitule_equip_appart, nb_equi_appart, prix_equip_appart, type_equip_appart, statut_equip_appart, id_appart)
 VALUES 
 ('Lave-linge', 1, 500, 'Electromenager', 'Disponible', 1),

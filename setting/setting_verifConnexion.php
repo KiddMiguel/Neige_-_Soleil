@@ -43,7 +43,7 @@ if (isset($_POST["valider"])) {
             $_SESSION["adresse_locataire"] = $unUser["adresse_locataire"];
             $_SESSION["cp_locataire"] = $unUser["cp_locataire"];
             $_SESSION["nb_reservations"] = $unUser["nb_reservations"];
-            header("location: index.php?page=home&&id_user=".$unUser["id_user"]);
+            header("location: index.php?page=home&id_user=".$unUser["id_user"]);
         }
     }
 }
@@ -109,4 +109,17 @@ if (isset($_POST["valider_proprio"])) {
         header("location: index.php?page=home&id_user=".$unUser["id_user"]);
     }
 }
+}
+
+if(isset($caseStay_locataire)){
+    $email_locataire = $_SESSION['email_locataire'];
+    $mdp_locataire = $_SESSION['mdp_locataire'];
+    $cookie_expire = time() + 60 * 60 * 24 * 30; // durée du cookie (30 jours)
+    setcookie($email_locataire, $mdp_locataire, $cookie_expire,"/");
+}
+if(isset($caseStay_proprio)){
+$email_proprio = $_SESSION['email_proprio'];
+$mdp_proprio = $_SESSION['mdp_proprio'];
+$cookie_expire = time() - 3600;
+setcookie($email_locataire, $mdp_locataire, $cookie_expire,"/");
 }
