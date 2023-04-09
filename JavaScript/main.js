@@ -5,6 +5,7 @@ window.onload = () => {
   inscription();
 };
 
+
 function calendar() {
   document.addEventListener("DOMContentLoaded", function () {
     var calendarEl = document.getElementById("calendar");
@@ -49,7 +50,7 @@ function calendar() {
       events: function (fetchInfo, successCallback, failureCallback) {
         $.ajax({
           type: "GET",
-          url: "http://localhost/PPE/Neige_-_Soleil/src/recup_reservations.php",
+          url: "http://localhost/PPE/Neige_-_Soleil/src/recup_reservations.php?id_appart="+id_appart+"",
           dataType: "json",
           success: function (reservations) {
             var events = [];
