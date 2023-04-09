@@ -14,7 +14,9 @@
                     <li class="nav-item">
                         <a class="nav-link " href="index.php?page=location"><i class="fa-solid fa-mountain-sun color-light"></i> Location</a>
                     </li>
-                    <?php if (!isset($_SESSION["email_locataire"]) && !isset($_SESSION["email_proprio"])) {
+                    <?php
+                    
+                    if (!isset($_SESSION["email_locataire"]) && !isset($_SESSION["email_proprio"])) {
                         echo '
                         <li class="nav-item">
                         <a class="nav-link" href="index.php?page=connexion_locataire"><i class="fa-solid fa-user"></i> Espace locataire</a>

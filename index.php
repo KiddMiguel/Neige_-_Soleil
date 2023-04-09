@@ -25,6 +25,7 @@ $unController = new Controller($server, $bdd, $user, $mdp);
 
 <body>
     <?php
+    // require_once("src/recup_reservations.php");
     require_once("setting/setting_appartement.php");
     require_once("setting/setting_reservation.php");
     require_once("setting/setting_demande.php");
@@ -93,7 +94,9 @@ $unController = new Controller($server, $bdd, $user, $mdp);
         case "delete":
             require_once("Templates/delete.php");
             break;
-            
+        case "recup_reservation":
+            require_once("src/recup_reservations.php");
+            break;
         case "deconnexion":
             session_destroy();
             header("location: index.php?page=home");
@@ -110,12 +113,14 @@ $unController = new Controller($server, $bdd, $user, $mdp);
     /******Calling footer****/
     require_once("include/footer.php");
     ?>
-    <script src='fullcalendar/dist/index.global.js'></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.4/index.global.min.js'></script>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.0/fullcalendar.min.js'></script>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js'></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+    <script>
+        var id_appart = <?php echo $id_appart ?>;
+    </script>
     <script src="JavaScript/main.js"></script>
 </body>
 

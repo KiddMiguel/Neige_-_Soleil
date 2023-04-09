@@ -84,7 +84,7 @@
       <div class= "d-flex mt-3">
       <input type="hidden" id="event-index" class="form-control w-25 me-1" value=""  >
       <input type="date" id="dateStart" disabled class="form-control w-25 me-1" value="' . $date . '"  >
-      <input type="date" id="dateEnd" disabled class="form-control w-25 ms-1" value=""><button type="button" id="choisir" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal" class="btn btn-success ms-2">Choisir</button><button type="reset" class="btn btn-danger ms-2">Reset</button>    
+      <input type="date" id="dateEnd" disabled class="form-control w-25 ms-1" value=""><button type="button" id="choisir" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal" class="btn btn-success ms-2">Contact propriétaire</button>   
       </div>
       <div class="mt-4">
         <div id="calendar">
@@ -94,7 +94,6 @@
 
       echo '</div>
           <div class="modal-footer">
-            <button class="btn btn-warning" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal">Contacter le propriétaire</button>
           </div>
         </div>
       </div>
