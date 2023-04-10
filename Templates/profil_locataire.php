@@ -88,7 +88,7 @@
                                     <div class="col-md-12"><label class="labels">Email</label><input type="email" class="form-control " name="email_locataire" required placeholder="Email" value="<?= ((isset($_SESSION["email_locataire"]))) ? $locataire['email_locataire'] : " " ?>"></div> <br>
                                     <div class="col-md-12 py-2">
 
-                                        <input type="password" class="form-control" id="old_mdp" name="old_mdp" placeholder="Ancien mot de passe" value="">
+                                        <input type="password" class="form-control" id="old_mdp" name="old_mdp" required placeholder="Ancien mot de passe" value="">
                                     </div>
                                     <div class="col-md-12 py-2">
                                         <label for="mdp" class="fst-italic">Au moins 8 caractères, une lettre majuscule, une lettre minuscule et un chiffre.</label>

@@ -88,11 +88,8 @@
                             </div>
 
                             <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
-                                <li class="nav-item  me-4 " role="presentation ">
-                                    <button class=" bg-white rounded p-2 active border fw-semibold" id="pills-locataires-tab" data-bs-toggle="pill" data-bs-target="#pills-locataires" type="button" role="tab" aria-controls="pills-locataires" aria-selected="true"> <i class="bi bi-people fs-4 text-muted "></i><br>Locataires</button>
-                                </li>
                                 <li class="nav-item me-4" role="presentation">
-                                    <button class="bg-white rounded p-2 border fw-semibold" id="pills-appartement-tab" data-bs-toggle="pill" data-bs-target="#pills-appartement" type="button" role="tab" aria-controls="pills-appartement" aria-selected="false"><i class="bi bi-houses fs-4 text-muted"></i><br>Appartements</button>
+                                    <button class="bg-white rounded p-2 active border fw-semibold" id="pills-appartement-tab" data-bs-toggle="pill" data-bs-target="#pills-appartement" type="button" role="tab" aria-controls="pills-appartement" aria-selected="true"><i class="bi bi-houses fs-4 text-muted"></i><br>Appartements</button>
                                 </li>
                                 <li class="nav-item me-4" role="presentation">
                                     <button class="bg-white rounded p-2 border fw-semibold" id="pills-demandes-tab" data-bs-toggle="pill" data-bs-target="#pills-demandes" type="button" role="tab" aria-controls="pills-demandes" aria-selected="false"><i class="bi bi-list-task fs-4 text-muted"></i><br>Demandes</button>
@@ -102,48 +99,7 @@
                                 </li>
                             </ul>
                             <div class="tab-content" id="pills-tabContent">
-                                <div class="tab-pane fade show active " style="border: none !important" id="pills-locataires" role="tabpanel" aria-labelledby="pills-locataires-tab" tabindex="0">
-                                    <table class="table table-hover">
-                                        <thead>
-                                            <tr>
-                                                <th scope="col" style="color: #646477 !important;">USER</th>
-                                                <th scope="col" style="color: #646477 !important;">CONTRAT</th>
-                                                <th scope="col" style="color: #646477 !important;">APPARTEMENT</th>
-                                                <th scope="col" style="color: #646477 !important;">PRIX</th>
-                                                <th scope="col" style="color: #646477 !important;">DATE FIN</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                                <tr>
-                                                <th scope="row ">
-                                                    <div class="d-flex"><i class="bi bi-person-circle fs-1 "></i>
-                                                        <p class="mt-3 ps-2">Miguel</p>
-                                                    </div>
-                                                </th>
-                                            
-                                                <td class="m-auto pt-4 text-muted fw-semibold"><span class="bg-warning p-2 rounded text-light">En cours</span></td>
-                                                <td class="m-auto pt-4 text-muted fw-semibold pe-0" style="text-align: justify;">Bel appartement en centre-ville...</td>
-                                                <td class="m-auto pt-4 text-muted fw-semibold">1 500€</td>
-                                                <td class="m-auto pt-4 text-muted fw-semibold">2023-06-04</td>
-                                            </tr>
-                                   
-                                    
-                                            <tr>
-                                                <th scope="row ">
-                                                    <div class="d-flex"><i class="bi bi-person-circle fs-1 "></i>
-                                                        <p class="mt-3 ps-2">John Fil</p>
-                                                    </div>
-                                                </th>
-                                                <td class="m-auto pt-4 text-muted fw-semibold"><span class="bg-danger p-2 rounded text-light">Terminer</span></td>
-                                                <td class="m-auto pt-4 text-muted fw-semibold pe-0" style="text-align: justify;">Studio au calme dans quartier ...</td>
-                                                <td class="m-auto pt-4 text-muted fw-semibold">1 900€</td>
-                                                <td class="m-auto pt-4 text-muted fw-semibold">2023-06-10</td>
-                                            </tr>
-
-                                        </tbody>
-                                    </table>
-                                </div>
-                                <div class="tab-pane fade" style="border: none !important" id="pills-appartement" role="tabpanel" aria-labelledby="pills-appartement-tab" tabindex="0">
+                                <div class="tab-pane fade show active" style="border: none !important" id="pills-appartement" role="tabpanel" aria-labelledby="pills-appartement-tab" tabindex="0">
                                 <table class="table table-hover">
                                         <thead>
                                             <tr>
@@ -154,6 +110,7 @@
                                                 <th scope="col" style="color: #646477 !important;">CP</th>
                                                 <th scope="col" style="color: #646477 !important;">TYPE</th>
                                                 <th scope="col" style="color: #646477 !important;">PIECES</th>
+                                                <!-- <th scope="col" style="color: #646477 !important;">N APPART</th> -->
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -172,10 +129,10 @@
                                                         <p class="mt-3 ps-2"  style="text-align: justify;">'.$intitule.'</p>
                                                     </a>
                                                 </th>';
-                                                if($appartement['statut_appart'] == 'Vendu'){
-                                                    echo'  <td class="m-auto pt-4 text-muted fw-semibold"><span class="bg-warning p-2 rounded text-light">'.$appartement['statut_appart'] .'</span></td>';
-                                                }elseif($appartement['statut_appart'] == 'Disponible'){
+                                                if($appartement['statut_appart'] == 'En location'){
                                                     echo'  <td class="m-auto pt-4 text-muted fw-semibold"><span class="bg-success p-2 rounded text-light">'.$appartement['statut_appart'] .'</span></td>';
+                                                }elseif($appartement['statut_appart'] == 'En attente'){
+                                                    echo'  <td class="m-auto pt-4 text-muted fw-semibold"><span class="bg-warning p-2 rounded text-light">'.$appartement['statut_appart'] .'</span></td>';
                                                 }elseif($appartement['statut_appart'] == ''){
                                                     echo'  <td class="m-auto pt-4 text-muted fw-semibold"><span class="p-2 rounded text-light">'.$appartement['statut_appart'] .'</span></td>';
                                                 }
@@ -197,7 +154,7 @@
                                 <div class="tab-pane fade" style="border: none !important" id="pills-demandes" role="tabpanel" aria-labelledby="pills-demandes-tab" tabindex="0">
                                 <table class="table table-hover">
                                         <thead>
-                                            <tr>
+                                            <tr> 
                                                 <th scope="col" style="color: #646477 !important;">INTITULE</th>
                                                 <th scope="col" style="color: #646477 !important;">STATUT</th>
                                                 <th scope="col" style="color: #646477 !important;">DATE</th>
@@ -216,9 +173,13 @@
                                             }else{
                                                echo' <td class="m-auto pt-4 text-muted fw-semibold"><span class="bg-success p-2 rounded text-light">'.$demande['statut_demande'].'</span></td>';
                                             }
-                                             echo'  <td class="m-auto pt-4 text-muted fw-semibold pe-0" style="text-align: justify;">'.$demande['date_demande'].'</td>
-                                                <td class="m-auto pt-4 text-muted fw-semibold"><button class="btn btn-danger"><i class="bi bi-trash3 fs-6" style="color:#DEE2E6 !important;"></i></button></td>
-                                            </tr>';
+                                             echo'  <td class="m-auto pt-4 text-muted fw-semibold pe-0" style="text-align: justify;">'.$demande['date_demande'].'</td>';
+                                             if($demande['statut_demande'] != "Valider"){
+                                                echo'<td class="m-auto pt-4 text-muted fw-semibold"><button class="btn btn-danger"><i class="bi bi-trash3 fs-6" style="color:#DEE2E6 !important;"></i></button></td>';
+                                             }else{
+                                                echo'<td class="m-auto pt-4 text-muted fw-semibold"><a href="contrat/contrat_proprietaire.php" target="blank"> <button class="btn btn-primary"><i class="bi bi-clipboard2-fill fs-6" style="color:#DEE2E6 !important;"></i></button> </a> </td>';
+                                             }
+                                            echo'</tr>';
                                                   }
                                             ?>
                                    
@@ -235,26 +196,33 @@
                                                 <th scope="col" style="color: #646477 !important;">STATUT</th>
                                                 <th scope="col" style="color: #646477 !important;">DATE FIN</th>
                                                 <th scope="col" style="color: #646477 !important;">DATE SIGN</th>
-                                                <th scope="col" style="color: #646477 !important;">APPARTEMENT</th>
                                                 <th scope="col" style="color: #646477 !important;">ACTION</th>
                                             </tr>
                                         </thead>
+                                        <?php
+                                        foreach($lesContrats as $contrats){
+                                        echo'
                                         <tbody>
                                                 <tr>
-                                                <td class="m-auto pt-4 text-muted fw-semibold">2023-06-04</td>
-                                                <td class="m-auto pt-4 text-muted fw-semibold"><span class="bg-warning p-2 rounded text-light">En cours</span></td>
-                                                <td class="m-auto pt-4 text-muted fw-semibold">2023-06-04</td>
-                                                <td class="m-auto pt-4 text-muted fw-semibold">2023-06-04</td>
-                                                <td class="m-auto text-muted fw-semibold pe-0" style="text-align: justify;"><a  class="d-flex text-decoration-none text-dark">
-                                                        <img src="Images/A-1.jpg" alt="" class="rounded" sizes="150" srcset="" width="70">
-                                                    </a></td>
-                                                <td class="m-auto text-muted fw-semibold"> <a href="contrat/contrat_proprietaire.php" target="blank"> <button class="btn btn-primary"><i class="bi bi-clipboard2-fill fs-6" style="color:#DEE2E6 !important;"></i></button> </a> </td>
+                                                <td class="m-auto pt-4 text-muted fw-semibold">'.$contrats['date_debut_contrat'].'</td>';
+                                                if($contrats['statut_contrat'] == 'En cours'){
+                                                    echo'<td class="m-auto pt-4 text-muted fw-semibold"><span class="bg-success p-2 rounded text-light">'.$contrats['statut_contrat'].'</span></td>';
+                                                }else{
+                                                    echo'<td class="m-auto pt-4 text-muted fw-semibold"><span class="bg-warning p-2 rounded text-light">'.$contrats['statut_contrat'].'</span></td>';
+                                                }
+                                                echo'
+                                                <td class="m-auto pt-4 text-muted fw-semibold">'.$contrats['date_fin_contrat'].'</td>
+                                                <td class="m-auto pt-4 text-muted fw-semibold">'.$contrats['date_sign_contrat'].'</td>';
+                                                if($contrats['statut_contrat'] == 'En cours'){
+                                                    echo'<td class="m-auto text-muted fw-semibold"> <a href="contrat/contrat_proprietaire.php?id_appart='.$contrats['id_appart'].'" target="blank"> <button class="btn btn-primary"><i class="bi bi-clipboard2-fill fs-6" style="color:#DEE2E6 !important;"></i></button> </a> </td>';
+                                                }else{
+                                                    echo'<td class="m-auto text-muted fw-semibold"> <a href="contrat/contrat_proprietaire.php?id_appart='.$contrats['id_appart'].'" target="blank"> <button class="btn btn-primary"><i class="bi bi-clipboard2-fill fs-6" style="color:#DEE2E6 !important;"></i></button> </a> ';
+                                                    echo'<a href="" target="blank"> <button class="btn btn-success"><i class="bi bi-file-earmark-plus-fill fs-6" style="color:#DEE2E6 !important;"></i></button> </a> </td>';
+                                                }
+                                                echo'
                                             </tr>
-                                   
-                                    
-                                          
-
-                                        </tbody>
+                                        </tbody>';}
+                                        ?>
                                     </table>
                                 </div>
                             </div>

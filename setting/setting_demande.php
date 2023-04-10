@@ -14,6 +14,6 @@ if (isset($_GET['id_user'])) {
                 break;
         }
     } else {
-        header("location: index.php?page=home");
+        header("location: index.php?page=error");
     }
 }

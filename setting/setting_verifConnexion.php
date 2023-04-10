@@ -3,10 +3,10 @@
 if (isset($_POST["se_connecter"])) {
     $email = $_POST["email_locataire"];
     $mdp = $_POST["mdp_locataire"];
-
+    $error ="";
     $unUser = $unController->verifconnexionLocataire($email, $mdp);
     if ($unUser == null) { 
-            
+        $error ="Mot de passe incorrect !";
     } else {
         $_SESSION["id_user"] = $unUser["id_user"];
         $_SESSION["civilite_locataire"] = $unUser["civilite_locataire"];
@@ -57,8 +57,10 @@ if (isset($_POST["valider"])) {
 if (isset($_POST["se_connecter_proprio"])) {
 $email = $_POST["email_proprio"];
 $mdp = $_POST["mdp_proprio"];
+$error="";
 $unUser = $unController->verifconnexionProprietaire($email, $mdp);
 if ($unUser == null) { 
+    $error ="Mot de passe incorrect !";
         echo'Error: Error';
 } else {
          $_SESSION["id_user"] = $unUser["id_user"];
@@ -88,9 +90,10 @@ $unController->insertProprietaire($_POST);
 if (isset($_POST["valider_proprio"])) {
     $email = $_POST["email_proprio"];
     $mdp = $_POST["mdp_proprio"];
+    $error="";
     $unUser = $unController->verifconnexionProprietaire($email, $mdp);
     if ($unUser == null) {
-        echo"Inscription okay";
+
     } else {
         $_SESSION["id_user"] = $unUser["id_user"];
         $_SESSION["id_proprietaire"] = $unUser["id_proprietaire"];

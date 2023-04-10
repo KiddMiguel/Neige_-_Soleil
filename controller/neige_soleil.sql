@@ -21,7 +21,7 @@ create table user (
 ); 
 CREATE table appartement (
     id_appart int(5) not null AUTO_INCREMENT,
-    statut_appart enum ("Disponible", "En location"),
+    statut_appart enum ("Disponible", "En location", "En attente"),
     prix_appart FLOAT,
     intitule_appart VARCHAR(100),
     ville_appart VARCHAR (50),
@@ -65,7 +65,7 @@ CREATE table demande (
 );
 create table contrat (
     id_contrat int(5) not null auto_increment,
-    statut_contrat varchar(50),
+    statut_contrat enum ("Résilier", "En cours"),
     date_debut_contrat date,
     date_fin_contrat date,
     date_sign_contrat date,
@@ -126,6 +126,15 @@ create table locataire (
     FOREIGN key (id_user) REFERENCES user(id_user),
     PRIMARY KEY (id_locataire)
     
+);
+
+CREATE TABLE question(
+    id_question INT(5),
+    intitule_question VARCHAR(100),
+    reponse_question VARCHAR(100),
+    id_user INT(5),
+    Foreign Key (id_user) REFERENCES user(id_user),
+    PRIMARY KEY(id_question)
 );
 
 CREATE TABLE statistique (
@@ -287,6 +296,19 @@ BEGIN
 END //
 DELIMITER ;
 
+-- TRIGGER QUI AJOUTE UN CONTRAT A LA MODIFICATION D'UNE DEMANDE
+
+drop trigger if exists set_contrat;
+DELIMITER //
+CREATE TRIGGER set_contrat
+AFTER UPDATE on demande
+for EACH ROW
+BEGIN
+    INSERT INTO contrat 
+    VALUES(null,"En cours", DATE_FORMAT(NOW(), '%Y-%m-%d'), DATE_ADD(NOW(), INTERVAL 1 YEAR), DATE_FORMAT(NOW(), '%Y-%m-%d'), NEW.id_user, NEW.id_appart);
+END //
+DELIMITER ;
+
 /*------------------------------------------------------------------*/
 /*PROCEDURE POUR AVOIR LE NOMBRE TOTAL DES LOCATAIRES*/
 Drop PROCEDURE if exists total_locataire;
@@ -319,6 +341,12 @@ DROP EVENT if exists time_reserved;
 CREATE event time_reserved
 ON SCHEDULE EVERY 1 MINUTE DO
     UPDATE reservation set statut_reservation ='Réservé' WHERE statut_reservation = 'En cours';
+
+-- EVENT QUI CHANGE LA DEMANDE EN 1 MINUTE
+DROP EVENT if exists time_demande;
+CREATE event time_demande
+ON SCHEDULE EVERY 1 MINUTE DO
+    UPDATE demande set statut_demande ='Valider' WHERE statut_demande = 'En cours';
     
 INSERT INTO locataire (civilite_locataire, nom_locataire, prenom_locataire, email_locataire, mdp_locataire, tel_locataire, adresse_locataire, cp_locataire, nb_reservations )
 VALUES 
