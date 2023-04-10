@@ -204,7 +204,7 @@ class Modele
     public function insertAppartement($tab)
     {
         if ($this->unPDO != null) {
-            $request = "insert into appartement values (null, 'Disponible', :prix_appart, :intitule_appart, :ville_appart, :cp_appart, :adresse_appart, :description_appart, :type_appart, :superficie_appart,'Default.png', :nb_chambre , :nb_cuisine, :nb_salon, :nb_salle_bain, :nb_piece,null, null, :id_user)";
+            $request = "insert into appartement values (null, 'En attente', :prix_appart, :intitule_appart, :ville_appart, :cp_appart, :adresse_appart, :description_appart, :type_appart, :superficie_appart,'Default.png', :nb_chambre , :nb_cuisine, :nb_salon, :nb_salle_bain, :nb_piece, :id_user)";
             $donnees = array(
                 ":prix_appart" => $tab['prix_appart'],
                 ":intitule_appart" => $tab['intitule_appart'],
@@ -404,6 +404,18 @@ class Modele
         }
     }
 
+
+    public function selectWhereContrat( $id_user)
+    {
+        if ($this->unPDO != null) {
+            $request = "select * from contrat where id_user=:id_user ";
+            $select = $this->unPDO->prepare($request);
+            $donnees = array(":id_user" => $id_user);
+            $select->execute($donnees);
+            $contrats = $select->fetchAll();
+            return $contrats;
+        }
+    }
 
     /*-----------------DASHBORD-------------------------- */
     //On fais une fonction qui récupère le nombre total des contrats pour un propriétaire

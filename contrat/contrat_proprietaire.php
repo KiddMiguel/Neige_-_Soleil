@@ -1,4 +1,5 @@
 <?php
+session_start();
 $chemin_image = "../images/Logo-noir.PNG";
 require_once("../vendor/autoload.php");
 require_once("connect_bdd_contrat.php");
@@ -11,6 +12,19 @@ $color = [255, 0, 0];
 use Spipu\Html2Pdf\Html2Pdf;
 
 $html2pdf = new Html2Pdf('P', 'A4', 'fr', true, 'UTF-8', [10, 5, 10, 0]);/* pour modifier la hauteur du text */
+if(isset($_SESSION['id_user'])){
+	$nom_proprio = $_SESSION['nom_proprio'];
+	$prenom_proprio = $_SESSION['prenom_proprio'];
+	$email_proprio = $_SESSION['email_proprio'];
+	$tel_proprio = $_SESSION['tel_proprio'];
+}
+
+
+$sql_appart = "select * from appartement WHERE id_user = ".$_SESSION['id_user']." AND id_appart= ".$id_appart.";";
+$result_appart = mysqli_query($conn, $sql_appart);
+$appartement = mysqli_fetch_assoc($result_appart);
+
+
 
 $html = "
 <page backtop='7mm' backbottom='7mm' backleft='10mm' backright='10mm' backcolor='#FFF' footer='page; date;'>
@@ -56,12 +70,10 @@ $html = "
 
 	<h1 class='center'>Contrat Proprietaire</h1>
     <hr/>
-    <h4 style='text-align: right;'>La société : 
-	[Nom, forme juridique, adresse, numéro de téléphone, adresse email, immatriculation RCS]</h4>
+    <h4 style='text-align: right;'>La société : Neige & Soleil,  RCS PARIS B 517 403 572</h4>
 
-	<h4> Le propriétaire : 
-	[Nom, prénom, adresse, numéro de téléphone, adresse email] désigné ci-après<br>
-	</h4>
+	<h4> Le propriétaire : $nom_proprio $prenom_proprio</h4>
+	<br>désigné ci-après
 
 	
 	Il est convenu ce qui suit :<br><br>

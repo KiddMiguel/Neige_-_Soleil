@@ -26,3 +26,8 @@ $mois_noms = [
 if (isset($mois_noms[$mois])) {
     $mois = $mois_noms[$mois];
 } 
+
+if(isset($_GET['id_user'])){
+    $id_user = $_GET['id_user'];
+    $lesContrats = $unController->selectWhereContrat($id_user);
+}

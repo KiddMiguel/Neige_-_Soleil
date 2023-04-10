@@ -44,6 +44,11 @@ class Controller
         $proprietaire = $this->unModele->selectWhereProprietaire($id_user);
         return $proprietaire;
     }
+    public function selectWhereContrat( $id_user)
+    {
+        $lesContrats = $this->unModele->selectWhereContrat($id_user);
+        return $lesContrats;
+    }
     public function verifconnexionProprietaire($email, $mdp)
     {
         return $this->unModele->verifconnexionProprietaire($email, $mdp);
