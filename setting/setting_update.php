@@ -8,7 +8,7 @@ if (isset($_POST["update_locataire"])) {
 }
 if (isset($_POST["update_proprio"])) {
   $unController->updateProprietaire($_POST);
-  header("location: index.php?page=home");
+  $success = "sauvegardé avec success";
 } else {
 }
 if (isset($_POST["modif_prorioMdp"])) {

@@ -24,6 +24,13 @@
                                     <a href="#" class="text-text-decoration-none">Mot de passe oublié ?</a>
                                 </div>
                                 <button type="submit" class="btn btn-warning w-100" name="se_connecter">Se connecter</button>
+                                <p class="text-danger py-2">
+                                    <?php
+                                        if(isset($_POST["se_connecter"])){
+                                            echo $error.' <i class="bi text-danger bi-exclamation-triangle"></i>';
+                                        }
+                                    ?>
+                                </p>
                                 <hr>
                                 <button class="btn btn-outline-warning w-100 text-black" type="button" id="continue_1"><a class="text-decoration-none  text-black">S'inscrire</a></button>
                                 <hr>

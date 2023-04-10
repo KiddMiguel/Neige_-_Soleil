@@ -9,7 +9,7 @@ if (isset($_GET['id_user'])) {
         $reservations = $unController->selectReservationLocataire($id_user);
         $reservationsAppart = $unController->selectReservationAppartement($id_user);
     } else {
-        header("location: index.php?page=home");
+        header("location: index.php?page=error");
     }
 }
 

@@ -6,7 +6,7 @@ if (isset($_GET['id_user'])) {
         $id_user = $_GET['id_user'];
         $locataire = $unController->selectWhereLocataire($id_user);
     } else {
-        header("location: index.php?page=home");
+        header("location: index.php?page=error");
     }
 }
 
@@ -17,6 +17,6 @@ if (isset($_GET['id_user'])) {
         $id_user = $_GET['id_user'];
         $proprietaire = $unController->selectWhereProprietaire($id_user);
     } else {
-        header("location: index.php?page=home");
+        header("location: index.php?page=error");
     }
 }

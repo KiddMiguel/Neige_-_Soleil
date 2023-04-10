@@ -67,9 +67,13 @@
                         <div class="mt-5 text-center"><button class="btn btn-warning profile-button" type="submit" name="update_proprio">Sauvegarder</button>
                             <p class="py-2" style="font-size: xx-small;"> <i>Merci de vous déconnecter puis vous réconnecter lors la modification de vos informations</i></p>
                         </div>
-
-
-
+                        <p class="text-success text-center">
+                            <?php
+                            if (isset($_POST["update_proprio"])) {
+                                echo $success . '<br> <img src="Images/checkmark.gif" alt="Gif validé" loop="false" class="" width="10%" height="50%"/>';
+                            }
+                            ?>
+                        </p>
                     </form>
                 </div>
             </div>
@@ -85,7 +89,7 @@
                                 if ($errorOldMpd != null) {
                                     echo '' . $errorOldMpd . ' <i class="bi text-danger bi-exclamation-triangle"></i>';
                                 } elseif ($error != null) {
-                                    echo '' . $error . ' <i class="bi text-danger bi-exclamation-triangle"></i>';
+                                    echo '' . $error . ' <iclass="bi text-danger bi-exclamation-triangle"></i>';
                                 } elseif ($errorIdentique != null) {
                                     echo '' . $errorIdentique . ' <i class="bi text-danger bi-exclamation-triangle"></i>';
                                 }
@@ -102,14 +106,18 @@
                                 </div>
                                 <form action="" method="post">
                                     <div class="modal-body">
-                                        <div class="col-md-12"><label class="labels">Email</label><input type="text" class="form-control " name="email_proprio" placeholder="Email" value="<?= ((isset($_SESSION["email_proprio"]))) ? $proprietaire['email_proprio'] : " " ?>"></div> <br>
-                                        <div class="col-md-12 py-2"><input type="password" class="form-control" name="old_mdp" placeholder="Ancien mot de passe" value=""></div>
-                                        <div class="col-md-12 py-2"><input type="password" class="form-control" name="new" placeholder="Nouveau mot de passe" value=""></div>
+                                        <div class="col-md-12"><label class="labels">Email</label><input type="text" required class="form-control " name="email_proprio" placeholder="Email" value="<?= ((isset($_SESSION["email_proprio"]))) ? $proprietaire['email_proprio'] : " " ?>"></div> <br>
+                                        <div class="col-md-12 py-2">
+                                            <input type="password" class="form-control" name="old_mdp" placeholder="Ancien mot de passe" value="">
+                                        </div>
+                                        <div class="col-md-12 py-2">
+                                        <label for="mdp" class="fst-italic">Au moins 8 caractères, une lettre majuscule, une lettre minuscule et un chiffre.</label>    
+                                        <input type="password" class="form-control" name="new_mdp" placeholder="Nouveau mot de passe" value=""></div>
                                         <div class="col-md-12 py-2"><input type="password" class="form-control" name="mdp_proprio" placeholder="Confirmer mot de passe" value=""></div>
 
                                     </div>
-                                    <div class="modal-footer">
-
+                                    <div class="modal-footer d-flex">
+                                    <a href="https://www.motdepasse.xyz/" target="blank" class="me-auto text-decoration-none text-primary bg-white">Générateur de mot de passe</a>
                                         <button type="submit" class="btn btn-warning" name="modif_prorioMdp">Modifier</button>
                                     </div>
                                 </form>
