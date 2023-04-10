@@ -104,8 +104,11 @@ $unController = new Controller($server, $bdd, $user, $mdp);
         case "contact":
             require_once("Templates/contact.php");
             break;
+        case "error":
+            require_once("Templates/error.php");
+            break;
         default:
-            require_once("erreur.php");
+            require_once("Templates/error.php");
     }
 
 
