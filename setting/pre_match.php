@@ -31,7 +31,7 @@ if(isset($_POST['submit']))
             $error .= "Date de Naissance invalide";
         }
 
-        if(!pregmatch("#^[a-z0-9.-] +@[a-z0-9._-]+.[a-z]{2-6}$#", $email))
+        if(!preg_match("#^[a-z0-9.-] +@[a-z0-9._-]+.[a-z]{2-6}$#", $email))
         {
             $error .="Adresse email invalide";
         }
@@ -40,7 +40,7 @@ if(isset($_POST['submit']))
             $error .= "Le numero de telephone invalide";
         }
 
-        if(!pregmatch("#^[a-zA-Z0-9.&][6,12]$#", $mdp))
+        if(!preg_match("#^[a-zA-Z0-9.&][6,12]$#", $mdp))
         {
             $error .= "Mot de passe invalide";
         }

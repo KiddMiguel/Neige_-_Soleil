@@ -94,8 +94,8 @@ $unController = new Controller($server, $bdd, $user, $mdp);
         case "delete":
             require_once("Templates/delete.php");
             break;
-        case "recup_reservation":
-            require_once("src/recup_reservations.php");
+        case "calendrier":
+            require_once("Templates/calendrier.php");
             break;
         case "deconnexion":
             session_destroy();

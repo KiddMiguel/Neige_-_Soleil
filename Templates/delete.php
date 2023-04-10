@@ -7,7 +7,7 @@
             <p class="fs-1">Etês vous sûr ?</p>
             <p class="text-center">Voulez-vous vraiment supprimer cette réservation ? <br>Ce processus ne peut pas être annulé.</p>
             <div>
-                <a href="index.php?page=home" class="text-decoration-none"><button type="button" class="btn btn-secondary">Annuler</button> </a><button type="submit" name="supprimer_reserv" class="btn btn-danger">Supprimer</button>
+                <a href="" class="text-decoration-none"><button type="button" class="btn btn-secondary">Annuler</button> </a><button type="submit" name="supprimer_reserv" class="btn btn-danger">Supprimer</button>
             </div>
         </form>
     </div>
