@@ -11,7 +11,6 @@ function calendar() {
   document.addEventListener("DOMContentLoaded", function () {
     var calendarEl = document.getElementById("calendar");
     var startDate, endDate;
-    var eventSelected = false;
     var calendar = new FullCalendar.Calendar(calendarEl, {
       initialView: "dayGridMonth",
       selectable: true,
@@ -23,13 +22,13 @@ function calendar() {
           if (info.start > startDate) {
             endDate = info.start; // Stocke la date de fin
 
-            endDate = moment(endDate).add(1, 'day').format('YYYY-MM-DD');
+            endDate = moment(endDate).add(1, "day").format("YYYY-MM-DD");
             var newEvent = {
               title: "Nouvelle réservation",
-              start: moment(startDate).format('YYYY-MM-DD'),
+              start: moment(startDate).format("YYYY-MM-DD"),
               end: endDate,
-              backgroundColor: 'green',
-              borderColor: 'green'
+              backgroundColor: "green",
+              borderColor: "green"
             };
             calendar.addEvent(newEvent);
           } else {
@@ -42,37 +41,37 @@ function calendar() {
         }
 
         if (startDate) {
-          var dateStart = moment(startDate).format('YYYY-MM-DD');
-          document.getElementById('dateStart').value = dateStart;
-          document.getElementById('dateStart_form').value = dateStart;
+          var dateStart = moment(startDate).format("YYYY-MM-DD");
+          document.getElementById("dateStart").value = dateStart;
+          document.getElementById("dateStart_form").value = dateStart;
         }
 
         if (endDate) {
-          var dateEnd = moment(endDate).format('YYYY-MM-DD');
-          document.getElementById('dateEnd').value = dateEnd;
-          document.getElementById('dateEnd_form').value = dateEnd;
+          var dateEnd = moment(endDate).format("YYYY-MM-DD");
+          document.getElementById("dateEnd").value = dateEnd;
+          document.getElementById("dateEnd_form").value = dateEnd;
         }
       },
       events: function events(fetchInfo, successCallback, failureCallback) {
         $.ajax({
           type: "GET",
-          url: 'http://localhost/PPE/Neige_-_Soleil/src/recup_reservations.php',
-          dataType: 'json',
+          url: "http://localhost/PPE/Neige_-_Soleil/src/recup_reservations.php?id_appart=" + id_appart + "",
+          dataType: "json",
           success: function success(reservations) {
             var events = [];
             reservations.forEach(function (reservations) {
               events.push({
-                title: 'Réservé',
+                title: "Réservé",
                 start: reservations.start,
                 end: reservations.end,
-                backgroundColor: 'red',
-                borderColor: 'red'
+                backgroundColor: "red",
+                borderColor: "red"
               });
             });
             successCallback(events);
           },
           error: function error() {
-            failureCallback('Erreur lors de la récupération des réservations.');
+            failureCallback("Erreur lors de la récupération des réservations.");
           }
         });
       },
@@ -80,13 +79,31 @@ function calendar() {
         return {
           start: nowDate,
           // La date d'aujourd'hui
-          end: '9999-01-01' // Une date éloignée dans le futur
+          end: "9999-01-01" // Une date éloignée dans le futur
 
         };
+      },
+      selectOverlap: function selectOverlap(event) {
+        // Récupérer tous les événements existants
+        var events = calendar.getEvents();
+        console.log("Event " + events);
+        console.log(event.start); // Vérifier si les dates de début et de fin de l'événement que l'utilisateur essaie de créer chevauchent un événement existant
+
+        for (var i = 0; i < events.length; i++) {
+          if (event.start >= events[i].start && event.start < events[i].end) {
+            return true;
+          }
+
+          if (event.end > events[i].start && event.end <= events[i].end) {
+            return true;
+          }
+        }
+
+        return true;
       }
     });
-    calendar.on('eventClick', function (info) {
-      if (info.event.title === 'Nouvelle réservation' && confirm("Voulez-vous supprimer cet événement ?")) {
+    calendar.on("eventClick", function (info) {
+      if (info.event.title === "Nouvelle réservation" && confirm("Voulez-vous supprimer cet événement ?")) {
         info.event.remove(); // Supprime l'événement
       }
     });

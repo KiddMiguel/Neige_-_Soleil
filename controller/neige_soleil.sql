@@ -78,7 +78,7 @@ create table contrat (
 
 CREATE table reservation (
     id_reservation int (5) not null AUTO_INCREMENT,
-    statut_reservation enum ("En cours", "Réservé"),
+    statut_reservation enum ("En cours", "Louer"),
     date_debut_reservation date,
     date_fin_reservation date,
     prix_reservation FLOAT,
@@ -311,6 +311,15 @@ SELECT COUNT(id_appart) AS nb_appart
     WHERE appartement.id_user = user_id;
 END //
 delimiter ;
+
+-- EVENT QUI MODIFIE LE STATUT DE LA RESERVATION
+
+SET GLOBAL event_scheduler=ON;
+DROP EVENT if exists time_reserved;
+CREATE event time_reserved
+ON SCHEDULE EVERY 1 MINUTE DO
+    UPDATE reservation set statut_reservation ='Réservé' WHERE statut_reservation = 'En cours';
+    
 INSERT INTO locataire (civilite_locataire, nom_locataire, prenom_locataire, email_locataire, mdp_locataire, tel_locataire, adresse_locataire, cp_locataire, nb_reservations )
 VALUES 
 ('Mr', 'Dupont', 'Pierre', 'pierre.dupont@gmail.com', 'motdepasse', '0123456789', '5 Rue des Lilas', '75020', 3),
@@ -351,10 +360,10 @@ VALUES
 /* INSERT INTO reservation (statut_reservation, date_debut_reservation, date_fin_reservation, prix_reservation, nb_personnes, id_user, id_appart)
 VALUES 
 ('En cours', '2023-03-01', '2023-03-07', 600, 2, 1, 1),
-('Réservé', '2023-04-15', '2023-04-22', 800, 4, 3, 2),
+('Louer', '2023-04-15', '2023-04-22', 800, 4, 3, 2),
 ('En cours', '2023-05-01', '2023-05-15', 1200, 3, 2, 1),
-('Réservé', '2023-06-10', '2023-06-15', 500, 2, 1, 1),
-('Réservé', '2023-07-20', '2023-07-25', 400, 2, 1, 3); */
+('Louer', '2023-06-10', '2023-06-15', 500, 2, 1, 1),
+('Louer', '2023-07-20', '2023-07-25', 400, 2, 1, 3); */
 INSERT INTO equipement_appart (intitule_equip_appart, nb_equi_appart, prix_equip_appart, type_equip_appart, statut_equip_appart, id_appart)
 VALUES 
 ('Lave-linge', 1, 500, 'Electromenager', 'Disponible', 1),

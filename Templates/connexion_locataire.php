@@ -17,7 +17,10 @@
                                 <input type="email" id="" name="email_locataire" class="form-control w-100" required placeholder="E-mail" /><br>
                                 <input type="password" id="" name="mdp_locataire" class="form-control w-100 mb-3" required placeholder="Mot de passe" />
                                 <div class="d-flex mb-2">
-                                    <input type="checkbox" name="" id="" class="me-auto">
+                                    <div class="me-auto">
+                                    <input type="checkbox" name="caseStay" id="" > <span class="label">Rester connecter</span>
+                                    </div>
+                                    
                                     <a href="#" class="text-text-decoration-none">Mot de passe oublié ?</a>
                                 </div>
                                 <button type="submit" class="btn btn-warning w-100" name="se_connecter">Se connecter</button>

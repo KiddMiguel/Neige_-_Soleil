@@ -14,7 +14,9 @@
                     <li class="nav-item">
                         <a class="nav-link " href="index.php?page=location"><i class="fa-solid fa-mountain-sun color-light"></i> Location</a>
                     </li>
-                    <?php if (!isset($_SESSION["email_locataire"]) && !isset($_SESSION["email_proprio"])) {
+                    <?php
+                    
+                    if (!isset($_SESSION["email_locataire"]) && !isset($_SESSION["email_proprio"])) {
                         echo '
                         <li class="nav-item">
                         <a class="nav-link" href="index.php?page=connexion_locataire"><i class="fa-solid fa-user"></i> Espace locataire</a>
@@ -59,6 +61,9 @@
                     
                     <button class="btn btn-outline-warning ms-4 ropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa-solid fa-user rounded"></i> '.$_SESSION["civilite_proprio"].' '.$_SESSION["nom_proprio"].'</li></button>                    
                     </ul>';}else{
+                            $civilite_locataire = $_SESSION['civilite_locataire'];
+                            $prenom_locataire = $_SESSION['prenom_locataire'];
+
                         echo '
                         <button class="btn btn-outline-warning ms-4 ropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa-solid fa-user rounded"></i> '.$_SESSION["civilite_locataire"].' '.$_SESSION["nom_locataire"].'</li></button>                    
                         </ul>';

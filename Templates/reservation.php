@@ -4,8 +4,9 @@
             <div class="col-md-12 col-xl-10">
 
                 <div class="card ">
-                    <div class="card-header p-3">
-                        <h5 class="mb-0"><i class="fas fa-tasks me-2"></i>Réservations</h5>
+                    <div class="card-header p-3 d-flex">
+                        <h5 class="mb-0 me-auto"><i class="fas fa-tasks me-2"></i>Réservations</h5>
+                        <p class="fst-italic">La confirmation de la réservation se fera dans quelques minutes.</p>
                     </div>
                     <div class="card-body d-flex" >
                         <table class="table mb-0 w-25">
