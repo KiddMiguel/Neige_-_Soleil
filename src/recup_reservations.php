@@ -11,9 +11,8 @@ if (!$conn) {
 // echo $_SESSION['id_user'];
 // // Vérifier que la variable de session 'id_appart' est définie et non vide
 // if (isset($_SESSION['id_appart'])) {
-    // Récupérer la valeur de 'id_appart'
+if(isset($_GET['id_appart'])){
     $id_appart = $_GET['id_appart'];
-
     // Effectuer la requête SQL avec $id_appart
     $sql = "SELECT id_reservation, date_debut_reservation, date_fin_reservation, statut_reservation FROM reservation WHERE id_appart = $id_appart";
     $result = mysqli_query($conn, $sql);
@@ -32,6 +31,10 @@ if (!$conn) {
         // Ajout de l'événement au tableau
         $events[] = $event;
     }
-
     // Encodage du tableau en JSON pour l'affichage dans FullCalendar
     echo json_encode($events);
+}else{
+
+}
+
+

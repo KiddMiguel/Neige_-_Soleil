@@ -78,7 +78,21 @@
                     <div class="d-flex justify-content-between align-items-center experience"><span class="fw-semibold">Paramètre Confidentialité</span><a class="border px-3 p-1 add-experience text-decoration-none text-black rounded" data-bs-toggle="modal" data-bs-target="#modalGerer" href="#">Gérer</a></div><br>
                     <div class="col-md-12"><label class="labels">Email</label><input type="text" class="form-control " disabled="disabled" placeholder="Email" value="<?= ((isset($_SESSION["email_proprio"]))) ? $proprietaire['email_proprio'] : " " ?>"></div> <br>
                     <div class="col-md-12"><label class="labels">Mot de Passe</label><input type="password" class="form-control" disabled="disabled" placeholder="Mot de passe" value="............."></div>
-
+                    <div>
+                        <p class="text-danger py-2">
+                            <?php
+                            if (isset($_POST["modif_prorioMdp"])) {
+                                if ($errorOldMpd != null) {
+                                    echo '' . $errorOldMpd . ' <i class="bi text-danger bi-exclamation-triangle"></i>';
+                                } elseif ($error != null) {
+                                    echo '' . $error . ' <i class="bi text-danger bi-exclamation-triangle"></i>';
+                                } elseif ($errorIdentique != null) {
+                                    echo '' . $errorIdentique . ' <i class="bi text-danger bi-exclamation-triangle"></i>';
+                                }
+                            }
+                            ?>
+                        </p>
+                    </div>
                     <div class="modal fade" id="modalGerer" tabindex="-1" aria-labelledby="modalGerer" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered">
                             <div class="modal-content">
@@ -89,8 +103,8 @@
                                 <form action="" method="post">
                                     <div class="modal-body">
                                         <div class="col-md-12"><label class="labels">Email</label><input type="text" class="form-control " name="email_proprio" placeholder="Email" value="<?= ((isset($_SESSION["email_proprio"]))) ? $proprietaire['email_proprio'] : " " ?>"></div> <br>
-                                        <div class="col-md-12 py-2"><input type="password" class="form-control " placeholder="Ancien mot de passe" value=""></div>
-                                        <div class="col-md-12 py-2"><input type="password" class="form-control" placeholder="Nouveau mot de passe" value=""></div>
+                                        <div class="col-md-12 py-2"><input type="password" class="form-control" name="old_mdp" placeholder="Ancien mot de passe" value=""></div>
+                                        <div class="col-md-12 py-2"><input type="password" class="form-control" name="new" placeholder="Nouveau mot de passe" value=""></div>
                                         <div class="col-md-12 py-2"><input type="password" class="form-control" name="mdp_proprio" placeholder="Confirmer mot de passe" value=""></div>
 
                                     </div>
