@@ -1,9 +1,10 @@
 <?php
 /********CONNEXION LOCATAIRE***** */
+// On vérifie si existe un name se_conneter
 if (isset($_POST["se_connecter"])) {
-    $email = $_POST["email_locataire"];
+    $email = $_POST["email_locataire"]; // On reécupère la valeur de l'email grace à cette syntaxe.
     $mdp = $_POST["mdp_locataire"];
-    $error ="";
+    $error =""; // La variable erreur est là pour afficher le message d'erreur si le mot de passe est incorrect
     $unUser = $unController->verifconnexionLocataire($email, $mdp);
     if ($unUser == null) { 
         $error ="Mot de passe incorrect !";

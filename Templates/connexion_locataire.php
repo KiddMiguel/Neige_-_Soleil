@@ -26,6 +26,7 @@
                                 <button type="submit" class="btn btn-warning w-100" name="se_connecter">Se connecter</button>
                                 <p class="text-danger py-2">
                                     <?php
+                                        // Affichage d'erreur lorseque le mot de passe in incorrect
                                         if(isset($_POST["se_connecter"])){
                                             echo $error.' <i class="bi text-danger bi-exclamation-triangle"></i>';
                                         }

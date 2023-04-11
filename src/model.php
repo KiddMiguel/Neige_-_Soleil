@@ -7,7 +7,7 @@ class Modele
     {
         $this->unPDO = null;
         try {
-            $url = "mysql:host=" . $server . ";dbname=" . $bdd;
+            $url = "mysql:host=" . $server . ";dbname=" . $bdd; // Lien de connexion syntaxe obligé.
 
             $this->unPDO = new PDO($url, $user, $mdp);
         } catch (PDOException $exp) {
@@ -16,13 +16,12 @@ class Modele
         }
     }
 
-
     /************CONNEXION ET INSCRIPTION LOCATAIRE */
 
     public function verifconnexionLocataire($email, $mdp)
     {
         if ($this->unPDO != null) {
-            $request = "select * from locataire where email_locataire = :email_locataire and mdp_locataire= :mdp_locataire;";
+            $request = "select * from locataire where email_locataire = :email_locataire and mdp_locataire= :mdp_locataire";
             $donnees = array(":email_locataire" => $email, ":mdp_locataire" => $mdp);
 
             $select = $this->unPDO->prepare($request);
