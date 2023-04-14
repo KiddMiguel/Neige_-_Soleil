@@ -45,8 +45,8 @@
                         <div class=" mb-4">
                             <form action="" method="post">
                                 <select class="select form-select w-25 mb-2" name="civilite_locataire">
-                                    <option value="Mme">Mr</option>
-                                    <option value="Mr">Mme</option>
+                                    <option value="Mr">Mr</option>
+                                    <option value="Mme">Mme</option>
                                     <option value="Autre">Autre</option>
                                 </select>
                                 <input type="text" id="" name="prenom_locataire" class="form-control w-100 mb-2" required placeholder="Prénom" />

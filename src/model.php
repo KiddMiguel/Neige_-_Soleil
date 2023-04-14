@@ -52,9 +52,8 @@ class Modele
     {
         if ($this->unPDO != null) {
 
-            $request = "update locataire set civilite_locataire=:civilite_locataire,  nom_locataire=:nom_locataire, prenom_locataire=:prenom_locataire, tel_locataire=:tel_locataire ,adresse_locataire=:adresse_locataire, cp_locataire=:cp_locataire where locataire.id_user=".$_SESSION['id_user']."";
+            $request = "update locataire set  nom_locataire=:nom_locataire, prenom_locataire=:prenom_locataire, tel_locataire=:tel_locataire ,adresse_locataire=:adresse_locataire, cp_locataire=:cp_locataire where locataire.id_user=".$_SESSION['id_user']."";
             $donnees = array(
-                ":civilite_locataire" => $tab['civilite_locataire'],
                 ":nom_locataire" => $tab['nom_locataire'],
                 ":prenom_locataire" => $tab['prenom_locataire'],
                 ":tel_locataire" => $tab['tel_locataire'],
@@ -103,9 +102,8 @@ class Modele
     {
         if ($this->unPDO != null) {
             $id_user = $_GET["id_user"];
-            $request = "update proprietaire set civilite_proprio=:civilite_proprio, nom_proprio=:nom_proprio, prenom_proprio=:prenom_proprio ,statut_proprio=:statut_proprio, tel_proprio=:tel_proprio, adresse_proprio=:adresse_proprio, cp_proprio=:cp_proprio, ville_proprio=:ville_proprio, pays_proprio=:pays_proprio, code_adherent=:code_adherent where proprietaire.id_user=$id_user";
+            $request = "update proprietaire set nom_proprio=:nom_proprio, prenom_proprio=:prenom_proprio ,statut_proprio=:statut_proprio, tel_proprio=:tel_proprio, adresse_proprio=:adresse_proprio, cp_proprio=:cp_proprio, ville_proprio=:ville_proprio, pays_proprio=:pays_proprio, code_adherent=:code_adherent where proprietaire.id_user=$id_user";
             $donnees = array(
-                ":civilite_proprio" => $tab['civilite_proprio'],
                 ":nom_proprio" => $tab['nom_proprio'],
                 ":prenom_proprio" => $tab['prenom_proprio'],
                 ":statut_proprio" => $tab['statut_proprio'],

@@ -30,8 +30,8 @@
                         <p class="pb-2" style="font-size :0.8rem;">Veuillez fournir votre nom complet ainsi que votre numéro de téléphone pour garantir la sécurité de votre compte neige&Soliel.com.</p>
                         <div class="form-outline mb-4">
                             <select class="select form-select w-25 mb-2" name="civilite_proprio">
-                                <option value="Mme">Mme</option>
                                 <option value="Mr">Mr</option>
+                                <option value="Mme">Mme</option>
                                 <option value="Autre">Autre</option>
                             </select>
                             <label for="" class=" fw-semibold">Prenom</label>
