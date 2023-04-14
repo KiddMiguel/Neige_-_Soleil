@@ -93,6 +93,16 @@ class Controller
         $appartements = $this->unModele->recupAllAppartement();
         return $appartements;
     }
+    public function recupPaginationAppartement($premier,$parPage)
+    {
+        $Pageappartements = $this->unModele->recupPaginationAppartement($premier,$parPage);
+        return $Pageappartements;
+    }
+    public function recupNombreAppartement()
+    {
+        $nbAppartement = $this->unModele->recupNombreAppartement();
+        return $nbAppartement;
+    }
 
     public function selectWhereApprtement($id_appart)
     {

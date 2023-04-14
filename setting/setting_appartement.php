@@ -2,7 +2,8 @@
 
 $appartements = $unController->recupAllAppartement();
 $appartement = null;
-
+$currentPage = null;
+$pages = null;
 
 if (isset($_GET['id_appart'])) {
     $id_appart = $_GET['id_appart'];
@@ -24,4 +25,21 @@ if (isset($_POST["filtre_index"])){
     $appartements = $unController->FiltreLocation_index($mot_index, $statut, $prixMax, $prixMin);
 }else{
     $appartements = $unController->recupAllAppartement();
+}
+
+if(isset($_POST["filtre_index"])){
+// On détermine sur quelle page on se trouve
+if (isset($_GET['n']) && is_numeric($_GET['n'])) {
+    $currentPage =  $_GET['n'];
+}else{
+    $currentPage = 1;
+}
+    // On détermine le nombre d'appart par page
+    $parPage = 8;
+    // On calcule le nombre de pages total
+    $nbAppartement = $unController->recupNombreAppartement();
+    $pages = ceil($nbAppartement / $parPage);
+    $premier = ($currentPage * $parPage) - $parPage;
+    $appartements = $unController->recupPaginationAppartement($premier,$parPage);
+
 }

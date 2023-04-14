@@ -52,7 +52,7 @@ class Modele
     {
         if ($this->unPDO != null) {
 
-            $request = "update locataire set  nom_locataire=:nom_locataire, prenom_locataire=:prenom_locataire, tel_locataire=:tel_locataire ,adresse_locataire=:adresse_locataire, cp_locataire=:cp_locataire where locataire.id_user=".$_SESSION['id_user']."";
+            $request = "update locataire set  nom_locataire=:nom_locataire, prenom_locataire=:prenom_locataire, tel_locataire=:tel_locataire ,adresse_locataire=:adresse_locataire, cp_locataire=:cp_locataire where locataire.id_user=" . $_SESSION['id_user'] . "";
             $donnees = array(
                 ":nom_locataire" => $tab['nom_locataire'],
                 ":prenom_locataire" => $tab['prenom_locataire'],
@@ -181,6 +181,37 @@ class Modele
             return $appartements;
         } else {
             return null;
+        }
+    }
+
+    // Recupère la pagination par limitte
+    public function recupPaginationAppartement($premier,$parPage)
+    {
+        if ($this->unPDO != null) {
+            $request = "SELECT * FROM `appartement` LIMIT :premier, :parpage;";
+            $select = $this->unPDO->prepare($request);
+            $select->bindValue(':premier', $premier, PDO::PARAM_INT);
+            $select->bindValue(':parpage', $parPage, PDO::PARAM_INT);
+            $select->execute();
+            $Pageappartements = $select->fetchAll(PDO::FETCH_ASSOC);
+            return $Pageappartements;
+        } else {
+            return null;
+        }
+    }
+
+
+    //Recupère le nombre d'appartement
+    public function recupNombreAppartement()
+    {
+        if ($this->unPDO != null) {
+            $request = "SELECT COUNT(*) AS nb_appartement FROM `appartement`;";
+            $select = $this->unPDO->prepare($request);
+            $select->execute();
+            // On récupère le nombre d'articles
+            $result = $select->fetch();
+            $nbAppartement = (int) $result['nb_appartement'];
+            return $nbAppartement;
         }
     }
 
@@ -402,7 +433,7 @@ class Modele
     }
 
 
-    public function selectWhereContrat( $id_user)
+    public function selectWhereContrat($id_user)
     {
         if ($this->unPDO != null) {
             $request = "select * from contrat where id_user=:id_user ";
@@ -514,8 +545,4 @@ class Modele
             return null;
         }
     }
-
-
-    /*********************AUTOMATIME LOCATAIRE */
-    
 }
