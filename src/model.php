@@ -339,12 +339,13 @@ class Modele
         }
     }
 
-    public function FiltreLocation($mot)
+    public function FiltreLocation($mot,$premier,$parPage)
     {
         if ($this->unPDO != null) {
-            $requete = "select * from appartement where ville_appart like :mot or statut_appart like :mot or prix_appart like :mot";
+            $requete = "select * from appartement where ville_appart like :mot or statut_appart like :mot or prix_appart like :mot LIMIT :premier, :parpage;";
             $donnees = array(":mot" => "%" . $mot . "%");
             $select = $this->unPDO->prepare($requete);
+
             $select->execute($donnees);
             $appartements = $select->fetchAll();
             return $appartements;
@@ -352,15 +353,17 @@ class Modele
             return null;
         }
     }
-    public function FiltreLocation_index($mot_index, $statut, $prixMax, $prixMin)
+    public function FiltreLocation_index($mot_index, $statut, $prixMax, $prixMin,$premier,$parPage)
     {
         if ($this->unPDO != null) {
-            $requete = "SELECT * from appartement where ville_appart like :mot_index and statut_appart like :statut OR (prix_appart BETWEEN :prixMin and :prixMax)";
+            $requete = "SELECT * from appartement where ville_appart like :mot_index and statut_appart like :statut OR (prix_appart BETWEEN :prixMin and :prixMax) LIMIT :premier, :parpage;";
             $donnees = array(
                 ":mot_index" => "%" . $mot_index . "%",
                 ":statut" => "%" . $statut . "%",
                 ":prixMax" => $prixMax,
-                ":prixMin" => $prixMin
+                ":prixMin" => $prixMin,
+                ":premier" => $premier,
+                ":parPage" => $parPage
             );
             $select = $this->unPDO->prepare($requete);
             $select->execute($donnees);
