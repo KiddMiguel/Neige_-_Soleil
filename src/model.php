@@ -35,7 +35,7 @@ class Modele
     public function insertLocataire($tab)
     {
         if ($this->unPDO != null) {
-            $request = "insert into locataire values (null, :civilite_locataire, :nom_locataire, :prenom_locataire, :email_locataire, :mdp_locataire, null, null, null, null, null, null, null)";
+            $request = "insert into locataire values (null, :civilite_locataire, :nom_locataire, :prenom_locataire, :email_locataire, :mdp_locataire, null, null, null, null, null)";
             $donnees = array(
                 ":civilite_locataire" => $tab['civilite_locataire'],
                 ":nom_locataire" => $tab['nom_locataire'],
