@@ -357,16 +357,14 @@ class Modele
     {
         if ($this->unPDO != null) {
             $requete = "SELECT * from appartement where ville_appart like :mot_index and statut_appart like :statut OR (prix_appart BETWEEN :prixMin and :prixMax) LIMIT :premier, :parpage;";
-            $donnees = array(
-                ":mot_index" => "%" . $mot_index . "%",
-                ":statut" => "%" . $statut . "%",
-                ":prixMax" => $prixMax,
-                ":prixMin" => $prixMin,
-                ":premier" => $premier,
-                ":parPage" => $parPage
-            );
             $select = $this->unPDO->prepare($requete);
-            $select->execute($donnees);
+            $select->bindValue(':mot_index', "%".$mot_index."%", PDO::PARAM_STR);
+            $select->bindValue(':statut', "%".$statut."%", PDO::PARAM_STR);
+            $select->bindValue(':prixMax', $prixMax, PDO::PARAM_INT);
+            $select->bindValue(':prixMin', $prixMin, PDO::PARAM_INT);
+            $select->bindValue(':premier', $premier, PDO::PARAM_INT);
+            $select->bindValue(':parpage', $parPage, PDO::PARAM_INT);
+            $select->execute();
             $appartements = $select->fetchAll();
             return $appartements;
         } else {

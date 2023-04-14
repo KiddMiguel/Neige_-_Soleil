@@ -29,20 +29,17 @@ $parPage = 8;
 $nbAppartement = $unController->recupNombreAppartement();
 $pages = ceil($nbAppartement / $parPage);
 $premier = ($currentPage * $parPage) - $parPage;
-$appartements = $unController->recupPaginationAppartement($premier, $parPage);
+
+if($_GET['page'] == "location"){
+    $appartements = $unController->recupPaginationAppartement($premier, $parPage);
+}
+
+
 
 if (isset($_POST["filtre_index"])) {
     $mot_index = $_POST["mot_index"];
     $statut = $_POST["statut"];
     $prixMax = $_POST["prixMax"];
     $prixMin = $_POST["prixMin"];
-    // On détermine le nombre d'appart par page
-    $parPage = 8;
-    // On calcule le nombre de pages total
-    $nbAppartement = $unController->recupNombreAppartement();
-    $pages = ceil($nbAppartement / $parPage);
-    $premier = ($currentPage * $parPage) - $parPage;
-    $appartements = $unController->FiltreLocation_index($mot_index, $statut, $prixMax, $prixMin);
-} else {
-    $appartements = $unController->recupPaginationAppartement($premier, $parPage);
-}
+    $appartements = $unController->FiltreLocation_index($mot_index, $statut, $prixMax, $prixMin,$premier, $parPage);
+} 
