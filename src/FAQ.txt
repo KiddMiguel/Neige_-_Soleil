@@ -9,3 +9,4 @@
     En résumé, $unPDO est une variable membre qui sert à stocker l'objet PDO créé lors de la connexion à la base de données et qui peut être utilisée dans d'autres méthodes de la même classe pour interagir avec la base de données.
 
 --- 'isset' est une fonction PHP qui permet de vérifier si une variable est définie et non nulle. Elle renvoie true si la variable existe et a une valeur non nulle, et false sinon.
+
