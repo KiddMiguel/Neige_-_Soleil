@@ -201,4 +201,45 @@ body {
             }
         }
     }
+
+
+    @media (max-width: 767.98px) { 
+        .custom_align_profil{
+            width: 40% !important;
+            margin-left: 0px !important;
+            margin-top: 0.5rem !important;
+        }
+        .custom_off{
+            display: none;
+        }
+        .responsive_img{
+            width: 65% !important;  
+            .img_resp{
+                width: 50% !important;  
+            }
+        }
+
+        .sectionOne {
+            height: 35rem;
+            .overlay {
+                .mt-custom {
+                    margin-top: 7rem !important;
+                    h1 {
+                        font-size: 2.5rem !important;
+                    }
+                    input {
+                        padding: 0.5rem !important;
+                    }
+                }
+            }
+        }
+
+        footer {
+            .btn_modif_footer{
+                width: 10rem !important;
+                padding: 0rem !important;
+            }
+
+        }
+     }
 }
