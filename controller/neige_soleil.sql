@@ -350,6 +350,61 @@ CREATE event time_demande
 ON SCHEDULE EVERY 1 MINUTE DO
     UPDATE demande set statut_demande ='Valider' WHERE statut_demande = 'En cours';
     
+
+INSERT INTO appartement (statut_appart, prix_appart, intitule_appart, ville_appart, cp_appart, adresse_appart, description_appart, type_appart, superficie_appart,image, nb_chambre, nb_cuisine, nb_salon, nb_salle_bain, nb_piece)
+VALUES 
+("Disponible", 1000, "Chalet de luxe à la montagne", "Aime-la-Plagne", "73210", "Aime la Plagne", "Profitez d'un séjour inoubliable dans notre chalet de luxe, situé dans les montagnes enneigées. Avec une vue imprenable sur les sommets environnants, des équipements haut de gamme et une proximité des pistes de ski, c'est l'endroit idéal pour les vacances d'hiver. Le chalet comprend 3 chambres, 2 salles de bains, un salon confortable avec cheminée, une cuisine entièrement équipée et un balcon avec vue sur les montagnes.", 'Appartement', '100','A-1.jpg', 3, 1, 1, 2, 6),
+("Disponible", 750, "Chalet de charme au coeur des Alpes", "Argentière", "74400", "Chamonix-Mont-Blanc", "Venez vous ressourcer dans notre chalet de charme, idéalement situé au coeur des Alpes. Avec une vue imprenable sur les montagnes environnantes et un accès direct aux sentiers de randonnée, c'est l'endroit parfait pour les amateurs de nature et de grands espaces. Le chalet comprend 4 chambres, 2 salles de bains, un salon confortable avec cheminée, une cuisine entièrement équipée et un jardin privé.", 'Appartement', '120','B-1.jpg', 4, 1, 1, 2, 8),
+("Disponible", 1400, "Chalet de montagne avec piscine intérieure", "Combloux", "74920", "49 chemin des Passerands", "Profitez de vos vacances d'hiver dans notre chalet de montagne avec piscine intérieure. Idéalement situé à proximité des pistes de ski, il vous offre un espace de détente et de bien-être après une journée sur les pentes. Le chalet comprend 4 chambres, 3 salles de bains, un salon confortable avec cheminée, une cuisine entièrement équipée et une piscine intérieure.", 'Appartement', '150','C-1.jpg', 4, 1, 1, 3, 8),
+("Disponible", 1000, "Chalet de montagne avec sauna", "Praz Sur Arly", "74120", "54 route du Val d'Arly", "Venez vous détendre dans notre chalet de montagne avec sauna, idéalement situé dans les Alpes. Avec une vue imprenable sur les montagnes environnantes, un sauna et un accès direct aux sentiers de randonnée, c'est l'endroit parfait pour vous ressourcer. Le chalet comprend 3 chambres, 2 salles de bains, un salon confortable avec cheminée, une cuisine entièrement équipée et un sauna privé.", "Appartement", '110','D-1.jpg', 3, 1, 1, 2, 6),
+("Disponible", 1200 , "Chalet de montagne avec jacuzzi", "Praz Sur Arly", "74120", "30 route du Val d'Arly", "Profitez de vos vacances d'hiver dans notre chalet de montagne avec jacuzzi, idéalement situé à proximité des pistes de ski. Avec une vue imprenable sur les montagnes environnantes, un jacuzzi extérieur et un accès direct aux sentiers de randonnée, c'est l'endroit parfait pour vous ressourcer après une journée sur les pentes. Le chalet comprend 4 chambres, 3 salles de bains, un salon confortable avec cheminée, une cuisine entièrement équipée et un jacuzzi extérieur privé.", "Appartement", "130","E-1.jpg", 4, 1, 1, 3, 8),
+("Disponible", 800, "Chalet de montagne à louer pour les vacances d'été", "Megeve", "74120", "70 rue monseigneur Conseil", "Venez passer vos vacances d'été dans notre chalet de montagne, idéalement situé dans les Alpes. Profitez de la nature environnante et des activités de plein air telles que la randonnée, le vélo et l'escalade. Le chalet est équipé d'une terrasse avec vue sur les montagnes, d'un jardin privé et d'une cuisine extérieure pour des repas en plein air. Le chalet comprend 3 chambres, 2 salles de bains, un salon confortable avec cheminée, une cuisine entièrement équipée et une terrasse avec vue sur les montagnes.", "Appartement", "100","F-1.jpg", 3, 1, 1, 2, 6),
+("Disponible", 1200, "Chalet de montagne avec vue panoramique", "Les Contamines Montjoie", "74170", "18 route de Notre Dame de la Gorge", "Venez passer vos vacances dans notre chalet de montagne avec vue panoramique sur les Alpes. Profitez de la vue imprenable depuis la terrasse ou depuis le salon confortable avec cheminée. Le chalet est équipé d'une cuisine entièrement équipée et d'une salle de jeux pour des soirées en famille ou entre amis. Le chalet comprend 4 chambres, 2 salles de bains, un salon confortable avec cheminée, une cuisine entièrement équipée et une terrasse avec vue panoramique sur les montagnes.", "Appartement", "130","J-1.jpg", 4, 1, 1, 2, 8),
+("Disponible", 600 , "Chalet de montagne pour les amoureux de la nature", "Les Houches", "74310", "BP 9-Place de la Mairie", "Venez passer vos vacances dans notre chalet de montagne idéalement situé pour les amoureux de la nature. Avec un accès direct aux sentiers de randonnée, des vues imprenables sur les montagnes environnantes et un jardin privé pour profiter des beaux jours. Le chalet est équipé d'une cuisine entièrement équipée, d'une salle de bain confortable et d'une cheminée pour des soirées cocooning. Le chalet comprend 2 chambres, 1 salle de bains, un salon confortable avec cheminée, une cuisine entièrement équipée et un jardin privé.", "Appartement", "80","G-1.jpg", 2, 1, 1, 1, 5),
+("Disponible", 900, "Chalet de montagne pour les vacances en famille", "Aime-la-Plagne", "73210", "Aime la Plagne", "Venez passer vos vacances en famille dans notre chalet de montagne idéalement situé pour les activités en plein air. Le chalet est équipé d'une cuisine entièrement équipée, d'une salle de jeux pour les enfants, d'une terrasse avec vue sur les montagnes et d'un jardin privé pour des repas en extérieur. Le chalet comprend 4 chambres, 2 salles de bains, un salon confortable avec cheminée, une cuisine entièrement équipée, une salle de jeux pour les enfants et une terrasse avec vue sur les montagnes.", 'Appartement', '110','H-2.jpg', 4, 1, 1, 2, 7),
+("Disponible", 1000, "Chalet de montagne avec accès à des activités de plein air", "Aime-la-Plagne", "73210", "Aime la Plagne", "Venez passer vos vacances dans notre chalet de montagne idéalement situé pour les activités de plein air. Le chalet est équipé d'une cuisine entièrement équipée, d'un salon confortable avec cheminée, d'une terrasse avec vue sur les montagnes et d'un accès direct aux sentiers de randonnée et aux pistes de ski. Le chalet comprend 3 chambres, 2 salles de bains, un salon confortable avec cheminée, une cuisine entièrement équipée et une terrasse avec vue sur les montagnes.", 'Appartement', '100',"I-3.jpg", 3, 1, 1, 2, 6);
+
+INSERT INTO atouts (nom_atout, id_appart)
+VALUES 
+    ("Vue sur la mer", 1),  ("Piscine", 1),("Parking", 1),  
+    ("Terrasse", 2),("Jardin", 2),("Ascenseur", 2), 
+    ("Internet haut débit", 3),("Cuisine équipée", 3),("Climatisation", 3),
+    ("Jacuzzi", 4), ("Sauna", 4),("Salle de sport", 4),
+    ("Vue panoramique", 5),("Proximité des commerces", 5),("Belle luminosité", 5),
+    ("Cheminée", 6),("Accès handicapé", 6),("Animaux acceptés", 6),
+    ("Spacieux", 7),("Très calme", 7),("Beau design", 7),
+    ("Bien isolé", 8),("Bonne distribution", 8),("Décoration moderne", 8),
+    ("Quartier animé", 9),("Proximité des transports", 9),("Proche de la plage", 9);
+
+INSERT INTO equipement_appart (intitule_equip_appart, nb_equi_appart, prix_equip_appart, type_equip_appart, statut_equip_appart, id_appart)
+VALUES 
+('Lave-linge', 1, 500, 'Electromenager', 'Disponible', 1),
+('Lave-vaisselle', 1, 600, 'Electromenager', 'Disponible', 1),
+('Réfrigérateur', 1, 800, 'Electromenager', 'Disponible', 1),
+('Four', 1, 700, 'Electromenager', 'Disponible', 1),
+('Micro-ondes', 1, 300, 'Electromenager', 'Disponible', 2),
+('Cafetière', 1, 50, 'Electromenager', 'Disponible', 2),
+('Aspirateur', 1, 100, 'Electromenager', 'Disponible', 2),
+('Fer à repasser', 1, 80, 'Electromenager', 'Disponible', 2),
+('Télévision', 1, 900, 'Multimedia', 'Disponible', 3),
+('Ordinateur portable', 1, 1200, 'Multimedia', 'Disponible', 3),
+('Enceinte Bluetooth', 1, 100, 'Multimedia', 'Disponible', 3),
+('Lecteur DVD', 1, 50, 'Multimedia', 'Disponible', 3),
+('Table de ping-pong', 1, 250, 'Sport', 'Disponible', 4),
+('Tapis de course', 1, 600, 'Sport', 'Disponible', 4),
+('Set de golf', 1, 800, 'Sport', 'Disponible', 4);
+
+
+INSERT INTO images (nom_img, type_img, id_appart) VALUES 
+("A-1", "jpg", 1), ("A-2", "jpg", 1), ("A-3", "jpg", 1), ("A-4", "jpg", 1), ("A-5", "jpg", 1),
+("B-1", "jpg", 2), ("B-2", "jpg", 2), ("B-3", "jpg", 2), ("B-4", "jpg", 2), ("B-5", "jpg", 2),
+("C-1", "jpg", 3), ("C-2", "jpg", 3), ("C-3", "jpg", 3), ("C-4", "jpg", 3), ("C-5", "jpg", 3),
+("D-1", "jpg", 4), ("D-2", "jpg", 4), ("D-3", "jpg", 4), ("D-4", "jpg", 4), ("D-5", "jpg", 4),
+("E-1", "jpg", 5), ("E-2", "jpg", 5), ("E-3", "jpg", 5), ("E-4", "jpg", 5), ("E-5", "jpg", 5),
+("F-1", "jpg", 6), ("F-2", "jpg", 6), ("F-3", "jpg", 6), ("F-4", "jpg", 6), ("F-5", "jpg", 6),
+("G-1", "jpg", 7), ("G-2", "jpg", 7), ("G-3", "jpg", 7), ("G-4", "jpg", 7), ("G-5", "jpg", 7);
+
+
 INSERT INTO locataire (civilite_locataire, nom_locataire, prenom_locataire, email_locataire, mdp_locataire, tel_locataire, adresse_locataire, cp_locataire, nb_reservations )
 VALUES 
 ('Mr', 'Dupont', 'Pierre', 'pierre.dupont@gmail.com', 'motdepasse', '0123456789', '5 Rue des Lilas', '75020', 3),
@@ -376,63 +431,4 @@ VALUES ('En cours', '2022-03-01', '2022-08-31', '2022-03-01', 1, 1),
        ('En cours', '2022-01-01', '2022-06-30', '2022-01-01', 4, 4),
        ('Résilié', '2022-05-01', '2022-08-31', '2022-05-01', 5, 5);
 
-INSERT INTO appartement (statut_appart, prix_appart, intitule_appart, ville_appart, cp_appart, adresse_appart, description_appart, type_appart, superficie_appart,image, nb_chambre, nb_cuisine, nb_salon, nb_salle_bain, nb_piece)
-VALUES 
-("Disponible", 1000, "Chalet de luxe à la montagne", "Aime-la-Plagne", "73210", "Aime la Plagne", "Profitez d'un séjour inoubliable dans notre chalet de luxe, situé dans les montagnes enneigées. Avec une vue imprenable sur les sommets environnants, des équipements haut de gamme et une proximité des pistes de ski, c'est l'endroit idéal pour les vacances d'hiver. Le chalet comprend 3 chambres, 2 salles de bains, un salon confortable avec cheminée, une cuisine entièrement équipée et un balcon avec vue sur les montagnes.", 'Appartement', '100','A-1.jpg', 3, 1, 1, 2, 6),
-("Disponible", 750, "Chalet de charme au coeur des Alpes", "Argentière", "74400", "Chamonix-Mont-Blanc", "Venez vous ressourcer dans notre chalet de charme, idéalement situé au coeur des Alpes. Avec une vue imprenable sur les montagnes environnantes et un accès direct aux sentiers de randonnée, c'est l'endroit parfait pour les amateurs de nature et de grands espaces. Le chalet comprend 4 chambres, 2 salles de bains, un salon confortable avec cheminée, une cuisine entièrement équipée et un jardin privé.", 'Appartement', '120','B-1.jpg', 4, 1, 1, 2, 8),
-("Disponible", 1400, "Chalet de montagne avec piscine intérieure", "Combloux", "74920", "49 chemin des Passerands", "Profitez de vos vacances d'hiver dans notre chalet de montagne avec piscine intérieure. Idéalement situé à proximité des pistes de ski, il vous offre un espace de détente et de bien-être après une journée sur les pentes. Le chalet comprend 4 chambres, 3 salles de bains, un salon confortable avec cheminée, une cuisine entièrement équipée et une piscine intérieure.", 'Appartement', '150','C-1.jpg', 4, 1, 1, 3, 8),
-("Disponible", 1000, "Chalet de montagne avec sauna", "Praz Sur Arly", "74120", "54 route du Val d'Arly", "Venez vous détendre dans notre chalet de montagne avec sauna, idéalement situé dans les Alpes. Avec une vue imprenable sur les montagnes environnantes, un sauna et un accès direct aux sentiers de randonnée, c'est l'endroit parfait pour vous ressourcer. Le chalet comprend 3 chambres, 2 salles de bains, un salon confortable avec cheminée, une cuisine entièrement équipée et un sauna privé.", "Appartement", '110','D-1.jpg', 3, 1, 1, 2, 6),
-("Disponible", 1200 , "Chalet de montagne avec jacuzzi", "Praz Sur Arly", "74120", "30 route du Val d'Arly", "Profitez de vos vacances d'hiver dans notre chalet de montagne avec jacuzzi, idéalement situé à proximité des pistes de ski. Avec une vue imprenable sur les montagnes environnantes, un jacuzzi extérieur et un accès direct aux sentiers de randonnée, c'est l'endroit parfait pour vous ressourcer après une journée sur les pentes. Le chalet comprend 4 chambres, 3 salles de bains, un salon confortable avec cheminée, une cuisine entièrement équipée et un jacuzzi extérieur privé.", "Appartement", "130","E-1.jpg", 4, 1, 1, 3, 8),
-("Disponible", 800, "Chalet de montagne à louer pour les vacances d'été", "Megeve", "74120", "70 rue monseigneur Conseil", "Venez passer vos vacances d'été dans notre chalet de montagne, idéalement situé dans les Alpes. Profitez de la nature environnante et des activités de plein air telles que la randonnée, le vélo et l'escalade. Le chalet est équipé d'une terrasse avec vue sur les montagnes, d'un jardin privé et d'une cuisine extérieure pour des repas en plein air. Le chalet comprend 3 chambres, 2 salles de bains, un salon confortable avec cheminée, une cuisine entièrement équipée et une terrasse avec vue sur les montagnes.", "Appartement", "100","F-1.jpg", 3, 1, 1, 2, 6),
-("Disponible", 1200, "Chalet de montagne avec vue panoramique", "Les Contamines Montjoie", "74170", "18 route de Notre Dame de la Gorge", "Venez passer vos vacances dans notre chalet de montagne avec vue panoramique sur les Alpes. Profitez de la vue imprenable depuis la terrasse ou depuis le salon confortable avec cheminée. Le chalet est équipé d'une cuisine entièrement équipée et d'une salle de jeux pour des soirées en famille ou entre amis. Le chalet comprend 4 chambres, 2 salles de bains, un salon confortable avec cheminée, une cuisine entièrement équipée et une terrasse avec vue panoramique sur les montagnes.", "Appartement", "130","J-1.jpg", 4, 1, 1, 2, 8),
-("Disponible", 600 , "Chalet de montagne pour les amoureux de la nature", "Les Houches", "74310", "BP 9-Place de la Mairie", "Venez passer vos vacances dans notre chalet de montagne idéalement situé pour les amoureux de la nature. Avec un accès direct aux sentiers de randonnée, des vues imprenables sur les montagnes environnantes et un jardin privé pour profiter des beaux jours. Le chalet est équipé d'une cuisine entièrement équipée, d'une salle de bain confortable et d'une cheminée pour des soirées cocooning. Le chalet comprend 2 chambres, 1 salle de bains, un salon confortable avec cheminée, une cuisine entièrement équipée et un jardin privé.", "Appartement", "80","G-1.jpg", 2, 1, 1, 1, 5),
-("Disponible", 900, "Chalet de montagne pour les vacances en famille", "Aime-la-Plagne", "73210", "Aime la Plagne", "Venez passer vos vacances en famille dans notre chalet de montagne idéalement situé pour les activités en plein air. Le chalet est équipé d'une cuisine entièrement équipée, d'une salle de jeux pour les enfants, d'une terrasse avec vue sur les montagnes et d'un jardin privé pour des repas en extérieur. Le chalet comprend 4 chambres, 2 salles de bains, un salon confortable avec cheminée, une cuisine entièrement équipée, une salle de jeux pour les enfants et une terrasse avec vue sur les montagnes.", 'Appartement', '110','H-2.jpg', 4, 1, 1, 2, 7),
-("Disponible", 1000, "Chalet de montagne avec accès à des activités de plein air", "Aime-la-Plagne", "73210", "Aime la Plagne", "Venez passer vos vacances dans notre chalet de montagne idéalement situé pour les activités de plein air. Le chalet est équipé d'une cuisine entièrement équipée, d'un salon confortable avec cheminée, d'une terrasse avec vue sur les montagnes et d'un accès direct aux sentiers de randonnée et aux pistes de ski. Le chalet comprend 3 chambres, 2 salles de bains, un salon confortable avec cheminée, une cuisine entièrement équipée et une terrasse avec vue sur les montagnes.", 'Appartement', '100',"I-3.jpg", 3, 1, 1, 2, 6);
 
-INSERT INTO equipement_appart (intitule_equip_appart, nb_equi_appart, prix_equip_appart, type_equip_appart, statut_equip_appart, id_appart)
-VALUES 
-('Lave-linge', 1, 500, 'Electromenager', 'Disponible', 1),
-('Lave-vaisselle', 1, 600, 'Electromenager', 'Disponible', 1),
-('Réfrigérateur', 1, 800, 'Electromenager', 'Disponible', 1),
-('Four', 1, 700, 'Electromenager', 'Disponible', 1),
-('Micro-ondes', 1, 300, 'Electromenager', 'Disponible', 2),
-('Cafetière', 1, 50, 'Electromenager', 'Disponible', 2),
-('Aspirateur', 1, 100, 'Electromenager', 'Disponible', 2),
-('Fer à repasser', 1, 80, 'Electromenager', 'Disponible', 2),
-('Télévision', 1, 900, 'Multimedia', 'Disponible', 3),
-('Ordinateur portable', 1, 1200, 'Multimedia', 'Disponible', 3),
-('Enceinte Bluetooth', 1, 100, 'Multimedia', 'Disponible', 3),
-('Lecteur DVD', 1, 50, 'Multimedia', 'Disponible', 3),
-('Table de ping-pong', 1, 250, 'Sport', 'Disponible', 4),
-('Tapis de course', 1, 600, 'Sport', 'Disponible', 4),
-('Set de golf', 1, 800, 'Sport', 'Disponible', 4);
-
-INSERT INTO images (nom_img, type_img, id_appart) VALUES 
-("A-1", "jpg", 1), ("A-2", "jpg", 1), ("A-3", "jpg", 1), ("A-4", "jpg", 1), ("A-5", "jpg", 1),
-("B-1", "jpg", 2), ("B-2", "jpg", 2), ("B-3", "jpg", 2), ("B-4", "jpg", 2), ("B-5", "jpg", 2),
-("C-1", "jpg", 3), ("C-2", "jpg", 3), ("C-3", "jpg", 3), ("C-4", "jpg", 3), ("C-5", "jpg", 3),
-("D-1", "jpg", 4), ("D-2", "jpg", 4), ("D-3", "jpg", 4), ("D-4", "jpg", 4), ("D-5", "jpg", 4),
-("E-1", "jpg", 5), ("E-2", "jpg", 5), ("E-3", "jpg", 5), ("E-4", "jpg", 5), ("E-5", "jpg", 5),
-("F-1", "jpg", 6), ("F-2", "jpg", 6), ("F-3", "jpg", 6), ("F-4", "jpg", 6), ("F-5", "jpg", 6),
-("G-1", "jpg", 7), ("G-2", "jpg", 7), ("G-3", "jpg", 7), ("G-4", "jpg", 7), ("G-5", "jpg", 7);
-
-INSERT INTO atouts (nom_atout, id_appart)
-VALUES 
-    ("Vue sur la mer", 1),  ("Piscine", 1),("Parking", 1),  
-    ("Terrasse", 2),("Jardin", 2),("Ascenseur", 2), 
-    ("Internet haut débit", 3),("Cuisine équipée", 3),("Climatisation", 3),
-    ("Jacuzzi", 4), ("Sauna", 4),("Salle de sport", 4),
-    ("Vue panoramique", 5),("Proximité des commerces", 5),("Belle luminosité", 5),
-    ("Cheminée", 6),("Accès handicapé", 6),("Animaux acceptés", 6),
-    ("Spacieux", 7),("Très calme", 7),("Beau design", 7),
-    ("Bien isolé", 8),("Bonne distribution", 8),("Décoration moderne", 8),
-    ("Quartier animé", 9),("Proximité des transports", 9),("Proche de la plage", 9);
-    
-INSERT INTO facture (date_facture, statut_facture, montant_facture, id_contrat)
-VALUES
-('2022-01-05', 'En attente', 500, 1),
-('2022-02-05', 'Payée', 500.9, 1),
-('2022-03-05', 'Payée', 500.45, 2),
-('2022-04-05', 'En attente', 500.4, 2),
-('2022-05-05', 'En attente', 500.85, 1),
-('2022-06-05', 'En attente', 500, 3);
