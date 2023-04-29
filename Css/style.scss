@@ -1,0 +1,245 @@
+@font-face {
+    font-family: 'Poppins_Medium';
+    src: url(../Polices/Poppins-Medium.ttf);
+}
+
+@font-face {
+    font-family: 'Poppins_Light';
+    src: url(../Polices/Poppins-LightItalic.otf);
+}
+
+@font-face {
+    font-family: 'Poppins_Regular';
+    src: url(../Polices/Poppins-Regular.ttf);
+}
+
+$bgcolor_fond: rgba(2, 60, 135, 0.363);
+$color_button: #FFC839;
+$color_blue: #093A7A;
+$color_InsideInput: #FFF0CB;
+body {
+    header {
+        font-size: 1.15rem;
+        background-color: $color_blue;
+        position: fixed;
+        z-index: 100;
+        .navbar-collapse {
+            flex-grow: unset;
+            .nav-item {
+                margin-right: 2rem;
+                a {
+                    color: white;
+                }
+                 :hover {
+                    color: $color_button;
+                }
+            }
+            .dropdown {
+                .dropdown-menu {
+                    a {
+                        color: black;
+                        &:hover {
+                            background-color: $color_button;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    .sectionOne {
+        width: 100%;
+        height: 100vh;
+        background: url(../images/fond.png);
+        background-size: cover;
+        overflow: hidden;
+        .overlay {
+            left: 0;
+            height: 100%;
+            background: $bgcolor_fond;
+            .mt-custom {
+                margin-top: 15rem;
+                h1 {
+                    font-size: 96px;
+                }
+                .bg-custom {
+                    background-color: $color_button;
+                }
+                input {
+                    background-color: $color_InsideInput;
+                }
+            }
+        }
+    }
+    .sectionTwo {
+        div {
+            .card {
+                padding: 0;
+                .fixed-size {
+                    width: 100%;
+                    height: 20rem;
+                }
+            }
+            .card-body {
+                background: white;
+                &:hover {
+                    background: $color_button;
+                    .btn-log {
+                        background: white;
+                    }
+                }
+                .btn-log {
+                    background-color: $color_button;
+                }
+            }
+        }
+    }
+    .sectionThree {
+        div {
+            p {
+                margin: 1rem 1rem 1rem 1rem;
+                text-align: justify;
+                font-family: Poppins_Light;
+            }
+            .logo_how_make {
+                font-size: 3rem;
+            }
+        }
+    }
+    .sectionFour {
+        font-family: Poppins_Regular;
+        .comments {
+            .carousel-item {
+                height: 50vh;
+                .card {
+                    border: none;
+                }
+            }
+        }
+        .help {
+            background-color: $color_InsideInput;
+            height: 30vh;
+            .sendHelp {
+                border: 1px solid black;
+                width: 80%;
+                input {
+                    width: 60%;
+                    border: none;
+                    & {
+                        border: none;
+                        outline: none;
+                    }
+                }
+                .bouton {
+                    width: 20%;
+                    border: none;
+                    background-color: $color_button;
+                }
+            }
+        }
+    }
+    .sectionFive {
+        .active {
+            border: 1.5px solid $color_blue !important;
+            color: $color_blue !important;
+            i {
+                color: $color_blue !important
+            }
+        }
+    }
+    .sectionLocation {
+        div {
+            .pagination {
+                .actives {
+                    background-color: $color_button !important;
+                    color: white;
+                }
+            }
+        }
+    }
+    .sectionConnexion {
+        .gradient-custom-2 {
+            /* Chrome 10-25, Safari 5.1-6 */
+            background: -webkit-linear-gradient(to right, #FFC839, #E1A624, #093A7A, #093A7A);
+            /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+            background: linear-gradient(to right, #E1A624, #a88838, #093A7A, #093A7A);
+        }
+    }
+    .SectionProfil {
+        background-color: $color_InsideInput !important;
+        height: 80vh;
+        .divProfil {
+            a {
+                background-color: $color_button;
+            }
+        }
+    }
+    .sectionInscription {
+        .container {
+            .card {
+                .active_page {
+                    display: block;
+                }
+                .desactive_page {
+                    display: none;
+                }
+            }
+        }
+    }
+    footer {
+        background-color: $color_blue;
+        li {
+            list-style: none;
+        }
+        div {
+            button {
+                border: $color_button;
+                background-color: $color_button;
+            }
+            input {
+                background-color: $color_InsideInput;
+                border: none;
+            }
+        }
+    }
+
+
+    @media (max-width: 767.98px) { 
+        .custom_align_profil{
+            width: 40% !important;
+            margin-left: 0px !important;
+            margin-top: 0.5rem !important;
+        }
+        .custom_off{
+            display: none;
+        }
+        .responsive_img{
+            width: 65% !important;  
+            .img_resp{
+                width: 50% !important;  
+            }
+        }
+
+        .sectionOne {
+            height: 35rem;
+            .overlay {
+                .mt-custom {
+                    margin-top: 7rem !important;
+                    h1 {
+                        font-size: 2.5rem !important;
+                    }
+                    input {
+                        padding: 0.5rem !important;
+                    }
+                }
+            }
+        }
+
+        footer {
+            .btn_modif_footer{
+                width: 10rem !important;
+                padding: 0rem !important;
+            }
+
+        }
+     }
+}
