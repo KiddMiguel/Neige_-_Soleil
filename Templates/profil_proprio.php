@@ -17,14 +17,16 @@
                     </div>
                     <form action="" method="post">
                         <div class="row mt-2">
-                            <div class="col-md-12 pt-3"> <select class="select border p-1" name="civilite_proprio">
+                            <!-- <div class="col-md-12 pt-3"> <select class="select border p-1" name="civilite_proprio">
                                     <option value="Mme">Mme</option>
                                     <option value="Mr">Mr</option>
                                     <option value="Autre">Autre</option>
-                                </select></div>
+                                </select>
+                            </div> -->
                             <?php
                             if (isset($proprietaire["email_proprio"])) {
-                                echo '<div class="col-md-12 pt-3"><select name="statut_proprio" class="select border p-1" >
+                                echo '<div class="col-md-12 pt-3">
+                                <select name="statut_proprio" class="select border p-1" >
                                     <option value="" disabled>Vous êtes</option>
                                     <option value="" selected>' . $proprietaire["statut_proprio"] . '</option>
                                     <option value="Loueur particulier">Loueur particulier</option>

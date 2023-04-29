@@ -26,14 +26,15 @@
                 </div>
 
                 <div class="row mt-2">
-                    <div class="col-md-12 pt-3"> <select class="select border p-1" name="civilite_locataire">
+                    <!-- <div class="col-md-12 pt-3"> <select class="select border p-1" name="civilite_locataire">
                             <optgroup label="Civilité">
-                                <option value=""><?= ((isset($_SESSION["email_locataire"]))) ? $locataire['civilite_locataire'] : "" ?></option>
+                                <option value=""><?//= ((isset($_SESSION["email_locataire"]))) ? $locataire['civilite_locataire'] : "" ?></option>
                                 <option name="civilite_locataire" value="Mme">Mme</option>
                                 <option name="civilite_locataire" value="Mr">Mr</option>
                                 <option name="civilite_locataire" value="Autre">Autre</option>
                             </optgroup>
-                        </select></div>
+                        </select>
+                    </div> -->
                     <div class="col-md-6 pt-3"><input type="text" class="form-control" name="nom_locataire" placeholder="Votre nom" value="<?= ((isset($_SESSION["email_locataire"]))) ? $locataire['nom_locataire'] : "" ?>"></div>
                     <div class="col-md-6 pt-3"><input type="text" class="form-control" name="prenom_locataire" placeholder="Votre prenom" value="<?= ((isset($_SESSION["email_locataire"]))) ? $locataire['prenom_locataire'] : "" ?>"></div>
                 </div>

@@ -7,7 +7,7 @@ class Modele
     {
         $this->unPDO = null;
         try {
-            $url = "mysql:host=" . $server . ";dbname=" . $bdd;
+            $url = "mysql:host=" . $server . ";dbname=" . $bdd; // Lien de connexion syntaxe obligé.
 
             $this->unPDO = new PDO($url, $user, $mdp);
         } catch (PDOException $exp) {
@@ -16,13 +16,12 @@ class Modele
         }
     }
 
-
     /************CONNEXION ET INSCRIPTION LOCATAIRE */
 
     public function verifconnexionLocataire($email, $mdp)
     {
         if ($this->unPDO != null) {
-            $request = "select * from locataire where email_locataire = :email_locataire and mdp_locataire= :mdp_locataire;";
+            $request = "select * from locataire where email_locataire = :email_locataire and mdp_locataire= :mdp_locataire";
             $donnees = array(":email_locataire" => $email, ":mdp_locataire" => $mdp);
 
             $select = $this->unPDO->prepare($request);
@@ -36,7 +35,7 @@ class Modele
     public function insertLocataire($tab)
     {
         if ($this->unPDO != null) {
-            $request = "insert into locataire values (null, :civilite_locataire, :nom_locataire, :prenom_locataire, :email_locataire, :mdp_locataire, null, null, null, null, null, null, null)";
+            $request = "insert into locataire values (null, :civilite_locataire, :nom_locataire, :prenom_locataire, :email_locataire, :mdp_locataire, null, null, null, null, null)";
             $donnees = array(
                 ":civilite_locataire" => $tab['civilite_locataire'],
                 ":nom_locataire" => $tab['nom_locataire'],
@@ -53,9 +52,8 @@ class Modele
     {
         if ($this->unPDO != null) {
 
-            $request = "update locataire set civilite_locataire=:civilite_locataire,  nom_locataire=:nom_locataire, prenom_locataire=:prenom_locataire, tel_locataire=:tel_locataire ,adresse_locataire=:adresse_locataire, cp_locataire=:cp_locataire where locataire.id_user=".$_SESSION['id_user']."";
+            $request = "update locataire set  nom_locataire=:nom_locataire, prenom_locataire=:prenom_locataire, tel_locataire=:tel_locataire ,adresse_locataire=:adresse_locataire, cp_locataire=:cp_locataire where locataire.id_user=" . $_SESSION['id_user'] . "";
             $donnees = array(
-                ":civilite_locataire" => $tab['civilite_locataire'],
                 ":nom_locataire" => $tab['nom_locataire'],
                 ":prenom_locataire" => $tab['prenom_locataire'],
                 ":tel_locataire" => $tab['tel_locataire'],
@@ -104,9 +102,8 @@ class Modele
     {
         if ($this->unPDO != null) {
             $id_user = $_GET["id_user"];
-            $request = "update proprietaire set civilite_proprio=:civilite_proprio, nom_proprio=:nom_proprio, prenom_proprio=:prenom_proprio ,statut_proprio=:statut_proprio, tel_proprio=:tel_proprio, adresse_proprio=:adresse_proprio, cp_proprio=:cp_proprio, ville_proprio=:ville_proprio, pays_proprio=:pays_proprio, code_adherent=:code_adherent where proprietaire.id_user=$id_user";
+            $request = "update proprietaire set nom_proprio=:nom_proprio, prenom_proprio=:prenom_proprio ,statut_proprio=:statut_proprio, tel_proprio=:tel_proprio, adresse_proprio=:adresse_proprio, cp_proprio=:cp_proprio, ville_proprio=:ville_proprio, pays_proprio=:pays_proprio, code_adherent=:code_adherent where proprietaire.id_user=$id_user";
             $donnees = array(
-                ":civilite_proprio" => $tab['civilite_proprio'],
                 ":nom_proprio" => $tab['nom_proprio'],
                 ":prenom_proprio" => $tab['prenom_proprio'],
                 ":statut_proprio" => $tab['statut_proprio'],
@@ -184,6 +181,37 @@ class Modele
             return $appartements;
         } else {
             return null;
+        }
+    }
+
+    // Recupère la pagination par limitte
+    public function recupPaginationAppartement($premier,$parPage)
+    {
+        if ($this->unPDO != null) {
+            $request = "SELECT * FROM `appartement` LIMIT :premier, :parpage;";
+            $select = $this->unPDO->prepare($request);
+            $select->bindValue(':premier', $premier, PDO::PARAM_INT);
+            $select->bindValue(':parpage', $parPage, PDO::PARAM_INT);
+            $select->execute();
+            $Pageappartements = $select->fetchAll(PDO::FETCH_ASSOC);
+            return $Pageappartements;
+        } else {
+            return null;
+        }
+    }
+
+
+    //Recupère le nombre d'appartement
+    public function recupNombreAppartement()
+    {
+        if ($this->unPDO != null) {
+            $request = "SELECT COUNT(*) AS nb_appartement FROM `appartement`;";
+            $select = $this->unPDO->prepare($request);
+            $select->execute();
+            // On récupère le nombre d'articles
+            $result = $select->fetch();
+            $nbAppartement = (int) $result['nb_appartement'];
+            return $nbAppartement;
         }
     }
 
@@ -311,12 +339,13 @@ class Modele
         }
     }
 
-    public function FiltreLocation($mot)
+    public function FiltreLocation($mot,$premier,$parPage)
     {
         if ($this->unPDO != null) {
-            $requete = "select * from appartement where ville_appart like :mot or statut_appart like :mot or prix_appart like :mot";
+            $requete = "select * from appartement where ville_appart like :mot or statut_appart like :mot or prix_appart like :mot LIMIT :premier, :parpage;";
             $donnees = array(":mot" => "%" . $mot . "%");
             $select = $this->unPDO->prepare($requete);
+
             $select->execute($donnees);
             $appartements = $select->fetchAll();
             return $appartements;
@@ -324,18 +353,18 @@ class Modele
             return null;
         }
     }
-    public function FiltreLocation_index($mot_index, $statut, $prixMax, $prixMin)
+    public function FiltreLocation_index($mot_index, $statut, $prixMax, $prixMin,$premier,$parPage)
     {
         if ($this->unPDO != null) {
-            $requete = "SELECT * from appartement where ville_appart like :mot_index and statut_appart like :statut OR (prix_appart BETWEEN :prixMin and :prixMax)";
-            $donnees = array(
-                ":mot_index" => "%" . $mot_index . "%",
-                ":statut" => "%" . $statut . "%",
-                ":prixMax" => $prixMax,
-                ":prixMin" => $prixMin
-            );
+            $requete = "SELECT * from appartement where ville_appart like :mot_index and statut_appart like :statut OR (prix_appart BETWEEN :prixMin and :prixMax) LIMIT :premier, :parpage;";
             $select = $this->unPDO->prepare($requete);
-            $select->execute($donnees);
+            $select->bindValue(':mot_index', "%".$mot_index."%", PDO::PARAM_STR);
+            $select->bindValue(':statut', "%".$statut."%", PDO::PARAM_STR);
+            $select->bindValue(':prixMax', $prixMax, PDO::PARAM_INT);
+            $select->bindValue(':prixMin', $prixMin, PDO::PARAM_INT);
+            $select->bindValue(':premier', $premier, PDO::PARAM_INT);
+            $select->bindValue(':parpage', $parPage, PDO::PARAM_INT);
+            $select->execute();
             $appartements = $select->fetchAll();
             return $appartements;
         } else {
@@ -405,7 +434,7 @@ class Modele
     }
 
 
-    public function selectWhereContrat( $id_user)
+    public function selectWhereContrat($id_user)
     {
         if ($this->unPDO != null) {
             $request = "select * from contrat where id_user=:id_user ";
@@ -517,8 +546,4 @@ class Modele
             return null;
         }
     }
-
-
-    /*********************AUTOMATIME LOCATAIRE */
-    
 }

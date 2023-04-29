@@ -12,7 +12,7 @@
                         <a class="nav-link" aria-current="page" href="index.php?page=home"><i class="fa-solid fa-house  color-light"></i> Accueil</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link " href="index.php?page=location"><i class="fa-solid fa-mountain-sun color-light"></i> Location</a>
+                        <a class="nav-link " href="index.php?page=location&n=1"><i class="fa-solid fa-mountain-sun color-light"></i> Location</a>
                     </li>
                     <?php
                     

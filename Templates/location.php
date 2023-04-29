@@ -67,16 +67,16 @@
     <div class="py-5 my-5">
         <nav aria-label="...">
             <ul class="pagination justify-content-center">
-                <li class="page-item">
-                    <a class="page-link text-black" href="#">Précédent</a>
+                <li class="page-item <?= ($currentPage == 1) ? "disabled" : "" ?>">
+                    <a class="page-link text-black" href="index.php?page=location&n=<?= $currentPage - 1 ?>">Précédent</a>
                 </li>
-                <li class="page-item "><a class="page-link actives" href="#">1</a></li>
-                <li class="page-item " aria-current="page">
-                    <a class="page-link " href="#">2</a>
+                <?php for($page = 1; $page <= $pages; $page++): ?>
+                <li class="page-item ">
+                    <a class="page-link text-black <?= ($currentPage == $page) ? "actives" : "" ?>" href="index.php?page=location&n=<?= $page ?>" class="page-link"><?= $page ?></a>
                 </li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                <li class="page-item">
-                    <a class="page-link text-black" href="#">Suivant</a>
+                <?php endfor ?>
+                <li class="page-item <?= ($currentPage == $pages) ? "disabled" : "" ?>">
+                    <a class="page-link text-black " href="index.php?page=location&n=<?= $currentPage + 1 ?>">Suivant</a>
                 </li>
             </ul>
         </nav>
