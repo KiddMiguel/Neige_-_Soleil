@@ -32,6 +32,19 @@ class Modele
             return null;
         }
     }
+    public function erreurConnexion($email, $mdp)
+    {
+        if ($this->unPDO != null) {
+            $request = "call connexionError( :email, :mdp);";
+            $donnees = array(":email" => $email, ":mdp" => $mdp);
+            $select = $this->unPDO->prepare($request);
+            $select->execute($donnees);
+            $reponse = $select->fetch();
+            return $reponse;
+        } else {
+            return null;
+        }
+    }
     public function insertLocataire($tab)
     {
         if ($this->unPDO != null) {
@@ -544,6 +557,18 @@ class Modele
             return $nbAppartement;
         } else {
             return null;
+        }
+    }
+
+    public function selectWhereArchiveMDP($id_user)
+    {
+        if ($this->unPDO != null) {
+            $request = "select * from achive_mdp where id_user=:id_user order BY date_change desc";
+            $select = $this->unPDO->prepare($request);
+            $donnees = array(":id_user" => $id_user);
+            $select->execute($donnees);
+            $mdp = $select->fetch();
+            return $mdp;
         }
     }
 }
