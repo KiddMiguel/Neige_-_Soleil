@@ -157,4 +157,36 @@ body footer div button {
 body footer div input {
   background-color: #FFF0CB;
   border: none;
+}
+@media (max-width: 767.98px) {
+  body .custom_align_profil {
+    width: 40% !important;
+    margin-left: 0px !important;
+    margin-top: 0.5rem !important;
+  }
+  body .custom_off {
+    display: none;
+  }
+  body .responsive_img {
+    width: 65% !important;
+  }
+  body .responsive_img .img_resp {
+    width: 50% !important;
+  }
+  body .sectionOne {
+    height: 35rem;
+  }
+  body .sectionOne .overlay .mt-custom {
+    margin-top: 7rem !important;
+  }
+  body .sectionOne .overlay .mt-custom h1 {
+    font-size: 2.5rem !important;
+  }
+  body .sectionOne .overlay .mt-custom input {
+    padding: 0.5rem !important;
+  }
+  body footer .btn_modif_footer {
+    width: 10rem !important;
+    padding: 0rem !important;
+  }
 }/*# sourceMappingURL=style.css.map */
