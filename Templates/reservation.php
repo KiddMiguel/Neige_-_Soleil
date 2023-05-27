@@ -3,10 +3,10 @@
         <div class="row d-flex justify-content-center align-items-center ">
             <div class="col-md-12 col-xl-10">
             <?php  
-            $validation = "";
-            if($locataire['nb_reservations'] >= 5){
-                $validation .= "Vous bénéficiez d'une rémise de 50% sur votre prochaine réservation.";
-            }
+            // $validation = "";
+            // if($locataire['nb_reservations'] >= 5){
+            //     $validation .= "Vous bénéficiez d'une rémise de 50% sur votre prochaine réservation.";
+            // }
             
             ?>
                 <div class="card ">
@@ -14,7 +14,7 @@
                         <h5 class="mb-0 me-auto"><i class="fas fa-tasks me-2"></i>Réservations</h5>
                         <p class="fst-italic">La confirmation de la réservation se fera dans quelques minutes.</p>
                     </div>
-                    <p class=" ms-4 mt-3"><?= ((isset($_SESSION["email_locataire"]))) ? $validation : "" ?></p>
+                    <!-- <p class=" ms-4 mt-3"><?= ((isset($_SESSION["email_locataire"]))) ? $validation : "" ?></p> -->
 
                     <div class="card-body d-flex" >
                         <table class="table mb-0 w-25">
@@ -83,7 +83,11 @@
                                     if($reservation['statut_reservation'] != 'Réservé'){
                                         echo '<button  class="btn btn-danger"><a href="index.php?page=delete&id_reservation='.$reservation['id_reservation'].'" class="text-decoration-none text-light" data-mdb-toggle="tooltip" title="Done">Annuler</i></a></button>';
                                     }else {
-                                        echo '<a href="contrat/contrat_locataire.php?id_appart='.$reservation['id_appart'].'" target="blank"> <button class="btn btn-primary"><i class="bi bi-clipboard2-fill fs-6" style="color:#DEE2E6 !important;"></i>Contrat</button> </a>';
+                                        if(isset($_SESSION['email_locataire'])){
+                                            echo '<a href="contrat/contrat_locataire.php?id_appart='.$reservation['id_appart'].'" target="blank"> <button class="btn btn-primary"><i class="bi bi-clipboard2-fill fs-6" style="color:#DEE2E6 !important;"></i>Contrat</button> </a>';
+                                        }else{
+                                            echo '<a href="contrat/contrat_proprietaire.php?id_appart='.$reservation['id_appart'].'" target="blank"> <button class="btn btn-primary"><i class="bi bi-clipboard2-fill fs-6" style="color:#DEE2E6 !important;"></i>Contrat</button> </a>';
+                                        }
                                     }
                                      echo'</td>
                                 </tr>';

@@ -9,27 +9,27 @@
             <div class="row">
                 <div class="col-md-6 mb-4">
                     <div class="form-outline">
-                        <input type="text" class="form-control form-control" required  value="<?= $_SESSION["nom_locataire"] ?>" placeholder="Nom" />
+                        <input type="text" class="form-control form-control" required  value="<?= ((isset($_SESSION["email_locataire"]))) ? $_SESSION['nom_locataire'] : $_SESSION['nom_proprio'] ?>" placeholder="Nom" />
                     </div>
                 </div>
                 <div class="col-md-6 mb-4">
                     <div class="form-outline">
-                        <input type="text" id="form3Example1n" class="form-control form-control" required  value="<?= $_SESSION["prenom_locataire"] ?>" placeholder="Prenom" />
+                        <input type="text" id="form3Example1n" class="form-control form-control" required  value="<?= ((isset($_SESSION["email_locataire"]))) ? $_SESSION["prenom_locataire"] : $_SESSION['prenom_proprio'] ?>" placeholder="Prenom" />
                     </div>
                 </div>
                 <div class="col-md-12 mb-4">
                     <div class="form-outline">
-                        <input type="text" id="form3Example1n" class="form-control form-control" required   value="<?= $_SESSION["email_locataire"] ?>" placeholder="Email" />
+                        <input type="text" id="form3Example1n" class="form-control form-control" required   value="<?= ((isset($_SESSION["email_locataire"]))) ? $_SESSION["email_locataire"] : $_SESSION['email_proprio']  ?>" placeholder="Email" />
                     </div>
                 </div>
                 <div class="col-md-6 mb-4">
                     <div class="form-outline">
-                        <input type="text" class="form-control form-control" required value="<?= $_SESSION["tel_locataire"] ?>" placeholder="Numéro de téléphone" />
+                        <input type="text" class="form-control form-control" required value="<?= ((isset($_SESSION["email_locataire"]))) ? $_SESSION["tel_locataire"] :  $_SESSION['tel_proprio'] ?>" placeholder="Numéro de téléphone" />
                     </div>
                 </div>
                 <div class="col-md-6 mb-2">
                     <div class="form-outline">
-                        <input type="text" id="" class="form-control form-control" required  value="<?= $_SESSION["cp_locataire"] ?>"  placeholder="Code Postal" />
+                        <input type="text" id="" class="form-control form-control" required  value="<?= ((isset($_SESSION["email_locataire"]))) ? $_SESSION["cp_locataire"] : $_SESSION['cp_proprio']  ?>"  placeholder="Code Postal" />
                     </div>
                 </div>
             </div>

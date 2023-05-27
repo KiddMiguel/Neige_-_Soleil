@@ -36,7 +36,7 @@ CREATE table appartement (
     ville_appart VARCHAR (50),
     cp_appart VARCHAR (50),
     adresse_appart varchar (255),
-    description_appart VARCHAR(500),
+    description_appart VARCHAR(5000),
     type_appart VARCHAR (50),
     superficie_appart VARCHAR (50),
     image VARCHAR (50) NULL,
