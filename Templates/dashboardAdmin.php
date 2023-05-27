@@ -2,78 +2,25 @@
 <section class="sectionFive py-5" style="background-color:#DEE2E6;">
     <div class="container-fluid">
         <div>
-            <h1 class="fs-3 ms-2 fw-bolder">Mon dashbord</h1>
             <div class="row">
-                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 row ">
+                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12 row ">
 
-                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 p-3 text-white">
+                    <div class="col-lg-12 col-md-12 col-sm-6 col-xs-12 p-3 text-white">
                         <div class="rounded m-1 pb-3" style="background-color:#2469CE;height: 17rem;">
-                            <p class="fs-2 fw-bold pt-3 ps-4 m-0 pb-1"><?php echo $contrats?> <span class="fs-5 fw-lighter">Contrat(s)</span></p>
-                            <p class="ps-4 fw-semibold">Dernier contrat active (<?php echo $mois ?>)</p>
-                            <div class="d-flex">
-                                <div class="mt-5 pt-5 me-auto ps-4">
-                                    <p><?php echo $factures_wait ?> Facture(s) en attente</p>
-                                </div>
-                                <!--<p class="mt-5 pt-5 pe-4">72%</p>-->
-                            </div>
-                            <div class="progress ms-4" style="height: 6px; width: 75%;" role="progressbar" aria-label="Example with label" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
-                                <div class="progress-bar bg-success" style="width: 100%;"></div>
-                            </div>
+                            
                         </div>
 
                     </div>
-                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 p-3 text-black">
-                        <div class="rounded bg-light m-1 pb-3" style="height: 17rem;">
-                            <p class="fs-2 fw-bold pt-3 ps-4 m-0"><?php echo $revenu ?>  € <span class="badge text-bg-success fw-semibold fs-6 ms-5"><i class="bi bi-arrow-up-short"></i>0.0%</span></p>
-                            <p class="ps-4 ">Revenue du mois</p>
-                            <div class="d-flex">
-                                <div class="mt-3 pt-4 me-auto ps-4">
-                                    <p><i class="bi bi-align-start text-success"></i> Locataires</p>
-                                    <p><i class="bi bi-align-start text-warning"></i> Appartements</p>
-                                </div>
-                                <div class="mt-3 pt-4 pe-4">
-                                    <p><i class="bi bi-arrow-up-short text-success"></i></p>
-                                    <p><i class="bi bi-arrow-up-short text-success"></i></p>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 p-3">
-                        <div class="rounded bg-light m-1" style="height: 17rem;">
-                            <p class="fs-5 fw-bold pt-3 ps-4 m-0 pb-5">Highlights</p>
-
-                            <div class="d-flex">
-                                <div class="mt-3 pt-4 me-auto ps-4">
-                                    <p><i class="bi bi-align-start text-success"></i> Locataire(s)</p>
-                                    <p><i class="bi bi-align-start text-warning"></i> Appartement(s)</p>
-                                    <p style="font-size: 10px;"><i class="bi bi-align-start text-danger " ></i> Le nombre de vos locatires et d'appartements</p>
-                                </div>
-                                <div class="mt-3 pt-4 pe-4">
-                                    <p><i class="bi bi-arrow-up-short text-success"></i> <?php //echo $nbLocataire ?></p>
-                                    <p><i class="bi bi-arrow-up-short text-success"></i> <?php echo $nbAppart?></p>
-                                    
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 p-3 text-light">
+                    
+        
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 p-3 text-light">
                         <div class="rounded m-1" style="background-color:#2469CE;height: 17rem;">
-                            <p class="fs-2 fw-bold pt-3 ps-4 m-0"><span class="fs-5 fw-lighter">Total </span><?php echo $revenus ?> €</p>
-                            <p class="ps-4">La somme total de votre revenu</p>
-                            <div class="d-flex">
-                                <p class="mt-5 pt-5 me-auto ps-4">Plafond</p>
-                                <p class="mt-5 pt-5 pe-4">100%</p>
-                            </div>
-                            <div class="progress ms-4" style="height: 6px; width: 85%;" role="progressbar" aria-label="Example with label" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
-                                <div class="progress-bar bg-warning" style="width: 100%;"></div>
-                            </div>
+                            
                         </div>
                     </div>
 
                 </div>
-                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 p-3">
+                <div class="col-lg-10 col-md-10 col-sm-6 col-xs-12 p-3">
                     <div class="rounded m-1 text-black bg-white" style="height: 36.5rem;">
                         <div class="container ps-4 pe-4">
                             <div class="d-flex">

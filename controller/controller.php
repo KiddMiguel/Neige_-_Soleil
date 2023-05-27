@@ -10,8 +10,12 @@ class Controller
     }
     /****************CONTROLLER LOCATAIRE********** */
     public function verifconnexionLocataire($email, $mdp)
-    {
+    {   
         return $this->unModele->verifconnexionLocataire($email, $mdp);
+    }
+    public function erreurConnexion($email, $mdp)
+    {   
+        return $this->unModele->erreurConnexion($email, $mdp);
     }
 
     public function insertLocataire($tab)
@@ -44,6 +48,7 @@ class Controller
         $proprietaire = $this->unModele->selectWhereProprietaire($id_user);
         return $proprietaire;
     }
+
     public function selectWhereContrat( $id_user)
     {
         $lesContrats = $this->unModele->selectWhereContrat($id_user);
@@ -212,5 +217,11 @@ class Controller
     {
         $nbAppartement = $this->unModele->dashBordNbAppartement($id_user);
         return $nbAppartement;
+    }
+
+    public function selectWhereArchiveMDP($id_user)
+    {
+        $mdpArchive = $this->unModele->selectWhereArchiveMDP($id_user);
+        return $mdpArchive;
     }
 }

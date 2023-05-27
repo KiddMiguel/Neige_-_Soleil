@@ -48,14 +48,14 @@
       <div class="d-flex">
         <div class="d-flex pe-5">
           <i class="fa-solid fa-user fs-1 me-3"></i>
-          <p>Présenté par votre expert.e en location N&S<br><span class="fs-5">Deborah</span></p>
+          <p>Présenté par votre expert en location<br><span class="fs-5">Neige & Soleil</span></p>
         </div>
         <div class="pe-5">
-          <i class="fa-solid fa-phone fs-5"></i></i> Deborah
+          <i class="fa-solid fa-phone fs-5"></i></i> 06 50 66 91 75 
         </div>
       </div>
       <hr>
-      <h4>Nos autres logements à proximité</h4>
+      <h4>Commentaires</h4>
 
     </div>
   

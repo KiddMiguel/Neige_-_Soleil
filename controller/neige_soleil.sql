@@ -1,6 +1,9 @@
 drop database if exists neige_soleil;
 create database neige_soleil;
 use neige_soleil;
+
+SET GLOBAL event_scheduler = ON;
+
 create table admin(
     id_admin int(11) not null AUTO_INCREMENT,
     nom varchar(255) not null,
@@ -17,6 +20,12 @@ create table user (
     nom_user varchar(255),
     prenom_user varchar(255),
     email_user varchar(255),
+    mdp_user varchar(255),
+    last_connexion DATETIME(5),
+    last_failConnexion DATETIME(5),
+    nb_connexion int DEFAULT 0,
+    nb_failConnexion int default 0,
+    etat_connexion enum ("Reussi", "Echec"),
     PRIMARY KEY (id_user)
 ); 
 CREATE table appartement (
@@ -27,7 +36,7 @@ CREATE table appartement (
     ville_appart VARCHAR (50),
     cp_appart VARCHAR (50),
     adresse_appart varchar (255),
-    description_appart VARCHAR(500),
+    description_appart VARCHAR(5000),
     type_appart VARCHAR (50),
     superficie_appart VARCHAR (50),
     image VARCHAR (50) NULL,
@@ -78,7 +87,7 @@ create table contrat (
 
 CREATE table reservation (
     id_reservation int (5) not null AUTO_INCREMENT,
-    statut_reservation enum ("En cours", "Louer"),
+    statut_reservation VARCHAR(155),
     date_debut_reservation date,
     date_fin_reservation date,
     prix_reservation FLOAT,
@@ -121,11 +130,15 @@ create table locataire (
     tel_locataire varchar(50),
     adresse_locataire varchar(50),
     cp_locataire varchar(50),
-    nb_reservations int(5),
+    nb_reservations int default 0,
+    last_connexion DATETIME(5), 
+    last_failConnexion DATETIME(5), 
+    nb_connexion int DEFAULT 0, 
+    nb_failConnexion int default 0, 
+    etat_connexion enum ("Reussi", "Echec"),
     id_user int(5), 
     FOREIGN key (id_user) REFERENCES user(id_user),
     PRIMARY KEY (id_locataire)
-    
 );
 
 CREATE TABLE question(
@@ -157,6 +170,17 @@ Create table images (
     foreign key (id_appart) references appartement(id_appart),
     primary key (id_img)
 );
+Create table verif_connexion (
+    id_verif int(10) not null AUTO_INCREMENT,
+    nom varchar(100),
+    prenom varchar(100),
+    email varchar(100),
+    date_connexion DATETIME,
+    etat enum ("Reussi", "Echec"),
+    id_user int(10),
+    foreign key (id_user) references user(id_user),
+    primary key (id_verif)
+);
 
 create table atouts(
     id_atout int(10) not null AUTO_INCREMENT,
@@ -176,6 +200,16 @@ FOREIGN key (id_contrat) REFERENCES contrat(id_contrat),
 primary key (id_reglement)
 );
 
+
+CREATE TABLE achive_mdp(
+    id_mdp int(5) not null auto_increment,
+    email VARCHAR(255),
+    mdp VARCHAR(255),
+    date_change DATETIME,
+    id_user int(5),
+    Foreign Key (id_user) REFERENCES user(id_user),
+    primary key (id_mdp)
+);
 CREATE table facture (
 id_facture int(5) not null auto_increment,
 date_facture date,
@@ -187,7 +221,8 @@ primary key (id_facture)
 );
 
 
---TRIGGER QUI INSERT UN id_user automatiquement dans la table user et dans la table locataire
+---############################################################################################
+---TRIGGER QUI INSERT UN id_user automatiquement dans la table user et dans la table locataire
 DROP TRIGGER IF EXISTS insert_locataire;
 DELIMITER //
 CREATE TRIGGER insert_locataire
@@ -197,13 +232,14 @@ BEGIN
     DECLARE nb_ligne INT;
     SELECT COUNT(*) INTO nb_ligne FROM user WHERE id_user = NEW.id_user;
     IF nb_ligne = 0 THEN
-        INSERT INTO user (nom_user, prenom_user, email_user) values (NEW.nom_locataire, NEW.prenom_locataire, NEW.email_locataire);
+        INSERT INTO user (nom_user, prenom_user, email_user, mdp_user) values (NEW.nom_locataire, NEW.prenom_locataire, NEW.email_locataire, NEW.mdp_locataire);
         SET NEW.id_user = LAST_INSERT_ID();
     END IF;
 END //
 DELIMITER ;
 
---TRIGGER QUI INSERT UN id_user automatiquement dans la table user et dans la table proprietaire
+---############################################################################################
+---TRIGGER QUI INSERT UN id_user automatiquement dans la table user et dans la table proprietaire
 DROP TRIGGER IF EXISTS insert_proprietaire;
 DELIMITER //
 CREATE TRIGGER insert_proprietaire
@@ -213,7 +249,7 @@ BEGIN
     DECLARE nb_ligne INT;
     SELECT COUNT(*) INTO nb_ligne FROM user WHERE id_user = NEW.id_user;
     IF nb_ligne = 0 THEN
-        INSERT INTO user (nom_user, prenom_user, email_user) values (NEW.nom_proprio, NEW.prenom_proprio, NEW.email_proprio);
+        INSERT INTO user (nom_user, prenom_user, email_user, mdp_user) values (NEW.nom_proprio, NEW.prenom_proprio, NEW.email_proprio, NEW.mdp_proprio);
         SET NEW.id_user = LAST_INSERT_ID();
     END IF;
 END //
@@ -222,7 +258,8 @@ DELIMITER ;
 
 
 
---TRIGGER QUI AJOUTER UNE DEMANDE après un insert dans appartement.
+---############################################################################################
+---TRIGGER QUI AJOUTER UNE DEMANDE après un insert dans appartement.
 Drop trigger if exists add_demande;
 delimiter //
 create trigger add_demande
@@ -234,6 +271,7 @@ FOR EACH row
     end //
 delimiter ;
 
+---############################################################################################
 /*PROCEDURE QUI AFFICHE LES FACTURES PAR MOIS ET PAR ANNEE*/
 /*Revenue du mois*/
 Drop PROCEDURE if exists afficher_montant_factures_par_mois;
@@ -259,7 +297,8 @@ BEGIN
 END //
 delimiter ;
 
--- TRIGGER qui update l'appartement par rapport à l'appartement
+---############################################################################################
+---TRIGGER qui update l'appartement par rapport à l'appartement
 drop trigger if exists set_appart;
 DELIMITER //
 CREATE TRIGGER set_appart
@@ -270,7 +309,8 @@ BEGIN
 END //
 DELIMITER ;
 
--- Trigger qui supprime le user de l'appartement après une suppression de la reservation
+---############################################################################################
+---Trigger qui supprime le user de l'appartement après une suppression de la reservation
 drop trigger IF EXISTS delete_user_appart;
 DELIMITER //
 CREATE TRIGGER delete_user_appart
@@ -281,7 +321,8 @@ BEGIN
 END //
 DELIMITER ;
 
--- TRIGGER QUI MODIFIE LE STATUT DE L4APPARTEMENT SI IL EXISTE UN ID_USER
+---############################################################################################
+--- TRIGGER QUI MODIFIE LE STATUT DE L4APPARTEMENT SI IL EXISTE UN ID_USER
 drop trigger IF EXISTS update_appart;
 DELIMITER //
 CREATE TRIGGER update_appart
@@ -296,7 +337,8 @@ BEGIN
 END //
 DELIMITER ;
 
--- TRIGGER QUI AJOUTE UN CONTRAT A LA MODIFICATION D'UNE DEMANDE
+---############################################################################################
+--- TRIGGER QUI AJOUTE UN CONTRAT A LA MODIFICATION D'UNE DEMANDE
 
 drop trigger if exists set_contrat;
 DELIMITER //
@@ -308,8 +350,7 @@ BEGIN
     VALUES(null,"En cours", DATE_FORMAT(NOW(), '%Y-%m-%d'), DATE_ADD(NOW(), INTERVAL 1 YEAR), DATE_FORMAT(NOW(), '%Y-%m-%d'), NEW.id_user, NEW.id_appart);
 END //
 DELIMITER ;
-
-/*------------------------------------------------------------------*/
+---############################################################################################
 /*PROCEDURE POUR AVOIR LE NOMBRE TOTAL DES LOCATAIRES*/
 Drop PROCEDURE if exists total_locataire;
 delimiter //
@@ -334,9 +375,9 @@ SELECT COUNT(id_appart) AS nb_appart
 END //
 delimiter ;
 
+---############################################################################################
 -- EVENT QUI MODIFIE LE STATUT DE LA RESERVATION
 
-SET GLOBAL event_scheduler=ON;
 DROP EVENT if exists time_reserved;
 CREATE event time_reserved
 ON SCHEDULE EVERY 1 MINUTE DO
@@ -347,51 +388,98 @@ DROP EVENT if exists time_demande;
 CREATE event time_demande
 ON SCHEDULE EVERY 1 MINUTE DO
     UPDATE demande set statut_demande ='Valider' WHERE statut_demande = 'En cours';
+
+
+
+---############################################################################################
+--- PROCEDURE DE VERIFICATION DE CONNEXION
+DROP PROCEDURE IF EXISTS connexionError;
+DELIMITER //
+CREATE PROCEDURE connexionError(email VARCHAR(255), mdp VARCHAR(255))
+BEGIN
+    IF (SELECT mdp_locataire FROM locataire l WHERE l.email_locataire = email) = mdp THEN
+        UPDATE locataire l
+            SET
+                l.last_connexion = NOW(),
+                l.nb_connexion = l.nb_connexion+1,
+                l.etat_connexion = "Reussi"
+            WHERE l.email_locataire = email; 
+    ELSE
+        UPDATE locataire l
+            SET
+                l.last_connexion = NOW(),
+                l.last_failConnexion = NOW(),
+                l.nb_connexion = l.nb_connexion+1,
+                l.nb_failConnexion = l.nb_failConnexion+1,
+                l.etat_connexion = "Echec"
+            WHERE l.email_locataire = email;
+    END IF;
+END //
+DELIMITER ;
     
-INSERT INTO locataire (civilite_locataire, nom_locataire, prenom_locataire, email_locataire, mdp_locataire, tel_locataire, adresse_locataire, cp_locataire, nb_reservations )
-VALUES 
-('Mr', 'Dupont', 'Pierre', 'pierre.dupont@gmail.com', 'motdepasse', '0123456789', '5 Rue des Lilas', '75020', 3),
-('Mme', 'Martin', 'Sophie', 'sophie.martin@gmail.com', 'motdepasse', '0123456789', '12 Rue de la Gare', '69002', 2 ),
-('Mr', 'Garcia', 'Antonio', 'antonio.garcia@gmail.com', 'motdepasse', '0123456789', '7 Avenue des Roses', '13010', 1),
-('Mme', 'Dumont', 'Laura', 'laura.dumont@gmail.com', 'motdepasse', '0123456789', '14 Rue des Pivoines', '34000', 0),
-('Mr', 'Lefebvre', 'Luc', 'luc.lefebvre@gmail.com', 'motdepasse', '0123456789', '8 Rue des Tilleuls', '25000', 2),
-('Mme', 'Moreau', 'Céline', 'celine.moreau@gmail.com', 'motdepasse', '0123456789', '25 Rue des Cerisiers', '44000',1),
-('Mr', 'Roux', 'Nicolas', 'nicolas.roux@gmail.com', 'motdepasse', '0123456789', '10 Rue des Peupliers', '57000', 0),
-('Mme', 'Le Gall', 'Anne', 'anne.legall@gmail.com', 'motdepasse', '0123456789', '9 Rue des Coquelicots', '29000', 4),
-('Mr', 'Fernandez', 'José', 'jose.fernandez@gmail.com', 'motdepasse', '0123456789', '3 Rue des Iris', '13005', 2),
-('Mme', 'Dubois', 'Elodie', 'elodie.dubois@gmail.com', 'motdepasse', '0123456789', '15 Rue des Azalées', '54000', 1);
+---############################################################################################
+--- TRIGGER D'AJOUT DE D'UN USER DANS LA TABLE ETAT_VERIFICATION
 
-INSERT INTO proprietaire ( civilite_proprio, nom_proprio, prenom_proprio, statut_proprio, email_proprio, mdp_proprio, tel_proprio, adresse_proprio, cp_proprio, ville_proprio, pays_proprio, code_adherent, id_contrat, id_appart)
-VALUES ( 'Mr', 'Durand', 'Jean', 'Particulier', 'jean.durand@email.com', 'motdepasse123', '01 23 45 67 89', '1 rue du Pont', '75001', 'Paris', 'France', '0123456789', 1, 1),
-       ( 'Mme', 'Lefebvre', 'Marie', 'Professionnel', 'marie.lefebvre@email.com', 'password456', '01 34 56 78 90', '2 rue de la Gare', '69001', 'Lyon', 'France', '0123456789', 2, 2),
-       ( 'Mr', 'Garcia', 'Luis', 'Particulier', 'luis.garcia@email.com', 'azerty123', '01 23 45 67 89', '3 rue de la Paix', '13001', 'Marseille', 'France', '0123456789', 3, 3),
-       ( 'Mme', 'Chang', 'Li', 'Professionnel', 'li.chang@email.com', 'secret789', '01 34 56 78 90', '4 avenue des Fleurs', '69002', 'Lyon', 'France', '0123456789', 4, 4);
 
-INSERT INTO contrat (statut_contrat, date_debut_contrat, date_fin_contrat, date_sign_contrat, id_user, id_appart)
-VALUES ('En cours', '2022-03-01', '2022-08-31', '2022-03-01', 1, 1),
-       ('Résilié', '2022-04-01', '2022-08-31', '2022-04-01', 1, 2), 
-       ('En cours', '2022-02-01', '2022-07-31', '2022-02-01', 3, 3),
-       ('En cours', '2022-01-01', '2022-06-30', '2022-01-01', 4, 4),
-       ('Résilié', '2022-05-01', '2022-08-31', '2022-05-01', 5, 5);
+DROP TRIGGER IF EXISTS insert_verif;
+DELIMITER //
+CREATE TRIGGER insert_verif
+BEFORE UPDATE ON locataire
+FOR EACH ROW
+BEGIN
+    declare date_r  DATETIME;
+    DECLARE nb_ligne INT;
+    SELECT COUNT(*) INTO nb_ligne FROM verif_connexion;
+    IF nb_ligne = 0 THEN
+        INSERT INTO verif_connexion (nom, prenom, email, date_connexion,etat, id_user) values (NEW.nom_locataire, NEW.prenom_locataire, NEW.email_locataire, new.last_connexion,new.etat_connexion, new.id_user);
+    ELSE    
+    SELECT last_connexion into date_r FROM locataire l WHERE id_locataire = new.id_locataire;   
+        IF(date_r != new.last_connexion) THEN
+            INSERT INTO verif_connexion (nom, prenom, email, date_connexion,etat, id_user) values (NEW.nom_locataire, NEW.prenom_locataire, NEW.email_locataire, new.last_connexion,new.etat_connexion, new.id_user);
+        END IF;
+    END IF;
+END //
+DELIMITER ;
+/*########################################################"""""""""""""""""""""######################"*/
+--- TRIGGER QUI RAJOUTE UN +1 A LA DATE DE NB_RESERVATION
+DROP trigger IF EXISTS updateNbReservations;
+DELIMITER //
+CREATE trigger updateNbReservations
+AFTER UPDATE on reservation
+FOR EACH ROW
+BEGIN
+  IF NEW.statut_reservation = 'Réservé' THEN
+        UPDATE locataire SET nb_reservations = nb_reservations + 1 WHERE id_locataire = NEW.id_user;
+    END IF;
+END //
+DELIMITER ;
+
 
 INSERT INTO appartement (statut_appart, prix_appart, intitule_appart, ville_appart, cp_appart, adresse_appart, description_appart, type_appart, superficie_appart,image, nb_chambre, nb_cuisine, nb_salon, nb_salle_bain, nb_piece)
 VALUES 
-('Disponible', 150000, 'Bel appartement en centre-ville', 'Paris', '75001', '10 Rue de Rivoli', 'Bel appartement lumineux de 75m² situé en plein coeur de Paris', 'Appartement', '75m²','A-1.jpg', 2, 1, 1, 1, 6),
-('Disponible', 220000, 'Grand appartement avec vue sur la mer', 'Marseille', '13008', '30 Avenue du Prado', 'Spacieux appartement de 100m² avec vue imprenable sur la mer Méditerranée', 'Appartement', '100m²','B-1.jpg', 3, 1, 1, 2, 7),
-('Disponible', 80000, 'Studio au calme dans quartier résidentiel', 'Lyon', '69006', '20 Rue de la République', 'Joli petit studio de 30m² au calme dans un quartier résidentiel de Lyon', 'Studio', '30m²','C-1.jpg', 1, 1, 0, 1, 3),
-('Disponible', 120000, 'Appartement rénové dans immeuble haussmannien', 'Paris', '75009', '15 Rue La Fayette', 'Appartement récemment rénové de 50m² dans un bel immeuble haussmannien', 'Appartement', '50m²','D-1.jpg', 1, 1, 1, 1, 4),
-('Disponible', 250000, 'Appartement duplex avec terrasse', 'Toulouse', '31000', '5 Rue Saint-Rome', 'Bel appartement duplex de 120m² avec grande terrasse en plein centre-ville de Toulouse', 'Appartement', '120m²','E-1.jpg', 4, 1, 1, 2, 8),
-('Disponible', 180000, 'Appartement lumineux avec balcon', 'Nantes', '44000', '10 Rue de Strasbourg', 'Appartement de 80m² très lumineux avec balcon donnant sur un parc arboré', 'Appartement', '80m²','F-1.jpg', 2, 1, 1, 1, 5),
-('Disponible', 90000, 'Appartement avec vue sur la montagne', 'Grenoble', '38000', '5 Rue de la République', 'Bel appartement de 60m² avec vue sur la montagne', 'Appartement', '60m²','J-1.jpg', 2, 1, 1, 1, 5),
-('Disponible', 150000, 'Appartement en rez-de-jardin', 'Nice', '06000', '10 Avenue des Fleurs', 'Appartement de 70m² en rez-de-jardin avec terrasse et accès direct à la piscine de la résidence', 'Appartement', '70m²','G-1.jpg', 2, 1, 1, 1, 5);
+("Disponible", 1000, "Chalet de luxe à la montagne", "Aime-la-Plagne", "73210", "Aime la Plagne", "Profitez d'un séjour inoubliable dans notre chalet de luxe, situé dans les montagnes enneigées. Avec une vue imprenable sur les sommets environnants, des équipements haut de gamme et une proximité des pistes de ski, c'est l'endroit idéal pour les vacances d'hiver. Le chalet comprend 3 chambres, 2 salles de bains, un salon confortable avec cheminée, une cuisine entièrement équipée et un balcon avec vue sur les montagnes.", 'Appartement', '100','A-1.jpg', 3, 1, 1, 2, 6),
+("Disponible", 750, "Chalet de charme au coeur des Alpes", "Argentière", "74400", "Chamonix-Mont-Blanc", "Venez vous ressourcer dans notre chalet de charme, idéalement situé au coeur des Alpes. Avec une vue imprenable sur les montagnes environnantes et un accès direct aux sentiers de randonnée, c'est l'endroit parfait pour les amateurs de nature et de grands espaces. Le chalet comprend 4 chambres, 2 salles de bains, un salon confortable avec cheminée, une cuisine entièrement équipée et un jardin privé.", 'Appartement', '120','B-1.jpg', 4, 1, 1, 2, 8),
+("Disponible", 1400, "Chalet de montagne avec piscine intérieure", "Combloux", "74920", "49 chemin des Passerands", "Profitez de vos vacances d'hiver dans notre chalet de montagne avec piscine intérieure. Idéalement situé à proximité des pistes de ski, il vous offre un espace de détente et de bien-être après une journée sur les pentes. Le chalet comprend 4 chambres, 3 salles de bains, un salon confortable avec cheminée, une cuisine entièrement équipée et une piscine intérieure.", 'Appartement', '150','C-1.jpg', 4, 1, 1, 3, 8),
+("Disponible", 1000, "Chalet de montagne avec sauna", "Praz Sur Arly", "74120", "54 route du Val d'Arly", "Venez vous détendre dans notre chalet de montagne avec sauna, idéalement situé dans les Alpes. Avec une vue imprenable sur les montagnes environnantes, un sauna et un accès direct aux sentiers de randonnée, c'est l'endroit parfait pour vous ressourcer. Le chalet comprend 3 chambres, 2 salles de bains, un salon confortable avec cheminée, une cuisine entièrement équipée et un sauna privé.", "Appartement", '110','D-1.jpg', 3, 1, 1, 2, 6),
+("Disponible", 1200 , "Chalet de montagne avec jacuzzi", "Praz Sur Arly", "74120", "30 route du Val d'Arly", "Profitez de vos vacances d'hiver dans notre chalet de montagne avec jacuzzi, idéalement situé à proximité des pistes de ski. Avec une vue imprenable sur les montagnes environnantes, un jacuzzi extérieur et un accès direct aux sentiers de randonnée, c'est l'endroit parfait pour vous ressourcer après une journée sur les pentes. Le chalet comprend 4 chambres, 3 salles de bains, un salon confortable avec cheminée, une cuisine entièrement équipée et un jacuzzi extérieur privé.", "Appartement", "130","E-1.jpg", 4, 1, 1, 3, 8),
+("Disponible", 800, "Chalet de montagne à louer pour les vacances d'été", "Megeve", "74120", "70 rue monseigneur Conseil", "Venez passer vos vacances d'été dans notre chalet de montagne, idéalement situé dans les Alpes. Profitez de la nature environnante et des activités de plein air telles que la randonnée, le vélo et l'escalade. Le chalet est équipé d'une terrasse avec vue sur les montagnes, d'un jardin privé et d'une cuisine extérieure pour des repas en plein air. Le chalet comprend 3 chambres, 2 salles de bains, un salon confortable avec cheminée, une cuisine entièrement équipée et une terrasse avec vue sur les montagnes.", "Appartement", "100","F-1.jpg", 3, 1, 1, 2, 6),
+("Disponible", 1200, "Chalet de montagne avec vue panoramique", "Les Contamines Montjoie", "74170", "18 route de Notre Dame de la Gorge", "Venez passer vos vacances dans notre chalet de montagne avec vue panoramique sur les Alpes. Profitez de la vue imprenable depuis la terrasse ou depuis le salon confortable avec cheminée. Le chalet est équipé d'une cuisine entièrement équipée et d'une salle de jeux pour des soirées en famille ou entre amis. Le chalet comprend 4 chambres, 2 salles de bains, un salon confortable avec cheminée, une cuisine entièrement équipée et une terrasse avec vue panoramique sur les montagnes.", "Appartement", "130","J-1.jpg", 4, 1, 1, 2, 8),
+("Disponible", 600 , "Chalet de montagne pour les amoureux de la nature", "Les Houches", "74310", "BP 9-Place de la Mairie", "Venez passer vos vacances dans notre chalet de montagne idéalement situé pour les amoureux de la nature. Avec un accès direct aux sentiers de randonnée, des vues imprenables sur les montagnes environnantes et un jardin privé pour profiter des beaux jours. Le chalet est équipé d'une cuisine entièrement équipée, d'une salle de bain confortable et d'une cheminée pour des soirées cocooning. Le chalet comprend 2 chambres, 1 salle de bains, un salon confortable avec cheminée, une cuisine entièrement équipée et un jardin privé.", "Appartement", "80","G-1.jpg", 2, 1, 1, 1, 5),
+("Disponible", 900, "Chalet de montagne pour les vacances en famille", "Aime-la-Plagne", "73210", "Aime la Plagne", "Venez passer vos vacances en famille dans notre chalet de montagne idéalement situé pour les activités en plein air. Le chalet est équipé d'une cuisine entièrement équipée, d'une salle de jeux pour les enfants, d'une terrasse avec vue sur les montagnes et d'un jardin privé pour des repas en extérieur. Le chalet comprend 4 chambres, 2 salles de bains, un salon confortable avec cheminée, une cuisine entièrement équipée, une salle de jeux pour les enfants et une terrasse avec vue sur les montagnes.", 'Appartement', '110','H-2.jpg', 4, 1, 1, 2, 7),
+("Disponible", 1000, "Chalet de montagne avec accès à des activités de plein air", "Aime-la-Plagne", "73210", "Aime la Plagne", "Venez passer vos vacances dans notre chalet de montagne idéalement situé pour les activités de plein air. Le chalet est équipé d'une cuisine entièrement équipée, d'un salon confortable avec cheminée, d'une terrasse avec vue sur les montagnes et d'un accès direct aux sentiers de randonnée et aux pistes de ski. Le chalet comprend 3 chambres, 2 salles de bains, un salon confortable avec cheminée, une cuisine entièrement équipée et une terrasse avec vue sur les montagnes.", 'Appartement', '100',"I-3.jpg", 3, 1, 1, 2, 6);
 
-/* INSERT INTO reservation (statut_reservation, date_debut_reservation, date_fin_reservation, prix_reservation, nb_personnes, id_user, id_appart)
+INSERT INTO atouts (nom_atout, id_appart)
 VALUES 
-('En cours', '2023-03-01', '2023-03-07', 600, 2, 1, 1),
-('Louer', '2023-04-15', '2023-04-22', 800, 4, 3, 2),
-('En cours', '2023-05-01', '2023-05-15', 1200, 3, 2, 1),
-('Louer', '2023-06-10', '2023-06-15', 500, 2, 1, 1),
-('Louer', '2023-07-20', '2023-07-25', 400, 2, 1, 3); */
+    ("Vue sur la mer", 1),  ("Piscine", 1),("Parking", 1),  
+    ("Terrasse", 2),("Jardin", 2),("Ascenseur", 2), 
+    ("Internet haut débit", 3),("Cuisine équipée", 3),("Climatisation", 3),
+    ("Jacuzzi", 4), ("Sauna", 4),("Salle de sport", 4),
+    ("Vue panoramique", 5),("Proximité des commerces", 5),("Belle luminosité", 5),
+    ("Cheminée", 6),("Accès handicapé", 6),("Animaux acceptés", 6),
+    ("Spacieux", 7),("Très calme", 7),("Beau design", 7),
+    ("Bien isolé", 8),("Bonne distribution", 8),("Décoration moderne", 8),
+    ("Quartier animé", 9),("Proximité des transports", 9),("Proche de la plage", 9);
+
 INSERT INTO equipement_appart (intitule_equip_appart, nb_equi_appart, prix_equip_appart, type_equip_appart, statut_equip_appart, id_appart)
 VALUES 
 ('Lave-linge', 1, 500, 'Electromenager', 'Disponible', 1),
@@ -410,6 +498,7 @@ VALUES
 ('Tapis de course', 1, 600, 'Sport', 'Disponible', 4),
 ('Set de golf', 1, 800, 'Sport', 'Disponible', 4);
 
+
 INSERT INTO images (nom_img, type_img, id_appart) VALUES 
 ("A-1", "jpg", 1), ("A-2", "jpg", 1), ("A-3", "jpg", 1), ("A-4", "jpg", 1), ("A-5", "jpg", 1),
 ("B-1", "jpg", 2), ("B-2", "jpg", 2), ("B-3", "jpg", 2), ("B-4", "jpg", 2), ("B-5", "jpg", 2),
@@ -419,24 +508,31 @@ INSERT INTO images (nom_img, type_img, id_appart) VALUES
 ("F-1", "jpg", 6), ("F-2", "jpg", 6), ("F-3", "jpg", 6), ("F-4", "jpg", 6), ("F-5", "jpg", 6),
 ("G-1", "jpg", 7), ("G-2", "jpg", 7), ("G-3", "jpg", 7), ("G-4", "jpg", 7), ("G-5", "jpg", 7);
 
-INSERT INTO atouts (nom_atout, id_appart)
+
+INSERT INTO locataire (civilite_locataire, nom_locataire, prenom_locataire, email_locataire, mdp_locataire, tel_locataire, adresse_locataire, cp_locataire, nb_reservations )
 VALUES 
-    ("Vue sur la mer", 1),  ("Piscine", 1),("Parking", 1),  
-    ("Terrasse", 2),("Jardin", 2),("Ascenseur", 2), 
-    ("Internet haut débit", 3),("Cuisine équipée", 3),("Climatisation", 3),
-    ("Jacuzzi", 4), ("Sauna", 4),("Salle de sport", 4),
-    ("Vue panoramique", 5),("Proximité des commerces", 5),("Belle luminosité", 5),
-    ("Cheminée", 6),("Accès handicapé", 6),("Animaux acceptés", 6),
-    ("Spacieux", 7),("Très calme", 7),("Beau design", 7),
-    ("Bien isolé", 8),("Bonne distribution", 8),("Décoration moderne", 8),
-    ("Quartier animé", 9),("Proximité des transports", 9),("Proche de la plage", 9);
-    
-INSERT INTO facture (date_facture, statut_facture, montant_facture, id_contrat)
-VALUES
-('2022-01-05', 'En attente', 500, 1),
-('2022-02-05', 'Payée', 500.9, 1),
-('2022-03-05', 'Payée', 500.45, 2),
-('2022-04-05', 'En attente', 500.4, 2),
-('2022-05-05', 'En attente', 500.85, 1),
-('2022-06-05', 'En attente', 500, 3);
+('Mr', 'Dupont', 'Pierre', 'pierre.dupont@gmail.com', 'motdepasse', '0123456789', '5 Rue des Lilas', '75020', 0),
+('Mme', 'Martin', 'Sophie', 'sophie.martin@gmail.com', 'motdepasse', '0123456789', '12 Rue de la Gare', '69002',0 ),
+('Mr', 'Garcia', 'Antonio', 'antonio.garcia@gmail.com', 'motdepasse', '0123456789', '7 Avenue des Roses', '13010', 0),
+('Mme', 'Dumont', 'Laura', 'laura.dumont@gmail.com', 'motdepasse', '0123456789', '14 Rue des Pivoines', '34000', 0),
+('Mr', 'Lefebvre', 'Luc', 'luc.lefebvre@gmail.com', 'motdepasse', '0123456789', '8 Rue des Tilleuls', '25000', 0),
+('Mme', 'Moreau', 'Céline', 'celine.moreau@gmail.com', 'motdepasse', '0123456789', '25 Rue des Cerisiers', '44000',0),
+('Mr', 'Roux', 'Nicolas', 'nicolas.roux@gmail.com', 'motdepasse', '0123456789', '10 Rue des Peupliers', '57000', 0),
+('Mme', 'Le Gall', 'Anne', 'anne.legall@gmail.com', 'motdepasse', '0123456789', '9 Rue des Coquelicots', '29000', 0),
+('Mr', 'Fernandez', 'José', 'jose.fernandez@gmail.com', 'motdepasse', '0123456789', '3 Rue des Iris', '13005', 0),
+('Mme', 'Dubois', 'Elodie', 'elodie.dubois@gmail.com', 'motdepasse', '0123456789', '15 Rue des Azalées', '54000', 0);
+
+INSERT INTO proprietaire ( civilite_proprio, nom_proprio, prenom_proprio, statut_proprio, email_proprio, mdp_proprio, tel_proprio, adresse_proprio, cp_proprio, ville_proprio, pays_proprio, code_adherent, id_contrat, id_appart)
+VALUES ( 'Mr', 'Durand', 'Jean', 'Particulier', 'jean.durand@email.com', 'motdepasse123', '01 23 45 67 89', '1 rue du Pont', '75001', 'Paris', 'France', '0123456789', NULL, NULL),
+       ( 'Mme', 'Lefebvre', 'Marie', 'Professionnel', 'marie.lefebvre@email.com', 'password456', '01 34 56 78 90', '2 rue de la Gare', '69001', 'Lyon', 'France', '0123456789', Null, NULL),
+       ( 'Mr', 'Garcia', 'Luis', 'Particulier', 'luis.garcia@email.com', 'azerty123', '01 23 45 67 89', '3 rue de la Paix', '13001', 'Marseille', 'France', '0123456789',NULL, NULL),
+       ( 'Mme', 'Chang', 'Li', 'Professionnel', 'li.chang@email.com', 'secret789', '01 34 56 78 90', '4 avenue des Fleurs', '69002', 'Lyon', 'France', '0123456789', NULL, NULL);
+
+INSERT INTO contrat (statut_contrat, date_debut_contrat, date_fin_contrat, date_sign_contrat, id_user, id_appart)
+VALUES ('En cours', '2022-03-01', '2022-08-31', '2022-03-01', 1, 1),
+       ('Résilié', '2022-04-01', '2022-08-31', '2022-04-01', 1, 2), 
+       ('En cours', '2022-02-01', '2022-07-31', '2022-02-01', 3, 3),
+       ('En cours', '2022-01-01', '2022-06-30', '2022-01-01', 4, 4),
+       ('Résilié', '2022-05-01', '2022-08-31', '2022-05-01', 5, 5);
+
 

@@ -38,7 +38,7 @@ $unController = new Controller($server, $bdd, $user, $mdp);
         $page = $_GET["page"];
     } else {
         $page = "home";
-        header("location: index.php?page=home");
+        // header("location: index.php?page=home");
     }
 
     switch ($page) {

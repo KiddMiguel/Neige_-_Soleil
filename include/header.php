@@ -1,12 +1,12 @@
 <header class="container-fluid">
-    <nav class="navbar navbar-expand-lg p-0">
+    <nav class="navbar navbar-expand-lg p-0 pb-1">
         <div class="container-fluid ">
-            <a class="navbar-brand text-light" href="index.php?page=home"><img src="Images/logo.png" width="50%" alt=""></a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <a class="navbar-brand text-light responsive_img" href="index.php?page=home"><img src="Images/logo.png" class="img_resp"  width="50%" alt=""></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav">
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
 
                         <a class="nav-link" aria-current="page" href="index.php?page=home"><i class="fa-solid fa-house  color-light"></i> Accueil</a>
@@ -38,7 +38,7 @@
                         <li class="nav-item">
                         <a class="nav-link" href="index.php?page=apropos"><i class="fa-regular fa-newspaper tN"></i> A propos</a>
                     </li>
-                    <button class="btn btn-warning" type="button"><a href="index.php?page=contact" class="text-decoration-none text-black">Contactez Nous</a> </button>
+                    <button class="btn btn-warning custom_off" type="button"><a href="index.php?page=contact" class="text-decoration-none text-black">Contactez Nous</a> </button>
                     <div class="dropdown me-5">
                         <ul class="dropdown-menu text-small shadow">';
                         if(isset($_SESSION["email_proprio"])){
@@ -51,7 +51,6 @@
                         }
                           
                                 echo '
-                            <li><a class="dropdown-item" href="index.php?page=gerer_compte"><i class="bi bi-heart"></i> Favories</a></li>
                             <li><hr class="dropdown-divider"></li>
                             <li><a class="dropdown-item text-danger fw-semibold" href="index.php?page=deconnexion"><i class="bi bi-box-arrow-left text-danger"></i> Déconnexion</a></li>
                         </ul>
@@ -59,13 +58,13 @@
                     if(isset($_SESSION["email_proprio"])){
                     echo '
                     
-                    <button class="btn btn-outline-warning ms-4 ropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa-solid fa-user rounded"></i> '.$_SESSION["civilite_proprio"].' '.$_SESSION["nom_proprio"].'</li></button>                    
+                    <button class="btn custom_align_profil btn-outline-warning ms-4 ropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa-solid fa-user rounded"></i> '.$_SESSION["civilite_proprio"].' '.$_SESSION["nom_proprio"].'</li></button>                    
                     </ul>';}else{
                             $civilite_locataire = $_SESSION['civilite_locataire'];
                             $prenom_locataire = $_SESSION['prenom_locataire'];
 
                         echo '
-                        <button class="btn btn-outline-warning ms-4 ropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa-solid fa-user rounded"></i> '.$_SESSION["civilite_locataire"].' '.$_SESSION["nom_locataire"].'</li></button>                    
+                        <button class="btn custom_align_profil btn-outline-warning ms-4 ropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa-solid fa-user rounded"></i> '.$_SESSION["civilite_locataire"].' '.$_SESSION["nom_locataire"].'</li></button>                    
                         </ul>';
                     }
                     }

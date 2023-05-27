@@ -4,7 +4,6 @@ if (isset($_POST["update_locataire"])) {
   $unController->updateLocataire($_POST);
   $success = "sauvegardé avec success";
 } else {
-
 }
 if (isset($_POST["update_proprio"])) {
   $unController->updateProprietaire($_POST);
@@ -18,11 +17,31 @@ if (isset($_POST["modif_prorioMdp"])) {
   $error = "";
   $errorOldMpd = "";
   $errorIdentique = "";
+  $erroMDPArchive = "";
   if ($old_mdp == $actuel_mdp) {
     $mdp = ($_POST['mdp_proprio']);
     if (preg_match('/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/', $mdp)) {
       if ($new_mdp == $mdp) {
-        $unController->updateProprietaireEmailMdp($_POST);
+
+        if (isset($_GET['id_user'])) {
+          if ($_GET['id_user'] == $_SESSION['id_user']) {
+            $id_user = $_GET['id_user'];
+            $mdps = $unController->selectWhereArchiveMDP($id_user);
+            $mdp_archive = $mdps['mdp'];
+            $date_archive = $mdps['date_change'];
+
+            $newDate = date('Y-m-d H:i:s', strtotime('+1 month', strtotime($date_archive)));
+            echo $newDate;
+
+            if ($date_archive >= $newDate) {
+              $erroMDPArchive = "Mot de passe précédent est déja utilisé il y a 1 mois !";
+            }else{
+              $unController->updateProprietaireEmailMdp($_POST);
+            }
+          }
+        }
+
+
         header("location: index.php?page=deconnexion");
       } else {
         $errorIdentique = "Echec de la confirmation du mot de passe !";

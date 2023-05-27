@@ -30,7 +30,7 @@ $nbAppartement = $unController->recupNombreAppartement();
 $pages = ceil($nbAppartement / $parPage);
 $premier = ($currentPage * $parPage) - $parPage;
 
-if($_GET['page'] == "location"){
+if(isset ($_GET['page']) == "location"){
     $appartements = $unController->recupPaginationAppartement($premier, $parPage);
 }
 

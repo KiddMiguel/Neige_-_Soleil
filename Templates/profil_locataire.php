@@ -72,6 +72,8 @@
                                 echo '' . $error . ' <i class="bi text-danger bi-exclamation-triangle"></i>';
                             } elseif ($errorIdentique != null) {
                                 echo '' . $errorIdentique . ' <i class="bi text-danger bi-exclamation-triangle"></i>';
+                            }elseif ($erroMDPArchive != null) {
+                                echo '' . $erroMDPArchive . ' <i class="bi text-danger bi-exclamation-triangle"></i>';
                             }
                         }
                         ?>
