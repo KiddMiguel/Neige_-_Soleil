@@ -1,7 +1,6 @@
 drop database if exists neige_soleil;
 create database neige_soleil;
 use neige_soleil;
-
 SET GLOBAL event_scheduler = ON;
 
 create table admin(
@@ -20,12 +19,6 @@ create table user (
     nom_user varchar(255),
     prenom_user varchar(255),
     email_user varchar(255),
-    mdp_user varchar(255),
-    last_connexion DATETIME(5),
-    last_failConnexion DATETIME(5),
-    nb_connexion int DEFAULT 0,
-    nb_failConnexion int default 0,
-    etat_connexion enum ("Reussi", "Echec"),
     PRIMARY KEY (id_user)
 ); 
 CREATE table appartement (
@@ -130,15 +123,11 @@ create table locataire (
     tel_locataire varchar(50),
     adresse_locataire varchar(50),
     cp_locataire varchar(50),
-    nb_reservations int default 0,
-    last_connexion DATETIME(5), 
-    last_failConnexion DATETIME(5), 
-    nb_connexion int DEFAULT 0, 
-    nb_failConnexion int default 0, 
-    etat_connexion enum ("Reussi", "Echec"),
+    nb_reservations int(5),
     id_user int(5), 
     FOREIGN key (id_user) REFERENCES user(id_user),
     PRIMARY KEY (id_locataire)
+    
 );
 
 CREATE TABLE question(
@@ -170,17 +159,6 @@ Create table images (
     foreign key (id_appart) references appartement(id_appart),
     primary key (id_img)
 );
-Create table verif_connexion (
-    id_verif int(10) not null AUTO_INCREMENT,
-    nom varchar(100),
-    prenom varchar(100),
-    email varchar(100),
-    date_connexion DATETIME,
-    etat enum ("Reussi", "Echec"),
-    id_user int(10),
-    foreign key (id_user) references user(id_user),
-    primary key (id_verif)
-);
 
 create table atouts(
     id_atout int(10) not null AUTO_INCREMENT,
@@ -200,16 +178,6 @@ FOREIGN key (id_contrat) REFERENCES contrat(id_contrat),
 primary key (id_reglement)
 );
 
-
-CREATE TABLE achive_mdp(
-    id_mdp int(5) not null auto_increment,
-    email VARCHAR(255),
-    mdp VARCHAR(255),
-    date_change DATETIME,
-    id_user int(5),
-    Foreign Key (id_user) REFERENCES user(id_user),
-    primary key (id_mdp)
-);
 CREATE table facture (
 id_facture int(5) not null auto_increment,
 date_facture date,
@@ -221,8 +189,7 @@ primary key (id_facture)
 );
 
 
----############################################################################################
----TRIGGER QUI INSERT UN id_user automatiquement dans la table user et dans la table locataire
+/*TRIGGER QUI INSERT UN id_user automatiquement dans la table user et dans la table locataire*/
 DROP TRIGGER IF EXISTS insert_locataire;
 DELIMITER //
 CREATE TRIGGER insert_locataire
@@ -232,14 +199,13 @@ BEGIN
     DECLARE nb_ligne INT;
     SELECT COUNT(*) INTO nb_ligne FROM user WHERE id_user = NEW.id_user;
     IF nb_ligne = 0 THEN
-        INSERT INTO user (nom_user, prenom_user, email_user, mdp_user) values (NEW.nom_locataire, NEW.prenom_locataire, NEW.email_locataire, NEW.mdp_locataire);
+        INSERT INTO user (nom_user, prenom_user, email_user) values (NEW.nom_locataire, NEW.prenom_locataire, NEW.email_locataire);
         SET NEW.id_user = LAST_INSERT_ID();
     END IF;
 END //
 DELIMITER ;
 
----############################################################################################
----TRIGGER QUI INSERT UN id_user automatiquement dans la table user et dans la table proprietaire
+/*TRIGGER QUI INSERT UN id_user automatiquement dans la table user et dans la table proprietaire*/
 DROP TRIGGER IF EXISTS insert_proprietaire;
 DELIMITER //
 CREATE TRIGGER insert_proprietaire
@@ -249,7 +215,7 @@ BEGIN
     DECLARE nb_ligne INT;
     SELECT COUNT(*) INTO nb_ligne FROM user WHERE id_user = NEW.id_user;
     IF nb_ligne = 0 THEN
-        INSERT INTO user (nom_user, prenom_user, email_user, mdp_user) values (NEW.nom_proprio, NEW.prenom_proprio, NEW.email_proprio, NEW.mdp_proprio);
+        INSERT INTO user (nom_user, prenom_user, email_user) values (NEW.nom_proprio, NEW.prenom_proprio, NEW.email_proprio);
         SET NEW.id_user = LAST_INSERT_ID();
     END IF;
 END //
@@ -258,8 +224,7 @@ DELIMITER ;
 
 
 
----############################################################################################
----TRIGGER QUI AJOUTER UNE DEMANDE après un insert dans appartement.
+/*TRIGGER QUI AJOUTER UNE DEMANDE après un insert dans appartement.*/
 Drop trigger if exists add_demande;
 delimiter //
 create trigger add_demande
@@ -271,7 +236,6 @@ FOR EACH row
     end //
 delimiter ;
 
----############################################################################################
 /*PROCEDURE QUI AFFICHE LES FACTURES PAR MOIS ET PAR ANNEE*/
 /*Revenue du mois*/
 Drop PROCEDURE if exists afficher_montant_factures_par_mois;
@@ -297,8 +261,7 @@ BEGIN
 END //
 delimiter ;
 
----############################################################################################
----TRIGGER qui update l'appartement par rapport à l'appartement
+-- TRIGGER qui update l'appartement par rapport à l'appartement
 drop trigger if exists set_appart;
 DELIMITER //
 CREATE TRIGGER set_appart
@@ -309,8 +272,7 @@ BEGIN
 END //
 DELIMITER ;
 
----############################################################################################
----Trigger qui supprime le user de l'appartement après une suppression de la reservation
+-- Trigger qui supprime le user de l'appartement après une suppression de la reservation
 drop trigger IF EXISTS delete_user_appart;
 DELIMITER //
 CREATE TRIGGER delete_user_appart
@@ -321,8 +283,7 @@ BEGIN
 END //
 DELIMITER ;
 
----############################################################################################
---- TRIGGER QUI MODIFIE LE STATUT DE L4APPARTEMENT SI IL EXISTE UN ID_USER
+-- TRIGGER QUI MODIFIE LE STATUT DE L4APPARTEMENT SI IL EXISTE UN ID_USER
 drop trigger IF EXISTS update_appart;
 DELIMITER //
 CREATE TRIGGER update_appart
@@ -337,8 +298,7 @@ BEGIN
 END //
 DELIMITER ;
 
----############################################################################################
---- TRIGGER QUI AJOUTE UN CONTRAT A LA MODIFICATION D'UNE DEMANDE
+-- TRIGGER QUI AJOUTE UN CONTRAT A LA MODIFICATION D'UNE DEMANDE
 
 drop trigger if exists set_contrat;
 DELIMITER //
@@ -350,7 +310,8 @@ BEGIN
     VALUES(null,"En cours", DATE_FORMAT(NOW(), '%Y-%m-%d'), DATE_ADD(NOW(), INTERVAL 1 YEAR), DATE_FORMAT(NOW(), '%Y-%m-%d'), NEW.id_user, NEW.id_appart);
 END //
 DELIMITER ;
----############################################################################################
+
+/*------------------------------------------------------------------*/
 /*PROCEDURE POUR AVOIR LE NOMBRE TOTAL DES LOCATAIRES*/
 Drop PROCEDURE if exists total_locataire;
 delimiter //
@@ -375,9 +336,7 @@ SELECT COUNT(id_appart) AS nb_appart
 END //
 delimiter ;
 
----############################################################################################
 -- EVENT QUI MODIFIE LE STATUT DE LA RESERVATION
-
 DROP EVENT if exists time_reserved;
 CREATE event time_reserved
 ON SCHEDULE EVERY 1 MINUTE DO
@@ -388,72 +347,6 @@ DROP EVENT if exists time_demande;
 CREATE event time_demande
 ON SCHEDULE EVERY 1 MINUTE DO
     UPDATE demande set statut_demande ='Valider' WHERE statut_demande = 'En cours';
-
-
-
----############################################################################################
---- PROCEDURE DE VERIFICATION DE CONNEXION
-DROP PROCEDURE IF EXISTS connexionError;
-DELIMITER //
-CREATE PROCEDURE connexionError(email VARCHAR(255), mdp VARCHAR(255))
-BEGIN
-    IF (SELECT mdp_locataire FROM locataire l WHERE l.email_locataire = email) = mdp THEN
-        UPDATE locataire l
-            SET
-                l.last_connexion = NOW(),
-                l.nb_connexion = l.nb_connexion+1,
-                l.etat_connexion = "Reussi"
-            WHERE l.email_locataire = email; 
-    ELSE
-        UPDATE locataire l
-            SET
-                l.last_connexion = NOW(),
-                l.last_failConnexion = NOW(),
-                l.nb_connexion = l.nb_connexion+1,
-                l.nb_failConnexion = l.nb_failConnexion+1,
-                l.etat_connexion = "Echec"
-            WHERE l.email_locataire = email;
-    END IF;
-END //
-DELIMITER ;
-    
----############################################################################################
---- TRIGGER D'AJOUT DE D'UN USER DANS LA TABLE ETAT_VERIFICATION
-
-
-DROP TRIGGER IF EXISTS insert_verif;
-DELIMITER //
-CREATE TRIGGER insert_verif
-BEFORE UPDATE ON locataire
-FOR EACH ROW
-BEGIN
-    declare date_r  DATETIME;
-    DECLARE nb_ligne INT;
-    SELECT COUNT(*) INTO nb_ligne FROM verif_connexion;
-    IF nb_ligne = 0 THEN
-        INSERT INTO verif_connexion (nom, prenom, email, date_connexion,etat, id_user) values (NEW.nom_locataire, NEW.prenom_locataire, NEW.email_locataire, new.last_connexion,new.etat_connexion, new.id_user);
-    ELSE    
-    SELECT last_connexion into date_r FROM locataire l WHERE id_locataire = new.id_locataire;   
-        IF(date_r != new.last_connexion) THEN
-            INSERT INTO verif_connexion (nom, prenom, email, date_connexion,etat, id_user) values (NEW.nom_locataire, NEW.prenom_locataire, NEW.email_locataire, new.last_connexion,new.etat_connexion, new.id_user);
-        END IF;
-    END IF;
-END //
-DELIMITER ;
-/*########################################################"""""""""""""""""""""######################"*/
---- TRIGGER QUI RAJOUTE UN +1 A LA DATE DE NB_RESERVATION
-DROP trigger IF EXISTS updateNbReservations;
-DELIMITER //
-CREATE trigger updateNbReservations
-AFTER UPDATE on reservation
-FOR EACH ROW
-BEGIN
-  IF NEW.statut_reservation = 'Réservé' THEN
-        UPDATE locataire SET nb_reservations = nb_reservations + 1 WHERE id_locataire = NEW.id_user;
-    END IF;
-END //
-DELIMITER ;
-
 
 INSERT INTO appartement (statut_appart, prix_appart, intitule_appart, ville_appart, cp_appart, adresse_appart, description_appart, type_appart, superficie_appart,image, nb_chambre, nb_cuisine, nb_salon, nb_salle_bain, nb_piece)
 VALUES 
@@ -528,11 +421,5 @@ VALUES ( 'Mr', 'Durand', 'Jean', 'Particulier', 'jean.durand@email.com', 'motdep
        ( 'Mr', 'Garcia', 'Luis', 'Particulier', 'luis.garcia@email.com', 'azerty123', '01 23 45 67 89', '3 rue de la Paix', '13001', 'Marseille', 'France', '0123456789',NULL, NULL),
        ( 'Mme', 'Chang', 'Li', 'Professionnel', 'li.chang@email.com', 'secret789', '01 34 56 78 90', '4 avenue des Fleurs', '69002', 'Lyon', 'France', '0123456789', NULL, NULL);
 
-INSERT INTO contrat (statut_contrat, date_debut_contrat, date_fin_contrat, date_sign_contrat, id_user, id_appart)
-VALUES ('En cours', '2022-03-01', '2022-08-31', '2022-03-01', 1, 1),
-       ('Résilié', '2022-04-01', '2022-08-31', '2022-04-01', 1, 2), 
-       ('En cours', '2022-02-01', '2022-07-31', '2022-02-01', 3, 3),
-       ('En cours', '2022-01-01', '2022-06-30', '2022-01-01', 4, 4),
-       ('Résilié', '2022-05-01', '2022-08-31', '2022-05-01', 5, 5);
 
 

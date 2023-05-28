@@ -43,6 +43,8 @@
                         <ul class="dropdown-menu text-small shadow">';
                         if(isset($_SESSION["email_proprio"])){
                             echo '  <li><a class="dropdown-item" href="index.php?page=profil_prorio&id_user='.$_SESSION['id_user'].'""><i class="bi bi-gear"></i> Profil</a></li>';
+                            echo ' <li><a class="dropdown-item" href="index.php?page=reservation&id_user='.$_SESSION['id_user'].'"><i class="bi bi-list-ul"></i> Mes réservations</a></li>';
+
                             echo '  <li><a class="dropdown-item" href="index.php?page=dashboard&id_user='.$_SESSION['id_user'].'"><i class="bi bi-houses"></i> Dashboard</a></li>';
 
                         }else{

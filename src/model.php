@@ -32,19 +32,19 @@ class Modele
             return null;
         }
     }
-    public function erreurConnexion($email, $mdp)
-    {
-        if ($this->unPDO != null) {
-            $request = "call connexionError( :email, :mdp);";
-            $donnees = array(":email" => $email, ":mdp" => $mdp);
-            $select = $this->unPDO->prepare($request);
-            $select->execute($donnees);
-            $reponse = $select->fetch();
-            return $reponse;
-        } else {
-            return null;
-        }
-    }
+    // public function erreurConnexion($email, $mdp)
+    // {
+    //     if ($this->unPDO != null) {
+    //         $request = "call connexionError( :email, :mdp);";
+    //         $donnees = array(":email" => $email, ":mdp" => $mdp);
+    //         $select = $this->unPDO->prepare($request);
+    //         $select->execute($donnees);
+    //         $reponse = $select->fetch();
+    //         return $reponse;
+    //     } else {
+    //         return null;
+    //     }
+    // }
     public function insertLocataire($tab)
     {
         if ($this->unPDO != null) {

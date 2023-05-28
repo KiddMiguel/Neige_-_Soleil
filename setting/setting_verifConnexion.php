@@ -6,7 +6,7 @@ if (isset($_POST["se_connecter"])) {
     $mdp = $_POST["mdp_locataire"];
     $error =""; // La variable erreur est là pour afficher le message d'erreur si le mot de passe est incorrect
     $unUser = $unController->verifconnexionLocataire($email, $mdp);
-    $reponse = $unController->erreurConnexion($email, $mdp);
+    // $reponse = $unController->erreurConnexion($email, $mdp);
     if ($unUser == null) { 
         $error ="Mot de passe incorrect !";
     } else {
@@ -61,7 +61,7 @@ $email = $_POST["email_proprio"];
 $mdp = $_POST["mdp_proprio"];
 $error="";
 $unUser = $unController->verifconnexionProprietaire($email, $mdp);
-$reponse = $unController->erreurConnexion($email, $mdp);
+// $reponse = $unController->erreurConnexion($email, $mdp);
 if ($unUser == null) { 
     $error ="Mot de passe incorrect !";
 } else {

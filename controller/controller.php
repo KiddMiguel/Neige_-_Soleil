@@ -13,10 +13,10 @@ class Controller
     {   
         return $this->unModele->verifconnexionLocataire($email, $mdp);
     }
-    public function erreurConnexion($email, $mdp)
-    {   
-        return $this->unModele->erreurConnexion($email, $mdp);
-    }
+    // public function erreurConnexion($email, $mdp)
+    // {   
+    //     return $this->unModele->erreurConnexion($email, $mdp);
+    // }
 
     public function insertLocataire($tab)
     {
