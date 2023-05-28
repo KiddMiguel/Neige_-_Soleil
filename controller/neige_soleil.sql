@@ -130,26 +130,6 @@ create table locataire (
     
 );
 
-CREATE TABLE question(
-    id_question INT(5),
-    intitule_question VARCHAR(100),
-    reponse_question VARCHAR(100),
-    id_user INT(5),
-    Foreign Key (id_user) REFERENCES user(id_user),
-    PRIMARY KEY(id_question)
-);
-
-CREATE TABLE statistique (
-    id_statistique INT(5) NOT NULL AUTO_INCREMENT,
-    id_locataire INT(5),
-    id_appart INT(5),
-    nb_reservations INT(5),
-    prix_total_reservations FLOAT,
-    revenu_total_locataire INT(10),
-    FOREIGN KEY (id_locataire) REFERENCES locataire(id_locataire),
-    FOREIGN KEY (id_appart) REFERENCES appartement(id_appart),
-    PRIMARY KEY (id_statistique)
-);
 
 Create table images (
     id_img int(10) not null AUTO_INCREMENT,
@@ -166,16 +146,6 @@ create table atouts(
     id_appart int(5),
     Foreign Key (id_appart) REFERENCES appartement(id_appart),
     primary key (id_atout)
-);
-
-CREATE table reglement (
-id_reglement int(5) not null auto_increment,
-date_reglement date,
-type_reglement enum ("Espèce", "Chèque", "Virement bancaire", "Carte bancaire"),
-montant_reglement FLOAT,
-id_contrat int(5),
-FOREIGN key (id_contrat) REFERENCES contrat(id_contrat),
-primary key (id_reglement)
 );
 
 CREATE table facture (
